@@ -1,17 +1,9 @@
-lms_app/cache/*
-!lms_app/cache/index.html
-!lms_app/cache/.htaccess
+.DS_Store
 
-lms_app/logs/*
-!lms_app/logs/index.html
-!lms_app/logs/.htaccess
+app/cache/*
+!app/cache/index.html
+!app/cache/.htaccess
 
-uploads/course/*
-uploads/temp/*
-uploads/user/*
-uploads/question/course/*
-uploads/question/exam/*
-uploads/*.png
-*.log
-!index.html
-
+app/logs/*
+!app/logs/index.html
+!app/logs/.htaccess
