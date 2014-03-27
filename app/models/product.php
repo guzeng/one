@@ -7,9 +7,6 @@
 class Product extends CI_Model{
 	
 	private $table = 'product';
-    //private $cate_id='';
-    //private $name = '';
-    //private $code = '';
     private $page = 1;
     private $per_page = 15;
     private $param = array();
@@ -31,7 +28,12 @@ class Product extends CI_Model{
         $this->base_url = '';
     }
     //----------------------------------------------------------------
-
+    /**
+    *   insert
+    *   插入单个商品
+    *   @param array row 数组
+    * 
+    */
 	public function insert($row)
     {
 		if(is_array($row) && !empty($row)){
@@ -46,7 +48,13 @@ class Product extends CI_Model{
 		return false;
 	}
     //----------------------------------------------------------------
-
+    /**
+    *   update
+    *   更新单个商品
+    *   @param array row 数组
+    *   @param int id
+    * 
+    */
 	public function update($row,$id)
     {
 		if(!empty($row) && $id){
@@ -57,6 +65,12 @@ class Product extends CI_Model{
 	}	
     //----------------------------------------------------------------
 
+    /**
+    *   delete
+    *   删除单个商品
+    *   @param int id
+    * 
+    */
 	public function delete($id)
     {
 		if($id){
@@ -67,6 +81,12 @@ class Product extends CI_Model{
 	}
     //----------------------------------------------------------------
 
+    /**
+    *   get
+    *   获取单个商品信息
+    *   @param int id
+    * 
+    */
 	public function get($id)
     {
 		if($id){
@@ -83,6 +103,12 @@ class Product extends CI_Model{
 	}
 	//----------------------------------------------------------------
 
+    /**
+    *   get_param
+    *   返回所有参数
+    *   @param return array
+    * 
+    */
     public function get_param()
     {
         return $this->param;
@@ -215,7 +241,11 @@ class Product extends CI_Model{
     }
     //----------------------------------------------------------------
 
-
+    /**
+    *   取商品图片
+    *   @param int id 商品ID
+    *   @param var type 类型
+    */
     public function pic($id, $type='big')
     {
         $default = base_url().'images/default_'.$type.'.jpg';

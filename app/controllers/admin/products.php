@@ -20,33 +20,8 @@ class Products extends CI_Controller {
         $this->list_type = 'return';
         $category = $this->product_category->fetch_all(array('orderby' =>'parent_id asc,id asc'));
         $data['category_list'] = $category;
-        $data['list_view'] = $this->lists();
-		$this->load->view('admin/product-list',$data);
-	}
-    //-------------------------------------------------------------------------
-	public function lists()
-	{
-        if($this->list_type == '')
-        {
-        	//验证登录及权限
-        }
-
-        
         $data['param'] = $this->product->get_param();//stripslashes
-        //$data['code'] = stripslashes($code);
-		//$data['name'] = stripslashes($name);
-        //$data['category_list'] = $this->product_category->tree();
-        //$data['list'] = $list;
-        //$data['page_url'] = rtrim($base_url,'/').'/page/'.$page;
-        if($this->list_type == 'return')
-        {
-            return $this->load->view('admin/product-list-view',$data,true);
-        }
-        else
-        {
-            echo json_encode(array('code'=>'1000','data'=>$this->load->view('admin/product-list-view',$data, true)));
-            exit;
-        }
+		$this->load->view('admin/product-list',$data);
 	}
     //-------------------------------------------------------------------------
 
