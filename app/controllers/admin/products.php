@@ -21,7 +21,10 @@ class Products extends CI_Controller {
         $category = $this->product_category->fetch_all(array('orderby' =>'parent_id asc,id asc'));
         $data['category_list'] = $category;
         $data['param'] = $this->product->get_param();//stripslashes
-		$this->load->view('admin/product-list',$data);
+        echo json_encode(array(
+        	'code' => '1000',
+        	'data' => $this->load->view('admin/product-list',$data,true)
+        ));
 	}
     //-------------------------------------------------------------------------
 
