@@ -159,15 +159,15 @@ class Product extends CI_Model{
         return '';
     }
     /**
-     * all
-     * 查询所有
+     * lists
+     * 查询所有 显示列表
      * @param var orderby 排序方式
      * @param var groupby 分组方式
      * @param int num 每页显示的个数
      * @author zeng.gu
      * 2014/3/31
      */    
-	public function all($num=15,$orderby='',$groupby='')
+	public function lists($num=15,$orderby='',$groupby='')
     {
         $_where = $this->condition();
         $_num = intval($num)>0 ? intval($num) : 15;
@@ -194,6 +194,38 @@ class Product extends CI_Model{
 		return false;	
 	}
 	//----------------------------------------------------------------
+    /**
+     * all
+     * 查询所有 显示列表
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/3/31
+     */    
+    public function all($orderby='',$groupby='')
+    {
+        $_where = $this->condition();
+        $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
+        $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
+        $_type = 'a.*';
+        $this->db->select ( $_type );
+        if(isset($_where)){
+            $this->db->where($_where);
+        }
+        $this->db->from($this->table.' as a');
+        if($this->groupby!='')
+        {
+            $this->db->group_by($this->groupby);
+        }
+        $this->db->order_by($_orderby);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;   
+    }
+    //----------------------------------------------------------------
     /**
      * count
      * 查询所有数量

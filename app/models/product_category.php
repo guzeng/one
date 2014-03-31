@@ -44,15 +44,13 @@ class Product_category  extends CI_Model{
 	//---------------------------------------------------------
 
 	/**
-	 * fetch_items
-	 * 查询所有分类
+	 * lists
+	 * 查询所有分类, 用于分页显示列表
 	 * 
 	 *	@param item array 
-	 *	@return array   
-	 *  @author chunhua.hong
-	 *  2013/1/10 11:12:56
+	 *	@return array
 	 */    
-	public function fetch_items($items=array()){
+	public function lists($items=array()){
 		
 		if(count($items) >0 ){
             foreach($items as $key => $val){
@@ -89,7 +87,7 @@ class Product_category  extends CI_Model{
 	 *  @author chunhua.hong
 	 *  2013/1/10 11:12:56
 	 */    
-	public function fetch_all($items=array())
+	public function all($items=array())
 	{
 		if(count($items) >0 ){
             foreach($items as $key => $val){
