@@ -815,7 +815,7 @@ var App = function () {
 
         // handle theme colors
         var setColor = function (color) {
-            $('#style_color').attr("href", "assets/css/themes/" + color + ".css");
+            $('#style_color').attr("href", msg.base_url+"assets/css/themes/" + color + ".css");
             $.cookie('style_color', color);
         }
 
@@ -944,7 +944,7 @@ var App = function () {
                 centerY = true;
             }
             el.block({
-                message: '<img src="./assets/img/ajax-loading.gif" align="">',
+                message: '<img src="'+msg.base_url+'assets/img/ajax-loading.gif" align="">',
                 centerY: centerY != undefined ? centerY : true,
                 css: {
                     top: '10%',

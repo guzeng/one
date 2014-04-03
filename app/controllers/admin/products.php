@@ -21,13 +21,18 @@ class Products extends CI_Controller {
         $category = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
         $data['category_list'] = $category;
         $data['param'] = $this->product->get_param();//stripslashes
-        echo json_encode(array(
-        	'code' => '1000',
-        	'data' => $this->load->view('admin/product-list',$data,true)
-        ));
+        $this->load->view('admin/product-list',$data);
 	}
     //-------------------------------------------------------------------------
 
+    public function lists()
+    {
+        $list = $this->product->all();
+        echo json_encode(array(
+            'code' => '1000',
+            'data' => $list
+        ));
+    }
 }
 /* End of file products.php */
 /* Location: ./lms_app/controllers/admin/products.php */

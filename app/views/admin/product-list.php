@@ -1,4 +1,17 @@
-
+<?$this->load->view('admin/header');?>
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/select2/select2_metro.css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.css" />
+	<!-- END PAGE LEVEL STYLES -->
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN SIDEBAR -->
+		<?$this->load->view('admin/sidebar');?>
+		<!-- END SIDEBAR -->
+		<!-- BEGIN PAGE -->
+		<div class="page-content">
+			<!-- BEGIN STYLE CUSTOMIZER -->
+			<?$this->load->view('admin/theme');?>
+			<!-- END BEGIN STYLE CUSTOMIZER -->
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
@@ -8,16 +21,9 @@
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li class="btn-group">
-							<button data-close-others="true" data-delay="1000" data-hover="dropdown" data-toggle="dropdown" class="btn blue dropdown-toggle" type="button">
-							<span>Actions</span> <i class="fa fa-angle-down"></i>
+							<button id="sample_editable_1_new" class="btn green">
+								<i class="fa fa-plus"></i> 新增商品 
 							</button>
-							<ul role="menu" class="dropdown-menu pull-right">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-							</ul>
 						</li>
 						<li>
 							<i class="fa fa-home"></i>
@@ -36,9 +42,9 @@
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
-					<div class="portlet box green">
+					<div class="portlet box blue">
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-globe"></i>显示/隐藏字段</div>
+							<div class="caption"><i class="fa fa-list"></i>所有商品</div>
 							<div class="actions">
 								<div class="btn-group">
 									<a class="btn default" href="#" data-toggle="dropdown">
@@ -50,14 +56,18 @@
 										<label><input type="checkbox" checked data-column="1">名称</label>
 										<label><input type="checkbox" checked data-column="2">价格</label>
 										<label><input type="checkbox" checked data-column="3">优惠价</label>
-										<label><input type="checkbox" checked data-column="4"></label>
 									</div>
 								</div>
 							</div>
+							<div class="tools">
+								<a class="reload m-r-5" href="javascript:void();" onclick="Product.reload()"></a>
+							</div> &nbsp; 
 						</div>
 						<div class="portlet-body">
+							<div class="table-toolbar">
+							</div>
 							<?$list = $this->product->all();?>
-							<table class="table table-striped table-bordered table-hover table-full-width" id="sample_2">
+							<table class="table table-striped table-bordered table-hover" id="product_list">
 								<thead>
 									<tr>
 										<th>编码</th>
@@ -87,9 +97,20 @@
 				</div>
 			</div>
 			<!-- END PAGE CONTENT-->
+			<div class="clearfix"></div>
+		</div>
+	</div>
+<?$this->load->view('admin/script');?>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.js"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script src="<?php echo base_url();?>assets/scripts/product.js"></script>    
+	<script>
+		jQuery(document).ready(function() {
+		   Product.init();
+		});
 
-			<script type="text/javascript">
-				$(function(){
-					TableAdvanced.init();
-				})
-			</script>
+	</script>
+<?$this->load->view('admin/footer');?>
