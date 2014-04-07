@@ -39,7 +39,7 @@ class Product extends CI_Model{
 		if(is_array($row) && !empty($row)){
             if(!isset($row['create_time']) || intval($row['create_time'])==0)
             {
-                $row['create_time'] = local_to_gmt(time());
+                $row['create_time'] = time();
             }
 			if($this->db->insert($this->table,$row)){
 				return $this->db->insert_id();
@@ -102,6 +102,29 @@ class Product extends CI_Model{
 		return false;
 	}
 	//----------------------------------------------------------------
+
+    /**
+    *   get_by_cond
+    *   获取单个商品信息
+    *   @param int id
+    * 
+    */
+    public function exist($where)
+    {
+        if($where){
+            $this->db->from($this->table. ' as a');
+            $this->db->where($where);
+            $type = 'count(a.id) as count';
+            $this->db->select($type);
+            $query = $this->db->get();
+            if($query->row()->count > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    //----------------------------------------------------------------
 
     /**
     *   get_param

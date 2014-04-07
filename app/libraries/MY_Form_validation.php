@@ -167,7 +167,7 @@ class MY_Form_validation extends CI_Form_validation{
 		}
 
 		// Load the language file containing error messages
-		$this->CI->lang->load('form_validation', get_language());
+		$this->CI->lang->load('form_validation');//get_language
 
 		// Cycle through the rules for each field, match the
 		// corresponding $_POST item and test for errors
@@ -226,7 +226,7 @@ class MY_Form_validation extends CI_Form_validation{
 		}
 
 		// Load the language file containing error messages
-		$this->CI->lang->load('form_validation', get_language());
+		$this->CI->lang->load('form_validation');//, get_language()
 
 		// Cycle through the rules for each field, match the
 		// corresponding $_POST item and test for errors

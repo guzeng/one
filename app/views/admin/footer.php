@@ -1,4 +1,10 @@
 
+
+            <!-- END PAGE CONTENT-->
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    
     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->               
     <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -34,6 +40,7 @@
         </div>
     </div>
     <!-- END FOOTER -->
+
 </body>
 <!-- END BODY -->
 </html>

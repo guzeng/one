@@ -67,3 +67,28 @@ var Product = function () {
 
 }();
 
+function form_validate(data)
+{
+    if(typeof(data.code)!='undefined')
+    {
+        if(data.code == '1000')
+        {
+        console.log('ssssssss');
+            window.location.href = msg.base_url+'admin/products';
+        }
+        else
+        {
+            if(typeof(data.error)!='undefined' && data.error != '')
+            {
+                $.each(data.error,function(key,item){
+                    if(item!='' && $('input[name='+key+']').length > 0)
+                    {
+                        $('input[name='+key+']').parent().addClass('has-error');
+                        $('input[name='+key+']').parent().find('span.help-block').html(item);
+                    }
+                })
+            }            
+        }
+    }
+}
+

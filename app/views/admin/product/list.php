@@ -2,16 +2,6 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/plugins/select2/select2_metro.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.css" />
 	<!-- END PAGE LEVEL STYLES -->
-	<!-- BEGIN CONTAINER -->
-	<div class="page-container">
-		<!-- BEGIN SIDEBAR -->
-		<?$this->load->view('admin/sidebar');?>
-		<!-- END SIDEBAR -->
-		<!-- BEGIN PAGE -->
-		<div class="page-content">
-			<!-- BEGIN STYLE CUSTOMIZER -->
-			<?$this->load->view('admin/theme');?>
-			<!-- END BEGIN STYLE CUSTOMIZER -->
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
@@ -21,9 +11,11 @@
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li class="btn-group">
+							<a href='<?php echo base_url();?>admin/products/edit'>
 							<button id="sample_editable_1_new" class="btn green">
 								<i class="fa fa-plus"></i> 新增商品 
 							</button>
+							</a>
 						</li>
 						<li>
 							<i class="fa fa-home"></i>
@@ -74,7 +66,7 @@
 										<th>名称</th>
 										<th>价格</th>
 										<th class="hidden-xs">优惠价</th>
-										<th class="hidden-xs"></th>
+										<th class="hidden-xs">操作</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -85,7 +77,12 @@
                                 		<td><?php echo $item->name?></td>
                                 		<td><?php echo $item->price?></td>
                                 		<td><?php echo $item->best_price?></td>
-										<td></td>
+										<td>
+											<a href="<?php echo base_url();?>admin/products/edit/<?php echo $item->id?>">
+												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
+											<a href="javascript:void(0)" onclick="delete('admin/products/edit/<?php echo $item->id?>')">
+												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
+										</td>
 									</tr>
                             		<?endforeach;?>
                             		<?endif;?>
@@ -96,11 +93,7 @@
 					<!-- END EXAMPLE TABLE PORTLET-->
 				</div>
 			</div>
-			<!-- END PAGE CONTENT-->
-			<div class="clearfix"></div>
-		</div>
-	</div>
-<?$this->load->view('admin/script');?>
+
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/select2/select2.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.js"></script>

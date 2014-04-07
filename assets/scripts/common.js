@@ -1,4 +1,56 @@
-
+function show_success(msg)
+{
+    close_alert();
+    if(typeof(msg)=='undefined' || msg=='')
+    {
+        var msg = '操作成功';
+    }
+    var html = "<div class='alert alert-success alert-dismissable show-alert' id='success'>"
+             + "<button aria-hidden='true' data-dismiss='alert' class='close' type='button'></button>"
+             + "<i class='fa fa-thumbs-o-up'></i> <strong>"+msg+"</strong>"
+             + "</div>";
+    $('body').append(html);
+    var w = parseInt($('#success').width())+60;
+    $('#success').css('margin-left',(0-w/2)+'px');
+}
+function show_error(msg)
+{
+    close_alert();
+    if(typeof(msg)=='undefined' || msg=='')
+    {
+        var msg = '出现错误';
+    }
+    var html = "<div class='alert alert-danger alert-dismissable show-alert' id='error'>"
+             + "<button aria-hidden='true' data-dismiss='alert' class='close' type='button'></button>"
+             + "<i class='fa fa-warning'></i> <strong>"+msg+"</strong>"
+             + "</div>";
+    $('body').append(html);
+    var w = parseInt($('#error').width())+60;
+    $('#error').css('margin-left',(0-w/2)+'px');
+}
+function loading()
+{
+    close_alert();
+    var html = "<div class='alert alert-info alert-dismissable show-alert' id='loading' style='width:150px; margin-left: -75px;'>"
+             + "<button aria-hidden='true' data-dismiss='alert' class='close' type='button'></button>"
+             + "<i class='fa fa-spinner'></i> <strong>请稍候...</strong>"
+             + "</div>";
+    $('body').append(html);
+}
+/**
+ * close_alert
+ * 关闭提示
+ * 
+ */ 
+function close_alert(callback){
+    $('.show-alert').remove();
+    if(typeof(callback)!='undefined' && callback!='' && callback!='undefined')
+    {
+        callback();
+        //$('.modal-backdrop').fadeOut('slow',function(){$(this).remove()});
+    }
+}
+//------------------------------------------------------------------------
 function reload()
 {
     window.location.reload();
@@ -66,50 +118,6 @@ function change_height(id)
     $('#'+id).find('.modal-body').css('max-height',(h-160)+'px');
     var modal_h = $('#'+id).height();
     $('#'+id).css('top',parseInt((h-modal_h)/2-10)); 
-}
-//------------------------------------------------------------------------
-
-/**
- * show log in popup
- * 重新登录
- * 
- * @author zeng.gu
- * @2013/08
- */
-function show_login()
-{
-    $('#_login_form').show();
-    $('body').append("<div class='modal-backdrop' id='_login_form_backdrop' style='z-index:2000'></div>");
-    change_height('_login_form');
-    $('#_relogin_form').find('#password_f').val('');
-    $('#_relogin_form').find('#error_message').html('');
-
-    if($('#_login_form').find('#username').val()!='')
-    {
-        $('#_login_form').find('#password_f').focus();
-    }
-    else
-    {
-        $('#_login_form').find('#username').focus();    
-    }
-    if($('#_login_form').find('#login_captcha').length>0)
-    {
-        refresh_captcha();    
-    }
-}
-//------------------------------------------------------------------------
-
-/**
- * hide log in popup
- * 重新登录
- * 
- * @author zeng.gu
- * @2013/08
- */
-function hide_login_form()
-{
-    $('#_login_form').hide();
-    $('#_login_form_backdrop').remove();
 }
 //------------------------------------------------------------------------
 
@@ -274,41 +282,6 @@ function load_page(url, target, callback)
 }
 //------------------------------------------------------------------------
 
-function load_submit_page(target, formID)
-{
-    if(typeof(target)!='undefined' && typeof(formID)!='undefined' && target != '' && formID != '')
-    {
-        $('#'+formID).find('input[type=text]').each(function(){
-            if($(this).val()==$(this).attr('placeholder'))
-            {
-                $(this).val('');
-            }
-        })
-        $('#'+formID).ajaxSubmit({
-            dataType:'json',
-            beforeSend:function(){
-                show_alert(msg.loading,'loading');
-            },
-            success:function(data){
-                close_alert();
-                if(typeof(data.code)!='undefined' && data.code == '1002')
-                {
-                    show_login();
-                }
-                else if(data.code=='1000')
-                {
-                    $('#'+target).html(data.data);
-                }
-                place_holder();
-            },
-            error:function(){
-                show_alert(msg.error, 'error');
-            }
-        })
-    }
-}
-//------------------------------------------------------------------------
-
 function enterSumbit(){  
       var event=arguments.callee.caller.arguments[0]||window.event;//消除浏览器差异  
      if (event.keyCode == 13){  
@@ -317,6 +290,49 @@ function enterSumbit(){
 }
 //------------------------------------------------------------------------
 
+/**
+ * show log in popup
+ * 重新登录
+ * 
+ * @author zeng.gu
+ * @2013/08
+ */
+function show_login()
+{
+    $('#_login_form').show();
+    $('body').append("<div class='modal-backdrop' id='_login_form_backdrop' style='z-index:2000'></div>");
+    //change_height('_login_form');
+    $('#_relogin_form').find('#password_f').val('');
+    $('#_relogin_form').find('#error_message').html('');
+
+    if($('#_login_form').find('#username').val()!='')
+    {
+        $('#_login_form').find('#password_f').focus();
+    }
+    else
+    {
+        $('#_login_form').find('#username').focus();    
+    }
+    if($('#_login_form').find('#login_captcha').length>0)
+    {
+        refresh_captcha();    
+    }
+}
+//------------------------------------------------------------------------
+
+/**
+ * hide log in popup
+ * 重新登录
+ * 
+ * @author zeng.gu
+ * @2013/08
+ */
+function hide_login_form()
+{
+    $('#_login_form').hide();
+    $('#_login_form_backdrop').remove();
+}
+//------------------------------------------------------------------------
 /**
  * submit
  *
@@ -330,8 +346,9 @@ function do_submit(formID, callback)
     $('#'+formID).ajaxSubmit({
         dataType:'json',
         async:false,
+        type:'post',
         beforeSubmit:function(){
-            show_alert(msg.loading,'loading');
+            loading();
         },
         success:function(data){
             close_alert();
@@ -341,29 +358,19 @@ function do_submit(formID, callback)
             }
             else if(data.code=='1000')
             {
-                if(typeof(callback) == 'function')
-                {
-                    callback();
-                }
-                else
-                {
-                    show_alert(msg.success, 'success');
-                }
+                show_success();
             }
             else
             {
-                if(typeof(data.msg)!='undefined')
-                {
-                    show_alert(data.msg,'error');
-                }
-                else
-                {
-                    show_alert(msg.error, 'error');
-                }
+                show_error(data.msg);
+            }
+            if(typeof(callback) == 'function')
+            {
+                callback(data);
             }
         },
         error:function(){
-            show_alert(msg.error, 'error');
+            show_error();
         }
     })
 }
