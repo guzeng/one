@@ -52,6 +52,7 @@
            App.init(); // initlayout and core plugins
         });
     </script>
+    <script src="<?php echo base_url();?>assets/scripts/common.js" type="text/javascript"></script>
     <!-- END JAVASCRIPTS -->
 </head>
 <!-- END HEAD -->

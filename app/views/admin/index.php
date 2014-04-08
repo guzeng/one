@@ -1,34 +1,15 @@
-<?$this->load->view('admin/header');?>
-	<!-- BEGIN CONTAINER -->
-	<div class="page-container">
-		<!-- BEGIN SIDEBAR -->
-		<?$this->load->view('admin/sidebar');?>
-		<!-- END SIDEBAR -->
-		<!-- BEGIN PAGE -->
-		<div class="page-content">
-			<!-- BEGIN STYLE CUSTOMIZER -->
-			<?$this->load->view('admin/theme');?>
-			<!-- END BEGIN STYLE CUSTOMIZER -->  
+<?$this->load->view('admin/header');?> 
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						Dashboard <small>statistics and more</small>
+						首页
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">Home</a> 
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li><a href="#">Dashboard</a></li>
-						<li class="pull-right">
-							<div id="dashboard-report-range" class="dashboard-date-range tooltips" data-placement="top" data-original-title="Change dashboard date range">
-								<i class="fa fa-calendar"></i>
-								<span></span>
-								<i class="fa fa-angle-down"></i>
-							</div>
+							<a href="index.html">首页</a> 
 						</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -100,9 +81,4 @@
 			</div>
 			<!-- END DASHBOARD STATS -->
 			<div class="clearfix"></div>
-		</div>
-		<!-- END PAGE -->
-	</div>
-	<!-- END CONTAINER -->
-<?$this->load->view('admin/script');?>
 <?$this->load->view('admin/footer');?>

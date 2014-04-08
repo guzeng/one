@@ -85,22 +85,15 @@ function confirm_dialog(title,msg,callback,param)
     $('#_confirm_dialog').find('#_confirm_btn').unbind('click');
     $('#_confirm_dialog').find('#_confirm_btn').click(function(){
         eval(callback+"("+str+")");
-        hide_confirm_dialog();
+        if(typeof(callback)=='function')
+        {
+            callback(str);
+        }
+        $('#_confirm_dialog').modal('hide');
     })
     var h = 0-parseInt($('#_confirm_dialog').height());
-    $('#_confirm_dialog').css({'z-index':'1150','top':'50%','margin-top':h}).show();
-    $('body').append("<div class='modal-backdrop' id='_confirm_dialog_backgrop'></div>");
+    $('#_confirm_dialog').modal();
     close_alert();
-}
-//------------------------------------------------------------------------
-
-function hide_confirm_dialog()
-{
-    $('#_confirm_dialog').hide(
-        function(){
-            $('#_confirm_dialog_backgrop').remove();
-        }
-    )
 }
 //------------------------------------------------------------------------
 
@@ -375,3 +368,9 @@ function do_submit(formID, callback)
     })
 }
 //------------------------------------------------------------------------
+
+function goback()
+{
+    history.go(-1);
+}
+

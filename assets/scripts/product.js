@@ -1,3 +1,7 @@
+
+jQuery(document).ready(function() {
+   Product.init();
+});
 var Product = function () {
 
      var initTable = function() {
@@ -92,3 +96,27 @@ function form_validate(data)
     }
 }
 
+function delete_product(id)
+{
+    $.ajax({
+        url:msg.base_url+'admin/products/delete/'+id,
+        dataType:'json',
+        success:function(data){
+            if(data.code=='1000')
+            {
+                $('#'+id).remove();
+                show_success(data.msg);
+            }
+            else
+            {
+                show_error(data.msg);
+            }
+        },
+        beforeSubmit:function(){
+            loading();
+        },
+        error:function(){
+            show_error();
+        }
+    })
+}

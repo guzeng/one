@@ -141,6 +141,23 @@ class Products extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function delete($id)
+    {
+        if(!$id)
+        {
+            echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
+            exit;
+        }
+        if($this->product->delete($id))
+        {
+            $data = array('code'=>'1000','msg'=>'删除成功');
+        }
+        else
+        {
+            $data = array('code'=>'1001','msg'=>'删除失败');
+        }
+        echo json_encode($data);
+    }
 }
 /* End of file products.php */
 /* Location: ./lms_app/controllers/admin/products.php */

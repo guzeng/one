@@ -72,7 +72,7 @@
 								<tbody>
                             		<?if(!empty($list)):?>
                             		<?foreach($list as $key => $item):?>
-									<tr>
+									<tr id='<?php echo $item->id;?>'>
                                 		<td><?php echo $item->code?></td>
                                 		<td><?php echo $item->name?></td>
                                 		<td><?php echo $item->price?></td>
@@ -80,7 +80,7 @@
 										<td>
 											<a href="<?php echo base_url();?>admin/products/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
-											<a href="javascript:void(0)" onclick="delete('admin/products/edit/<?php echo $item->id?>')">
+											<a href="javascript:void(0)" onclick="confirm_dialog('删除确认','确认删除该商品吗？','delete_product','<?php echo $item->id?>')">
 												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
 										</td>
 									</tr>
@@ -101,9 +101,6 @@
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="<?php echo base_url();?>assets/scripts/product.js"></script>    
 	<script>
-		jQuery(document).ready(function() {
-		   Product.init();
-		});
 
 	</script>
 <?$this->load->view('admin/footer');?>

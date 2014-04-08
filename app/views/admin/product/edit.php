@@ -2,7 +2,6 @@
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script src="<?php echo base_url();?>assets/scripts/product.js"></script>
-<script src="<?php echo base_url();?>assets/scripts/common.js" type="text/javascript"></script>
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
@@ -27,6 +26,11 @@
 							<?php echo $row->name;?>
 						</li>
 						<?endif;?>
+						<li class='btn-group'>
+							<button class="btn btn-link" type="button" onclick='goback()'>
+								<i class="fa fa-reply"></i><span>返回</span>
+							</button>
+						</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
