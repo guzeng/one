@@ -7,7 +7,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						所有商品
+						商品分类
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -15,7 +15,11 @@
 							<a href="index.html">首页</a> 
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li><a href="#">所有商品</a></li>
+						<li>
+							<a href="#">商品</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>商品分类</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -29,23 +33,13 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue" id='list-box'>
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-list"></i>所有商品</div>
+							<div class="caption"><i class="fa fa-list"></i>商品分类</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/products/edit' class="btn green m-r-5">
-											<i class="fa fa-plus"></i> 新增商品
+									<a href='<?php echo base_url();?>admin/product_cate/edit' class="btn green m-r-5">
+											<i class="fa fa-plus"></i> 新增分类
 									</a>
-									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','product_list','admin/products/lists')"><i class='fa fa-refresh'></i></a>
-									<a class="btn blue" href="#" data-toggle="dropdown">
-									显示/隐藏
-									<i class="fa fa-angle-down"></i>
-									</a>
-									<div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-										<label><input type="checkbox" checked data-column="0">编码</label>
-										<label><input type="checkbox" checked data-column="1">名称</label>
-										<label><input type="checkbox" checked data-column="2">价格</label>
-										<label><input type="checkbox" checked data-column="3">优惠价</label>
-									</div>
+									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','cate_list','admin/product_category/lists')"><i class='fa fa-refresh'></i></a>
 								</div>
 							</div>
 						</div>
@@ -64,8 +58,5 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.js"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="<?php echo base_url();?>assets/scripts/admin/product.js"></script>    
-	<script>
-
-	</script>
+	<script src="<?php echo base_url();?>assets/scripts/admin/product_cate.js"></script>    
 <?$this->load->view('admin/footer');?>

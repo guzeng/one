@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Products extends CI_Controller {
+class Product_cate extends CI_Controller {
 
 	/**
 	 * course for this controller.
@@ -11,34 +11,29 @@ class Products extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('product');
         $this->load->model('product_category');
-        $this->load->model('product_type');
 		$this->list_type = '';
     }
 	public function index()
 	{
         $this->list_type = 'return';
-        $category = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
-        $data['category_list'] = $category;
-        $data['param'] = $this->product->get_param();//stripslashes
         $data['list'] = $this->lists();
-        $this->load->view('admin/product/list',$data);
+        $this->load->view('admin/product_cate/list',$data);
 	}
     //-------------------------------------------------------------------------
 
     public function lists()
     {
-        $data['list'] = $this->product->all();
+        $data['list'] = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
         if($this->list_type == 'return')
         {
-            return $this->load->view('admin/product/datalist',$data,true);
+            return $this->load->view('admin/product_cate/datalist',$data,true);
         }
         else
         {
             echo json_encode(array(
                 'code' => '1000',
-                'data' => $this->load->view('admin/product/datalist',$data,true)
+                'data' => $this->load->view('admin/product_cate/datalist',$data,true)
             ));            
         }
 
@@ -159,7 +154,7 @@ class Products extends CI_Controller {
         }
         if($this->product->delete($id))
         {
-            $data = array('code'=>'1000','msg'=>'删除成功','data'=>array('id'=>$id));
+            $data = array('code'=>'1000','msg'=>'删除成功');
         }
         else
         {

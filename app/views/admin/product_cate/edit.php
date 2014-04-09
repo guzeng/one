@@ -1,7 +1,7 @@
 <?$this->load->view('admin/header');?>
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="<?php echo base_url();?>assets/scripts/admin/product.js"></script>
+	<script src="<?php echo base_url();?>assets/scripts/product.js"></script>
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">

@@ -1,6 +1,8 @@
+var clearTime = '';
 function show_success(msg)
 {
     close_alert();
+    clearTimeout(clearTime);
     if(typeof(msg)=='undefined' || msg=='')
     {
         var msg = '操作成功';
@@ -12,6 +14,7 @@ function show_success(msg)
     $('body').append(html);
     var w = parseInt($('#success').width())+60;
     $('#success').css('margin-left',(0-w/2)+'px');
+    clearTime = setTimeout(function(){$('#success').remove();},5000);
 }
 function show_error(msg)
 {
@@ -84,7 +87,6 @@ function confirm_dialog(title,msg,callback,param)
     }
     $('#_confirm_dialog').find('#_confirm_btn').unbind('click');
     $('#_confirm_dialog').find('#_confirm_btn').click(function(){
-        eval(callback+"("+str+")");
         if(typeof(callback)=='function')
         {
             callback(str);
@@ -153,31 +155,6 @@ function place_holder()
     }
 }
 //---------------------------------------------------------------------------------
-
-/**
- * browser
- * type of browser
- * 
-    browser={
-        version: (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [0,'0'])[1],
-        safari: /webkit/.test( userAgent ),
-        opera: /opera/.test( userAgent ),
-        msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ),
-        mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent )
-    }
- * @author zeng.gu
- * @2013/4/9
- */
-function msie()
-{
-    var userAgent = navigator.userAgent.toLowerCase();
-    if(/msie/.test( userAgent ) && !/opera/.test( userAgent ))
-    {
-        return true;
-    }
-    return false;
-}
-//------------------------------------------------------------------------
 
 /**
  * isExistOption
@@ -374,3 +351,95 @@ function goback()
     history.go(-1);
 }
 
+function initTable(tableID) {
+    if($('#'+tableID).length > 0)
+    {
+        var oTable = $('#'+tableID).dataTable( {
+            "aoColumnDefs": [
+                { "aTargets": [ 0 ] }
+            ],
+            "aaSorting": [[1, 'asc']],
+             "aLengthMenu": [
+                [10, 5, 10, 15, 20, -1],
+                ['', 5, 10, 15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "iDisplayLength": 10,
+        });
+
+        jQuery('#'+tableID+'_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
+        jQuery('#'+tableID+'_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+        jQuery('#'+tableID+'_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+
+        $('#sample_2_column_toggler input[type="checkbox"]').change(function(){
+            /* Get the DataTables object again - this is not a recreation, just a get of the object */
+            var iCol = parseInt($(this).attr("data-column"));
+            var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
+            oTable.fnSetColumnVis(iCol, (bVis ? false : true));
+        });        
+    }
+}
+/**
+ * 删除列表中一条记录
+ */
+function doDelete(url)
+{
+    confirm_dialog('删除确认','确认删除该记录吗？',Delete,url);
+}
+function Delete(url)
+{
+    var uri = url.replace(/\"/g,'');
+    if(typeof(uri)!='undefined' && uri!='' && uri!=null)
+    {
+        $.ajax({
+            url:msg.base_url+uri,
+            dataType:'json',
+            success:function(data){
+                if(data.code=='1000')
+                {
+                    $('#'+data.data.id).remove();
+                    show_success(data.msg);
+                }
+                else
+                {
+                    show_error(data.msg);
+                }
+            },
+            beforeSubmit:function(){
+                loading();
+            },
+            error:function(){
+                show_error();
+            }
+        })        
+    }
+}
+/**
+ * 重新加载列表 
+ */
+function reload_list(boxID,tableID,url){
+    var el = $('#'+boxID).children('.portlet-body');
+    $.ajax({
+        url:msg.base_url+url,
+        dataType:'json',
+        success:function(data){
+            App.unblockUI(el);
+            if(data.code == '1000')
+            {
+                el.html(data.data);
+                initTable(tableID);
+            }
+            else
+            {
+                show_error();
+            }
+        },
+        beforeSend:function(){
+            App.blockUI(el);
+        },
+        error:function(){
+            App.unblockUI(el);
+            show_error();
+        }
+    })
+}
