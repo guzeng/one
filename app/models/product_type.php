@@ -42,7 +42,28 @@ class Product_type  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
-
+    /**
+    *   exist
+    *   检查是否存在
+    *   @param int id
+    * 
+    */
+    public function exist($where)
+    {
+        if($where){
+            $this->db->from($this->table. ' as a');
+            $this->db->where($where);
+            $type = 'count(a.id) as count';
+            $this->db->select($type);
+            $query = $this->db->get();
+            if($query->row()->count > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    //----------------------------------------------------------------
 	/**
 	 * lists
 	 * 查询所有分类, 用于分页显示列表
@@ -79,13 +100,12 @@ class Product_type  extends CI_Model{
 	}
 	//---------------------------------------------------------
 	/**
-	 * fetch_items
+	 * all
 	 * 查询所有分类
 	 * 
 	 *	@param item array 
 	 *	@return array   
-	 *  @author chunhua.hong
-	 *  2013/1/10 11:12:56
+	 *  @author zeng.gu
 	 */    
 	public function all($items=array())
 	{

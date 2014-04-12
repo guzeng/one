@@ -7,19 +7,19 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						商品分类
+						商品类型
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">首页</a> 
+							<a href="<?php echo base_url()?>admin">首页</a> 
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
 							<a href="#">商品</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li>商品分类</li>
+						<li>商品类型</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -33,13 +33,13 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue" id='list-box'>
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-list"></i>商品分类</div>
+							<div class="caption"><i class="fa fa-list"></i>商品类型</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/product_cate/edit' class="btn green m-r-5">
-											<i class="fa fa-plus"></i> 新增分类
+									<a href='<?php echo base_url();?>admin/product_types/edit' class="btn green m-r-5">
+											<i class="fa fa-plus"></i> 新增商品类型
 									</a>
-									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','cate_list','admin/product_cate/lists')"><i class='fa fa-refresh'></i></a>
+									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','cate_list','admin/product_type/lists')"><i class='fa fa-refresh'></i></a>
 								</div>
 							</div>
 						</div>

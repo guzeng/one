@@ -6,7 +6,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						<?php echo isset($row)?'编辑':'添加'?>商品分类
+						<?php echo isset($row)?'编辑':'添加'?>商品类型
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -15,7 +15,7 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							商品分类
+							商品类型
 							<?if(isset($row)):?>
 							<i class="fa fa-angle-right"></i>
 							<?endif;?>
@@ -41,10 +41,10 @@
 					<div class="portlet box blue">
 						<div class="portlet-body ">
 							<!-- BEGIN FORM-->
-							<form action="<?php echo base_url()?>admin/product_cate/update" class="horizontal-form" id='product-cate-edit'>
+							<form action="<?php echo base_url()?>admin/product_types/update" class="horizontal-form" id='product-type-edit'>
 								<div class="form-body">
 									<div class="row">
-										<div class="col-md-6">
+										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label">名称</label>
 												<input type="text" id="name" name='name' class="form-control" maxLength='50' placeholder="50字符以内" value="<?php echo isset($row)?$row->name:''?>">
@@ -53,9 +53,19 @@
 										</div>
 										<!--/span-->
 									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label">备注</label>
+												<textarea id="info" name='info' class="form-control" maxLength='100' placeholder="100字符以内"><?php echo isset($row)?$row->info:''?></textarea>
+												<span class="help-block"></span>
+											</div>
+										</div>
+										<!--/span-->
+									</div>
 								</div>
 								<div class="form-actions right">
-									<button type="button" onclick="do_submit('product-cate-edit')" class="btn green"><i class="fa fa-save"></i> 保存</button>
+									<button type="button" onclick="do_submit('product-type-edit')" class="btn green"><i class="fa fa-save"></i> 保存</button>
 									<button type="button" class="btn default" onclick="javascript:history.go(-1);">取消</button>
 								</div>
 								<input type='hidden' id='id' name='id' value="<?php echo isset($row)?$row->id:''?>">

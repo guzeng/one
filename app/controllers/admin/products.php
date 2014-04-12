@@ -95,10 +95,13 @@ class Products extends CI_Controller {
         $error = array();
         if($post['id'])
         {
-            $where = array('code'=>$post['pcode'],'id !='=>$post['id']);
-            if($this->product->exist($where))
+            if($post['pcode'])
             {
-                $error['pcode'] = '编码已存在';
+                $where = array('code'=>$post['pcode'],'id !='=>$post['id']);
+                if($this->product->exist($where))
+                {
+                    $error['pcode'] = '编码已存在';
+                }                
             }
             $where = array('name'=>$post['name'],'id !='=>$post['id']);
             if($this->product->exist($where))
@@ -108,10 +111,13 @@ class Products extends CI_Controller {
         }
         else
         {
-            $where = array('code'=>$post['pcode']);
-            if($this->product->exist($where))
+            if($post['pcode'])
             {
-                $error['pcode'] = '编码已存在';
+                $where = array('code'=>$post['pcode']);
+                if($this->product->exist($where))
+                {
+                    $error['pcode'] = '编码已存在';
+                }
             }
             $where = array('name'=>$post['name']);
             if($this->product->exist($where))
@@ -127,9 +133,9 @@ class Products extends CI_Controller {
         $row = array(
             'code' => $post['pcode'],
             'name' => $post['name'],
-            'price' => $post['price'],
-            'best_price' => $post['best_price'],
-            'amount' => $post['amount'],
+            'price' => $post['price'] ? $post['price'] : 0,
+            'best_price' => $post['best_price'] ? $post['best_price'] : 0,
+            'amount' => $post['amount'] ? $post['amount'] : 0,
             'cate_id' => $post['cate_id'],
             'type_id' => $post['type_id']
         );
@@ -146,6 +152,10 @@ class Products extends CI_Controller {
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
             }
+        }
+        if($data['code'] == '1000')
+        {
+            $data['goto'] = 'admin/products';
         }
         echo json_encode($data);
     }

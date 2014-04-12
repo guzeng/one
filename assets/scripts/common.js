@@ -319,9 +319,13 @@ function do_submit(formID, callback)
         type:'post',
         beforeSubmit:function(){
             loading();
+            $('#'+formID).find('div.form-group').removeClass('has-error');
+            $('#'+formID).find('span.error-span').html('').removeClass('error-span');
+            $('#'+formID).find('button').addClass('disabled');
         },
         success:function(data){
             close_alert();
+            $('#'+formID).find('button').removeClass('disabled');
             if(typeof(data.code)!='undefined' && data.code == '1002')
             {
                 show_login();
@@ -329,10 +333,32 @@ function do_submit(formID, callback)
             else if(data.code=='1000')
             {
                 show_success();
+                if(typeof(data.goto)!='undefined')
+                {
+                    window.location.href = msg.base_url+data.goto;
+                }
             }
             else
             {
                 show_error(data.msg);
+                if(typeof(data.error)!='undefined' && data.error != '')
+                {
+                    $.each(data.error,function(key,item){
+                        if(item!='')
+                        {
+                            if($('input[name='+key+']').length > 0)
+                            {
+                                $('#'+formID).find('input[name='+key+']').parent().addClass('has-error');
+                                $('#'+formID).find('input[name='+key+']').parent().find('span.help-block').html(item).addClass('error-span');
+                            }
+                            else if($('textarea[name='+key+']').length > 0)
+                            {
+                                $('#'+formID).find('textarea[name='+key+']').parent().addClass('has-error');
+                                $('#'+formID).find('textarea[name='+key+']').parent().find('span.help-block').html(item).addClass('error-span');
+                            }
+                        }
+                    })
+                }
             }
             if(typeof(callback) == 'function')
             {
@@ -340,6 +366,7 @@ function do_submit(formID, callback)
             }
         },
         error:function(){
+            $('#'+formID).find('button').removeClass('disabled');
             show_error();
         }
     })

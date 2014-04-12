@@ -18,7 +18,7 @@ $method_name=$RTR->fetch_method();
                     <span class="selected"></span>
                     </a>
                 </li>
-                <li class="<?if(in_array($controller_name, array('products','product_cate'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('products','product_cate','product_types','product_comment'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">商品</span>
@@ -35,7 +35,47 @@ $method_name=$RTR->fetch_method();
                             商品分类
                             </a>
                         </li>
+                        <li class="<?if($controller_name=='product_types'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/product_types" >
+                            商品类型
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='product_comment'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/product_comment" >
+                            用户评论
+                            </a>
+                        </li>
                     </ul>
+                </li>
+                <li class="<?if(in_array($controller_name, array('orders'))):?>open active<?endif;?>">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">订单</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu" <?if(in_array($controller_name, array('orders'))):?>style='display:block;'<?endif;?>>
+                        <li class="<?if($controller_name=='orders'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/orders" >
+                            所有订单
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='product_cate'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/orders/send" >
+                            发货单
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='product_type'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/orders/back" >
+                            退货单
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="<?if(in_array($controller_name, array('orders'))):?>open active<?endif;?>">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">分仓管理</span>
+                    </a>
                 </li>
             </ul>
             <!-- END SIDEBAR MENU -->

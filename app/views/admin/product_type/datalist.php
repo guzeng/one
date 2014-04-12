@@ -12,9 +12,9 @@
 									<tr id='<?php echo $item->id;?>'>
                                 		<td><?php echo $item->name?></td>
 										<td>
-											<a href="<?php echo base_url();?>admin/product_cate/edit/<?php echo $item->id?>">
+											<a href="<?php echo base_url();?>admin/product_types/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
-											<a href="javascript:void(0)" onclick="doDelete('admin/product_cate/delete/'+<?php echo $item->id?>)">
+											<a href="javascript:void(0)" onclick="doDelete('admin/product_types/delete/'+<?php echo $item->id?>)">
 												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
 										</td>
 									</tr>

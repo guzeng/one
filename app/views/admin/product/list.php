@@ -63,9 +63,10 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.js"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="<?php echo base_url();?>assets/scripts/admin/product.js"></script>    
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->  
 	<script>
-
+		jQuery(document).ready(function() {
+		   initTable('product_list');
+		});
 	</script>
 <?$this->load->view('admin/footer');?>

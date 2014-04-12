@@ -1,7 +1,6 @@
 <?$this->load->view('admin/header');?>
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
-	<script src="<?php echo base_url();?>assets/scripts/admin/product.js"></script>
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
@@ -55,7 +54,7 @@
 										<!--/span-->
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="control-label">名称</label>
+												<label class="control-label"><span class='req'>*</span> 名称</label>
 												<input type="text" id="name" name='name' class="form-control" maxLength='50' placeholder="50字符以内" value="<?php echo isset($row)?$row->name:''?>">
 												<span class="help-block"></span>
 											</div>
@@ -128,7 +127,7 @@
 									<!--/row--> 
 								</div>
 								<div class="form-actions right">
-									<button type="button" onclick="do_submit('product-edit',form_validate)" class="btn green"><i class="fa fa-save"></i> 保存</button>
+									<button type="button" onclick="do_submit('product-edit')" class="btn green"><i class="fa fa-save"></i> 保存</button>
 									<button type="button" class="btn default" onclick="javascript:history.go(-1);">取消</button>
 								</div>
 								<input type='hidden' id='id' name='id' value="<?php echo isset($row)?$row->id:''?>">
