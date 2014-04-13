@@ -398,7 +398,7 @@ function initTable(tableID) {
         jQuery('#'+tableID+'_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
         jQuery('#'+tableID+'_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
 
-        $('#sample_2_column_toggler input[type="checkbox"]').change(function(){
+        $('#'+tableID+'_column_toggler input[type="checkbox"]').change(function(){
             /* Get the DataTables object again - this is not a recreation, just a get of the object */
             var iCol = parseInt($(this).attr("data-column"));
             var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;

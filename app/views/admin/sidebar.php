@@ -54,24 +54,24 @@ $method_name=$RTR->fetch_method();
                     <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu" <?if(in_array($controller_name, array('orders'))):?>style='display:block;'<?endif;?>>
-                        <li class="<?if($controller_name=='orders'):?>active<?endif;?>">
+                        <li class="<?if($controller_name=='orders' && $method_name=='index'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/orders" >
                             所有订单
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='product_cate'):?>active<?endif;?>">
+                        <li class="<?if($controller_name=='orders' && $method_name=='send'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/orders/send" >
-                            发货单
+                            待发货
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='product_type'):?>active<?endif;?>">
+                        <li class="<?if($controller_name=='orders' && $method_name=='back'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/orders/back" >
                             退货单
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="<?if(in_array($controller_name, array('orders'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('storage'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">分仓管理</span>

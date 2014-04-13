@@ -1,0 +1,2 @@
+alter table one_order add column username varchar(30) not null default '' COMMENT '用户名' after user_id;
+alter table one_order_detail add column order_id int(11) not null default 0 COMMENT '订单ID' after id;
