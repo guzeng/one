@@ -29,7 +29,7 @@ class Products extends CI_Controller {
 
     public function lists()
     {
-        $data['list'] = $this->product->all();
+        $data['list'] = $this->product->all(array('status !='=>2));
         if($this->list_type == 'return')
         {
             return $this->load->view('admin/product/datalist',$data,true);
@@ -177,6 +177,34 @@ class Products extends CI_Controller {
         }
         echo json_encode($data);
     }
+
+    public function recycle()
+    {
+        $this->list_type = 'return';
+        $category = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
+        $data['category_list'] = $category;
+        $data['list'] = $this->recycle_lists();
+        $this->load->view('admin/product/recycle-list',$data);
+    }
+    //-------------------------------------------------------------------------
+
+    public function recycle_lists()
+    {
+        $data['list'] = $this->product->all(array('status'=>2));
+        if($this->list_type == 'return')
+        {
+            return $this->load->view('admin/product/recycle-datalist',$data,true);
+        }
+        else
+        {
+            echo json_encode(array(
+                'code' => '1000',
+                'data' => $this->load->view('admin/product/recycle-datalist',$data,true)
+            ));            
+        }
+
+    }
+    //-------------------------------------------------------------------------
 }
 /* End of file products.php */
 /* Location: ./lms_app/controllers/admin/products.php */

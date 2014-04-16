@@ -226,15 +226,15 @@ class Product extends CI_Model{
      * @author zeng.gu
      * 2014/3/31
      */    
-    public function all($orderby='',$groupby='')
+    public function all($where=array(),$orderby='',$groupby='')
     {
-        $_where = $this->condition();
+        //$_where = $this->condition($where);
         $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
         $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
         $_type = 'a.*';
         $this->db->select ( $_type );
-        if(isset($_where)){
-            $this->db->where($_where);
+        if(!empty($where)){
+            $this->db->where($where);
         }
         $this->db->from($this->table.' as a');
         if($this->groupby!='')

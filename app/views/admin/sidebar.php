@@ -50,6 +50,11 @@ $method_name=$RTR->fetch_method();
                             用户评论
                             </a>
                         </li>
+                        <li class="<?if($controller_name=='products' && $method_name=='recycle'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/products/recycle" >
+                            回收站
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="<?if(in_array($controller_name, array('orders'))):?>open active<?endif;?>">
