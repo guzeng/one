@@ -18,7 +18,7 @@ $method_name=$RTR->fetch_method();
                     <span class="selected"></span>
                     </a>
                 </li>
-                <li class="<?if(in_array($controller_name, array('products','product_cate','product_types','product_comment'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('products','product_cate','product_types','product_brands','product_comments'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">商品</span>
@@ -40,8 +40,13 @@ $method_name=$RTR->fetch_method();
                             商品类型
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='product_comment'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/product_comment" >
+                        <li class="<?if($controller_name=='product_brands'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/product_brands" >
+                            商品品牌
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='product_comments'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/product_comments" >
                             用户评论
                             </a>
                         </li>
