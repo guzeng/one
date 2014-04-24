@@ -85,7 +85,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i> 全屏</a></li>
                         <li><a href="extra_lock.html"><i class="fa fa-lock"></i> 锁屏</a></li>
-                        <li><a href="login.html"><i class="fa fa-key"></i> 退出</a></li>
+                        <li><a href="<?php echo base_url()?>admin/login/out"><i class="fa fa-key"></i> 退出</a></li>
                     </ul>
                 </li>
                 <!-- END USER LOGIN DROPDOWN -->

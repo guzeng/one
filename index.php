@@ -200,6 +200,7 @@ if (defined('ENVIRONMENT'))
  *
  */
 date_default_timezone_set("Asia/Shanghai");
+session_start();
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */

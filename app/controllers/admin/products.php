@@ -18,6 +18,7 @@ class Products extends CI_Controller {
     }
 	public function index()
 	{
+        $this->auth->check_login();
         $this->list_type = 'return';
         $category = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
         $data['category_list'] = $category;
@@ -36,6 +37,7 @@ class Products extends CI_Controller {
         }
         else
         {
+            $this->auth->check_login_json();
             echo json_encode(array(
                 'code' => '1000',
                 'data' => $this->load->view('admin/product/datalist',$data,true)
@@ -47,6 +49,7 @@ class Products extends CI_Controller {
 
     public function edit($id='')
     {
+        $this->auth->check_login();
         if($id)
         {
             $row = $this->product->get($id);
@@ -64,6 +67,7 @@ class Products extends CI_Controller {
 
     public function update()
     {
+        $this->auth->check_login_json();
         $post = $this->input->post();
         if(empty($post))
         {
@@ -162,6 +166,7 @@ class Products extends CI_Controller {
 
     public function delete($id)
     {
+        $this->auth->check_login_json();
         if(!$id)
         {
             echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
@@ -180,6 +185,7 @@ class Products extends CI_Controller {
 
     public function recycle()
     {
+        $this->auth->check_login();
         $this->list_type = 'return';
         $category = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
         $data['category_list'] = $category;
@@ -197,6 +203,7 @@ class Products extends CI_Controller {
         }
         else
         {
+            $this->auth->check_login_json();
             echo json_encode(array(
                 'code' => '1000',
                 'data' => $this->load->view('admin/product/recycle-datalist',$data,true)

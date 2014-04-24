@@ -40,11 +40,11 @@
 	<!-- BEGIN LOGIN -->
 	<div class="content">
 		<!-- BEGIN LOGIN FORM -->
-		<form class="login-form" action="index.html" method="post">
+		<?php echo form_open('admin/login/verify', array('class'=>'login-form'));?>
 			<h3 class="form-title">登录</h3>
-			<div class="alert alert-danger display-hide">
+			<div class="alert alert-danger <?php if(!isset($msg)):?>display-hide<?endif;?>">
 				<button class="close" data-close="alert"></button>
-				<span>Enter any username and password.</span>
+				<span><?php echo isset($msg)?$msg:'';?></span>
 			</div>
 			<div class="form-group">
 				<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -76,7 +76,7 @@
 					重置密码
 				</p>
 			</div>
-		</form>
+		<?php echo form_close();?>
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->
 		<form class="forget-form" action="index.html" method="post">

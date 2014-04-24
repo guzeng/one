@@ -13,6 +13,7 @@ class Index extends CI_Controller {
     }
 	public function index()
 	{
+        $this->auth->check_login();
 		$this->show_dashboard = 'return';
 		$data['dashboard'] = $this->dashboard();
 		$this->load->view('admin/index', $data);
@@ -28,6 +29,7 @@ class Index extends CI_Controller {
 		}
 		else
 		{
+        	$this->auth->check_login_json();
 			$this->load->view('admin/dashboard');
 		}
 	}
