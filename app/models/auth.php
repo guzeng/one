@@ -37,6 +37,12 @@ class Auth extends CI_Model{
     {
         if(isset($_SESSION['user_id']) && $_SESSION['user_id']!='')
         {
+            $RTR =& load_class('Router', 'core');
+            $dir_name=$RTR->fetch_directory();
+            if($dir_name == 'admin' && !$_SESSION['is_admin'])
+            {
+                return false;
+            }
             return true;
         }
         return false;
@@ -145,6 +151,7 @@ class Auth extends CI_Model{
             $_SESSION['username'] = $row->username;
             $_SESSION['email'] = $row->email;
             $_SESSION['name'] = $row->name;
+            $_SESSION['is_admin'] = $row->is_admin;
         }
     }
     //--------------------------------------------------------------------

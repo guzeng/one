@@ -1,0 +1,2 @@
+insert into one_member (username,pwd,name) values('admin','497245c9e08975567103ce3cc382e761758a1679','admin');
+alter table one_member add column `is_admin` tinyint(3) not null default '0' comment '是否管理员';
