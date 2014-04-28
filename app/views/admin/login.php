@@ -70,18 +70,19 @@
 				</button>            
 			</div>
 			<div class="forget-password">
-				<h4>忘记密码 ?</h4>
+				<p>用户名：admin, 密码：admin</p>
+				<h4></h4>
+				<!--
 				<p>
-					请点击 <a href="javascript:;"  id="forget-password">这里</a>
-					重置密码
-				</p>
+					<a href="javascript:;"  id="forget-password">忘记密码 ?</a>
+				</p>-->
 			</div>
 		<?php echo form_close();?>
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->
 		<form class="forget-form" action="index.html" method="post">
-			<h3 >Forget Password ?</h3>
-			<p>Enter your e-mail address below to reset your password.</p>
+			<h3 >忘记密码 ?</h3>
+			<p>请输入您的邮箱</p>
 			<div class="form-group">
 				<div class="input-icon">
 					<i class="fa fa-envelope"></i>
@@ -102,7 +103,7 @@
 	<!-- END LOGIN -->
 	<!-- BEGIN COPYRIGHT -->
 	<div class="copyright">
-		2013 &copy; Zeng.
+		2013 &copy; zeng
 	</div>
 	<!-- END COPYRIGHT -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
