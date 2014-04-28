@@ -81,8 +81,8 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
-                <li class="<?if(in_array($controller_name, array('storage'))):?>open active<?endif;?>">
-                    <a href="javascript:;">
+                <li class="<?if(in_array($controller_name, array('storages'))):?>open active<?endif;?>">
+                    <a href="<?php echo base_url()?>admin/storages">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">分仓管理</span>
                     </a>
