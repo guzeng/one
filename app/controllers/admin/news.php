@@ -162,4 +162,4 @@ class News extends CI_Controller {
 
 }
 /* End of file news.php */
-/* Location: ./lms_app/controllers/admin/news.php */
+/* Location: ./app/controllers/admin/news.php */

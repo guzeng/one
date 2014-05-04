@@ -15,9 +15,9 @@
 									<tr id='<?php echo $item->id;?>'>
                                 		<td><?php echo $item->title?></td>
                                 		<td><?php echo $item->status?></td>
-                                		<td><?php echo date('Y-m-d',$item->create_time)?></td>
-                                		<td><?php echo $item->show_time==0 ? date('Y-m-d',$item->create_time) : date('Y-m-d',$item->show_time)?></td>
-										<td>
+                                		<td class="hidden-xs"><?php echo date('Y-m-d',$item->create_time)?></td>
+                                		<td class="hidden-xs"><?php echo $item->show_time==0 ? date('Y-m-d',$item->create_time) : date('Y-m-d',$item->show_time)?></td>
+										<td class="hidden-xs">
 											<a href="<?php echo base_url();?>admin/news/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
 											<a href="javascript:void(0)" onclick="doDelete('admin/news/delete/'+<?php echo $item->id?>)">

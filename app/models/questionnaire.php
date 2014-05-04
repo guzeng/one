@@ -1,12 +1,13 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**********************************
-    * 文章
+    * 问卷
     * @author alex.liang
     * 2014/4/26
 **********************************/
-class Newss extends CI_Model{
+class Questionnaire extends CI_Model{
 	
-	private $table = 'news';
+	private $table = 'questionnaire';
+    private $table_user = 'member';
     private $page = 1;
     private $per_page = 15;
     private $param = array();
@@ -26,7 +27,7 @@ class Newss extends CI_Model{
     //----------------------------------------------------------------
     /**
     *   insert
-    *   插入文章
+    *   插入问卷
     *   @param array row 数组
     * 
     */
@@ -46,7 +47,7 @@ class Newss extends CI_Model{
     //----------------------------------------------------------------
     /**
     *   update
-    *   更新文章
+    *   更新问卷
     *   @param array row 数组
     *   @param int id
     * 
@@ -62,56 +63,47 @@ class Newss extends CI_Model{
     //----------------------------------------------------------------
 
     /**
-    *   update
-    *   更新文章类别ID
-    *   @param int id
-    * 
-    */
-    public function update_by_cate($id)
-    {
-        if($id){
-            $this->db->where('cate_id',$id);
-            return $this->db->update($this->table,array('cate_id' => 0, ));
-        }
-        return false;
-    }   
-    //----------------------------------------------------------------
-
-    /**
     *   delete
-    *   删除文章
+    *   删除问卷
     *   @param int id
     * 
     */
 	public function delete($id)
     {
-		if($id){
-			$this->db->where('id',$id);
-            return $this->db->delete($this->table);
-		}
-		return false;
-	}
+        if ($id)
+        {
+            $this->db->where('id', $id);
+            if($this->db->delete($this->table))
+            {
+                //问卷相关联的表
+                $tables = array('questionnaire_question', 'questionnaire_option');
+                $this->db->where('questionnaire_id', $id);
+                $this->db->delete($tables);
+                return true;
+            }
+        }
+        return false;
+    }
     //----------------------------------------------------------------
 
     /**
     *   get
-    *   获取文章信息
+    *   获取问卷信息
     *   @param int id
     * 
     */
 	public function get($id)
     {
-		if($id){
-            $this->db->from($this->table. ' as a');
-			$this->db->where('a.id',$id);
-            $type = 'a.*';
-            $this->db->select($type);
-			$query = $this->db->get();
-			if($query->num_rows()>0){
-				return $query->row();
-			}
-		}
-		return false;
+		if ($id)
+        {
+            $this->db->where('id', $id);
+            $query = $this->db->get($this->table);
+            if ($query->num_rows() > 0)
+            {
+                return $query->row();
+            }
+        }
+        return false;
 	}
 	//----------------------------------------------------------------
 
@@ -222,12 +214,13 @@ class Newss extends CI_Model{
         $_where = $this->condition($where);
         $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
         $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
-        $_type = 'a.*';
+        $_type = 'a.*,u.name as creator';
         $this->db->select ( $_type );
         if(!empty($where)){
             $this->db->where($where);
         }
         $this->db->from($this->table.' as a');
+        $this->db->join($this->table_user.' as u', 'a.create_by = u.id', 'left');
         if($this->groupby!='')
         {
             $this->db->group_by($this->groupby);
@@ -280,7 +273,7 @@ class Newss extends CI_Model{
     {
         $config['per_page'] = $this->per_page;
         $config['total_rows'] = $this->count();
-        $config['base_url'] = base_url().'admin/products/lists/'.rtrim($this->base_url,'/');
+        $config['base_url'] = base_url().'admin/questionnaires/lists/'.rtrim($this->base_url,'/');
         $config['target'] = 'list_view';
         $this->pagination->init($config);
         return $this->pagination->links_load_page();
@@ -288,33 +281,25 @@ class Newss extends CI_Model{
     //----------------------------------------------------------------
 
     /**
-    *   取商品图片
-    *   @param int id 商品ID
-    *   @param var type 类型
+    * 更新问卷记录数
     */
-    public function pic($id, $type='big')
+    public function record_increment($id)
     {
-        $default = base_url().'images/default_'.$type.'.jpg';
-        if($id)
+        if ($id)
         {
-            $this->load->helper('file');
-            $dir = upload_dir($id);
-            $filePath = '';
-            if($type=='big')
+            $this->db->select('record');
+            $this->db->where('id', $id);
+            $query = $this->db->get($this->table);
+
+            if ($query->num_rows() > 0)
             {
-                $filePath = upload_folder('product').'/'.$dir.'/cover.png';
-            }
-            else if($type=='small')
-            {
-                $filePath = upload_folder('product').'/'.$dir.'/cover_thumb.png';
-            }
-            if(file_exists($filePath))
-            {
-                return base_url().$filePath.'?'.rand();
+                $record = $query->row();
+                $this->db->where('id', $id);
+                $this->db->update($this->table, array('record' => (1 + intval($record->record))));
             }
         }
-        return $default;
+        return false;
     }
 }
-/* End of file product.php */
-/* Location: ./app/models/product.php */	
+/* End of file questionnaire.php */
+/* Location: ./app/models/questionnaire.php */	

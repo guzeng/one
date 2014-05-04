@@ -87,6 +87,31 @@ $method_name=$RTR->fetch_method();
                     <span class="title">分仓管理</span>
                     </a>
                 </li>
+                <li class="<?if(in_array($controller_name, array('news'))):?>open active<?endif;?>">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">文章</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu" <?if(in_array($controller_name, array('news'))):?>style='display:block;'<?endif;?>>
+                        <li class="<?if($controller_name=='news' && $method_name=='index'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/news" >
+                            所有文章
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='news_cate' && $method_name=='index'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/news_cate" >
+                            文章分类
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="<?if(in_array($controller_name, array('questionnaires'))):?>open active<?endif;?>">
+                    <a href="<?php echo base_url()?>admin/questionnaires">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">在线问卷</span>
+                    </a>
+                </li>
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

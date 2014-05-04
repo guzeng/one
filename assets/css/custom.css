@@ -2,4 +2,55 @@
 .show-alert{position: fixed;top:5px; z-index: 10000; width: auto; border-radius:5px; left:50%;padding: 5px 35px 5px 15px; }
 .show-alert .close{top:5px;}
 .req{color:#FF0000;}
+/** questionnaires style start **/
+
+.topic_type {
+    margin-bottom: 20px;
+    border: 1px solid #DBDBDB;
+    position: relative;
+}
+
+.topic_type_menu {
+    left: 0;
+    padding: 5px 3px;
+    position: absolute;
+    top: 0;
+    width: 50px;
+}
+.topic_type_con {
+    height: 100%;
+    margin-left: 50px;
+    min-height: 150px;
+    padding: 8px;
+    border-left: 1px solid #DBDBDB;
+}
+.topic_type_con a {
+    display: inline-block;
+    padding: 0 2px;
+}
+
+.setup-group {
+    padding: 0 5px;
+    text-align: center;
+}
+
+.th4 {
+    font-size: 16px;
+    min-height: 30px;
+    padding: 6px 0 0;
+}
+
+.T_edit_min {width: 80%;}
+
+.Drag_area {
+    margin: -9px 0 0 -9px;
+    padding: 5px 0 0 10px;
+    z-index: 9;
+}
+
+.editable-container{width: 100% !important}
+.editable-container .editableform .form-group {width: 100% !important}
+.editable-container .editableform .form-group .editable-input{width: 80% !important}
+/** questionnaires style end **/
+
 /* here you can put your own css to customize and override the theme */
