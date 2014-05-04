@@ -87,6 +87,20 @@ $method_name=$RTR->fetch_method();
                     <span class="title">分仓管理</span>
                     </a>
                 </li>
+                <li class="<?if(in_array($controller_name, array('settings'))):?>open active<?endif;?>">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">系统管理</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu" <?if(in_array($controller_name, array('settings'))):?>style='display:block;'<?endif;?>>
+                        <li class="<?if($controller_name=='orders'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/settings" >
+                            系统设置
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>
