@@ -48,10 +48,14 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'one';
-$db['default']['password'] = 'one';
-$db['default']['database'] = 'one';
+// $db['default']['hostname'] = 'localhost';
+// $db['default']['username'] = 'one';
+// $db['default']['password'] = 'one';
+// $db['default']['database'] = 'one';
+$db['default']['hostname'] = '127.0.0.1';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '';
+$db['default']['database'] = '170es';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = 'one_';
 $db['default']['pconnect'] = TRUE;
