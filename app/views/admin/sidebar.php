@@ -95,7 +95,7 @@ $method_name=$RTR->fetch_method();
                     <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu" <?if(in_array($controller_name, array('settings'))):?>style='display:block;'<?endif;?>>
-                        <li class="<?if($controller_name=='orders'):?>active<?endif;?>">
+                        <li class="<?if($controller_name=='settings'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/settings" >
                             系统设置
                             </a>
