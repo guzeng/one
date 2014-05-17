@@ -16,7 +16,7 @@ class Settings extends CI_Controller {
     }
 	public function index()
 	{
-        $this->load->view('admin/settings/list',$data);
+        $this->load->view('admin/setting/edit');
 	}
     //-------------------------------------------------------------------------
 
