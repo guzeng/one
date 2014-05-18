@@ -88,7 +88,7 @@ $method_name=$RTR->fetch_method();
                     </a>
                 </li>
 
-                <li class="<?if(in_array($controller_name, array('settings'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('settings','joins'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">系统管理</span>
@@ -98,6 +98,11 @@ $method_name=$RTR->fetch_method();
                         <li class="<?if($controller_name=='settings'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/settings" >
                             系统设置
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='joins'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/joins" >
+                            加盟ES
                             </a>
                         </li>
                     </ul>
