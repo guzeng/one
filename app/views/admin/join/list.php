@@ -15,7 +15,8 @@
 							<a href="index.html">首页</a> 
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li><a href="#">加盟</a></li>
+						<li><a href="#">系统管理</a><i class="fa fa-angle-right"></i></li>
+						<li>加盟ES</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
