@@ -428,7 +428,6 @@ function initTable(tableID)
                 bVis = true;
                 $(this).attr('checked','checked');
             }
-            console.log(bVis);
             oTable.fnSetColumnVis(iCol, bVis);
         });
     }
