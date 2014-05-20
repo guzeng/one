@@ -50,7 +50,7 @@ class Links extends CI_Controller {
             }
             $data['row'] = $row;
         }
-        $this->load->view('admin/join/info',$data);
+        $this->load->view('admin/link/edit',$data);
     }
     //-------------------------------------------------------------------------
 
@@ -77,7 +77,7 @@ class Links extends CI_Controller {
         }
 
         $row = array(
-            'title' => trim($post['title']).
+            'title' => trim($post['title']),
             'url' => trim($post['url'])
         );
         if($post['id'])
