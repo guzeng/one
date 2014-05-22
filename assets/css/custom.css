@@ -1,4 +1,5 @@
 .m-r-5{margin-right: 5px;}
+.p-20{padding: 20px;}
 .show-alert{position: fixed;top:5px; z-index: 10000; width: auto; border-radius:5px; left:50%;padding: 5px 35px 5px 15px; }
 .show-alert .close{top:5px;}
 .req{color:#FF0000;}

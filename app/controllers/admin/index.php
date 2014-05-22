@@ -15,6 +15,14 @@ class Index extends CI_Controller {
 	{
         $this->auth->check_login();
 		$this->show_dashboard = 'return';
+		$this->load->model('product');
+		$this->load->model('order');
+		$this->load->model('user');
+		$this->load->model('newss');
+		$data['product_count'] = $this->product->count();
+		$data['order_count'] = $this->order->count();
+		$data['member_count'] = $this->user->count();
+		$data['news_count'] = $this->newss->count();
 		$data['dashboard'] = $this->dashboard();
 		$this->load->view('admin/index', $data);
 	}
