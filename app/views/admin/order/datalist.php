@@ -21,10 +21,8 @@
                                 		<td><?php echo date('Y-m-d H:i:s',$item->create_time)?></td>
                                 		<td><?php echo $item->phone?></td>
 										<td>
-											<a href="<?php echo base_url();?>admin/products/edit/<?php echo $item->id?>">
+											<a href="<?php echo base_url();?>admin/orders/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
-											<a href="javascript:void(0)" onclick="doDelete('admin/products/delete/'+<?php echo $item->id?>)">
-												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
 										</td>
 									</tr>
                             		<?endforeach;?>

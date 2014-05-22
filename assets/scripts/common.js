@@ -378,32 +378,58 @@ function goback()
     history.go(-1);
 }
 
-function initTable(tableID) {
+/**
+ * Advanced table init
+ * @param tableID  table's id attribute
+ */
+var oTable;
+function initTable(tableID) 
+{
+    oTable = '';
     if($('#'+tableID).length > 0)
     {
-        var oTable = $('#'+tableID).dataTable( {
+        oTable = $('#'+tableID).dataTable({           
             "aoColumnDefs": [
                 { "aTargets": [ 0 ] }
             ],
-            "aaSorting": [[1, 'asc']],
-             "aLengthMenu": [
+            //"aaSorting": [[0, 'asc']],
+            "aLengthMenu": [
                 [10, 5, 10, 15, 20, -1],
                 ['', 5, 10, 15, 20, "All"] // change per page values here
             ],
             // set the initial value
             "iDisplayLength": 10,
+            "bDestroy" :true,
+            "oLanguage": {
+                        "sLengthMenu": "每页显示 _MENU_ ",  
+                        "sZeroRecords": "未查询到任何相关数据",  
+                        "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",  
+                        "sInfoFiltered": "（从 _MAX_ 条记录中搜索）",  
+                        "sProcessing": "正在加载中...",  
+                        "sSearch": "搜索 : ",
+                        "sInfoEmpty": "当前显示 0 至 0， 共 0 项",
+                        "oPaginate":  {"sFirst":"第一页","sPrevious":"上一页 ","sNext":"下一页 ","sLast":"末页 "}
+                    },
         });
 
         jQuery('#'+tableID+'_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
         jQuery('#'+tableID+'_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
-        jQuery('#'+tableID+'_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
-
-        $('#'+tableID+'_column_toggler input[type="checkbox"]').change(function(){
+        jQuery('#'+tableID+'_wrapper .dataTables_length select').select2(); // initialize select2 dropdown.TR54
+        $('#'+tableID+'_column_toggler input[type="checkbox"]').on('change',function(){
             /* Get the DataTables object again - this is not a recreation, just a get of the object */
             var iCol = parseInt($(this).attr("data-column"));
-            var bVis = oTable.fnSettings().aoColumns[iCol].bVisible;
-            oTable.fnSetColumnVis(iCol, (bVis ? false : true));
-        });        
+            //var bVis = $(this).parent().hasClass('checked');//oTable.fnSettings().aoColumns[iCol].bVisible;
+            if($(this).attr('checked')=='checked'){
+                bVis = false;
+                $(this).removeAttr('checked');
+            }
+            else
+            {
+                bVis = true;
+                $(this).attr('checked','checked');
+            }
+            oTable.fnSetColumnVis(iCol, bVis);
+        });
     }
 }
 /**
