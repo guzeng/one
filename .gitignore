@@ -7,3 +7,8 @@ app/cache/*
 app/logs/*
 !app/logs/index.html
 !app/logs/.htaccess
+
+upload/*
+!index.html
+
+Thumbs.db
