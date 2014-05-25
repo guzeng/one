@@ -36,7 +36,7 @@
 							<div class="caption"><i class="fa fa-list"></i>商品类型</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/product_types/edit' class="btn green m-r-5">
+									<a href='<?php echo base_url();?>admin/product_types/edit' class="btn blue m-r-5">
 											<i class="fa fa-plus"></i> 新增商品类型
 									</a>
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','cate_list','admin/product_type/lists')"><i class='fa fa-refresh'></i></a>

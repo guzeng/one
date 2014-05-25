@@ -415,7 +415,7 @@ function initTable(tableID)
         jQuery('#'+tableID+'_wrapper .dataTables_filter input').addClass("form-control input-small"); // modify table search input
         jQuery('#'+tableID+'_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
         jQuery('#'+tableID+'_wrapper .dataTables_length select').select2(); // initialize select2 dropdown.TR54
-        $('#'+tableID+'_column_toggler input[type="checkbox"]').on('change',function(){
+        $('#'+tableID+'_column_toggler input[type="checkbox"]').off().on('change',function(){
             /* Get the DataTables object again - this is not a recreation, just a get of the object */
             var iCol = parseInt($(this).attr("data-column"));
             //var bVis = $(this).parent().hasClass('checked');//oTable.fnSettings().aoColumns[iCol].bVisible;

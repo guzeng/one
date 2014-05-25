@@ -37,7 +37,7 @@
 									显示/隐藏
 									<i class="fa fa-angle-down"></i>
 									</a>
-									<div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+									<div id="product_recycle_list_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
 										<label><input type="checkbox" checked data-column="0">编码</label>
 										<label><input type="checkbox" checked data-column="1">名称</label>
 										<label><input type="checkbox" checked data-column="2">价格</label>
