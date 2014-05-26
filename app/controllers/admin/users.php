@@ -69,15 +69,23 @@ class Users extends CI_Controller {
         }
         $data = array('code' => '1000', 'msg' => '');
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', ' ', 'required|max_length[20]'); 
-        $this->form_validation->set_rules('name', ' ', 'max_length[50]'); 
+        $this->form_validation->set_rules('username', ' ', 'required');
+        $this->form_validation->set_rules('email', ' ', 'required|valid_email');
+        $this->form_validation->set_rules('password', ' ', 'required|min_length[6]');
+        $this->form_validation->set_rules('password_re', ' ', 'required|min_length[6]|matches[password]');
+        $this->form_validation->set_rules('score', ' ', 'required|is_natural');
+        $this->form_validation->set_rules('grade', ' ', 'required');
         
         if($this->form_validation->run() == FALSE)
         {
             $this->form_validation->set_error_delimiters('', '');
             $data['code'] = '1010';
             $error['username'] = form_error('username');
-            $error['name'] = form_error('name');
+            $error['email'] = form_error('email');
+            $error['password'] = form_error('password');
+            $error['password_re'] = form_error('password_re');
+            $error['score'] = form_error('score');
+            $error['grade'] = form_error('grade');
             $data['msg'] = $this->lang->line('error_msg');
             $data['error'] = $error;
             echo json_encode($data);                                    
@@ -95,6 +103,14 @@ class Users extends CI_Controller {
                     $error['username'] = '会员名已存在';
                 }                
             }
+            if($post['email'])
+            {
+                $where = array('email'=>$post['email'],'id !='=>$post['id']);
+                if($this->user->exist($where))
+                {
+                    $error['email'] = '邮箱已存在';
+                }                
+            }
         }
         else
         {
@@ -106,11 +122,15 @@ class Users extends CI_Controller {
                     $error['username'] = '会员名已存在';
                 }
             }
-            $where = array('name'=>$post['name']);
-            if($this->user->exist($where))
+            if($post['email'])
             {
-                $error['name'] = '名称已存在';
+                $where = array('email'=>$post['email']);
+                if($this->user->exist($where))
+                {
+                    $error['email'] = '邮箱已存在';
+                }
             }
+            
         }
         if(!empty($error))
         {
@@ -119,7 +139,17 @@ class Users extends CI_Controller {
         }
         $row = array(
             'username' => $post['username'],
-            'name' => $post['name']
+            'email' => $post['email'],
+            'password' => $post['password'],
+            'score' => $post['score'] != ''? $post['score'] : 0,
+            'grade' => $post['grade'],
+            'reference' => $post['reference'] != ''? $post['reference'] : 0,
+            'phone' => $post['phone'],
+            'telephone' => $post['telephone'],
+            'post_code' => $post['post_code'],
+            'area' => $post['area'] != ''? $post['area'] : 0,
+            'address' => $post['address'],
+            'qq' => $post['qq']
         );
         if($post['id'])
         {

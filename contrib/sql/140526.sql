@@ -1,10 +1,24 @@
-alter table one_product change brand brand_id int(11) not null default 0 comment '品牌ID';
-alter table one_product add column `unit` varchar(30) not null default '' comment '计量单位',
-						add column `weight` float(9,2) not null default 0 comment '单位重量',
-						add column `score` int(11) not null default 0 comment '积分',
-						add column `min_num` int(11) not null default 0 comment '最低购买数',
-						add column `recommend` tinyint(3) not null default 0 comment '是否推荐，1:推荐',
-						add column `specials` tinyint(3) not null default 0 comment '是否特价,1:是',
-						add column `hot` tinyint(3) not null default 0 comment '是否热卖,1:是',
-						add column `allow_comment` tinyint(3) not null default 0 comment '是否允许评论,1:是',
-						add column `info` text null comment '简介';
+﻿
+ALTER TABLE `one_member`   
+  ADD COLUMN `email` varchar(50) NOT NULL DEFAULT ''  COMMENT '电子邮箱';
+ALTER TABLE `one_member`   
+  ADD COLUMN `password` varchar(50) NOT NULL DEFAULT ''  COMMENT '密码';
+ALTER TABLE `one_member`   
+  ADD COLUMN `telephone` varchar(30) NOT NULL DEFAULT ''  COMMENT '固定电话';
+ALTER TABLE `one_member`   
+  ADD COLUMN `phone` varchar(30) NOT NULL DEFAULT ''  COMMENT '手机';
+ALTER TABLE `one_member`   
+  ADD COLUMN `post_code` varchar(10) NOT NULL DEFAULT ''  COMMENT '邮编';
+ALTER TABLE `one_member`   
+  ADD COLUMN `area` int(11) NOT NULL DEFAULT '0'  COMMENT '地区';
+ALTER TABLE `one_member`   
+  ADD COLUMN `qq` varchar(30) NOT NULL DEFAULT ''  COMMENT 'qq';
+ALTER TABLE `one_member`   
+  ADD COLUMN `telephone` varchar(30) NOT NULL DEFAULT ''  COMMENT '启用';
+ALTER TABLE `one_member`   
+  ADD COLUMN `gender` int(11) NOT NULL DEFAULT '0'  COMMENT '性别';
+ALTER TABLE `one_member`   
+  ADD COLUMN `address` varchar(50) NOT NULL DEFAULT ''  COMMENT '详细地址';
+ALTER TABLE `one_member`   
+  ADD COLUMN `money` decimal(2) NOT NULL DEFAULT '0.00'  COMMENT '预付款';
+
