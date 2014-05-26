@@ -14,7 +14,7 @@ ALTER TABLE `one_member`
 ALTER TABLE `one_member`   
   ADD COLUMN `qq` varchar(30) NOT NULL DEFAULT ''  COMMENT 'qq';
 ALTER TABLE `one_member`   
-  ADD COLUMN `telephone` varchar(30) NOT NULL DEFAULT ''  COMMENT '启用';
+  ADD COLUMN `status` varchar(30) NOT NULL DEFAULT ''  COMMENT '启用';
 ALTER TABLE `one_member`   
   ADD COLUMN `gender` int(11) NOT NULL DEFAULT '0'  COMMENT '性别';
 ALTER TABLE `one_member`   
