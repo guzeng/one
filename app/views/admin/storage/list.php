@@ -36,7 +36,7 @@
 							<div class="caption"><i class="fa fa-list"></i>分仓</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/storages/edit' class="btn green m-r-5">
+									<a href='<?php echo base_url();?>admin/storages/edit' class="btn blue m-r-5">
 											<i class="fa fa-plus"></i> 新增分仓
 									</a>
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','stotage_list','admin/storages/lists')"><i class='fa fa-refresh'></i></a>

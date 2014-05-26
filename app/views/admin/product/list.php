@@ -32,7 +32,7 @@
 							<div class="caption"><i class="fa fa-list"></i>所有商品</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/products/edit' class="btn green m-r-5">
+									<a href='<?php echo base_url();?>admin/products/edit' class="btn blue m-r-5">
 											<i class="fa fa-plus"></i> 新增商品
 									</a>
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','product_list','admin/products/lists')"><i class='fa fa-refresh'></i></a>
@@ -40,7 +40,7 @@
 									显示/隐藏
 									<i class="fa fa-angle-down"></i>
 									</a>
-									<div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+									<div id="product_list_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
 										<label><input type="checkbox" checked data-column="0">编码</label>
 										<label><input type="checkbox" checked data-column="1">名称</label>
 										<label><input type="checkbox" checked data-column="2">价格</label>
