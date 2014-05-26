@@ -14,6 +14,7 @@ class Products extends CI_Controller {
         $this->load->model('product');
         $this->load->model('product_category');
         $this->load->model('product_type');
+        $this->load->model('product_brand');
 		$this->list_type = '';
     }
 	public function index()
@@ -61,6 +62,7 @@ class Products extends CI_Controller {
         }
         $data['cates'] = $this->product_category->all();
         $data['types'] = $this->product_type->all();
+        $data['brands'] = $this->product_brand->all();
         $this->load->view('admin/product/edit',$data);
     }
     //-------------------------------------------------------------------------
@@ -80,6 +82,15 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('price', ' ', 'numeric|max_length[8]'); 
         $this->form_validation->set_rules('best_price', ' ', 'numeric|max_length[8]'); 
         $this->form_validation->set_rules('amount', ' ', 'integer|max_length[8]'); 
+        $this->form_validation->set_rules('unit', ' ', 'max_length[30]');  
+        $this->form_validation->set_rules('weight', ' ', 'numeric|max_length[8]');  
+        $this->form_validation->set_rules('min_num', ' ', 'integer|max_length[11]');  
+        $this->form_validation->set_rules('score', ' ', 'integer|max_length[11]');  
+        $this->form_validation->set_rules('status', ' ', 'integer');
+        $this->form_validation->set_rules('recommend', ' ', 'integer');  
+        $this->form_validation->set_rules('specials', ' ', 'integer');  
+        $this->form_validation->set_rules('hot', ' ', 'integer');  
+        $this->form_validation->set_rules('allow_comment', ' ', 'integer');    
         
         if($this->form_validation->run() == FALSE)
         {
@@ -90,6 +101,15 @@ class Products extends CI_Controller {
             $error['price'] = form_error('price');
             $error['best_price'] = form_error('best_price');
             $error['amount'] = form_error('amount');
+            $error['unit'] = form_error('unit');
+            $error['weight'] = form_error('weight');
+            $error['min_num'] = form_error('min_num');
+            $error['score'] = form_error('score');
+            $error['status'] = form_error('status');
+            $error['recommend'] = form_error('recommend');
+            $error['specials'] = form_error('specials');
+            $error['hot'] = form_error('hot');
+            $error['allow_comment'] = form_error('allow_comment');
             $data['msg'] = $this->lang->line('error_msg');
             $data['error'] = $error;
             echo json_encode($data);                                    
@@ -141,7 +161,18 @@ class Products extends CI_Controller {
             'best_price' => $post['best_price'] ? $post['best_price'] : 0,
             'amount' => $post['amount'] ? $post['amount'] : 0,
             'cate_id' => $post['cate_id'],
-            'type_id' => $post['type_id']
+            'type_id' => $post['type_id'],
+            'brand_id' => $post['brand_id'],
+            'unit' => $post['unit'],
+            'weight' => $post['weight'],
+            'min_num' => $post['min_num'],
+            'score' => $post['score'],
+            'info' => $post['info'],
+            'status' => $post['status'],
+            'recommend' => $post['recommend'],
+            'specials' => $post['specials'],
+            'hot' => $post['hot'],
+            'allow_comment' => $post['allow_comment']
         );
         if($post['id'])
         {
