@@ -32,7 +32,7 @@
 							<div class="caption"><i class="fa fa-list"></i>所有调查问卷</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/questionnaires/add' class="btn green m-r-5">
+									<a href='<?php echo base_url();?>admin/questionnaires/add' class="btn blue m-r-5">
 											<i class="fa fa-plus"></i> 新增调查问卷
 									</a>
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','questionnaire_list','admin/questionnaires/lists')"><i class='fa fa-refresh'></i></a>

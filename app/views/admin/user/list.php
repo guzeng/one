@@ -32,7 +32,7 @@
 							<div class="caption"><i class="fa fa-list"></i>所有会员</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/users/edit' class="btn green m-r-5">
+									<a href='<?php echo base_url();?>admin/users/edit' class="btn blue m-r-5">
 											<i class="fa fa-plus"></i> 新增会员
 									</a>
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','user_list','admin/users/lists')"><i class='fa fa-refresh'></i></a>

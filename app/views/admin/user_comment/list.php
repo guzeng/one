@@ -7,7 +7,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						所有文章
+						所有留言
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -15,7 +15,7 @@
 							<a href="index.html">首页</a> 
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li><a href="#">所有文章</a></li>
+						<li><a href="#">所有留言</a></li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -29,14 +29,11 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue" id='list-box'>
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-list"></i>所有文章</div>
+							<div class="caption"><i class="fa fa-list"></i>所有留言</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/news/edit' class="btn blue m-r-5">
-											<i class="fa fa-plus"></i> 新增文章
-									</a>
-									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','news_list','admin/news/lists')"><i class='fa fa-refresh'></i></a>
-									<!-- <a class="btn blue" href="#" data-toggle="dropdown">
+									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','user_comment_list','admin/user_comments/lists')"><i class='fa fa-refresh'></i></a>
+									<a class="btn blue" href="#" data-toggle="dropdown">
 									显示/隐藏
 									<i class="fa fa-angle-down"></i>
 									</a>
@@ -45,7 +42,7 @@
 										<label><input type="checkbox" checked data-column="1">名称</label>
 										<label><input type="checkbox" checked data-column="2">价格</label>
 										<label><input type="checkbox" checked data-column="3">优惠价</label>
-									</div> -->
+									</div>
 								</div>
 							</div>
 						</div>
@@ -66,7 +63,7 @@
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->  
 	<script>
 		jQuery(document).ready(function() {
-		   initTable('news_list');
+		   initTable('user_comment_list');
 		});
 	</script>
 <?$this->load->view('admin/footer');?>

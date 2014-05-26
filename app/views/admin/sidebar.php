@@ -99,6 +99,11 @@ $method_name=$RTR->fetch_method();
                             所有会员
                             </a>
                         </li>
+                        <li class="<?if($controller_name=='user_comment'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/user_comments" >
+                            会员留言
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="<?if(in_array($controller_name, array('settings','joins','links'))):?>open active<?endif;?>">
