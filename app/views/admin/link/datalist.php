@@ -2,6 +2,7 @@
 							<table class="table table-striped table-bordered table-hover" id="link_list">
 								<thead>
 									<tr>
+										<th class='hide'></th>
 										<th>标题</th>
 										<th>图片</th>
 										<th>链接地址</th>
@@ -12,13 +13,14 @@
                             		<?if(!empty($list)):?>
                             		<?foreach($list as $key => $item):?>
 									<tr id='<?php echo $item->id;?>'>
+                                		<td class='hide'><?php echo $item->id?></td>
                                 		<td><?php echo $item->title?></td>
-                                		<td><?php echo $item->img?></td>
+                                		<td><img src="<?php echo $this->link->pic($item->id)?>" ></td>
                                 		<td><?php echo $item->url?></td>
 										<td class="hidden-xs">
 											<a href="<?php echo base_url();?>admin/links/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
-											<a href="javascript:void(0)" onclick="doDelete('<?php echo base_url();?>admin/links/delete/<?php echo $item->id?>')">
+											<a href="javascript:void(0)" onclick="doDelete('admin/links/delete/<?php echo $item->id?>')">
 												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
 										</td>
 									</tr>

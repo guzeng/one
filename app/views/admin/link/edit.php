@@ -1,35 +1,5 @@
 <?$this->load->view('admin/header');?>
-<script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
-<!-- The Templates plugin is included to render the upload/download listings -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/vendor/tmpl.min.js" type="text/javascript"></script>
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/vendor/load-image.min.js" type="text/javascript"></script>
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js" type="text/javascript"></script>
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.iframe-transport.js" type="text/javascript"></script>
-<!-- The basic File Upload plugin -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
-<!-- The File Upload processing plugin -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js" type="text/javascript"></script>
-<!-- The File Upload image preview & resize plugin -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-image.js" type="text/javascript"></script>
-<!-- The File Upload audio preview plugin -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-audio.js" type="text/javascript"></script>
-<!-- The File Upload video preview plugin -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-video.js" type="text/javascript"></script>
-<!-- The File Upload validation plugin -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js" type="text/javascript"></script>
-<!-- The File Upload user interface plugin -->
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
-<!-- The main application script -->
-<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
-<!--[if (gte IE 8)&(lt IE 10)]>
-<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js" type="text/javascript"></script>
-<![endif]-->
-
+<link href="<?php echo base_url()?>assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
@@ -44,11 +14,11 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="index.html">系统管理</a> 
+							系统管理
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">友情链接</a>
+							<a href="<?php echo base_url()?>admin/links">友情链接</a>
 							<?if(isset($row)):?>
 								<i class="fa fa-angle-right"></i>
 							<?endif;?>
@@ -72,17 +42,21 @@
 			<div class="row">
 				<div class="col-md-12" id="">
 					<div class="portlet box blue">
-						<div class="portlet-body ">
+                        <div class="portlet-title">
+                            <div class="caption"><i class="fa fa-list"></i>
+                                <?php echo isset($row)&&$row->id>0?'编辑':'新增'?>友情链接</div>
+                        </div>
+						<div class="portlet-body form">
 							<!-- BEGIN FORM-->
 							<form action="<?php echo base_url()?>admin/links/update" class="form-horizontal" id='link-edit'>
 								<div class="form-body">
-									<div class="form-group">
-										<label class="control-label col-md-3"><span class='req'>*</span> 名称</label>
-										<div class="col-md-7">
-		                                    <input type="text" id="title" name="title" class="form-control" maxlength="50" placeholder="50字符以内" value="<?php echo isset($row)?$row->title:''?>">
-		                                    <span class="help-block" for='title'></span>
-										</div>
-									</div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3"><span class='req'>*</span> 名称</label>
+                                        <div class="col-md-7">
+                                            <input type="text" id="title" name="title" class="form-control" maxlength="50" placeholder="50字符以内" value="<?php echo isset($row)?$row->title:''?>">
+                                            <span class="help-block" for='url'></span>
+                                        </div>
+                                    </div>
 									<div class="form-group">
 										<label class="control-label col-md-3"><span class='req'>*</span> 地址</label>
 										<div class="col-md-7">
@@ -93,6 +67,9 @@
 		                            <div class="form-group m-b-0">
 		                                <label class="col-md-3 control-label">图片</label>
 		                                <div class="col-md-9">
+                                            <?if(isset($row)&&$row->id>0):?>
+                                                <img src="<?php echo $this->link->pic($row->id)?>" id='link_setting_pic' style='max-width:120px;height:68px;margin-bottom:10px;'> 
+                                            <?endif;?>
 		                                    <div id="review_pic" class='m-b-10'></div>
 		                                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
 		                                    <div class="row fileupload-buttonbar" id='upload_file_con'>
@@ -115,20 +92,41 @@
 		                                </div>
 		                            </div>
 								</div>
-								<div class="form-actions center">
-									<label class="control-label col-md-3"></label>
-									<div class="col-md-7">
-										<button type="button" onclick="do_submit('link-edit')" class="btn green btn-lg"><i class="fa fa-save"></i> 保存</button>
+								<div class="form-actions">
+									<div class="col-md-offset-3 col-md-9">
+										<button type="button" onclick="do_submit('link-edit')" class="btn green btn-lg"><i class="fa fa-save"></i> 保存</button> &nbsp;
 										<button type="button" class="btn btn-default btn-lg" onclick="javascript:history.go(-1);">取消</button>
 									</div>
 								</div>
 								<input type='hidden' id='id' name='id' value="<?php echo isset($row)?$row->id:''?>">
+                                <input type='hidden' id='link_pic_path' name='link_pic_path' value=''>
 							</form>
 							<!-- END FORM--> 
 						</div>
 					</div>
 				</div>
 			</div>
+
+<script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/vendor/tmpl.min.js" type="text/javascript"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/vendor/load-image.min.js" type="text/javascript"></script>
+<!-- The basic File Upload plugin -->
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload.js" type="text/javascript"></script>
+<!-- The File Upload processing plugin -->
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js" type="text/javascript"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-image.js" type="text/javascript"></script>
+<!-- The File Upload user interface plugin -->
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
+<!-- The main application script -->
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
+<!--[if (gte IE 8)&(lt IE 10)]>
+<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/cors/jquery.xdr-transport.js" type="text/javascript"></script>
+<![endif]-->
 <!-- BEGIN:File Upload Plugin JS files-->
 <script id="template-upload" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -209,62 +207,6 @@
         </tr>
     {% } %}
 </script>
-<script type="text/javascript">
-$(function(){
-    //上传
-    $('#skin_edit_upload').fileupload({
-        dataType: "json",
-        autoUpload: true,
-        url: msg.base_url+'uploadHandler',
-        // Enable image resizing, except for Android and Opera,
-        // which actually support image resizing, but fail to
-        // send Blob objects via XHR requests:
-        disableImageResize: /Android(?!.*Chrome)|Opera/
-            .test(window.navigator.userAgent),
-        maxFileSize: 1000000,
-        maxNumberOfFiles : 1,
-        acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-        start: function (e) {
-        	loading();
-            $('#skin_edit_upload').attr('disabled', true);
-        },
-        progressall: function (e, data) {
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#upload-loading').show();
-            $('#upload-loading').find('div.progress-bar').width(progress + '%');
-            $('#upload-loading').find('div.progress-bar').find('span.sr-only').css({'width':'auto','height':'auto','clip':'auto'}).html(progress + '%');
-        },
-        fail: function (e, data) {
-        	close_alert();
-            $('#skin_edit_upload').attr('disabled', false);
-            show_error(data.errorThrown);
-            $('#upload-loading').hide();
-            $('#upload-loading').find('div.progress-bar').width('0%');
-            $('#upload-loading').find('div.progress-bar').find('span.sr-only').html('0%');
-        },
-        done: function (e, data) {
-            //给隐藏值赋值
-            var url = data['result']['files'][0]['thumbnailUrl'];
-            $('#review_pic').html('');
-            $('#review_pic').prepend("<img src='"+url+"?"+Math.random()+"' id='skin_setting_pic' style='max-width:120px;height:68px;'> <p><button class='btn btn-link' type='button' onclick='cancel_upload()'>"+msg.cancel+"</button></p>");
-            $('#skin_pic_path').val(data['result']['files'][0]['name']);
-            $('#upload_file_con').hide();
-            data.context.text('');
-            $('#skin_edit_upload').attr('disabled', false);
-            $('#upload-loading').hide();
-            $('#upload-loading').find('div.progress-bar').width('0%');
-            $('#upload-loading').find('div.progress-bar').find('span.sr-only').html('0%');
-        } 
-    });
-})
-function cancel_upload()
-{
-    $('#review_pic').html('');
-    $('#skin_pic_path').val('');
-    $('#upload_file_con').show();
-}
-</script>
-
-
-	<!-- END PAGE LEVEL PLUGINS -->
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="<?php echo base_url();?>assets/scripts/admin/link.js" type="text/javascript"></script>
 <?$this->load->view('admin/footer');?>

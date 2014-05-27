@@ -31,6 +31,9 @@
 							<div class="caption"><i class="fa fa-list"></i>友情链接</div>
 							<div class="actions">
 								<div class="btn-group">
+									<a href='<?php echo base_url();?>admin/links/edit' class="btn blue m-r-5">
+										<i class="fa fa-plus"></i> 新增友情链接
+									</a>
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','link_list','admin/links/lists')"><i class='fa fa-refresh'></i></a>
 									<a class="btn blue" href="#" data-toggle="dropdown">
 									显示/隐藏

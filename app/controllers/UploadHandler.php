@@ -1,6 +1,6 @@
 <?php
 
-class UploadHandler extends CI_Controller{
+class uploadHandler extends CI_Controller{
 
 	protected $options;
     // PHP File Upload error message codes:
@@ -137,7 +137,7 @@ class UploadHandler extends CI_Controller{
      * @2014/4/28
      * @author alex
      */
-    protected function initialize($thumbnail_max_width = null,$thumbnail_max_height = null,$other_max_width = null,$other_max_height = null) {
+    public function index($thumbnail_max_width = null,$thumbnail_max_height = null,$other_max_width = null,$other_max_height = null) {
         if($thumbnail_max_width!=null || $thumbnail_max_height!=null)
         {
             $this->options['image_versions']['thumbnail'] = array('max_width' => $thumbnail_max_width,'max_height' => $thumbnail_max_height);

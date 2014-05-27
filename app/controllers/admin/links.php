@@ -41,6 +41,7 @@ class Links extends CI_Controller {
 
     public function edit($id='')
     {
+        $data = array();
         if($id)
         {
             $row = $this->link->get($id);
@@ -62,6 +63,7 @@ class Links extends CI_Controller {
             show_error('参数错误');
         }
         $data = array('code' => '1000', 'msg' => '');
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('title', ' ', 'required|max_length[50]'); 
         $this->form_validation->set_rules('url', ' ', 'required|max_length[200]'); 
         
@@ -86,6 +88,35 @@ class Links extends CI_Controller {
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
             }
+            $id = $post['id'];
+        }
+        else
+        {
+            if(!$id = $this->link->insert($row))
+            {
+                $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
+            }
+        }
+        //处理图片
+        if($post['link_pic_path'] && is_file(upload_folder('temp').DIRECTORY_SEPARATOR.$post['link_pic_path']))
+        {
+            $target = upload_folder('link').DIRECTORY_SEPARATOR.file_save_dir($id);
+
+            create_folder($target);
+            $config['image_library'] = 'gd2';
+            $config['source_image'] = upload_folder('temp').DIRECTORY_SEPARATOR.$post['link_pic_path'];
+            $config['create_thumb'] = false;
+            $config['maintain_ratio'] = TRUE;
+            $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'.png';
+            $config['width'] = 120;
+            $config['height'] = 80;
+            $this->load->library('image_lib', $config);
+            $this->image_lib->resize();
+            @unlink($config['source_image']);
+        }
+        if($data['code']=='1000')
+        {
+            $data['goto'] = 'admin/links';
         }
         echo json_encode($data);
     }
@@ -100,6 +131,7 @@ class Links extends CI_Controller {
         if($this->link->delete($id))
         {
             $data = array('code'=>'1000','msg'=>'删除成功','data'=>array('id'=>$id));
+            @unlink(upload_folder('link').DIRECTORY_SEPARATOR.file_save_dir($id).DIRECTORY_SEPARATOR.file_save_name($id).'.png');
         }
         else
         {
