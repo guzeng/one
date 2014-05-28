@@ -690,9 +690,10 @@ class uploadHandler extends CI_Controller{
     }
 
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
-            $index = null, $content_range = null) {
+        $index = null, $content_range = null) {
         $file = new stdClass();
-        $file->name = $this->get_file_name($name, $type, $index, $content_range);
+        $_filename = $this->get_file_name($name, $type, $index, $content_range);
+        $file->name = md5($_filename).substr($_filename,strrpos($_filename,'.'));
         $file->size = $this->fix_integer_overflow(intval($size));
         $file->type = $type;
         if ($this->validate($uploaded_file, $file, $error, $index)) {

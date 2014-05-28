@@ -164,15 +164,15 @@ class Products extends CI_Controller {
             'type_id' => $post['type_id'],
             'brand_id' => $post['brand_id'],
             'unit' => $post['unit'],
-            'weight' => $post['weight'],
-            'min_num' => $post['min_num'],
-            'score' => $post['score'],
+            'weight' => isset($post['weight'])?floor($post['weight']):0,
+            'min_num' => isset($post['min_num'])?intval($post['min_num']):0,
+            'score' => isset($post['score'])?intval($post['score']):0,
             'info' => $post['info'],
-            'status' => $post['status'],
-            'recommend' => $post['recommend'],
-            'specials' => $post['specials'],
-            'hot' => $post['hot'],
-            'allow_comment' => $post['allow_comment']
+            'status' => isset($post['status'])?round($post['status'],2):0,
+            'recommend' => isset($post['recommend'])?intval($post['recommend']):0,
+            'specials' => isset($post['specials'])?$post['specials']:0,
+            'hot' => isset($post['hot'])?intval($post['hot']):0,
+            'allow_comment' => isset($post['allow_comment'])?intval($post['allow_comment']):0
         );
         if($post['id'])
         {
@@ -180,17 +180,41 @@ class Products extends CI_Controller {
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
             }
+            $id = $post['id'];
         }
         else
         {
-            if(!$this->product->insert($row))
+            if(!$id = $this->product->insert($row))
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
             }
         }
+
         if($data['code'] == '1000')
         {
             $data['goto'] = 'admin/products';
+            //处理图片
+            if($post['pro_pic_path'] && is_file(upload_folder('temp').DIRECTORY_SEPARATOR.$post['pro_pic_path']))
+            {
+                $this->load->library('image_lib');
+                $target = upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id);
+                create_folder($target);
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = upload_folder('temp').DIRECTORY_SEPARATOR.$post['pro_pic_path'];
+                $config['create_thumb'] = false;
+                $config['maintain_ratio'] = TRUE;
+                $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'.png';
+                $config['width'] = 800;
+                $config['height'] = 480;
+                $this->image_lib->initialize($config); 
+                $this->image_lib->resize();
+                $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'_thumb.png';
+                $config['width'] = 250;
+                $config['height'] = 150;
+                $this->image_lib->initialize($config); 
+                $this->image_lib->resize();
+                @unlink($config['source_image']);
+            }
         }
         echo json_encode($data);
     }
@@ -206,6 +230,8 @@ class Products extends CI_Controller {
         if($this->product->delete($id))
         {
             $data = array('code'=>'1000','msg'=>'删除成功','data'=>array('id'=>$id));
+            @unlink(upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id).DIRECTORY_SEPARATOR.file_save_name($id).'.png');
+            @unlink(upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id).DIRECTORY_SEPARATOR.file_save_name($id).'_thumb.png');
         }
         else
         {

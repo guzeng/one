@@ -303,26 +303,23 @@ class Product extends CI_Model{
     */
     public function pic($id, $type='big')
     {
-        $default = base_url().'images/default_'.$type.'.jpg';
-        if($id)
+        $folder = upload_folder('product');
+        $file_save_dir = file_save_dir($id);
+        $file_save_name = file_save_name($id);
+        $filePath = '';
+        if($type=='big')
         {
-            $this->load->helper('file');
-            $dir = upload_dir($id);
-            $filePath = '';
-            if($type=='big')
-            {
-                $filePath = upload_folder('product').'/'.$dir.'/cover.png';
-            }
-            else if($type=='small')
-            {
-                $filePath = upload_folder('product').'/'.$dir.'/cover_thumb.png';
-            }
-            if(file_exists($filePath))
-            {
-                return base_url().$filePath.'?'.rand();
-            }
+            $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'.png';
         }
-        return $default;
+        else if($type=='small')
+        {
+            $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_thumb.png';
+        }
+        if(file_exists($filePath))
+        {
+            return base_url().$filePath.'?'.rand();
+        }
+        return base_url().'assets/img/default.jpg';
     }
 }
 /* End of file product.php */
