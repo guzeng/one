@@ -62,20 +62,12 @@ class Joins extends CI_Controller {
             show_error('参数错误');
         }
         $data = array('code' => '1000', 'msg' => '');
-        $this->form_validation->set_rules('status', ' ', 'integer|max_length[3]'); 
-        
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->form_validation->set_error_delimiters('', '');
-            $error['status'] = form_error('status');
-            $data['msg'] = $this->lang->line('error_msg');
-            $data['error'] = $error;
-            echo json_encode($data);                                    
-            exit;
-        }
 
         $row = array(
-            'status' => intval($post['status'])
+            'status' => 1,
+            'remark' => $post['remark'],
+            'handle' => $this->auth->username(),
+            'handle_time' => time()
         );
         if($post['id'])
         {
@@ -83,6 +75,10 @@ class Joins extends CI_Controller {
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
             }
+        }
+        if($data['code'] == '1000')
+        {
+            $data['goto'] = 'admin/joins';
         }
         echo json_encode($data);
     }
