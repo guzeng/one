@@ -104,7 +104,7 @@ class User_comments extends CI_Controller {
         {
             show_error('参数错误');
         }
-        $data = array('code' => '1000', 'msg' => '');
+        $data = array('code' => '1000', 'msg' => '','goto'=>'admin/user_comments');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('reversion', ' ', 'required'); 
         

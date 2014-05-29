@@ -36,16 +36,16 @@
 											<i class="fa fa-plus"></i> 新增文章
 									</a>
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','news_list','admin/news/lists')"><i class='fa fa-refresh'></i></a>
-									<!-- <a class="btn blue" href="#" data-toggle="dropdown">
+									<a class="btn blue" href="#" data-toggle="dropdown">
 									显示/隐藏
 									<i class="fa fa-angle-down"></i>
 									</a>
-									<div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-										<label><input type="checkbox" checked data-column="0">编码</label>
-										<label><input type="checkbox" checked data-column="1">名称</label>
-										<label><input type="checkbox" checked data-column="2">价格</label>
-										<label><input type="checkbox" checked data-column="3">优惠价</label>
-									</div> -->
+									<div id="news_list_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+										<label><input type="checkbox" checked data-column="0">标题</label>
+										<label><input type="checkbox" checked data-column="1">状态</label>
+										<label><input type="checkbox" checked data-column="2">创建时间</label>
+										<label><input type="checkbox" checked data-column="3">发表时间</label>
+									</div>
 								</div>
 							</div>
 						</div>

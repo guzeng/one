@@ -37,11 +37,10 @@
 									显示/隐藏
 									<i class="fa fa-angle-down"></i>
 									</a>
-									<div id="sample_2_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-										<label><input type="checkbox" checked data-column="0">编码</label>
-										<label><input type="checkbox" checked data-column="1">名称</label>
-										<label><input type="checkbox" checked data-column="2">价格</label>
-										<label><input type="checkbox" checked data-column="3">优惠价</label>
+									<div id="user_comment_list_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+										<label><input type="checkbox" checked data-column="0">会员名</label>
+										<label><input type="checkbox" checked data-column="1">留言</label>
+										<label><input type="checkbox" checked data-column="2">留言时间</label>
 									</div>
 								</div>
 							</div>

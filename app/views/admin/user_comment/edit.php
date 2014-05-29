@@ -47,9 +47,7 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label"><span class='req'>*</span>留言内容</label>
-												<textarea rows="4" id="content" name='content' class="form-control" placeholder="" readonly>
-													<?php echo isset($row)?$row->content:''?>
-												</textarea>
+												<textarea rows="4" id="content" name='content' class="form-control" maxLength='100' readonly><?php echo isset($row)?$row->content:''?></textarea>
 												<span class="help-block"></span>
 											</div>
 										</div>
@@ -59,9 +57,7 @@
 										<div class="col-md-12">
 											<div class="form-group">
 												<label class="control-label"><span class='req'>*</span> 回复内容</label>
-												<textarea rows="4" id="reversion" name='reversion' class="form-control"placeholder="">
-													<?php echo isset($row)?$row->reversion:''?>
-												</textarea>
+												<textarea rows="4" id="reversion" name='reversion' class="form-control"placeholder=""><?php echo isset($row)?$row->reversion:''?></textarea>
 												<span class="help-block"></span>
 											</div>
 										</div>

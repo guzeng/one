@@ -4,6 +4,7 @@
 									<tr>
 										<th>会员名</th>
 										<th>姓名</th>
+										<th>邮箱</th>
 										<th>等级</th>
 										<th>积分</th>
 										<th class="hidden-xs">操作</th>
@@ -15,6 +16,7 @@
 									<tr id='<?php echo $item->id;?>'>
                                 		<td><?php echo $item->username?></td>
                                 		<td><?php echo $item->name?></td>
+                                		<td><?php echo $item->email?></td>
                                 		<td><?php echo $item->grade?></td>
                                 		<td><?php echo $item->score?></td>
 										<td class="hidden-xs">
