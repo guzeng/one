@@ -12,7 +12,7 @@
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">首页</a> 
+							<a href="<?php echo base_url()?>">首页</a> 
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li><a href="#">回收站</a></li>

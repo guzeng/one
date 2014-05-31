@@ -63,7 +63,7 @@
         <!-- BEGIN TOP NAVIGATION BAR -->
         <div class="header-inner">
             <!-- BEGIN LOGO -->  
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="<?php echo base_url()?>">
                 Just One
             <!--<img src="<?php echo base_url();?>assets/img/logo.png" alt="logo" class="img-responsive" />-->
             </a>
