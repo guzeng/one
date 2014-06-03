@@ -27,7 +27,7 @@ $(function(){
             items : [
                 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
                 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-                'insertunorderedlist', '|', 'image', 'link','unlink','|','fullscreen','about']
+                'insertunorderedlist', '|' , 'link','unlink','|','fullscreen','about']
         });
     });
     //状态事件
