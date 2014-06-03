@@ -9,7 +9,7 @@
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">Home</a> 
+							<a href="<?php echo base_url()?>">Home</a> 
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li><a href="#">Dashboard</a></li>

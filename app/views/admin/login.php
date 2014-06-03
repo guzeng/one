@@ -80,7 +80,7 @@
 		<?php echo form_close();?>
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->
-		<form class="forget-form" action="index.html" method="post">
+		<form class="forget-form" action="<?php echo base_url()?>" method="post">
 			<h3 >忘记密码 ?</h3>
 			<p>请输入您的邮箱</p>
 			<div class="form-group">
