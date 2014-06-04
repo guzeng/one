@@ -13,6 +13,7 @@ class Products extends CI_Controller {
         parent::__construct();
         $this->load->model('product');
         $this->load->model('product_category');
+        $this->load->model('product_category_map');
         $this->load->model('product_type');
         $this->load->model('product_brand');
 		$this->list_type = '';
@@ -51,6 +52,7 @@ class Products extends CI_Controller {
     public function edit($id='')
     {
         $this->auth->check_login();
+        $cate = array();
         if($id)
         {
             $row = $this->product->get($id);
@@ -59,7 +61,15 @@ class Products extends CI_Controller {
                 show_404('',false);
             }
             $data['row'] = $row;
+            $cates = $this->product_category_map->all(array('where'=>array('product_id'=>$id)));
+            if(!empty($cates))
+            {
+                foreach ($cates as $key => $value) {
+                    $cate[] = $value->category_id;
+                }
+            }
         }
+        $data['cate'] = $cate;
         $data['cates'] = $this->product_category->all();
         $data['types'] = $this->product_type->all();
         $data['brands'] = $this->product_brand->all();
@@ -160,7 +170,6 @@ class Products extends CI_Controller {
             'price' => $post['price'] ? $post['price'] : 0,
             'best_price' => $post['best_price'] ? $post['best_price'] : 0,
             'amount' => $post['amount'] ? $post['amount'] : 0,
-            'cate_id' => $post['cate_id'],
             'type_id' => $post['type_id'],
             'brand_id' => $post['brand_id'],
             'unit' => $post['unit'],
@@ -181,6 +190,7 @@ class Products extends CI_Controller {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
             }
             $id = $post['id'];
+            $this->product_category_map->delete_by_product($id);
         }
         else
         {
@@ -189,9 +199,14 @@ class Products extends CI_Controller {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
             }
         }
-
         if($data['code'] == '1000')
         {
+            if($post['cate_id'] && is_array($post['cate_id']) && !empty($post['cate_id']))
+            {
+                foreach ($post['cate_id'] as $key => $value) {
+                    $this->product_category_map->insert(array('product_id'=>$id,'category_id'=>$value));
+                }
+            }
             $data['goto'] = 'admin/products';
             //处理图片
             if($post['pro_pic_path'] && is_file(upload_folder('temp').DIRECTORY_SEPARATOR.$post['pro_pic_path']))

@@ -54,7 +54,10 @@ $(function(){
             } 
         });        
     }
-
+    $('#cate_id').select2({
+        placeholder: "请选择",
+        allowClear: true
+    });
 })
 function cancel_upload()
 {

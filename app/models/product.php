@@ -18,8 +18,8 @@ class Product extends CI_Model{
     {
         parent::__construct();
         $params = $this->uri->uri_to_assoc(4);
-        $this->param['cate_id'] = $this->input->post('cate_id') ? trim($this->input->post('cate_id')) : 
-            (isset($params['cate_id']) ? urldecode(trim($params['cate_id'])) : 0);
+        $this->param['cate_id'] = $this->input->post('cate_id') ? $this->input->post('cate_id') : 
+            (isset($params['cate_id']) ? urldecode($params['cate_id']) : 0);
         $this->param['code'] = $this->input->post('code')!='' ? trim($this->input->post('code')) : 
             (isset($params['code']) ? urldecode(trim($params['code'])) : '');
         $this->param['name'] = $this->input->post('name')!='' ? trim($this->input->post('name')) : 
