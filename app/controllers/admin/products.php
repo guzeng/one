@@ -209,26 +209,38 @@ class Products extends CI_Controller {
             }
             $data['goto'] = 'admin/products';
             //处理图片
-            if($post['pro_pic_path'] && is_file(upload_folder('temp').DIRECTORY_SEPARATOR.$post['pro_pic_path']))
+            $this->load->library('image_lib');
+            $target = upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id);
+            create_folder($target);
+            $tmp_folder = upload_folder('temp');
+            $target_name = file_save_name($id);
+            $unlink = array();
+            for($i=1;$i<=5;$i++)
             {
-                $this->load->library('image_lib');
-                $target = upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id);
-                create_folder($target);
-                $config['image_library'] = 'gd2';
-                $config['source_image'] = upload_folder('temp').DIRECTORY_SEPARATOR.$post['pro_pic_path'];
-                $config['create_thumb'] = false;
-                $config['maintain_ratio'] = TRUE;
-                $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'.png';
-                $config['width'] = 800;
-                $config['height'] = 480;
-                $this->image_lib->initialize($config); 
-                $this->image_lib->resize();
-                $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'_thumb.png';
-                $config['width'] = 250;
-                $config['height'] = 150;
-                $this->image_lib->initialize($config); 
-                $this->image_lib->resize();
-                @unlink($config['source_image']);
+                if($post['pro_pic_path_'.$i] && is_file($tmp_folder.DIRECTORY_SEPARATOR.$post['pro_pic_path_'.$i]))
+                {
+                    $config['image_library'] = 'gd2';
+                    $config['source_image'] = $tmp_folder.DIRECTORY_SEPARATOR.$post['pro_pic_path_'.$i];
+                    $config['create_thumb'] = false;
+                    $config['maintain_ratio'] = TRUE;
+                    $config['new_image'] = $target.DIRECTORY_SEPARATOR.$target_name.'_'.$i.'.png';
+                    $config['width'] = 800;
+                    $config['height'] = 600;
+                    $this->image_lib->initialize($config); 
+                    $this->image_lib->resize();
+                    $config['new_image'] = $target.DIRECTORY_SEPARATOR.$target_name.'_'.$i.'_thumb.png';
+                    $config['width'] = 200;
+                    $config['height'] = 150;
+                    $this->image_lib->initialize($config); 
+                    $this->image_lib->resize();
+                    $unlink[] = $config['source_image'];
+                }
+            }
+            if(!empty($unlink))
+            {
+                foreach ($unlink as $key => $value) {
+                    @unlink($value);
+                }
             }
         }
         echo json_encode($data);
