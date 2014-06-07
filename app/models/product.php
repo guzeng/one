@@ -301,25 +301,32 @@ class Product extends CI_Model{
     *   @param int id 商品ID
     *   @param var type 类型
     */
-    public function pic($id, $type='big')
+    public function pic($id='', $sort=1, $type='big')
     {
-        $folder = upload_folder('product');
-        $file_save_dir = file_save_dir($id);
-        $file_save_name = file_save_name($id);
-        $filePath = '';
-        if($type=='big')
-        {
-            $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'.png';
+        $default = base_url().'assets/img/default.jpg';
+        if($id)
+        {    
+            $folder = upload_folder('product');
+            $file_save_dir = file_save_dir($id);
+            $file_save_name = file_save_name($id);
+            $filePath = '';
+            switch ($type) {
+                case 'small':
+                case 'thumb':
+                    $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'_thumb.png';
+                break;
+                case 'big':
+                case 'default':
+                default:
+                    $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'.png';
+                break;
+            }
+            if(file_exists($filePath))
+            {
+                return base_url().$filePath.'?'.rand();
+            }
         }
-        else if($type=='small')
-        {
-            $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_thumb.png';
-        }
-        if(file_exists($filePath))
-        {
-            return base_url().$filePath.'?'.rand();
-        }
-        return base_url().'assets/img/default.jpg';
+        return $default;
     }
 }
 /* End of file product.php */

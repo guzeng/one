@@ -170,19 +170,25 @@
 							<h4 class='form-section'>商品图片</h4>
 							<div class='row'>
 								<div class='col-md-12'>		     
-                                    <?if(isset($row)&&$row->id>0):?>
-                                        <img src="<?php echo $this->product->pic($row->id,'small')?>" id='pro_setting_pic' style='max-width:120px;height:68px;margin-bottom:10px;'> 
-                                    <?endif;?>
-                                    <div id="review_pic" class='m-b-10'></div>
+                                    <img src="<?php echo $this->product->pic((isset($row)&&$row->id>0)?$row->id:'',1,'thumb')?>" title='点击图片上传' id='pro_pic_1' sort='1' class='m-b-10 product-pic-upload hand'>
+                                    <img src="<?php echo $this->product->pic((isset($row)&&$row->id>0)?$row->id:'',2,'thumb')?>" title='点击图片上传' id='pro_pic_2' sort='2' class='m-b-10 product-pic-upload hand'>
+                                    <img src="<?php echo $this->product->pic((isset($row)&&$row->id>0)?$row->id:'',3,'thumb')?>" title='点击图片上传' id='pro_pic_3' sort='3' class='m-b-10 product-pic-upload hand'>
+                                    <img src="<?php echo $this->product->pic((isset($row)&&$row->id>0)?$row->id:'',4,'thumb')?>" title='点击图片上传' id='pro_pic_4' sort='4' class='m-b-10 product-pic-upload hand'>
+                                    <img src="<?php echo $this->product->pic((isset($row)&&$row->id>0)?$row->id:'',5,'thumb')?>" title='点击图片上传' id='pro_pic_5' sort='5' class='m-b-10 product-pic-upload hand'> 
+                                    
                                     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                                    <div class="row fileupload-buttonbar" id='upload_file_con'>
+                                    <div class="row fileupload-buttonbar hide" id='upload_file_con'>
                                         <div class="col-md-3">
                                             <!-- The fileinput-button span is used to style the file input field as button -->
                                             <span class="btn blue fileinput-button">
                                             <i class="fa fa-plus"></i>
                                             <span>上传图片</span>
-                                            <input id="pic_edit_upload" type="file" name="files" multiple="false">
+                                            <input id="pic_upload_1" type="file" name="files" multiple="false">
                                             </span>
+                                            <input id="pic_upload_2" type="file" name="files" multiple="false">
+                                            <input id="pic_upload_3" type="file" name="files" multiple="false">
+                                            <input id="pic_upload_4" type="file" name="files" multiple="false">
+                                            <input id="pic_upload_5" type="file" name="files" multiple="false">
                                         </div>
                                     </div>
                                     <div class='clearfix'></div>
@@ -224,7 +230,7 @@
 							<button type="button" class="btn btn-lg btn-default" onclick="javascript:history.go(-1);">取消</button>
 						</div>
 						<input type='hidden' id='id' name='id' value="<?php echo isset($row)?$row->id:''?>">
-                        <input type='hidden' id='pro_pic_path' name='pro_pic_path' value=''>
+                        <input type='hidden' id='pro_pic_path_1' name='pro_pic_path_1' value=''>
                         <input type='hidden' id='pro_pic_path_2' name='pro_pic_path_2' value=''>
                         <input type='hidden' id='pro_pic_path_3' name='pro_pic_path_3' value=''>
                         <input type='hidden' id='pro_pic_path_4' name='pro_pic_path_4' value=''>
