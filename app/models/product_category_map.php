@@ -53,6 +53,26 @@ class Product_category_map  extends CI_Model{
 	//---------------------------------------------------------
 
 	/**
+	 * get_by_product
+	 * 获取商品所有分类
+	 * 
+	 *	@param product_id
+	 *	@return array   
+	 */   
+	public function get_by_product($product_id){
+		if($product_id){
+			$this->db->where('product_id',$product_id);
+            $this->db->select('category_id');
+			$query = $this->db->get($this->table);
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+		}
+		return false;
+	}
+	//---------------------------------------------------------
+
+	/**
 	 * all
 	 * 查询所有分类
 	 * 

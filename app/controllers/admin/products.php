@@ -22,7 +22,7 @@ class Products extends CI_Controller {
 	{
         $this->auth->check_login();
         $this->list_type = 'return';
-        $category = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
+        $category = $this->product_category->tree();
         $data['category_list'] = $category;
         $data['param'] = $this->product->get_param();//stripslashes
         $data['list'] = $this->lists();
@@ -229,6 +229,46 @@ class Products extends CI_Controller {
                 $this->image_lib->initialize($config); 
                 $this->image_lib->resize();
                 @unlink($config['source_image']);
+            }
+        }
+        echo json_encode($data);
+    }
+
+    public function update_product_category($category_id){
+        $this->auth->check_login_json();
+
+        $data = array('code' => '1000','msg'=>'批量分配分类成功' );
+        $ids = $this->input->post('ids');
+        if(is_array($ids) && empty($ids) && !category)
+        {
+            echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
+            exit;
+        }
+        foreach ($ids as $key => $product_id) {
+            $row = $this->product_category_map->get_by_product($product_id);
+            if($row && !empty($row))
+            {
+                $isExist = true; //商品是否已经分配过该分类
+                foreach ($row as $key => $item) {
+                    if($item->category_id == $category_id)
+                    {
+                        $isExist = false;
+                    }
+                }
+                if($isExist)
+                {
+                    $insert_id = $this->product_category_map->insert(array('product_id'=>$product_id,'category_id'=>$category_id));
+                    if(!$insert_id)
+                    {
+                        $data['code'] = '1001';
+                        $data['msg'] = '批量分配商品分类出错';
+                    }
+                }
+            }
+            else
+            {
+                $data['code'] = '1001';
+                $data['msg'] = '商品不存在';
             }
         }
         echo json_encode($data);
