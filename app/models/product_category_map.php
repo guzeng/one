@@ -21,6 +21,14 @@ class Product_category_map  extends CI_Model{
 		return false;
 	}
 	//--------------------------------------------------------
+	public function update_by_condition($row,$condition){
+		if(!empty($row) && $condition){
+			$this->db->where($condition);
+			return $this->db->update($this->table,$row);
+		}
+		return false;
+	}
+	//--------------------------------------------------------
 
 	public function delete($id){
 		if($id){

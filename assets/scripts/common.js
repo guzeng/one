@@ -392,7 +392,7 @@ function initTable(tableID)
             "aoColumnDefs": [
                 { "aTargets": [ 0 ] }
             ],
-            //"aaSorting": [[0, 'asc']],
+            "aaSorting": [[0, 'asc']],
             "aLengthMenu": [
                 [10, 5, 10, 15, 20, -1],
                 ['', 5, 10, 15, 20, "All"] // change per page values here
@@ -439,7 +439,7 @@ function doDelete(url)
 {
     confirm_dialog('删除确认','确认删除该记录吗？',Delete,url);
 }
-function Delete(url)
+function Delete(url,callback)
 {
     var uri = url.replace(/\"/g,'');
     if(typeof(uri)!='undefined' && uri!='' && uri!=null)
@@ -450,7 +450,16 @@ function Delete(url)
             success:function(data){
                 if(data.code=='1000')
                 {
-                    $('#'+data.data.id).remove();
+                    if(typeof(data.ids))
+                    {
+                        $.each(data.ids,function(key,item){
+                            $('#'+item).remove();
+                        })
+                    }
+                    else
+                    {
+                        $('#'+data.data.id).remove();
+                    }
                     show_success(data.msg);
                 }
                 else
@@ -496,3 +505,37 @@ function reload_list(boxID,tableID,url){
         }
     })
 }
+
+function hide_tree_list(compare, current)
+{
+    if(typeof(current) != 'undefined' && typeof(compare)!='undefined' && $(current).length>0)
+    {
+        var compare_deep = $(compare).attr('deep');
+        var current_deep = $(current).attr('deep');
+        if(parseInt(compare_deep) < parseInt(current_deep))
+        {
+            if(typeof($(compare).attr('show_child'))=='undefined' || $(compare).attr('show_child')=='true')
+            {
+                var parent_id = $(current).attr('parent');
+                if($('#'+parent_id).css('display')!='none' && (typeof($('#'+parent_id).attr('show_child'))=='undefined' || $('#'+parent_id).attr('show_child')=='true'))
+                {
+                    current.show();
+                    //图标处理
+                    $(current).find('img.fold-icon').attr('src',msg.base_url+'assets/img/minus.png');
+                }
+                else
+                {
+                    current.hide();
+                    //图标处理
+                    $(current).find('img.fold-icon').attr('src',msg.base_url+'assets/img/plus.png');
+                }
+            }
+            else
+            {
+                current.hide();
+            }
+            hide_tree_list(compare,$(current).next());
+        }
+    }
+}
+//------------------------------------------------------------------------

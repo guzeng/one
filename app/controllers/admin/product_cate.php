@@ -24,7 +24,8 @@ class Product_cate extends CI_Controller {
 
     public function lists()
     {
-        $data['list'] = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
+        $data['tree'] = $this->product_category->tree();
+        //$data['list'] = $this->product_category->all(array('orderby' =>'parent_id asc,id asc'));
         if($this->list_type == 'return')
         {
             return $this->load->view('admin/product_cate/datalist',$data,true);
@@ -101,7 +102,8 @@ class Product_cate extends CI_Controller {
             exit;
         }
         $row = array(
-            'name' => $post['name']
+            'name' => $post['name'],
+            'parent_id' => $post['parent_id']
         );
         if($post['id'])
         {
@@ -128,17 +130,53 @@ class Product_cate extends CI_Controller {
     {
         if(!$id)
         {
-            echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
+            echo json_encode(array('code'=>'1004','msg'=>'参数错误'));
             exit;
         }
+        $this->load->model('product_category_map');
+        $data = array(
+            'code' => '1000',
+            'msg' => $this->lang->line('delete_success')
+        );
+        $ids = array();
+        if($id)
+        {
+            //循环删除该节点下的所有节点
+            $children_node = $this->product_category->get_all_children($id);
+            $children_node[] = $id;
+            $cate = $this->product_category->get($id);
+            foreach ($children_node as $key => $value)
+            {
+                if(!$this->product_category->delete($value))
+                {
+                    $data['code'] = '1001';
+                    $data['msg'] = Lang::get('text.delete_failed');
+                }
+                else
+                {
+                    $this->product_category_map->update_by_condition(array('category_id'=>$cate->parent_id), array('category_id'=>$value));
+                }
+                $ids[] = 'add_new_childNode_'.$value;
+            }
+        }
+        else
+        {
+            $data['code'] = '1004';
+            $data['msg'] = '参数错误';
+        }
+        if($data['code'] == '1000')
+        {
+            $data['ids'] = $ids;
+        }
+        /*
         if($this->product_category->delete($id))
         {
-            $data = array('code'=>'1000','msg'=>'删除成功','data'=>array('id'=>$id));
+            $data = array('code'=>'1000','msg'=>'删除成功','removeId'=>'add_new_childNode_'.$id);
         }
         else
         {
             $data = array('code'=>'1001','msg'=>'删除失败');
-        }
+        }*/
         echo json_encode($data);
     }
 }
