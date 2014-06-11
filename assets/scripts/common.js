@@ -439,7 +439,7 @@ function doDelete(url)
 {
     confirm_dialog('删除确认','确认删除该记录吗？',Delete,url);
 }
-function Delete(url,callback)
+function Delete(url)
 {
     var uri = url.replace(/\"/g,'');
     if(typeof(uri)!='undefined' && uri!='' && uri!=null)
@@ -450,7 +450,7 @@ function Delete(url,callback)
             success:function(data){
                 if(data.code=='1000')
                 {
-                    if(typeof(data.ids))
+                    if(typeof(data.ids)!='undefined')
                     {
                         $.each(data.ids,function(key,item){
                             $('#'+item).remove();
@@ -461,6 +461,10 @@ function Delete(url,callback)
                         $('#'+data.data.id).remove();
                     }
                     show_success(data.msg);
+                    if(typeof(delete_callback)=='function')
+                    {
+                        delete_callback();
+                    }
                 }
                 else
                 {

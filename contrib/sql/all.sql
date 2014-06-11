@@ -346,3 +346,32 @@ CREATE TABLE `one_product_category_map` (
   PRIMARY KEY  (`id`),
   KEY `product_id` (`product_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品分类对应表';
+
+
+DROP TABLE IF EXISTS `one_pay`;
+CREATE TABLE `one_pay` (
+  `id` int(11) NOT NULL auto_increment,
+  `type` varchar(30) NOT NULL default '' COMMENT '支付方式名称',
+  `apikey` varchar(200) NOT NULL default '' COMMENT 'apikey',
+  `secret` text,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='支付方式';
+
+
+DROP TABLE IF EXISTS `one_ship_type`;
+CREATE TABLE `one_ship_type` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(30) NOT NULL default '' COMMENT '名称',
+  `info` text NOT NULL COMMENT '描述',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='配送方式';
+
+DROP TABLE IF EXISTS `one_ship`;
+CREATE TABLE `one_ship` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(30) NOT NULL default '' COMMENT '名称',
+  `billing` varchar(100) NOT NULL default '' COMMENT '计费方法',
+  `info` text NOT NULL COMMENT '描述',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='配送方式';
+
