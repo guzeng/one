@@ -35,12 +35,6 @@
 						<div class="portlet-title">
 							<div class="caption"><i class="fa fa-list"></i>文章分类</div>
 							<div class="actions">
-								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/news_cate/edit' class="btn blue m-r-5">
-											<i class="fa fa-plus"></i> 新增分类
-									</a>
-									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','cate_list','admin/news_cate/lists')"><i class='fa fa-refresh'></i></a>
-								</div>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -59,8 +53,7 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script >
-		jQuery(document).ready(function() {
-		   initTable('cate_list');
-		});
-	</script>    
+		var tree = <?php echo json_encode($tree);?>;
+	</script>  
+	<script type="text/javascript" src="<?php echo base_url();?>assets/scripts/admin/news_category.js"></script>  
 <?$this->load->view('admin/footer');?>
