@@ -201,7 +201,7 @@ class Products extends CI_Controller {
         }
         if($data['code'] == '1000')
         {
-            if($post['cate_id'] && is_array($post['cate_id']) && !empty($post['cate_id']))
+            if(isset($post['cate_id']) && $post['cate_id'] && is_array($post['cate_id']) && !empty($post['cate_id']))
             {
                 foreach ($post['cate_id'] as $key => $value) {
                     $this->product_category_map->insert(array('product_id'=>$id,'category_id'=>$value));
