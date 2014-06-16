@@ -8,5 +8,6 @@ CREATE TABLE `one_news_category`(
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL default '' COMMENT '类型名字',
   `create_time` int(10) NOT NULL default '0' COMMENT '创建时间',
+  `parent_id` int(11) NOT NULL default '0' COMMENT '父ID',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章类别表';

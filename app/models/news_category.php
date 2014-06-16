@@ -95,6 +95,90 @@ class News_category  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
+
+	public function tree()
+	{
+		$this->db->order_by('parent_id asc, id asc');
+		$query = $this->db->get($this->table);
+		if($query->num_rows() > 0)
+		{
+			$rows = $query->result();
+			$items = $this->tree_items($rows);
+			return $this->build_tree($items);
+		}
+		return false;
+	}
+	//---------------------------------------------------------
+
+    public function tree_items($arr,$pid=0) 
+    {
+        $ret = array();
+        if(is_array($arr) && !empty($arr))
+        {
+	        foreach($arr as $k => $v) {
+	            if($v->parent_id == $pid) {
+	                $tmp = $arr[$k];
+	                unset($arr[$k]);
+	                $tmp->children = $this->tree_items($arr,$v->id);
+	                $ret[] = $tmp;
+	            }
+	        }        	
+        }
+        return $ret;
+    }
+	//---------------------------------------------------------
+
+    /**
+     * 返回带有深度参数的一维数组
+     * param deep int 深度
+     */
+	public function build_tree($arr, $deep=0)
+	{
+		$a = array();
+		if (is_array($arr) && !empty($arr)){
+		   	foreach ($arr as $key=>$val){
+		   		$b = array('id'=>$val->id,'name'=>$val->name,'parent_id'=>$val->parent_id,'deep'=>$deep);
+		   		if(!empty($val->children))
+		   		{
+		   			$b['hasChild'] = true;
+		   		}
+		   		else
+		   		{
+		   			$b['hasChild'] = false;
+		   		}
+		   		$a[] = $b;
+				$a = array_merge($a, $this->build_tree($val->children, $deep+1));
+		    }
+		}
+		return $a;
+	}
+	//---------------------------------------------------------
+
+    public function get_all_children($pid=0)
+    {
+		$this->db->order_by('parent_id asc');
+		$query = $this->db->get($this->table);
+		if($query->num_rows() > 0)
+		{
+			$rows = $query->result();
+			return $this->get_child($rows, $pid);
+		}
+		return false;
+    }
+	//---------------------------------------------------------
+
+    public function get_child($arr, $pid=0)
+    {
+        $ret = array();
+        foreach($arr as $k => $v) {
+            if($v->parent_id == $pid) {
+                $ret[] = $v->id;
+                unset($arr[$k]);
+                $ret = array_merge($ret, $this->get_child($arr,$v->id));
+            }
+        }
+        return $ret;
+    }
 }
 /* End of file news_categorys.php */
 /* Location: ./application/models/product_categorys.php */	

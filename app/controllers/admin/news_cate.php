@@ -24,7 +24,7 @@ class News_cate extends CI_Controller {
 
     public function lists()
     {
-        $data['list'] = $this->news_category->all(array('orderby' =>'id asc'));
+        $data['tree'] = $this->news_category->tree();
         if($this->list_type == 'return')
         {
             return $this->load->view('admin/news_cate/datalist',$data,true);
@@ -101,7 +101,8 @@ class News_cate extends CI_Controller {
             exit;
         }
         $row = array(
-            'name' => $post['name']
+            'name' => $post['name'],
+            'parent_id' => $post['parent_id']
         );
         if($post['id'])
         {
