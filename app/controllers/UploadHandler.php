@@ -196,9 +196,12 @@ class uploadHandler extends CI_Controller{
         if (empty($version)) {
             $version_path = '';
         } else {
-            $version_dir = @$this->options['image_versions'][$version]['upload_dir'];
-            if ($version_dir) {
-                return $version_dir.$this->get_user_path().$file_name;
+            if(isset($this->options['image_versions'][$version]['upload_dir']))
+            {
+                $version_dir = @$this->options['image_versions'][$version]['upload_dir'];
+                if ($version_dir) {
+                    return $version_dir.$this->get_user_path().$file_name;
+                }
             }
             $version_path = $version.'/';
         }
@@ -223,9 +226,12 @@ class uploadHandler extends CI_Controller{
         if (empty($version)) {
             $version_path = '';
         } else {
-            $version_url = @$this->options['image_versions'][$version]['upload_url'];
-            if ($version_url) {
-                return $version_url.$this->get_user_path().rawurlencode($file_name);
+            if(isset($this->options['image_versions'][$version]['upload_url']))
+            {
+                $version_url = @$this->options['image_versions'][$version]['upload_url'];
+                if ($version_url) {
+                    return $version_url.$this->get_user_path().rawurlencode($file_name);
+                }   
             }
             $version_path = rawurlencode($version).'/';
         }
