@@ -111,8 +111,8 @@ class uploadHandler extends CI_Controller{
                     // Uncomment the following to force the max
                     // dimensions and e.g. create square thumbnails:
                     //'crop' => true,
-                    'max_width' => 110,
-                    'max_height' => 60
+                    'max_width' => 120,
+                    'max_height' => 90
                 )
             )
         );
