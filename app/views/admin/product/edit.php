@@ -162,7 +162,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3">简介</label>
 								<div class="col-md-7">
-									<textarea id="info" name='info' class="ckeditor form-control"><?php echo isset($row)?$row->info:''?></textarea>
+									<textarea id="info" name='info' class="form-control"><?php echo isset($row)?$row->info:''?></textarea>
 									<span class="help-block"></span>
 								</div>
 							</div>
@@ -226,7 +226,7 @@
 
 						</div>
 						<div class="form-actions text-center">
-							<button type="button" onclick="do_submit('product-edit')" class="btn btn-lg green"><i class="fa fa-save"></i> 保存</button> &nbsp; 
+							<button type="button" onclick="$('#info').html(CKEDITOR.instances.info.getData());do_submit('product-edit');" class="btn btn-lg green"><i class="fa fa-save"></i> 保存</button> &nbsp; 
 							<button type="button" class="btn btn-lg btn-default" onclick="javascript:history.go(-1);">取消</button>
 						</div>
 						<input type='hidden' id='id' name='id' value="<?php echo isset($row)?$row->id:''?>">
@@ -344,7 +344,7 @@
 	    {% } %}
 	</script>
 	<!-- END PAGE LEVEL PLUGINS -->
-	<script src="<?php echo base_url();?>assets/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>  
+	<script src="<?php echo base_url();?>assets/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
 	<script src="<?php echo base_url();?>assets/scripts/admin/product.js" type="text/javascript"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/select2/select2.min.js"></script>
 <?$this->load->view('admin/footer');?>

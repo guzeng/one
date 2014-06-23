@@ -58,4 +58,8 @@ $(function(){
         placeholder: "请选择",
         allowClear: true
     });
+    CKEDITOR.replace( 'info', {
+        // Load the German interface.
+        language: 'zh-cn'
+    });
 })
