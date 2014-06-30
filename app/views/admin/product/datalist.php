@@ -3,6 +3,7 @@
 								<thead>
 									<tr>
 										<th style="width1:8px;"><input type="checkbox" class="group-checkable" data-set="#product_list .checkboxes" /></th>
+										<th>图片</th>
 										<th>编码</th>
 										<th>名称</th>
 										<th>价格</th>
@@ -15,6 +16,7 @@
                             		<?foreach($list as $key => $item):?>
 									<tr id='<?php echo $item->id;?>'>
 										<td><input type="checkbox" class="checkboxes" value="<?php echo $item->id;?>" /></td>
+                                		<td><img src="<?php echo $this->product->pic($item->id,1,'thumb')?>"></td>
                                 		<td><?php echo $item->code?></td>
                                 		<td><?php echo $item->name?></td>
                                 		<td><?php echo $item->price?></td>
