@@ -195,6 +195,8 @@ CREATE TABLE `one_product` (
   `allow_comment` tinyint(3) NOT NULL default '0' COMMENT '是否允许评论,1:是',
   `info` text COMMENT '简介',
   `hot` tinyint(3) NOT NULL default '0' COMMENT '是否热卖,1:是',
+  `promise` text COMMENT '服务承诺',
+  `sale_num` int(11) NOT NULL default '0' COMMENT '销量',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='产品表';
