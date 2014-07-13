@@ -92,6 +92,7 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('price', ' ', 'numeric|max_length[8]'); 
         $this->form_validation->set_rules('best_price', ' ', 'numeric|max_length[8]'); 
         $this->form_validation->set_rules('amount', ' ', 'integer|max_length[8]'); 
+        $this->form_validation->set_rules('sale_num', ' ', 'integer|max_length[8]'); 
         $this->form_validation->set_rules('unit', ' ', 'max_length[30]');  
         $this->form_validation->set_rules('weight', ' ', 'numeric|max_length[8]');  
         $this->form_validation->set_rules('min_num', ' ', 'integer|max_length[11]');  
@@ -111,6 +112,7 @@ class Products extends CI_Controller {
             $error['price'] = form_error('price');
             $error['best_price'] = form_error('best_price');
             $error['amount'] = form_error('amount');
+            $error['sale_num'] = form_error('sale_num');
             $error['unit'] = form_error('unit');
             $error['weight'] = form_error('weight');
             $error['min_num'] = form_error('min_num');
@@ -170,6 +172,7 @@ class Products extends CI_Controller {
             'price' => $post['price'] ? $post['price'] : 0,
             'best_price' => $post['best_price'] ? $post['best_price'] : 0,
             'amount' => $post['amount'] ? $post['amount'] : 0,
+            'sale_num' => $post['sale_num'] ? $post['sale_num'] : 0,
             'type_id' => $post['type_id'],
             'brand_id' => $post['brand_id'],
             'unit' => $post['unit'],
@@ -177,6 +180,7 @@ class Products extends CI_Controller {
             'min_num' => isset($post['min_num'])?intval($post['min_num']):0,
             'score' => isset($post['score'])?intval($post['score']):0,
             'info' => $post['info'],
+            'promise' => $post['promise'],
             'status' => isset($post['status'])?round($post['status'],2):0,
             'recommend' => isset($post['recommend'])?intval($post['recommend']):0,
             'specials' => isset($post['specials'])?$post['specials']:0,

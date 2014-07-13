@@ -55,7 +55,9 @@ class Users extends CI_Controller {
             $data['row'] = $row;
             $this->load->view('admin/user/edit',$data);
         }
-        $this->load->view('admin/user/edit');
+        else{
+            $this->load->view('admin/user/edit');
+        }
     }
     //-------------------------------------------------------------------------
 

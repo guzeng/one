@@ -76,6 +76,13 @@
 									<span class="help-block"></span>
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3">销量</label>
+								<div class="col-md-7">
+									<input type="text" id="sale_num" name='sale_num' maxLength='8' class="form-control" placeholder="请输入整数" value="<?php echo isset($row)?$row->sale_num:0?>">
+									<span class="help-block"></span>
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label class="control-label col-md-3">分类</label>
@@ -166,6 +173,14 @@
 									<span class="help-block"></span>
 								</div>
 							</div>
+
+							<div class="form-group">
+								<label class="control-label col-md-3">服务承诺</label>
+								<div class="col-md-7">
+									<textarea id="promise" name='promise' class="form-control"><?php echo isset($row)?$row->promise:''?></textarea>
+									<span class="help-block"></span>
+								</div>
+							</div>
 							
 							<h4 class='form-section'>商品图片</h4>
 							<div class='row'>
@@ -226,7 +241,7 @@
 
 						</div>
 						<div class="form-actions text-center">
-							<button type="button" onclick="$('#info').html(CKEDITOR.instances.info.getData());do_submit('product-edit');" class="btn btn-lg green"><i class="fa fa-save"></i> 保存</button> &nbsp; 
+							<button type="button" onclick="$('#info').html(CKEDITOR.instances.info.getData());$('#promise').html(CKEDITOR.instances.promise.getData());do_submit('product-edit');" class="btn btn-lg green"><i class="fa fa-save"></i> 保存</button> &nbsp; 
 							<button type="button" class="btn btn-lg btn-default" onclick="javascript:history.go(-1);">取消</button>
 						</div>
 						<input type='hidden' id='id' name='id' value="<?php echo isset($row)?$row->id:''?>">

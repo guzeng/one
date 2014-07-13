@@ -62,4 +62,8 @@ $(function(){
         // Load the German interface.
         language: 'zh-cn'
     });
+    CKEDITOR.replace( 'promise', {
+        // Load the German interface.
+        language: 'zh-cn'
+    });
 })
