@@ -1,0 +1,28 @@
+body { 
+  color: #000; 
+  font-family: "Microsoft YaHei","微软雅黑","宋体";
+  padding: 0px !important;
+  margin: 0px !important;
+  font-size:13px; 
+  direction: ltr;
+}
+.m-r-15{margin-right: 15px;}
+.m-r-20{margin-right: 20px;}
+.m-t-5{margin-top: 5px;}
+.m-t-10{margin-top: 10px;}
+.m-b-10{margin-bottom: 10px;}
+#top{height:30px;line-height:30px; width:100%; background-color: #eeeeee; }
+#top span{margin-left: 28px; font-size: 12px;}
+#header{padding:15px 0 10px;}
+.btn-cart{background-color: #FF6711;color:#FFFFFF;font-size: 16px;padding: 9px 16px;}
+#search{width:360px; border:3px solid #5FAC22; height:40px; line-height: 40px;font-size: 16px; padding: 6px 12px; color: #606060;} 
+#search-form .input-group-addon{background-color:#5FAC22; border:3px solid #5FAC22; border-left:0px; font-size: 16px; padding:6px 10px;}
+#search-form .input-group-addon i{color: #FFFFFF;}
+.navbar{min-height: 40px;margin-bottom: 10px;}
+#navbar{background-color: #5FAC22;}
+#navbar a{color:#FFFFFF;font-size: 16px;padding-top: 10px;padding-bottom: 10px;}
+#navbar a:hover,#navbar a:focus{background-color: #569E0C;}
+#navbar .navbar-toggle{padding:4px 10px; margin-right: 0px;}
+#navbar .navbar-toggle .icon-bar{background-color: #FFFFFF;}
+#categorys{background-color: #569E0C;}
+#categorys .navbar-brand{height: auto;}
