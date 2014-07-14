@@ -75,7 +75,7 @@
     <!-- navbar -->
     <div class='container navbar' id='navbar'>
         <div class='row'>
-            <div class='col-lg-2 col-md-3 col-sm-3 col-xs-12' id='categorys'>
+            <div class='col-lg-2 col-md-3 col-sm-3 col-xs-12' id='categorys' >
                 <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -84,7 +84,7 @@
                 </button>
                 <a class='navbar-brand'>全部商品分类</a>
             </div>
-            <div class='col-md-9 col-sm-9 col-xs-12 navbar-collapse collapse'>
+            <div class='col-md-9 col-sm-9 col-xs-12 navbar-collapse collapse' >
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">首页</a></li>
                     <li><a href="#about">食品</a></li>
@@ -99,8 +99,68 @@
     <!-- categorys  -->
     <div class='container'>
         <div class='row'>
-            <div id='category' class='col-lg-2 col-md-3'>
-                <div>asdfasdf</div>
+            <div id='category' class='col-lg-2 col-md-3 col-no-padding' >
+                <div class='item'>
+                    <a>家用电器</a>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <span><a>家居</a></span>、
+                    <span><a>家具</a></span>、
+                    <span><a>家装</a></span>、
+                    <span><a>厨具</a></span>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <span><a>服饰内衣</a></span>、
+                    <span><a>珠宝首饰</a></span>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <a>个护化妆</a>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <a>汽车用品</a>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <span><a>鞋靴</a></span>、
+                    <span><a>箱包</a></span>、
+                    <span><a>钟表</a></span>、
+                    <span><a>奢侈品</a></span>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <span><a>运动户外母婴</a></span>、
+                    <span><a>玩具乐器</a></span>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <span><a>食品饮料</a></span>、
+                    <span><a>酒类</a></span>、
+                    <span><a>生鲜</a></span>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <a>营养保健</a>
+                    <span class="more">></span>
+                </div>
+                <div class='item'>
+                    <span><a>彩票</a></span>、
+                    <span><a>旅行</a></span>、
+                    <span><a>充值</a></span>、
+                    <span><a>票务</a></span>
+                    <span class="more">></span>
+                </div>
+            </div>
+            <div class='col-lg-7 col-p-10'>
+                asdfadsf
+            </div>
+            <div class='col-lg-3 col-no-padding m-t-10'>
+                <div id='userinfo'>
+                    adsf
+                </div>
             </div>
         </div>
     </div>

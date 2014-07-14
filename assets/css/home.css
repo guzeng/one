@@ -11,6 +11,8 @@ body {
 .m-t-5{margin-top: 5px;}
 .m-t-10{margin-top: 10px;}
 .m-b-10{margin-bottom: 10px;}
+.col-no-padding{padding-left: 0px; padding-right: 0px;}
+.col-p-10{padding-left: 10px;padding-right: 10px;}
 #top{height:30px;line-height:30px; width:100%; background-color: #eeeeee; }
 #top span{margin-left: 28px; font-size: 12px;}
 #header{padding:15px 0 10px;}
@@ -18,7 +20,7 @@ body {
 #search{width:360px; border:3px solid #5FAC22; height:40px; line-height: 40px;font-size: 16px; padding: 6px 12px; color: #606060;} 
 #search-form .input-group-addon{background-color:#5FAC22; border:3px solid #5FAC22; border-left:0px; font-size: 16px; padding:6px 10px;}
 #search-form .input-group-addon i{color: #FFFFFF;}
-.navbar{min-height: 40px;margin-bottom: 10px;}
+.navbar{min-height: 40px;margin-bottom: 0px;}
 #navbar{background-color: #5FAC22;}
 #navbar a{color:#FFFFFF;font-size: 16px;padding-top: 10px;padding-bottom: 10px;}
 #navbar a:hover,#navbar a:focus{background-color: #569E0C;}
@@ -26,3 +28,10 @@ body {
 #navbar .navbar-toggle .icon-bar{background-color: #FFFFFF;}
 #categorys{background-color: #569E0C;}
 #categorys .navbar-brand{height: auto;}
+
+#category{background-color: #FFFBE0; }
+#category .item{padding: 8px 8px 9px 9px; border-bottom: 1px solid #F1EBCA; color:#AD6C3E; }
+#category .item a{color:#AD6C3E;font-size: 13px; font-weight: 600}
+#category .more{float: right; color:#AD6C3E;}
+
+#userinfo{border:1px solid #EEEEEE;padding: 15px;}
