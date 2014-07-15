@@ -1,0 +1,27 @@
+body { 
+  color: #000; 
+  font-family: "Microsoft YaHei","微软雅黑","宋体";
+  padding: 0px !important;
+  margin: 0px !important;
+  font-size:13px; 
+  direction: ltr;
+  background-color: #60AC22;
+}
+#header{margin:30px auto 30px;}
+#contain{padding:50px;}
+#loginLeft{padding:50px 30px; background-color: #FFFFFF;}
+#loginArea{background-color: #F8F8F8;padding:35px 30px; height:375px; color:#999999;}
+#loginArea form label{font-size: 13px; color:#999999;}
+#loginArea .form-group{margin-bottom: 10px;}
+#loginArea input.form-control{height: 40px;}
+#loginArea button.btn-block{background-color: #EC5252; height: 40px; margin-top: 25px;}
+#loginArea .partnerTitle{color:#999999;font-size: 13px; margin-top: 30px;margin-bottom: 5px;}
+#loginArea .partner span{margin-right: 10px; }
+#loginArea .partner a{color: #666666; font-size: 13px; }
+#loginArea .register{margin-top: 20px; }
+#loginArea .register a{font-size: 13px; color: #60AC22;}
+#loginArea .register span{margin-right: 10px;}
+
+#footer{font-size: 12px; color: #FFFFFF;}
+#footer #about{margin-bottom: 10px;}
+#footer a{margin-right: 5px; color:#FFFFFF;}
