@@ -159,7 +159,37 @@
             </div>
             <div class='col-lg-3 col-no-padding m-t-10'>
                 <div id='userinfo'>
-                    adsf
+                    <div class='pull-left'>
+                        <img src="<?php echo base_url();?>assets/img/home/user.png" >
+                    </div>
+                    <div class='pull-left username'>
+                        <div>Hi,Bevis </div>
+                        <div>170ES达人</div>
+                    </div>
+                    <div class='clearfix'></div>
+                </div>
+                <div id='info-detail'>
+                    <div class=''>
+                        <div class='col-md-4 info-items'>
+                            <div class='text-center item'>
+                                <div>5</div>
+                                <div>购物车</div>
+                            </div>
+                        </div>
+                        <div class='col-md-4 info-items'>
+                            <div class=' text-center item'>
+                                <div>8</div>
+                                <div>我的订单</div>
+                            </div>
+                        </div>
+                        <div class='col-md-4 info-items'>
+                            <div class=' text-center item'>
+                                <div>47</div>
+                                <div>积分</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='clearfix'></div>
                 </div>
             </div>
         </div>
