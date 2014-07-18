@@ -13,6 +13,7 @@ body {
 .m-b-10{margin-bottom: 10px;}
 .col-no-padding{padding-left: 0px; padding-right: 0px;}
 .col-p-10{padding-left: 10px;padding-right: 10px;}
+.o-h{overflow: hidden;}
 #top{height:30px;line-height:30px; width:100%; background-color: #eeeeee; }
 #top span{margin-left: 28px; font-size: 12px;}
 #header{padding:15px 0 10px;}

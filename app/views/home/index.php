@@ -154,8 +154,8 @@
                     <span class="more">></span>
                 </div>
             </div>
-            <div class='col-lg-7 col-p-10'>
-                asdfadsf
+            <div class='col-lg-7 col-p-10 m-t-10 o-h'>
+                <img src="<?php echo base_url()?>assets/img/home/i.png">
             </div>
             <div class='col-lg-3 col-no-padding m-t-10'>
                 <div id='userinfo'>
