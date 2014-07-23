@@ -113,6 +113,14 @@ class Users extends CI_Controller {
                     $error['email'] = '邮箱已存在';
                 }                
             }
+             if($post['phone'])
+            {
+                $where = array('phone'=>$post['phone'],'id !='=>$post['id']);
+                if($this->user->exist($where))
+                {
+                    $error['phone'] = '手机号码已存在';
+                }                
+            }
         }
         else
         {
@@ -130,6 +138,14 @@ class Users extends CI_Controller {
                 if($this->user->exist($where))
                 {
                     $error['email'] = '邮箱已存在';
+                }
+            }
+            if($post['phone'])
+            {
+                $where = array('phone'=>$post['phone']);
+                if($this->user->exist($where))
+                {
+                    $error['phone'] = '手机号码已存在';
                 }
             }
             

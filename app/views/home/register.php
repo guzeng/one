@@ -52,34 +52,60 @@
 	<!-- header end -->
     <div class='container' id='contain'>
         <div class='row'>
-            <div class='col-md-7' id='loginLeft'>
-                <img src='<?php echo base_url()?>assets/img/home/loginLeft.png'>
-            </div>
-            <div class='col-md-5' id='loginArea'>
-                <form action="<?=base_url()?>login/verify" method="post" onsubmit='return false' role="form" id='lms-form'>
-                    <div class="form-group">
-                        <label for="username"><strong>邮箱/用户名/手机</strong></label>
-                        <input type="username" class="form-control" id="username" name="username" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label for="password"><strong>密码</strong></label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="">
-                    </div>
-                    <div style='display:none'>
-                      <div style="color:#ff0000;font-size:12px;" id='error_message' ></div>
-                    </div>
-                    <button type="submit" class="btn btn-block btn-danger" onclick="login_submit()" id='login_form_submit_btn'>登 录</button>
-                </form>
-                <div class='partnerTitle'><strong>使用合作网站账号登录170ES：</strong></div>
-                <div class='partner'>
-                    <a><span><strong>QQ</strong></span></a>
-                    <span>|</span><span>
-                    <a><strong>微信</strong></span></a>
-                </div>
-                <div class='register text-center'>
-                    <a href="<?php echo base_url();?>register"><span><strong>免费注册</strong></span></a>
-                    <span>|</span>
-                    <a><span><strong>忘记密码</strong></span></a>
+            <div class='col-md-12' style="background-color:#FFFFFF;padding-top:50px;padding-bottom:50px;">
+                <div class="portlet-body form">
+                    <form action="<?=base_url()?>register/apply" method="post" onsubmit='return false' role="form" id='lms-form' class="form-horizontal">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class="red">*</span> 登录名</label>
+                                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
+                                    <input type="text" value="" id="username" name="username" maxlength="20" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span id="pass" class="red">*</span> 密&nbsp;&nbsp;码</label>
+                                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
+                                    <input type="password" maxlength="20" value="" name="password" id="password" class="form-control"> 
+                                    <span class="redd form_error height-30" id="alert_password"></span> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span id="pass_red" class="red">*</span> 确认密码</label>
+                                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
+                                    <input type="password" maxlength="20" value="" name="pwd_confirmation" id="pwd_confirmation" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class="red">*</span> 电邮</label>
+                                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
+                                    <div class="input-icon">
+                                        <i class="fa fa-envelope"></i>
+                                        <input type="text" maxlength="50" value="" id="email" name="email" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class="red">*</span> 验证码</label>
+                                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input id="validate_key" name="validate_key" type="text" class="form-control" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img style="cursor: pointer;margin-left: 10px;margin-top:6px;" title="换一张" id="login_captcha" border='0' src="<?php echo base_url()?>login/get_captcha"   
+                                                  onclick="document.getElementById('login_captcha').src='<?php echo base_url()?>login/get_captcha?t='+Math.random()"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"></label>
+                                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
+                                     <button type="submit" class="btn btn-block btn-danger" onclick="login_submit()" id='login_form_submit_btn'>注 册</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -115,6 +141,8 @@
     <![endif]-->   
     <script src="<?php echo base_url();?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/plugins/jquery-validation/jquery.validate.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/plugins/jquery-validation/messages_zh.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <script>
     var base_url = "<?php echo base_url();?>";

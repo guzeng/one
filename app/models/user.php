@@ -54,6 +54,21 @@ class User  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
+
+	public function get_by_condition($login_item){
+		if($login_item){
+			$this->db->where('username',$login_item);
+			$this->db->or_where('email =',$login_item);
+			$this->db->or_where('phone =',$login_item);
+			$query = $this->db->get($this->table,1,0);
+			if($query->num_rows()>0){
+				return $query->row();
+			}
+		}
+		return false;
+	}
+	//---------------------------------------------------------
+
     /**
     *   exist
     *   检查是否存在
