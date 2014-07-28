@@ -87,7 +87,6 @@ CREATE TABLE `one_member` (
   `last_login_time` int(10) NOT NULL default '0' COMMENT '最后登录时间',
   `last_login_ip` varchar(15) NOT NULL default '' COMMENT '最后登录IP',
   `is_admin` tinyint(3) NOT NULL default '0' COMMENT '是否管理员',
-  `password` varchar(50) NOT NULL default '' COMMENT '密码',
   `telephone` varchar(30) NOT NULL default '' COMMENT '固定电话',
   `phone` varchar(30) NOT NULL default '' COMMENT '手机',
   `post_code` varchar(10) NOT NULL default '' COMMENT '邮编',
@@ -101,7 +100,7 @@ CREATE TABLE `one_member` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 
-INSERT INTO `one_member` VALUES (1,'admin','497245c9e08975567103ce3cc382e761758a1679','admin','',0,0,0,0,0,'',0,'','','','',0,'','',0,'',0);
+INSERT INTO `one_member` VALUES (1,'admin','497245c9e08975567103ce3cc382e761758a1679','admin','',0,0,0,0,0,'',0,'','','',0,'','1',0,'',0);
 
 #
 # Source for table one_news

@@ -24,6 +24,9 @@
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
 											<a href="javascript:void(0)" onclick="doDelete('admin/users/delete/'+<?php echo $item->id?>)">
 												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
+											<a class="btn btn-xs blue btn-editable" onclick="showResetPassword('<?php echo $item->id;?>')" href="javascript:;" title="更换密码">
+				                                <i class="fa fa-key"></i>
+				                            </a>
 										</td>
 									</tr>
                             		<?endforeach;?>

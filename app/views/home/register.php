@@ -33,7 +33,20 @@
     <script src="<?php echo base_url();?>assets/plugins/excanvas.min.js"></script> 
     <![endif]-->
     <script src="<?php echo base_url();?>assets/scripts/common.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/scripts/validate.js" type="text/javascript"></script>
     <!-- END JAVASCRIPTS -->
+    <style type="text/css">
+        .showError {
+            background: none repeat scroll 0 0 #f9f7e0;
+            border: 1px solid #ff0000;
+            float: left;
+            font-size: 12px;
+            line-height: 20px;
+            padding: 5px;
+        }
+        .errorBorder{border: 1px solid #ff0000;}
+        .normalBorder{border: 1px solid #e5e5e5;}
+    </style>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -54,38 +67,31 @@
         <div class='row'>
             <div class='col-md-12' style="background-color:#FFFFFF;padding-top:50px;padding-bottom:50px;">
                 <div class="portlet-body form">
-                    <form action="<?=base_url()?>register/apply" method="post" onsubmit='return false' role="form" id='lms-form' class="form-horizontal">
+                    <form action="<?=base_url()?>register/apply" method="post" onsubmit='return false' role="form" id='register-form' class="form-horizontal">
                         <div class="form-body">
                             <div class="form-group">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class="red">*</span> 登录名</label>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class='req'>*</span> 登录名</label>
                                 <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
                                     <input type="text" value="" id="username" name="username" maxlength="20" class="form-control">
                                 </div>
+                                <div class="hide showError" id="error_username"></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span id="pass" class="red">*</span> 密&nbsp;&nbsp;码</label>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span id="pass" class='req'>*</span> 密&nbsp;&nbsp;码</label>
                                 <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
                                     <input type="password" maxlength="20" value="" name="password" id="password" class="form-control"> 
-                                    <span class="redd form_error height-30" id="alert_password"></span> 
                                 </div>
+                                <div class="hide showError" id="error_password"></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span id="pass_red" class="red">*</span> 确认密码</label>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span id="pass_red" class='req'>*</span> 确认密码</label>
                                 <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
                                     <input type="password" maxlength="20" value="" name="pwd_confirmation" id="pwd_confirmation" class="form-control">
                                 </div>
+                                <div class="hide showError" id="error_pwd_confirmation"></div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class="red">*</span> 电邮</label>
-                                <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
-                                    <div class="input-icon">
-                                        <i class="fa fa-envelope"></i>
-                                        <input type="text" maxlength="50" value="" id="email" name="email" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class="red">*</span> 验证码</label>
+                                <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class='req'>*</span> 验证码</label>
                                 <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -97,6 +103,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="hide showError" id="error_validate_key"></div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"></label>
@@ -141,34 +148,49 @@
     <![endif]-->   
     <script src="<?php echo base_url();?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
-    <script src="<?php echo base_url();?>assets/plugins/jquery-validation/jquery.validate.js" type="text/javascript"></script>
-    <script src="<?php echo base_url();?>assets/plugins/jquery-validation/messages_zh.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script> 
+    <script src="<?php echo base_url();?>assets/plugins/jquery-validation/localization/messages_zh.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <script>
     var base_url = "<?php echo base_url();?>";
-    var login_msg = {
-        'username_required':"请输入帐户",
-        'pwd_required':"请输入密码"
-    };
+
+    $(document).ready(function(){
+        
+    });
+    
+    function checkAll(){
+        $("input").removeClass('ui-state-highlight');
+        var bValid = true;
+        var tips = $("#wrongDiv");
+        var username=$("input[name=username]");
+        var password=$("input[name=password]");
+        var validate_key=$("input[name=validate_key]");
+        var pwd_confirmation=$("input[name=pwd_confirmation]");
+
+        bValid = validator().checkNull(password,'请输入密码',$("#error_password")) && bValid;
+        bValid = validator().checkNull(pwd_confirmation,'请输入确认密码',$("#error_pwd_confirmation")) && bValid;
+        bValid = bValid && validator().checkLength(password,'密码不能小于6位数',6,50,$("#error_password"));
+
+        if($.trim(password.val()) != $.trim(pwd_confirmation.val()) && bValid){
+            validator().updateTips("两次输入的密码不一致",$("#error_password"),password);
+            bValid = false;
+        }
+        bValid = validator().checkNull(validate_key,'请输入验证码',$("#error_validate_key")) && bValid;    
+        bValid = validator().checkNull(username,'请输入登录名',$("#error_username")) && bValid;
+        bValid = validator().checkExist(base_url+"register/checkName","username",username,$("#error_username")) && bValid;
+        return bValid;
+
+}
+    
     function login_submit()
     {
-        var msg = '';
-        if($('input[name=username]').val()=='')
+        //调用验证
+        if(checkAll() === false)
         {
-            msg += "<p>"+login_msg.username_required+"</p>";
-        }
-        if($('input[name=password]').val()=='')
-        {
-            msg += "<p>"+login_msg.pwd_required+"</p>";
-        }
-        if(msg != '')
-        {
-            $('#error_message').html(msg).show();
-            $('#error_message').parent().show();
             return false;
         }
 
-        $('#lms-form').ajaxForm({
+        $('#register-form').ajaxForm({
             dataType:'json',
             success:function(json){
                 if(json.code != '1000')
@@ -179,13 +201,8 @@
                     $('#error_message').html(json.message).show();
                     $('#error_message').parent().show();
                 }else if(json.code != '1000'){
-                    $('#error_message').html(json.message).show();
-                    $('#error_message').parent().show();
-                    $('input[name=password]').val('');
-                    $("label[for='password']").show();
-                    $('input[name=password]').focus();
                     //刷新验证码
-                    $('#login_captcha').attr({src:base_url+'login/get_captcha?t='+Math.random()});
+                    // $('#login_captcha').attr({src:base_url+'login/get_captcha?t='+Math.random()});
                     $('input[name=validate_key]').val('');
                     $("label[for='validate_key']").show();
                 }else{
@@ -194,15 +211,13 @@
             },
             beforeSubmit:function(){
                 $('#login_form_submit_btn').attr('disabled',true).hide();
-                $('#error_message').html('');
-                $('#error_message').parent().hide();
             },
             error:function(XMLHttpRequest, textStatus, errorThrown)
             {
                 
             }
         });
-        $('#lms-form').submit();
+        $('#register-form').submit();
     }
     </script>
     <!-- END JAVASCRIPTS -->

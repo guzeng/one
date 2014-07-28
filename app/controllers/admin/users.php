@@ -71,13 +71,16 @@ class Users extends CI_Controller {
         }
         $data = array('code' => '1000', 'msg' => '');
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('username', ' ', 'required');
         $this->form_validation->set_rules('email', ' ', 'required|valid_email');
-        $this->form_validation->set_rules('password', ' ', 'required|min_length[6]');
-        $this->form_validation->set_rules('password_re', ' ', 'required|min_length[6]|matches[password]');
         $this->form_validation->set_rules('score', ' ', 'required|is_natural');
         $this->form_validation->set_rules('grade', ' ', 'required');
-        
+        if($post['id']=='')
+        {
+
+            $this->form_validation->set_rules('username', ' ', 'required');
+            $this->form_validation->set_rules('password', ' ', 'required|min_length[6]');
+            $this->form_validation->set_rules('password_re', ' ', 'required|min_length[6]|matches[password]');
+        }
         if($this->form_validation->run() == FALSE)
         {
             $this->form_validation->set_error_delimiters('', '');
@@ -156,9 +159,7 @@ class Users extends CI_Controller {
             exit;
         }
         $row = array(
-            'username' => $post['username'],
             'email' => $post['email'],
-            'password' => $post['password'],
             'score' => $post['score'] != ''? $post['score'] : 0,
             'grade' => $post['grade'],
             'reference' => $post['reference'] != ''? $post['reference'] : 0,
@@ -169,6 +170,11 @@ class Users extends CI_Controller {
             'address' => $post['address'],
             'qq' => $post['qq']
         );
+        if(!$post['id']){
+            $row['pwd'] = $this->auth->encrypt($post['password'],$post['username']);
+            $row['username'] = $post['username'];
+        }
+       
         if($post['id'])
         {
             if(!$this->user->update($row,$post['id']))
@@ -205,6 +211,54 @@ class Users extends CI_Controller {
         else
         {
             $data = array('code'=>'1001','msg'=>'删除失败');
+        }
+        echo json_encode($data);
+    }
+
+    public function resetPassword()
+    {
+
+        $this->auth->check_login_json();
+        $this->load->library('form_validation');
+        $post = $this->input->post();
+        if(empty($post) && $post['reset_user_id'])
+        {
+            show_error('参数错误');
+        }
+        $data = array('code' => '1000', 'msg' => '');
+        $this->form_validation->set_rules('new_pwd', ' ', 'required|min_length[6]');
+        $this->form_validation->set_rules('new_pwd_confirmation', ' ', 'required|min_length[6]|matches[new_pwd]');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->form_validation->set_error_delimiters('', '');
+            $data['code'] = '1010';
+            $error['new_pwd'] = form_error('new_pwd');
+            $error['new_pwd_confirmation'] = form_error('new_pwd_confirmation');
+            $data['msg'] = $this->lang->line('error_msg');
+            $data['error'] = $error;
+            echo json_encode($data);                                    
+            exit;
+        }
+
+        $user = $this->user->get($post['reset_user_id']);
+        if(!$user){
+            show_error('用户不存在');
+        }
+        
+        if($user)
+        {
+            $row = array(
+                'pwd' => $this->auth->encrypt($post['new_pwd'],$user->username)
+            );
+            if(!$this->user->update($row,$post['reset_user_id']))
+            {
+                $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
+            }
+        }
+        if($data['code'] == '1000')
+        {
+            $data['msg'] = '修改成功！';
         }
         echo json_encode($data);
     }

@@ -14,8 +14,29 @@ class Register extends CI_Controller {
 	{
 		$this->load->view('home/register');
 	}
-	 //-------------------------------------------------------------------------
-    
+
+    public function checkName()
+    {
+        $post = $this->input->post();
+        $this->load->model('user');
+        $data = array("code"=>'1001',"msg"=>'参数错误');
+        if($post['field'] && $post['field_value'])
+        {
+            $where = array($post['field']=>$post['field_value']);
+            if($this->user->exist($where))
+            {
+                $data['msg'] = '用户名已存在';
+            }
+            else
+            {
+                $data['code'] = '1000';
+                $data['msg'] = '';
+            }                
+        }
+
+        echo json_encode($data);
+    }
+
     public function apply()
     {
         $validate_key = trim($this->input->post('validate_key'));
@@ -23,11 +44,12 @@ class Register extends CI_Controller {
         if( strtoupper($validate_key) != $_SESSION['login_check_number'])
         {
             $data['code'] = '1011';
-            $data['message'] = 验证码不准确;
+            $data['message'] = 验证码不正确;
             echo json_encode($data);
             exit;
         }
-    }
+        
+   }
 
 }
 

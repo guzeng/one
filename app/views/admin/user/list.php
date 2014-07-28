@@ -63,11 +63,112 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/select2/select2.min.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.js"></script>
+	<script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->  
 	<script>
 		jQuery(document).ready(function() {
 		   initTable('user_list');
 		});
+		function showResetPassword(id)
+		{
+		    var html = "<tr id='reset_"+id+"'><td colspan='8'><form id='reset_pwd_form' method='post' action='"+msg.base_url+"admin/users/resetPassword'>"+
+		        "<table width='100%'><tbody>"+
+		            "<tr id='tr_new_pwd'>"+
+		                "<td style='text-align:right' width='38%'>"+
+		                    "<label style='margin-right:20px;margin-top:10px'>"+"新密码"+"</label>"+
+		                "</td>"+
+		                "<td width='30%'>"+
+		                    "<input type='password' class='form-control' id='new_pwd' name='new_pwd' value='' maxlength='20'>"+
+		                "</td>"+
+		                "<td></td>"+
+		            "</tr>"+
+		            "<tr id='tr_new_pwd_confirmation'>"+
+		                "<td style='text-align:right'>"+
+		                    "<label style='margin-right:20px;margin-top:10px'>"+"确认密码"+"</label>"+
+		                "</td>"+
+		                "<td>"+
+		                    "<input type='password' class='form-control' id='new_pwd_confirmation' name='new_pwd_confirmation' value='' maxlength='20'>"+
+		                "</td>"+
+		            "</tr>"+
+		            "<tr>"+
+		                "<td>"+
+		                    "<label style='margin-right:10px;'></label>"+
+		                "</td>"+
+		                "<td>"+
+		                    "<button class='btn green' type='button' onclick='resetPassword()' id='reset_edit_btn'>"+"确认"+"</button>&nbsp;"+
+		                    "<button class='btn default' type='button' onclick='removeNode()'>"+"取消"+"</button>"+
+		                    "<input type='hidden' id='reset_user_id' name='reset_user_id' value='"+id+"'>"+
+		                "</td>"+
+		            "</tr>"+
+		        "</tbody></table>"+
+		        "</form></td></tr>";
+
+		    if($('#reset_'+id).length>0)
+		    {
+		        $('#reset_'+id).remove();
+		    }
+		    else
+		    {
+		        removeNode()
+		        $('#'+id).after(html);
+		    }
+		    return false;
+		}
+
+		function resetPassword()
+		{
+		    $('#reset_pwd_form').ajaxForm({
+		        dataType:'json',
+		        beforeSend:function(){
+		            $('#reset_edit_btn').attr('disabled',true);
+		            $('.pwd_alert').remove();
+		            loading();
+		        },
+		        success:function(json){
+		            close_alert();
+		            $('#reset_edit_btn').attr('disabled', false);
+		            if(json.code=='1000')
+		            {
+		                show_success();
+		                removeNode()
+		            }
+		            else if(json.code=='1002')
+		            {
+		                show_login(json);
+		            }
+		            else
+		            {
+		                if(typeof(json.error)!='undefined')
+		                {
+		                    $.each(json.error,function(key,item){
+		                        var tips="";
+		                        for(var i=0;i<item.length;i++){
+		                            tips=tips+"&nbsp;"+item[i];
+		                        }
+		                        if($('input[name='+key+']').length>0 && tips!=''){
+		                            $('#tr_'+key).after("<tr class='pwd_alert'><td></td><td><span class='req'>"+tips+"</span></td><td></td></tr>");
+		                            $('input[name='+key+']').focus();
+		                        }
+		                    })
+		                }
+		                else if(typeof(json.msg)!='undefined')
+		                {
+		                    show_error(json.msg);
+		                }
+		            }
+		        },
+		        error:function(err){
+		            $('#reset_edit_btn').attr('disabled',true);
+		            show_error();
+		        }
+		    })
+		    $('#reset_pwd_form').submit();
+		}
+
+		function removeNode()
+		{
+		    $('tr[id^=reset_]').remove();
+		}
 	</script>
 <?$this->load->view('admin/footer');?>

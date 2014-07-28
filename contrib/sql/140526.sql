@@ -2,8 +2,6 @@
 ALTER TABLE `one_member`   
   ADD COLUMN `email` varchar(50) NOT NULL DEFAULT ''  COMMENT '电子邮箱';
 ALTER TABLE `one_member`   
-  ADD COLUMN `password` varchar(50) NOT NULL DEFAULT ''  COMMENT '密码';
-ALTER TABLE `one_member`   
   ADD COLUMN `telephone` varchar(30) NOT NULL DEFAULT ''  COMMENT '固定电话';
 ALTER TABLE `one_member`   
   ADD COLUMN `phone` varchar(30) NOT NULL DEFAULT ''  COMMENT '手机';

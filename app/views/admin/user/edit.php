@@ -60,12 +60,13 @@
 											</div>
 										</div>
 									</div>
+									<?php if(!isset($row)):?>
 									<div class="row">
 										<!--/span-->
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="control-label"><span class='req'>*</span> 密码</label>
-												<input type="password" id="password" name='password' class="form-control" maxLength='50' placeholder="" value="<?php echo isset($row)?$row->password:''?>">
+												<input type="password" id="password" name='password' class="form-control" maxLength='50' placeholder="" value="<?php echo isset($row)?$row->pwd:''?>">
 												<span class="help-block"></span>
 											</div>
 										</div>
@@ -73,11 +74,12 @@
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="control-label"><span class='req'>*</span> 确认密码</label>
-												<input type="password" id="password_re" name='password_re' class="form-control" maxLength='50' placeholder="" value="<?php echo isset($row)?$row->password:''?>">
+												<input type="password" id="password_re" name='password_re' class="form-control" maxLength='50' placeholder="" value="<?php echo isset($row)?$row->pwd:''?>">
 												<span class="help-block"></span>
 											</div>
 										</div>
 									</div>
+									<?endif;?>
 									<div class="row">
 										<!--/span-->
 										<div class="col-md-6">
