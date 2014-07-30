@@ -6,11 +6,17 @@ body {
   font-size:13px; 
   direction: ltr;
 }
+
 .m-r-15{margin-right: 15px;}
 .m-r-20{margin-right: 20px;}
 .m-t-5{margin-top: 5px;}
 .m-t-10{margin-top: 10px;}
 .m-b-10{margin-bottom: 10px;}
+.p-15{padding: 15px;}
+.p-t-5{padding-top: 5px;}
+.p-b-5{padding-bottom: 5px;}
+.p-t-10{padding-top: 10px;}
+.p-b-10{padding-bottom: 10px;}
 .col-no-padding{padding-left: 0px; padding-right: 0px;}
 .col-p-10{padding-left: 10px;padding-right: 10px;}
 .o-h{overflow: hidden;}
@@ -40,3 +46,11 @@ body {
 #info-detail{border-left: 1px solid #EEEEEE; border-bottom: 1px solid #EEEEEE;}
 #info-detail .info-items{border-right: 1px solid #EEEEEE;}
 #info-detail .info-items .item{padding: 10px 0;}
+
+.notice{border:1px solid #EEEEEE; height: 175px; overflow: hidden; color: #787878;}
+.notice .nav-tabs a{padding: 5px 15px; color: #787878;}
+.notice .tab-content{padding: 5px 15px 15px;}
+.notice .tab-content ul{padding-left: 15px;}
+.notice .tab-content li{line-height: 23px;}
+#notice-tab li{width: 33.3%;}
+.ad-top{width: 660px;}
