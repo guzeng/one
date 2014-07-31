@@ -155,7 +155,10 @@
     var base_url = "<?php echo base_url();?>";
 
     $(document).ready(function(){
-        
+        $('input[name=username]').blur(function(){
+            if(validator().checkNull($("input[name=username]"),'请输入登录名',$("#error_username")))
+                validator().checkExist(base_url+"register/checkName","username",$("input[name=username]"),$("#error_username"));
+        });
     });
     
     function checkAll(){
@@ -176,8 +179,11 @@
             bValid = false;
         }
         bValid = validator().checkNull(validate_key,'请输入验证码',$("#error_validate_key")) && bValid;    
-        bValid = validator().checkNull(username,'请输入登录名',$("#error_username")) && bValid;
-        bValid = validator().checkExist(base_url+"register/checkName","username",username,$("#error_username")) && bValid;
+
+        if(validator().checkNull(username,'请输入登录名',$("#error_username")))
+            bValid = validator().checkExist(base_url+"register/checkName","username",username,$("#error_username")) && bValid;
+        else
+            bValid = false;
         return bValid;
 
 }
@@ -197,15 +203,21 @@
                 {
                     $('#login_form_submit_btn').attr('disabled',false).show();              
                 }
-                if(json.code == '1011'){
-                    $('#error_message').html(json.message).show();
-                    $('#error_message').parent().show();
-                }else if(json.code != '1000'){
+                if(json.code == '1010'){
                     //刷新验证码
-                    // $('#login_captcha').attr({src:base_url+'login/get_captcha?t='+Math.random()});
+                    $('#login_captcha').attr({src:base_url+'login/get_captcha?t='+Math.random()});
                     $('input[name=validate_key]').val('');
-                    $("label[for='validate_key']").show();
-                }else{
+                    //错误提示
+                    $.each(json.error,function(key,item){
+                        if($('input[name='+key+']').length>0 && item!=''){
+                            validator().updateTips(item,$("#error_"+key),$('input[name='+key+']'));
+                        }
+                    })
+                }
+                else if(json.code == '1001'){
+                    showError(json.msg);
+                }
+                else if(json.code == '1000'){
                     window.location.href = json.url;
                 }
             },

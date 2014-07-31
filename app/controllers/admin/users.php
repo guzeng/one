@@ -91,7 +91,7 @@ class Users extends CI_Controller {
             $error['password_re'] = form_error('password_re');
             $error['score'] = form_error('score');
             $error['grade'] = form_error('grade');
-            $data['msg'] = $this->lang->line('error_msg');
+            $data['msg'] = "出错";
             $data['error'] = $error;
             echo json_encode($data);                                    
             exit;
@@ -155,7 +155,7 @@ class Users extends CI_Controller {
         }
         if(!empty($error))
         {
-            echo json_encode(array('code'=>'1010','msg'=>$this->lang->line('error_msg'),'error'=>$error));
+            echo json_encode(array('code'=>'1010','msg'=>"出错",'error'=>$error));
             exit;
         }
         $row = array(
@@ -179,14 +179,14 @@ class Users extends CI_Controller {
         {
             if(!$this->user->update($row,$post['id']))
             {
-                $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
+                $data = array('code'=>'1001','msg'=>$this->lang->line('update_failed'));
             }
         }
         else
         {
             if(!$this->user->insert($row))
             {
-                $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
+                $data = array('code'=>'1001','msg'=>$this->lang->line('add_failed'));
             }
         }
         if($data['code'] == '1000')
@@ -235,7 +235,7 @@ class Users extends CI_Controller {
             $data['code'] = '1010';
             $error['new_pwd'] = form_error('new_pwd');
             $error['new_pwd_confirmation'] = form_error('new_pwd_confirmation');
-            $data['msg'] = $this->lang->line('error_msg');
+            $data['msg'] = "出错";
             $data['error'] = $error;
             echo json_encode($data);                                    
             exit;
@@ -253,7 +253,7 @@ class Users extends CI_Controller {
             );
             if(!$this->user->update($row,$post['reset_user_id']))
             {
-                $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
+                $data = array('code'=>'1001','msg'=>$this->lang->line('update_failed'));
             }
         }
         if($data['code'] == '1000')
