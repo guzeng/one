@@ -234,6 +234,17 @@
         </div>
     </div>
     <!-- categorys end -->
+
+    <div class='container sway'>
+        <div class='left pull-left'>
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </div>
+        <div >
+        </div>
+        <div class='right pull-right'>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+    </div>
 </body>
 <!-- END BODY -->
 </html>
