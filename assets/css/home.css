@@ -54,8 +54,13 @@ body {
 .notice .tab-content li{line-height: 23px;}
 #notice-tab li{width: 33.3%;}
 .ad-top{width: 660px;}
+.ad-top .ad-table{height:110px; color: #787878;}
+.ad-top .title{color: #000000;}
+.ad-top .ad-table td div{line-height: 23px;}
 
 .b{border:1px solid #EEEEEE; }
 .sway{border:1px solid #EEEEEE; height:80px; line-height:80px; padding:0px; overflow:hidden; color:#CECECE;}
 .sway .left {padding-left:6px; padding-right:6px; border-right:1px solid #EEEEEE; font-size:16px;} 
 .sway .right {padding-left:6px; padding-right:6px; border-left:1px solid #EEEEEE; font-size:16px;}
+.sway .list img{margin-right: 19px;}
+.sway .list img.last{margin-right: 0px;}

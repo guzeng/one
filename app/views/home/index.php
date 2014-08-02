@@ -159,12 +159,42 @@
                     <img src="<?php echo base_url()?>assets/img/home/i.png" class="img-responsive">
                 </div>
                 <div class='ad-top'>
-                    <table class="table table-bordered" style='height:110px;'>
+                    <table class="table table-bordered ad-table" >
                         <tbody>
                             <tr>
-                                <td width='33.3%'>1</td>
-                                <td width='33.3%'>Table cell</td>
-                                <td width='33.3%'>Table cell</td>
+                                <td width='33.3%'>
+                                    <div class='pull-left'>
+                                        <div class='title'><strong>进口水果</strong></div>
+                                        <div>台湾凤梨</div>
+                                        <div>美国水果</div>
+                                        <div>意大利水果</div>
+                                    </div>
+                                    <div class='pull-right'>
+                                        <img src="<?php echo base_url()?>assets/img/home/ad-s-1.png">
+                                    </div>
+                                </td>
+                                <td width='33.3%'>
+                                    <div class='pull-left'>
+                                        <div class='title'><strong>T恤节女装</strong></div>
+                                        <div>条纹T恤</div>
+                                        <div>假两件T</div>
+                                        <div>情侣T恤</div>
+                                    </div>
+                                    <div class='pull-right'>
+                                        <img src="<?php echo base_url()?>assets/img/home/ad-s-2.png">
+                                    </div>
+                                </td>
+                                <td width='33.3%'>
+                                    <div class='pull-left'>
+                                        <div class='title'><strong>意尔康大牌日</strong></div>
+                                        <div>高跟单鞋</div>
+                                        <div>正装皮鞋</div>
+                                        <div>男帆布鞋</div>
+                                    </div>
+                                    <div class='pull-right'>
+                                        <img src="<?php echo base_url()?>assets/img/home/ad-s-3.png">
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -239,10 +269,20 @@
         <div class='left pull-left'>
             <span class="glyphicon glyphicon-chevron-left"></span>
         </div>
-        <div >
-        </div>
         <div class='right pull-right'>
             <span class="glyphicon glyphicon-chevron-right"></span>
+        </div>
+        <div class='list'>
+            <img src="<?php echo base_url()?>assets/img/home/sway-1.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-2.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-3.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-4.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-5.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-6.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-7.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-8.png">
+            <img src="<?php echo base_url()?>assets/img/home/sway-9.png">
+            <img class='last' src="<?php echo base_url()?>assets/img/home/sway-10.png">
         </div>
     </div>
 </body>
