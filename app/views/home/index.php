@@ -285,6 +285,109 @@
             <img class='last' src="<?php echo base_url()?>assets/img/home/sway-10.png">
         </div>
     </div>
+    <div class='container jingxuan'>
+        <div class='row'>
+            <h3><span class='title'>每日精选</span><small class='subtitle'>精彩每一天</small></h3>
+        </div>
+        <div class='row'>
+            <div class='item w-bg pull-left'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>品牌街</h4>
+                    <div class="s-name">新品上市</div>
+                    <div class="s-ext"><b>领50元优惠券</b></div>
+                    <ul class="s-hotword">
+                        <li><i></i>更多品牌</li>
+                        <li><i></i>进入品牌街</li>
+                    </ul>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-1.jpg"></a>
+            </div>
+            <div class='item pull-left'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>天天低价</h4>
+                    <div class="s-name">NIKE休闲板鞋</div>
+                    <div class="s-ext"><b>288元秒杀</b></div>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-2.jpg"></a>
+            </div>
+            <div class='item pull-left w-bg'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>精品周刊</h4>
+                    <div class="s-name">型男养成记</div>
+                    <div class="s-ext"><b>天王表低至3折</b></div>
+                    <ul class="s-hotword">
+                        <li><i></i>型男休闲范儿</li>
+                    </ul>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-3.jpg"></a>
+            </div>
+            <div class='item tuangou pull-left'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>今日团购</h4>
+                    <div class="s-name">3D电影票</div>
+                    <div class="s-ext"><b></b></div>
+                    <a target="_blank" href="" class="s-tuangou"> 
+                        <span class='t'>团购价</span>
+                        <strong class='price'>￥9.9</strong>
+                    </a>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-4.jpg"></a>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='item pull-left'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>首发</h4>
+                    <div class="s-name">三星NX系列镜</div>
+                    <div class="s-ext"><b>首发下单赠礼</b></div>
+                    <ul class="s-hotword">
+                    </ul>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-5.jpg"></a>
+            </div>
+            <div class='item w-bg pull-left'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>品牌特卖</h4>
+                    <div class="s-name">给宝宝的礼物</div>
+                    <div class="s-ext"><b>低至2折</b></div>
+                    <ul class="s-hotword">
+                    </ul>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-6.jpg"></a>
+            </div>
+            <div class='item pull-left'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>预售</h4>
+                    <div class="s-name">苹果联合首发</div>
+                    <div class="s-ext"><b>全球限量预售</b></div>
+                    <ul class="s-hotword">
+                    </ul>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-7.jpg"></a>
+            </div>
+            <div class='item w-bg pull-left'>
+                <div class="aside">
+                    <a href="" target="_blank" class="s-link"></a>
+                    <h4>青春国际</h4>
+                    <div class="s-name">六一嘉年华</div>
+                    <div class="s-ext"><b>玩趣青春</b></div>
+                    <ul class="s-hotword">
+                        <li><i></i>NB Kids</li>
+                        <li><i></i>千趣会</li>
+                        <li>...</li>
+                    </ul>
+                </div>
+                <a><img src="<?php echo base_url()?>assets/img/home/jx-8.jpg"></a>
+            </div>
+        </div>
+    </div>
 </body>
 <!-- END BODY -->
 </html>

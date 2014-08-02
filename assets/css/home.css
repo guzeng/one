@@ -6,7 +6,7 @@ body {
   font-size:13px; 
   direction: ltr;
 }
-
+h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
 .m-r-15{margin-right: 15px;}
 .m-r-20{margin-right: 20px;}
 .m-t-5{margin-top: 5px;}
@@ -64,3 +64,24 @@ body {
 .sway .right {padding-left:6px; padding-right:6px; border-left:1px solid #EEEEEE; font-size:16px;}
 .sway .list img{margin-right: 19px;}
 .sway .list img.last{margin-right: 0px;}
+
+.jingxuan .title{color: #009944; margin-right: 20px; font-weight: bold;}
+.jingxuan .subtitle{font-size: 16px; }
+.jingxuan .item{width: 25%; height: 190px; overflow: hidden; position: relative;}
+.jingxuan .item img{position: absolute; top: 0; left: 0;}
+.jingxuan .item .aside{height: 190px; padding: 30px 20px 0 20px; position: absolute; top: 0px; left: 0px; z-index: 1;}
+.jingxuan .item.w-bg .aside{background: none repeat scroll 0 0 rgba(255, 255, 255, 0.75);}
+.jingxuan .item .s-link{background: url('../img/blank.gif') repeat scroll 0 0; height: 100%; width: 100%; left: 0; top: 0; position: absolute; z-index: 2;}
+.jingxuan .item h4{font-size: 18px; height: 20px; line-height: 20px; margin-bottom: 5px; overflow: hidden; color: #333333; font-weight: 700;}
+.jingxuan .item .s-name{color: rgb(102, 102, 102); font-size: 13px; height: 20px; line-height: 20px; overflow: hidden;}
+.jingxuan .item .s-ext{height: 18px; line-height: 18px; margin-top: 2px; overflow: hidden;}
+.jingxuan .item.w-bg .s-ext{margin-top: 0px;}
+.jingxuan .item .s-ext b{background-color: rgb(228, 57, 60); color: #FFFFFF; display: inline-block; font-size: 12px; font-weight: 400; padding: 0 2px;}
+.jingxuan .item.w-bg .s-ext b{background-color: rgba(0, 0, 0, 0); color: rgb(234, 99, 101); padding:0px;}
+.jingxuan .item .s-hotword{padding: 20px 0 0;}
+.jingxuan .item .s-hotword li{color: rgb(136, 136, 136); height: 18px; line-height: 18px; overflow: hidden; padding-left: 6px; position: relative;}
+.jingxuan .item .s-hotword li i{background: none repeat scroll 0 0 rgb(153, 153, 153); display: block; height: 2px; left: 0px; overflow: hidden; position: absolute; top: 8px; width: 2px; vertical-align: middle;}
+.jingxuan .item.tuangou .s-ext{display: none;}
+.jingxuan .item.tuangou .s-tuangou{background: url("../img/index.tuangou.png") no-repeat scroll 0 33px rgba(0, 0, 0, 0); display: block; height: 65px; margin-top: 20px; width: 120px;}
+.jingxuan .item.tuangou .s-tuangou .t{color: rgb(153, 153, 153); margin-right: 5px; vertical-align: baseline; font-size: 12px; margin-bottom: 10px;}
+.jingxuan .item.tuangou .s-tuangou .price{color: rgb(228, 57, 60); font-size: 22px; font-weight: 600; vertical-align: baseline;}
