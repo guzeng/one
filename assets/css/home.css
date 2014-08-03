@@ -7,10 +7,12 @@ body {
   direction: ltr;
 }
 h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
+a{color: rgb(102, 102, 102); text-decoration: none;}
 .m-r-15{margin-right: 15px;}
 .m-r-20{margin-right: 20px;}
 .m-t-5{margin-top: 5px;}
 .m-t-10{margin-top: 10px;}
+.m-t-20{margin-top: 20px;}
 .m-b-10{margin-bottom: 10px;}
 .p-15{padding: 15px;}
 .p-t-5{padding-top: 5px;}
@@ -20,6 +22,8 @@ h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
 .col-no-padding{padding-left: 0px; padding-right: 0px;}
 .col-p-10{padding-left: 10px;padding-right: 10px;}
 .o-h{overflow: hidden;}
+.relative{position: relative;}
+.absolute{position: absolute;}
 #top{height:30px;line-height:30px; width:100%; background-color: #eeeeee; }
 #top span{margin-left: 28px; font-size: 12px;}
 #header{padding:15px 0 10px;}
@@ -67,7 +71,7 @@ h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
 
 .jingxuan .title{color: #009944; margin-right: 20px; font-weight: bold;}
 .jingxuan .subtitle{font-size: 16px; }
-.jingxuan .item{width: 25%; height: 190px; overflow: hidden; position: relative;}
+.jingxuan .item{height: 190px; overflow: hidden; position: relative;}
 .jingxuan .item img{position: absolute; top: 0; left: 0;}
 .jingxuan .item .aside{height: 190px; padding: 30px 20px 0 20px; position: absolute; top: 0px; left: 0px; z-index: 1;}
 .jingxuan .item.w-bg .aside{background: none repeat scroll 0 0 rgba(255, 255, 255, 0.75);}
@@ -85,3 +89,28 @@ h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
 .jingxuan .item.tuangou .s-tuangou{background: url("../img/index.tuangou.png") no-repeat scroll 0 33px rgba(0, 0, 0, 0); display: block; height: 65px; margin-top: 20px; width: 120px;}
 .jingxuan .item.tuangou .s-tuangou .t{color: rgb(153, 153, 153); margin-right: 5px; vertical-align: baseline; font-size: 12px; margin-bottom: 10px;}
 .jingxuan .item.tuangou .s-tuangou .price{color: rgb(228, 57, 60); font-size: 22px; font-weight: 600; vertical-align: baseline;}
+
+#f1{border-bottom: 1px solid #DCDCDC;margin-bottom: 20px;}
+#f1 .floor-sign{font-size: 18px; font-weight: 700; background-color: #E0402A; color: #FFFFFF; margin-right: 10px;}
+#f1 .floor-name{color: #E0402A; font-weight: bold; font-size: 24px;}
+#f1 #title{ border-bottom: 2px solid #BBBBBB;}
+#f1 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
+#f1 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
+#f1 #left ul li{height: 25px; line-height: 25px; overflow: hidden; vertical-align: bottom;}
+#f1 #left span{position: absolute; right: 0; top: 0; line-height: 0; z-index: 1;}
+#f1 #list-tab{margin-bottom: 0px; }
+#f1 #list-tab li{width: 20%; margin: 0px;}
+#f1 #list-tab li a{font-size: 14px; font-weight: 700; color: #000000;}
+#f1 #list-tab.nav-pills > li > a:hover, 
+#f1 #list-tab.nav-pills > li > a:focus{background-color: #FFFFFF; color: #E0402A;}
+#f1 #list-tab.nav-pills > li.active > a, 
+#f1 #list-tab.nav-pills > li.active > a:hover, 
+#f1 #list-tab.nav-pills > li.active > a:focus{background-color: #FFFFFF; color: #E0402A;}
+
+#f1 #list .item{padding: 10px; width: 20%; border-top: 1px solid #F1F1F1; border-right: 1px solid  #F1F1F1; text-align: center; height: 180px;}
+#f1 #list .item .img{margin-bottom: 5px;}
+#f1 #list .item .name{text-align:left;height: 3em;  word-break:break-all; word-wrap:break-word; overflow: hidden;}
+#f1 #list .item .price{color: #E4393C; font-size: 15px; overflow: hidden;}
+#f1 #list .item .price span{font-size: 12px;}
+
+#f1 #right{overflow: hidden;text-align: right;}
