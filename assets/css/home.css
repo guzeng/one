@@ -90,27 +90,69 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 .jingxuan .item.tuangou .s-tuangou .t{color: rgb(153, 153, 153); margin-right: 5px; vertical-align: baseline; font-size: 12px; margin-bottom: 10px;}
 .jingxuan .item.tuangou .s-tuangou .price{color: rgb(228, 57, 60); font-size: 22px; font-weight: 600; vertical-align: baseline;}
 
-#f1{border-bottom: 1px solid #DCDCDC;margin-bottom: 20px;}
+#f1,#f2,#f3{border-bottom: 1px solid #DCDCDC;margin-bottom: 20px;}
 #f1 .floor-sign{font-size: 18px; font-weight: 700; background-color: #E0402A; color: #FFFFFF; margin-right: 10px;}
 #f1 .floor-name{color: #E0402A; font-weight: bold; font-size: 24px;}
-#f1 #title{ border-bottom: 2px solid #BBBBBB;}
+#f1 #title, #f2 #title, #f3 #title{ border-bottom: 2px solid #BBBBBB;}
 #f1 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
 #f1 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
 #f1 #left ul li{height: 25px; line-height: 25px; overflow: hidden; vertical-align: bottom;}
 #f1 #left span{position: absolute; right: 0; top: 0; line-height: 0; z-index: 1;}
-#f1 #list-tab{margin-bottom: 0px; }
-#f1 #list-tab li{width: 20%; margin: 0px;}
-#f1 #list-tab li a{font-size: 14px; font-weight: 700; color: #000000;}
+#f1 #list-tab,#f2 #list-tab,#f3 #list-tab{margin-bottom: 0px; }
+#f1 #list-tab li,#f2 #list-tab li,#f3 #list-tab li{width: 20%; margin: 0px;}
+#f1 #list-tab li a,#f2 #list-tab li a,#f3 #list-tab li a{font-size: 14px; font-weight: 700; color: #000000;}
 #f1 #list-tab.nav-pills > li > a:hover, 
-#f1 #list-tab.nav-pills > li > a:focus{background-color: #FFFFFF; color: #E0402A;}
+#f1 #list-tab.nav-pills > li > a:focus,
 #f1 #list-tab.nav-pills > li.active > a, 
 #f1 #list-tab.nav-pills > li.active > a:hover, 
-#f1 #list-tab.nav-pills > li.active > a:focus{background-color: #FFFFFF; color: #E0402A;}
+#f1 #list-tab.nav-pills > li.active > a:focus{
+    background-color: #FFFFFF; color: #E0402A;
+}
 
-#f1 #list .item{padding: 10px; width: 20%; border-top: 1px solid #F1F1F1; border-right: 1px solid  #F1F1F1; text-align: center; height: 180px;}
-#f1 #list .item .img{margin-bottom: 5px;}
-#f1 #list .item .name{text-align:left;height: 3em;  word-break:break-all; word-wrap:break-word; overflow: hidden;}
-#f1 #list .item .price{color: #E4393C; font-size: 15px; overflow: hidden;}
-#f1 #list .item .price span{font-size: 12px;}
+#f1 #list .item,
+#f2 #list .item,
+#f3 #list .item{
+    padding: 10px; width: 20%; border-top: 1px solid #F1F1F1; border-right: 1px solid  #F1F1F1; text-align: center; height: 180px;
+}
+#f1 #list .item .img,
+#f2 #list .item .img,
+#f3 #list .item .img{margin-bottom: 5px;}
+#f1 #list .item .name,
+#f2 #list .item .name,
+#f3 #list .item .name{
+    text-align:left;height: 3em;  word-break:break-all; word-wrap:break-word; overflow: hidden;
+}
+#f1 #list .item .price,
+#f2 #list .item .price,
+#f3 #list .item .price{
+    color: #E4393C; font-size: 15px; overflow: hidden;
+}
+#f1 #list .item .price span,
+#f2 #list .item .price span,
+#f3 #list .item .price span{
+    font-size: 12px;
+}
+#f1 #right,#f2 #right,#f3 #right{overflow: hidden;text-align: right;}
 
-#f1 #right{overflow: hidden;text-align: right;}
+#f2 .floor-sign{font-size: 18px; font-weight: 700; background-color: #0068B7; color: #FFFFFF; margin-right: 10px;}
+#f2 .floor-name{color: #0068B7; font-weight: bold; font-size: 24px;}
+#f2 #left,#f3 #left{padding-top: 5px;border-right: 1px solid rgb(221, 221, 221); height: 361px; position: relative;}
+#f2 #left .el,#f3 #left .el{margin-top: 10px;}
+#f2 #left .bottom,#f3 #left .bottom{position: absolute; bottom: 0px;}
+#f2 #list-tab.nav-pills > li > a:hover, 
+#f2 #list-tab.nav-pills > li > a:focus,
+#f2 #list-tab.nav-pills > li.active > a, 
+#f2 #list-tab.nav-pills > li.active > a:hover, 
+#f2 #list-tab.nav-pills > li.active > a:focus{
+    background-color: #FFFFFF; color: #0068B7;
+}
+
+#f3 .floor-sign{font-size: 18px; font-weight: 700; background-color: #22AC38; color: #FFFFFF; margin-right: 10px;}
+#f3 .floor-name{color: #22AC38; font-weight: bold; font-size: 24px;}
+#f3 #list-tab.nav-pills > li > a:hover, 
+#f3 #list-tab.nav-pills > li > a:focus,
+#f3 #list-tab.nav-pills > li.active > a, 
+#f3 #list-tab.nav-pills > li.active > a:hover, 
+#f3 #list-tab.nav-pills > li.active > a:focus{
+    background-color: #FFFFFF; color: #22AC38;
+}

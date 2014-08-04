@@ -547,6 +547,324 @@
         </div>
     </div>
     <!-- 1F end -->
+    <!-- 2F -->
+    <div class='container' id='f2'>
+        <div class='row' id='title'>
+            <div class='col-md-2 col-no-padding'>
+                <span class="label floor-sign">2 F</span>
+                <span class='floor-name'>电脑数码</span>
+            </div>
+            <div class='col-md-8 col-no-padding'>
+                <ul id="list-tab" class="nav nav-pills" role="tablist">
+                    <li class=""><a href="#home2" role="tab" class="text-center" data-toggle="tab">爆品疯抢</a></li>
+                    <li class=""><a href="#profile2" role="tab" class="text-center" data-toggle="tab">新品专区</a></li>
+                    <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">特价商品</a></li>
+                    <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">热卖推荐</a></li>
+                    <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">好评商品</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-2 relative col-no-padding' id='left'>
+                <div class='row' >
+                    <div class='col-md-6 el'><a href="">男装</a></div>
+                    <div class='col-md-6 el'><a href="">女装</a></div>
+                    <div class='col-md-6 el'><a href="">服装配饰</a></div>
+                    <div class='col-md-6 el'><a href="">内衣</a></div>
+                    <div class='col-md-6 el'><a href="">童装</a></div>
+                    <div class='col-md-6 el'><a href="">男鞋</a></div>
+                    <div class='col-md-6 el'><a href="">女鞋</a></div>
+                    <div class='col-md-6 el'><a href="">功能箱包</a></div>
+                    <div class='col-md-6 el'><a href="">潮流女包</a></div>
+                    <div class='col-md-6 el'><a href="">时尚男包</a></div>
+                    <div class='col-md-6 el'><a href="">户外鞋服</a></div>
+                    <div class='col-md-6 el'><a href="">户外装备</a></div>
+                    <div class='col-md-6 el'><a href="">运动器械</a></div>
+                    <div class='col-md-6 el'><a href="">运动服饰</a></div>
+                </div>
+                <div class='bottom'>
+                    <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></a>
+                </div>
+            </div>
+            <div class='col-md-8 col-no-padding' id='list'>
+                <div id='list1'>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-1.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-2.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-3.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-4.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-5.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-6.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-7.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-8.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-9.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-10.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-2 col-no-padding' id='right'>
+                <img class='img-responsive pull-right' src='<?php echo base_url()?>assets/img/home/1f-111.png'>
+            </div>
+        </div>
+    </div>
+    <!-- 2F end -->
+    <!-- 3F -->
+    <div class='container' id='f3'>
+        <div class='row' id='title'>
+            <div class='col-md-2 col-no-padding'>
+                <span class="label floor-sign">3F</span>
+                <span class='floor-name'>居家生活</span>
+            </div>
+            <div class='col-md-8 col-no-padding'>
+                <ul id="list-tab" class="nav nav-pills" role="tablist">
+                    <li class=""><a href="#home2" role="tab" class="text-center" data-toggle="tab">爆品疯抢</a></li>
+                    <li class=""><a href="#profile2" role="tab" class="text-center" data-toggle="tab">新品专区</a></li>
+                    <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">特价商品</a></li>
+                    <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">热卖推荐</a></li>
+                    <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">好评商品</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-2 relative col-no-padding' id='left'>
+                <div class='row' >
+                    <div class='col-md-6 el'><a href="">男装</a></div>
+                    <div class='col-md-6 el'><a href="">女装</a></div>
+                    <div class='col-md-6 el'><a href="">服装配饰</a></div>
+                    <div class='col-md-6 el'><a href="">内衣</a></div>
+                    <div class='col-md-6 el'><a href="">童装</a></div>
+                    <div class='col-md-6 el'><a href="">男鞋</a></div>
+                    <div class='col-md-6 el'><a href="">女鞋</a></div>
+                    <div class='col-md-6 el'><a href="">功能箱包</a></div>
+                    <div class='col-md-6 el'><a href="">潮流女包</a></div>
+                    <div class='col-md-6 el'><a href="">时尚男包</a></div>
+                    <div class='col-md-6 el'><a href="">户外鞋服</a></div>
+                    <div class='col-md-6 el'><a href="">户外装备</a></div>
+                    <div class='col-md-6 el'><a href="">运动器械</a></div>
+                    <div class='col-md-6 el'><a href="">运动服饰</a></div>
+                </div>
+                <div class='bottom'>
+                    <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></a>
+                </div>
+            </div>
+            <div class='col-md-8 col-no-padding' id='list'>
+                <div id='list1'>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-1.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-2.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-3.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-4.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-5.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-6.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-7.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-8.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-9.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-10.png"></a>
+                        </div>
+                        <div class='name'>
+                            <a>欧时力夏装纯棉条纹连衣裙</a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span>149.<span>00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-2 col-no-padding' id='right'>
+                <img class='img-responsive pull-right' src='<?php echo base_url()?>assets/img/home/1f-111.png'>
+            </div>
+        </div>
+    </div>
+    <!-- 3F end -->
 </body>
 <!-- END BODY -->
 </html>
