@@ -865,6 +865,84 @@
         </div>
     </div>
     <!-- 3F end -->
+    <div class='container m-b-20' id='ad-footer'>
+        <div class='row'>
+            <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/ad-footer.png'>
+        </div>
+    </div>
+
+    <div class='container m-b-20' id='footer'>
+        <div class='row'>
+            <div class='col-md-6 item'>
+                <div class='row'>
+                    <div class='col-md-3 p-l-30'>
+                        <div class='m-b-10 f-14'><strong>购物指南</strong></div>
+                        <div class='m-b-10'><a>购物流程</a></div>
+                        <div class='m-b-10'><a>会员介绍</a></div>
+                        <div class='m-b-10'><a>团购/机票</a></div>
+                        <div class='m-b-10'><a>常见问题</a></div>
+                        <div class='m-b-10'><a>联系客服</a></div>
+                    </div>
+                    <div class='col-md-3 p-l-30'>
+                        <div class='m-b-10 f-14'><strong>配送方式</strong></div>
+                        <div class='m-b-10'><a>上门自提</a></div>
+                        <div class='m-b-10'><a>211限时达</a></div>
+                        <div class='m-b-10'><a>配送服务查询</a></div>
+                        <div class='m-b-10'><a>配送费收取标准</a></div>
+                        <div class='m-b-10'><a>海外配送</a></div>
+                    </div>
+                    <div class='col-md-3 p-l-30'>
+                        <div class='m-b-10 f-14'><strong>支付方式</strong></div>
+                        <div class='m-b-10'><a>货到付款</a></div>
+                        <div class='m-b-10'><a>在线支付</a></div>
+                        <div class='m-b-10'><a>分期付款</a></div>
+                        <div class='m-b-10'><a>邮局汇款</a></div>
+                        <div class='m-b-10'><a>公司转账</a></div>
+                    </div>
+                    <div class='col-md-3 p-l-30'>
+                        <div class='m-b-10 f-14'><strong>售后服务</strong></div>
+                        <div class='m-b-10'><a>售后政策</a></div>
+                        <div class='m-b-10'><a>价格保护</a></div>
+                        <div class='m-b-10'><a>退款说明</a></div>
+                        <div class='m-b-10'><a>返修/退换货</a></div>
+                        <div class='m-b-10'><a>取消订单</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-3 item'>
+                <div class='row'>
+                    <div class='col-md-6 p-l-25'>
+                        <div class='m-b-15 f-14'><strong>壹心微购</strong></div>
+                        <div>
+                            <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/2.png'>
+                        </div>
+                    </div>
+                    <div class='col-md-6 p-l-10'>
+                        <div class='m-b-15'><strong class=' f-14'>微信账号:</strong><span class='c-6'>壹心易购</span></div>
+                        <div>
+                            <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/2.png'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-3 text-right'>
+                <div class='row m-b-15'>
+                    <div class='guanzhubtn btn'><span class='icon pull-left'></span><span>关注壹心易购</span></div>
+                </div>
+                <div class='row m-b-15'>
+                    壹心客服: <span class='kefu-num'>4009 170 170</span>
+                </div>
+                <div class='row '>
+                    <form class="form-inline" role="form">
+                      <div class="form-group">
+                        <input type="password" class="form-control" placeholder="输入邮箱订阅促销信息">
+                      </div>
+                      <button type="submit" class="btn btn-default">订阅</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <!-- END BODY -->
 </html>
