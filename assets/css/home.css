@@ -13,9 +13,11 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 .m-t-5{margin-top: 5px;}
 .m-t-10{margin-top: 10px;}
 .m-t-20{margin-top: 20px;}
+.m-b-8{margin-bottom: 8px;}
 .m-b-10{margin-bottom: 10px;}
 .m-b-15{margin-bottom: 15px;}
 .m-b-20{margin-bottom: 20px;}
+.m-b-30{margin-bottom: 30px;}
 .p-15{padding: 15px;}
 .p-l-10{padding-left: 10px;}
 .p-l-25{padding-left: 25px;}
@@ -165,7 +167,15 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 }
 
 #footer{font-size: 12px;}
-#footer .item{border-right:1px solid #dddddd;}
-#footer .guanzhubtn{background-color: #ff4741; padding: 10px 40px; font-size: 18px; color: #FFFFFF;border-radius:4px;}
+#footer .service{ padding: 20px 0; border-bottom: 1px solid #dddddd; margin-bottom: 20px;}
+#footer .item{border-right:1px solid #dddddd; height: 150px;}
+#footer .guanzhubtn{width:100%;background-color: #ff4741; padding: 10px 40px; font-size: 18px; color: #FFFFFF;border-radius:4px;}
 #footer .guanzhubtn span.icon{width: 27px;height: 25px;background: url('../img/weibo-icon.png') no-repeat;display: inline-block;border-radius:4px !important; margin-right: 5px;}
 #footer .kefu-num{font-style: italic; font-size: 24px; font-weight: 700; color: #333333;}
+#footer .kefu{color: rgb(102, 102, 102);}
+#footer .dingyue{background-color: #A7A7A7; color: #FFFFFF;}
+#footer .about{color: rgb(102, 102, 102); }
+#footer .about a{margin: 0 5px;}
+#footer .cr{color: #787878; }
+#footer .fb a{margin:0 5px;}
+#footer .fb a img{display: inline-block;}
