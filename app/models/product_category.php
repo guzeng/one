@@ -107,7 +107,7 @@ class Product_category  extends CI_Model{
 	 *	@return array   
 	 *  @author zeng.gu
 	 */    
-	public function all($items=array())
+	public function all($items=array(),$return_type = 'object')
 	{
 		if(count($items) >0 ){
             foreach($items as $key => $val){
@@ -126,7 +126,10 @@ class Product_category  extends CI_Model{
         $this->db->order_by($_orderby);
 		$query = $this->db->get ( $this->table);
         if($query->num_rows() > 0){
-            return $query->result();
+        	if($return_type == 'object')
+            	return $query->result();
+            else
+            	return $query->result_array();
         }
 		return false;
 	}
@@ -211,6 +214,39 @@ class Product_category  extends CI_Model{
                 $ret[] = $v->id;
                 unset($arr[$k]);
                 $ret = array_merge($ret, $this->get_child($arr,$v->id));
+            }
+        }
+        return $ret;
+    }
+
+    public function get_level_tree()
+    {
+		$this->db->select ( '*' );
+        $this->db->where('parent_id = 0');
+        $this->db->order_by('id desc');
+		$query = $this->db->get ( $this->table);
+        if($query->num_rows() > 0){
+            $result = $query->result_array();
+            $all = $this->all(array(),'array');
+            
+            if($result){
+            	foreach ($result as $key => $item) {
+            		$result[$key]['child'] = $this->set_child($item['id'],$all);
+
+            	}
+            }
+            return $result;
+        }
+		return false;
+    }
+
+    public function set_child($pid,$all)
+    {
+    	$ret = array();
+        foreach($all as $k => $v) {
+            if($v['parent_id'] == $pid) {
+                $v['child'] = $this->set_child($v['id'],$all);
+                $ret[] = $v;
             }
         }
         return $ret;

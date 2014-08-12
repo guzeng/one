@@ -3,6 +3,32 @@
     <div class='container'>
         <div class='row'>
             <div id='category' class='col-lg-2 col-md-3 col-no-padding' >
+                <?php if(isset($product_cate) && !empty($product_cate)): ?>
+                    <?foreach($product_cate as $key => $item):?>
+                        <!-- 顶级分类 -->
+                        <div class='item' style="position:relative;">
+                            <a><?php echo $item['name'];?></a>
+                            <span class="more">></span>
+                            <?php if(isset($item['child']) && !empty($item['child'])): ?>
+                            <?foreach($item['child'] as $k => $i):?>
+                                <!-- 二级分类 -->
+                                <div style="position:absultion">
+                                    <a><?php echo $i['name'];?></a>
+                                    <!-- 三级分类 -->
+                                    <?php if(isset($i['child']) && !empty($i['child'])): ?>
+                                    <?foreach($i['child'] as $k3 => $v):?>
+                                        <div style="position:absultion">
+                                            <a><?php echo $v['name'];?></a>
+                                            
+                                        </div>
+                                    <?endforeach;?>
+                                    <?endif;?>
+                                </div>
+                            <?endforeach;?>
+                            <?endif;?>
+                        </div>
+                    <?endforeach;?>
+                <?endif;?>
                 <div class='item'>
                     <a>家用电器</a>
                     <span class="more">></span>

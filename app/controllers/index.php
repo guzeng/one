@@ -12,7 +12,12 @@ class Index extends CI_Controller {
     }
 	public function index()
 	{
-		$this->load->view('home/index');
+		$data = array();
+		$this->load->model('product_category');
+		
+		$data['product_cate'] = $this->product_category->get_level_tree();
+
+		$this->load->view('home/index',$data);
 	}
 
 }

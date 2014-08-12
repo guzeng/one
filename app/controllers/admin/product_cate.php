@@ -103,7 +103,7 @@ class Product_cate extends CI_Controller {
         }
         $row = array(
             'name' => $post['name'],
-            'parent_id' => $post['parent_id']
+            'parent_id' => isset($post['parent_id']) ? $post['parent_id'] : 0
         );
         if($post['id'])
         {
