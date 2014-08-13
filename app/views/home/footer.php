@@ -97,10 +97,13 @@
         </div>
 
         <div class='row text-center fb'>
-            <a class='beian'><img class='img-responsive' src='<?php echo base_url()?>assets/img/home/beian.gif'></a>
-            <a class='kexin'><img class='img-responsive' src='<?php echo base_url()?>assets/img/home/kexin.gif'></a>
-            <a class='tixing'><img class='img-responsive' src='<?php echo base_url()?>assets/img/home/tixing.png'></a>
-            <a class='chengxin'><img class='img-responsive' src='<?php echo base_url()?>assets/img/home/chengxin.png'></a>
+            <!-- 只显示最新的五条友情链接 start-->
+            <?php if(isset($link) && !empty($link)): ?>
+            <?foreach($link as $key => $item):?>
+                <a target="_blank" href="<?php echo $item->url;?>"><img class='img-responsive' style="height:40px;width:108px;" src='<?php echo $this->link->pic($item->id)?>'></a>
+            <?endforeach;?>
+            <?endif;?>  
+            <!-- 友情链接 end-->
 
         </div>
     </div>

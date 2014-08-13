@@ -181,9 +181,9 @@ class Newss extends CI_Model{
      * @author zeng.gu
      * 2014/3/31
      */    
-	public function lists($num=15,$orderby='',$groupby='')
+	public function lists($where=array(),$num=15,$orderby='',$groupby='')
     {
-        $_where = $this->condition();
+        $_where = $this->condition($where);
         $_num = intval($num)>0 ? intval($num) : 15;
         $_start = (intval($this->page)-1)*$_num;
         $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
@@ -192,7 +192,7 @@ class Newss extends CI_Model{
         $_type = 'a.*';
 		$this->db->select ( $_type );
         if(isset($_where)){
-            $this->db->where($_where);
+            $this->db->where($where);
         }
         $this->db->limit($_num,$_start);
         $this->db->from($this->table.' as a');
@@ -205,7 +205,7 @@ class Newss extends CI_Model{
         if($query->num_rows() > 0){
             return $query->result();
         }
-		return false;	
+        return false;   
 	}
 	//----------------------------------------------------------------
     /**

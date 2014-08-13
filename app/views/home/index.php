@@ -172,7 +172,17 @@
                     </ul>
                     <div class="tab-content p-15" id="notice-tabContent">
                         <div id="home" class="tab-pane fade">
-                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                            <!-- 只显示最新的五条公告 start-->
+                            <?php if(isset($news) && !empty($news)): ?>
+                            <ul>
+                            <?foreach($news as $key => $item):?>
+                                <li><a href="news/<?php echo $item->id;?>"><?php echo $item->title;?></a></li>
+                            <?endforeach;?>
+                            </ul>  
+                            <?else:?>
+                            暂无公告!
+                            <?endif;?>  
+                            <!-- 公告 end-->
                         </div>
                         <div id="profile" class="tab-pane fade active in">
                             <ul>
