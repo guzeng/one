@@ -1,5 +1,5 @@
 body { 
-  color: #000; 
+  color: #666666; 
   font-family: "Microsoft YaHei","微软雅黑","宋体";
   padding: 0px !important;
   margin: 0px !important;
@@ -8,8 +8,11 @@ body {
 }
 h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
 a{color: rgb(102, 102, 102); text-decoration: none;}
+.m-l-0{margin-left: 0px;}
+.m-l-15{margin-left: 15px;}
 .m-r-15{margin-right: 15px;}
 .m-r-20{margin-right: 20px;}
+.m-r-30{margin-right: 30px;}
 .m-t-5{margin-top: 5px;}
 .m-t-10{margin-top: 10px;}
 .m-t-20{margin-top: 20px;}
@@ -19,12 +22,16 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 .m-b-20{margin-bottom: 20px;}
 .m-b-30{margin-bottom: 30px;}
 .p-15{padding: 15px;}
+.p-l-0{padding-left: 0px;}
 .p-l-10{padding-left: 10px;}
 .p-l-25{padding-left: 25px;}
 .p-l-30{padding-left: 30px;}
+.p-r-0{padding-right: 0px;}
 .p-t-5{padding-top: 5px;}
+.p-t-6{padding-top: 6px;}
 .p-b-5{padding-bottom: 5px;}
 .p-t-10{padding-top: 10px;}
+.p-b-5{padding-bottom: 5px;}
 .p-b-10{padding-bottom: 10px;}
 .col-no-padding{padding-left: 0px; padding-right: 0px;}
 .col-p-10{padding-left: 10px;padding-right: 10px;}
@@ -72,6 +79,9 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 .ad-top .ad-table td div{line-height: 23px;}
 
 .b{border:1px solid #EEEEEE; }
+.b-l{border-left:1px solid #EEEEEE;}
+.b-r{border-right:1px solid #EEEEEE;}
+.b-b{border-bottom:1px solid #EEEEEE;}
 .sway{border:1px solid #EEEEEE; height:80px; line-height:80px; padding:0px; overflow:hidden; color:#CECECE;}
 .sway .left {padding-left:6px; padding-right:6px; border-right:1px solid #EEEEEE; font-size:16px;} 
 .sway .right {padding-left:6px; padding-right:6px; border-left:1px solid #EEEEEE; font-size:16px;}
@@ -179,3 +189,12 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 #footer .cr{color: #787878; }
 #footer .fb a{margin:0 5px;}
 #footer .fb a img{display: inline-block;}
+
+.top-bar{background-color:#FFFFFF; font-size: 14px; color: #787878; padding: 15px; margin-bottom: 0px;}
+.order-line{background-color: #FAFAFA; border:1px solid #EEEEEE; font-size: 12px; line-height: 25px;}
+.order-line-title{}
+.order-item{background-color: #F1F1F1; border: 1px solid #EAEAEA; padding:0px 10px; display: inline-block;}
+
+.order-page{margin-right: 30px; padding: 2px 0px; display: inline-block;}
+.order-page-btn button{padding-top: 2px; padding-bottom: 2px; font-size: 12px;}
+.order-page-current{color: rgb(228, 57, 60);}
