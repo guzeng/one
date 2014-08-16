@@ -3,11 +3,12 @@ body {
   font-family: "Microsoft YaHei","微软雅黑","宋体";
   padding: 0px !important;
   margin: 0px !important;
-  font-size:13px; 
+  font-size:14px; 
   direction: ltr;
 }
 h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
-a{color: rgb(102, 102, 102); text-decoration: none;}
+a{color: #666666; text-decoration: none;}
+a:hover{color: #666666; }
 .m-l-0{margin-left: 0px;}
 .m-l-15{margin-left: 15px;}
 .m-r-15{margin-right: 15px;}
@@ -16,11 +17,13 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 .m-t-5{margin-top: 5px;}
 .m-t-10{margin-top: 10px;}
 .m-t-20{margin-top: 20px;}
+.m-b-5{margin-bottom: 5px;}
 .m-b-8{margin-bottom: 8px;}
 .m-b-10{margin-bottom: 10px;}
 .m-b-15{margin-bottom: 15px;}
 .m-b-20{margin-bottom: 20px;}
 .m-b-30{margin-bottom: 30px;}
+.p-10{padding: 10px;}
 .p-15{padding: 15px;}
 .p-l-0{padding-left: 0px;}
 .p-l-10{padding-left: 10px;}
@@ -39,7 +42,11 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 .relative{position: relative;}
 .absolute{position: absolute;}
 .c-6{color: #666666;}
+.c-9{color: #999999;}
+.black{color: #000000;}
 .f-14{font-size: 14px;}
+.f-12{font-size: 12px;}
+.word-break{word-break:break-all; word-wrap:break-word;}
 #top{height:30px;line-height:30px; width:100%; background-color: #eeeeee; }
 #top span{margin-left: 28px; font-size: 12px;}
 #header{padding:15px 0 10px;}
@@ -191,6 +198,9 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 #footer .fb a img{display: inline-block;}
 
 .top-bar{background-color:#FFFFFF; font-size: 14px; color: #787878; padding: 15px; margin-bottom: 0px;}
+.top-bar > li + li:before {
+  content: ">";
+}
 .order-line{background-color: #FAFAFA; border:1px solid #EEEEEE; font-size: 12px; line-height: 25px;}
 .order-line-title{}
 .order-item{background-color: #F1F1F1; border: 1px solid #EAEAEA; padding:0px 10px; display: inline-block;}
@@ -198,3 +208,23 @@ a{color: rgb(102, 102, 102); text-decoration: none;}
 .order-page{margin-right: 30px; padding: 2px 0px; display: inline-block;}
 .order-page-btn button{padding-top: 2px; padding-bottom: 2px; font-size: 12px;}
 .order-page-current{color: rgb(228, 57, 60);}
+
+.p-thumb{padding: 10px 30px; }
+.p-thumb .title{font-size: 14px;}
+.p-thumb .price{color: rgb(228, 57, 60); font-family: verdana; font-weight: 700;}
+.p-thumb .input{position: relative; width: 50px;}
+.p-thumb .plus,.p-thumb .minus{position: absolute; padding: 0px 3px; width: 15px; height: 12px; font-size: 11px; line-height: 11px;}
+.p-thumb .plus:hover,.p-thumb .minus:hover{background-color: #FB9B23; border-color: #FB9B23; color: #FFFFFF;}
+.p-thumb .plus{top: 0px; right: 0px;}
+.p-thumb .minus{bottom:0px; right: 0px; font-size: 16px; }
+.p-thumb .form-control{width: 32px; height: 25px; font-size: 12px; padding: 3px;font-family: verdana; text-align: center;}
+.p-thumb .ship-btn button{padding: 3px 5px; margin-left: 5px; font-size: 12px;}
+.p-thumb .ship-btn button:hover{background-color: #60AC22; color: #FFFFFF; border-color: #60AC22;}
+
+.guess-like{background-color: #999999; padding: 8px 15px; color: #FFFFFF; font-size: 15px;}
+
+.c-top10{padding: 10px 10px 0;}
+.c-top10 li{margin-bottom: 10px;}
+.c-top10 .img{width: 50px; height: 50px; border: 1px solid #E8E8E8; overflow: hidden; margin-right: 10px; }
+.c-top10 .name{margin-left: 60px; font-size: 13px;}
+.c-top10 .price{color: #E23E22; font-weight: 700;}
