@@ -223,7 +223,7 @@ class Product_category  extends CI_Model{
     {
 		$this->db->select ( '*' );
         $this->db->where('parent_id = 0');
-        $this->db->order_by('id desc');
+        $this->db->order_by('id asc');
 		$query = $this->db->get ( $this->table);
         if($query->num_rows() > 0){
             $result = $query->result_array();
@@ -243,7 +243,7 @@ class Product_category  extends CI_Model{
     public function set_child($pid,$all)
     {
     	$ret = array();
-        foreach($all as $k => $v) {
+        foreach(array_reverse($all) as $k => $v) {
             if($v['parent_id'] == $pid) {
                 $v['child'] = $this->set_child($v['id'],$all);
                 $ret[] = $v;

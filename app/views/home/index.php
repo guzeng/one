@@ -1,8 +1,9 @@
 <?$this->load->view('home/header')?>
 <style type="text/css">
-    /*.mod_cate{position:relative;z-index:600;margin-top:-1px;float:left;width:190px;height:40px;background-color:#4593fd;box-shadow:2px -1px 3px rgba(55,55,55,.5)}.mod_cate a{color:#fff}.mod_cate a:hover{color:#fff}.mod_cate_on .mod_cate_hd{border-color:#3586f2}.mod_cate_on .mod_cate_bd{display:block}.mod_cate_on .mod_cate_hd_arrow{visibility:hidden}
-    .mod_subcate{position:absolute;display:none;z-index:4;left:188px;top:40px;color:#333;width:798px;height:626px;border:2px solid #4594fd;background-color:#fff;box-shadow:5px 5px 10px rgba(55,55,55,0.4);overflow:hidden}.mod_subcate a{color:#666}.mod_subcate a:hover{color:#333}.mod_subcate_item{position:relative;width:801px;zoom:1;overflow:hidden}.mod_subcate_main{float:left;width:530px;padding:0 20px;border-right:1px solid #ddd;padding-bottom:1000px;margin-bottom:-1000px}.mod_subcate_side{float:left;width:230px;padding-bottom:1000px;margin-bottom:-1000px}.mod_subcate_gg{clear:both;position:absolute;bottom:0;right:0;_right:-1px;_bottom:-1px}.mod_subcate_main dl{zoom:1;overflow:hidden;padding:10px 0 10px 65px;border-bottom:1px solid #e5e5e5}.mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:65px;font:700 12px/22px tahoma;color:#1d7ad9}.mod_subcate_main dd{overflow:hidden;zoom:1;line-height:22px}.mod_subcate_main dd a{display:inline;float:left;margin-left:5px;margin-right:5px;white-space:nowrap}.mod_subcate_main dd .hl,.mod_subcate_main dd .hl:hover{color:#ff7300}.mod_subcate_dotline{clear:both;display:block;width:100%;height:1px;margin-bottom:5px;font-size:0;overflow:hidden;border-top:5px solid #fff;border-bottom:1px dotted #dadada}.mod_subcate_channel{clear:both;margin-top:15px;padding-bottom:20px}
-    */
+    .mod_cate{position:relative;z-index:600;margin-top:-1px;float:left;background-color:#4593fd;box-shadow:2px -1px 3px rgba(55,55,55,.5)}.mod_cate a{color:#fff}.mod_cate a:hover{color:#fff}.mod_cate_on .mod_cate_hd{border-color:#3586f2}.mod_cate_on .mod_cate_bd{display:block}.mod_cate_on .mod_cate_hd_arrow{visibility:hidden}
+    .mod_subcate{position:absolute;display:none;z-index:4;left:100%;top:0px;color:#333;width:798px;height:626px;border:2px solid #4594fd;background-color:#fff;box-shadow:5px 5px 10px rgba(55,55,55,0.4);overflow:hidden}.mod_subcate a{color:#666}.mod_subcate a:hover{color:#333}.mod_subcate_item{position:relative;width:100%;zoom:1;overflow:hidden}.mod_subcate_main{float:left;width:100%;padding:0 20px;border-right:1px solid #ddd;padding-bottom:1000px;margin-bottom:-1000px}.mod_subcate_side{float:left;width:230px;padding-bottom:1000px;margin-bottom:-1000px}.mod_subcate_gg{clear:both;position:absolute;bottom:0;right:0;_right:-1px;_bottom:-1px}.mod_subcate_main dl{zoom:1;overflow:hidden;padding:10px 0 10px 65px;border-bottom:1px solid #e5e5e5}.mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:65px;font:700 12px/22px tahoma;color:#1d7ad9}.mod_subcate_main dd{overflow:hidden;zoom:1;line-height:22px}.mod_subcate_main dd a{display:inline;float:left;margin-left:5px;margin-right:5px;white-space:nowrap}.mod_subcate_main dd .hl,.mod_subcate_main dd .hl:hover{color:#ff7300}.mod_subcate_dotline{clear:both;display:block;width:100%;height:1px;margin-bottom:5px;font-size:0;overflow:hidden;border-top:5px solid #fff;border-bottom:1px dotted #dadada}.mod_subcate_channel{clear:both;margin-top:15px;padding-bottom:20px}
+    #category .item:hover .mod_subcate{display: block;border-left:0px;}
+    #category .item:hover{background-color: #FFFFFF;}
 </style>
     <!-- categorys  -->
     <div class='container'>
@@ -11,66 +12,39 @@
                 <?php if(isset($product_cate) && !empty($product_cate)): ?>
                     <?foreach($product_cate as $key => $item):?>
                         <!-- 顶级分类 -->
-                        <div class='item' style="position:relative;">
+                        <div class='item'>
                             <a><?php echo $item['name'];?></a>
                             <span class="more">></span>
+                            
                             <?php if(isset($item['child']) && !empty($item['child'])): ?>
-                            <?foreach($item['child'] as $k => $i):?>
-                                <!-- 二级分类 -->
-                                <div style="position:absultion">
-                                    <a><?php echo $i['name'];?></a>
-                                    <!-- 三级分类 -->
-                                    <?php if(isset($i['child']) && !empty($i['child'])): ?>
-                                    <?foreach($i['child'] as $k3 => $v):?>
-                                        <div style="position:absultion">
-                                            <a><?php echo $v['name'];?></a>
-                                            
+                            <div class="mod_subcate hide" style="width:350%; top: 0px; overflow: hidden; height: 372px;">
+                                    <div id="panel0" class="mod_subcate_item" index="0" style="display: block;">
+                                        <div class="mod_subcate_main">
+                                            <?foreach($item['child'] as $k => $i):?>
+                                            <dl>
+                                                <!-- 二级分类 开始-->
+                                                <dt><?php echo $i['name'];?></dt>
+                                                <!-- 二级分类 结束-->
+                                                <dd>
+                                                    <!-- 三级分类 -->
+                                                    <?php if(isset($i['child']) && !empty($i['child'])): ?>
+                                                    <?foreach($i['child'] as $k3 => $v):?>
+                                                        <a href="<?php echo base_url().'/category/'.$v['id']?>" target="_blank"><?php echo $v['name'];?></a>
+                                                        <?if($k3 >6 && $k3%7 == 0):?>
+                                                        <s class="mod_subcate_dotline"></s>
+                                                        <?endif;?>
+                                                    <?endforeach;?>
+                                                    <?endif;?>
+                                                </dd>
+                                            </dl>
+                                            <?endforeach;?>
                                         </div>
-                                    <?endforeach;?>
-                                    <?endif;?>
+                                    </div>
                                 </div>
-                            <?endforeach;?>
                             <?endif;?>
                         </div>
                     <?endforeach;?>
                 <?endif;?>
-               
-                <div class='item'>
-                    <span><a>家居</a></span>、
-                    <span><a>家具</a></span>、
-                    <span><a>家装</a></span>、
-                    <span><a>厨具</a></span>
-                    <span class="more">></span>
-                </div>
-                <!-- <div id="second_list" class="mod_subcate" style="display: block; top: 40px; overflow: hidden; height: 597px;">
-                    <div id="panel0" class="mod_subcate_item" index="0" style="display: block;">
-                        <div class="mod_subcate_main">
-                            <dl>
-                                <dt>手机通讯</dt>
-                                <dd>
-                                    <a r="true" ytag="85050" href="http://searchex.yixun.com/html?path=705852t705856" class="" target="_blank">全部手机</a>
-                                    <a r="true" ytag="85051" href="http://searchex.yixun.com/html?path=705852t705854" class="" target="_blank">对讲机</a>
-                                    <a r="true" ytag="85052" href="http://searchex.yixun.com/html?path=705938t705943" class="" target="_blank">3G上网卡</a>
-                                    <a r="true" ytag="85053" href="http://searchex.yixun.com/html?path=705852t705856t707217&amp;attr=42617e25o27o28o31&amp;area=1&amp;so" class="" target="_blank">中国移动</a>
-                                    <a r="true" ytag="85054" href="http://searchex.yixun.com/html?path=705852t705856t707217&amp;attr=42617e29o32&amp;area=1&amp;sort=0&amp;s" class="" target="_blank">中国电信</a>
-                                    <a r="true" ytag="85055" href="http://searchex.yixun.com/html?path=705852t705856t707217&amp;attr=42617e30o31&amp;area=1&amp;sort=0&amp;s" class="" target="_blank">中国联通</a>
-                                    <s class="mod_subcate_dotline"></s>
-                                    <a r="true" ytag="85056" href="http://searchex.yixun.com/html?attr=55e5686&amp;path=705852t705856" class="" target="_blank">三星</a>
-                                    <a r="true" ytag="85057" href="http://searchex.yixun.com/html?path=706188t706189" class="hl" target="_blank">苹果</a>
-                                    <a r="true" ytag="85058" href="http://searchex.yixun.com/html?attr=55e5865&amp;path=706188t705856" class="" target="_blank">华为</a>
-                                    <a r="true" ytag="85059" href="http://searchex.yixun.com/html?attr=55e7355&amp;path=705852t705856" class="hl" target="_blank">小米</a>
-                                    <a r="true" ytag="85060" href="http://searchex.yixun.com/html?&amp;attr=55e5705&amp;path=705852t705856" class="" target="_blank">诺基亚</a>
-                                    <a r="true" ytag="85061" href="http://searchex.yixun.com/html?&amp;attr=55e5707&amp;path=705852t705856" class="" target="_blank">联想</a>
-                                    <a r="true" ytag="85062" href="http://searchex.yixun.com/html?&amp;attr=55e5776&amp;path=705852t705856" class="" target="_blank">HTC</a>
-                                    <a r="true" ytag="85063" href="http://searchex.yixun.com/html?&amp;attr=55e3614&amp;path=705852t705856" class="" target="_blank">索尼</a>
-                                    <a r="true" ytag="85064" href="http://searchex.yixun.com/html?&amp;attr=55e6824&amp;path=705852t705856" class="" target="_blank">酷派</a>
-                                    <a r="true" ytag="85065" href="http://searchex.yixun.com/html?&amp;attr=55e3370&amp;path=705852t705856" class="" target="_blank">海尔</a>
-                                    <a r="true" ytag="85066" href="http://searchex.yixun.com/html?attr=55e6393&amp;path=705852t705856" class="" target="_blank">OPPO</a>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <div class='col-lg-7 col-p-10 m-t-10 o-h'>
                 <div class='m-b-10 ad-top'>
