@@ -71,7 +71,7 @@
 																<div class="checkbox-list">
 																	<label class="checkbox-inline">
 																		<input id="checkbox_<?=$item['id']?>" type="checkbox" style='margin: 5px 5px 0 0;' value="<?=$item['id']?>" id="status" name='status' > 
-																		<?=stripslashes($item['name']) ?>
+																		<span style="padding-left:20px"><?=stripslashes($item['name']) ?></span>
 																	</label>
 																</div>
 															</li>

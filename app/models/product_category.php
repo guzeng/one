@@ -2,6 +2,7 @@
 
 class Product_category  extends CI_Model{
 	private $table='product_category';
+	private $table_product = 'product';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -196,6 +197,7 @@ class Product_category  extends CI_Model{
     public function get_all_children($pid=0)
     {
 		$this->db->order_by('parent_id asc');
+		$this->db->order_by('id asc');
 		$query = $this->db->get($this->table);
 		if($query->num_rows() > 0)
 		{

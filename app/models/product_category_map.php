@@ -2,6 +2,7 @@
 
 class Product_category_map  extends CI_Model{
 	private $table='product_category_map';
+	private $table_product='product';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -77,6 +78,31 @@ class Product_category_map  extends CI_Model{
 			}
 		}
 		return false;
+	}
+	//---------------------------------------------------------
+
+	/**
+	 * get_product_by_cate
+	 * 获取分类下的首页热门商品
+	 * 
+	 *	@param cate_id
+	 *	@return array   
+	 */   
+	public function get_product_by_cate($cate_id_ary){
+        $this->db->select('a.category_id,a.product_id,p.name,p.price,p.best_price,p.status,p.brand_id,p.recommend,p.specials,p.hot');
+        $this->db->from( $this->table.' as a');
+        $this->db->join($this->table_product.' as p','p.id=a.product_id','left');
+        $this->db->where_in('a.category_id',$cate_id_ary);
+        $this->db->where('p.hot',1);
+		$query = $this->db->get();
+		
+		if($query->num_rows()>0){
+			return $query->result();
+		}
+		else{
+			return false;
+		}
+		
 	}
 	//---------------------------------------------------------
 
