@@ -122,7 +122,7 @@ a:hover{color: #666666; }
 
 #f1,#f2,#f3{border-bottom: 1px solid #DCDCDC;margin-bottom: 20px;}
 #f1 .floor-sign{font-size: 18px; font-weight: 700; background-color: #E0402A; color: #FFFFFF; margin-right: 10px;}
-#f1 .floor-name{color: #E0402A; font-weight: bold; font-size: 24px;}
+#f1 .floor-name{color: #E0402A; font-weight: bold; font-size: 18px;}
 #f1 #title, #f2 #title, #f3 #title{ border-bottom: 2px solid #BBBBBB;}
 #f1 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
 #f1 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
@@ -165,7 +165,7 @@ a:hover{color: #666666; }
 #f1 #right,#f2 #right,#f3 #right{overflow: hidden;text-align: right;}
 
 #f2 .floor-sign{font-size: 18px; font-weight: 700; background-color: #0068B7; color: #FFFFFF; margin-right: 10px;}
-#f2 .floor-name{color: #0068B7; font-weight: bold; font-size: 24px;}
+#f2 .floor-name{color: #0068B7; font-weight: bold; font-size: 18px;}
 #f2 #left,#f3 #left{padding-top: 5px;border-right: 1px solid rgb(221, 221, 221); height: 361px; position: relative;}
 #f2 #left .el,#f3 #left .el{margin-top: 10px;}
 #f2 #left .bottom,#f3 #left .bottom{position: absolute; bottom: 0px;}
@@ -178,7 +178,7 @@ a:hover{color: #666666; }
 }
 
 #f3 .floor-sign{font-size: 18px; font-weight: 700; background-color: #22AC38; color: #FFFFFF; margin-right: 10px;}
-#f3 .floor-name{color: #22AC38; font-weight: bold; font-size: 24px;}
+#f3 .floor-name{color: #22AC38; font-weight: bold; font-size: 18px;}
 #f3 #list-tab.nav-pills > li > a:hover, 
 #f3 #list-tab.nav-pills > li > a:focus,
 #f3 #list-tab.nav-pills > li.active > a, 
