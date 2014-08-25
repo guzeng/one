@@ -14,6 +14,7 @@ class Index extends CI_Controller {
 	{
 		$data = array();
 		$show_count = 3;//首页展示楼层数量
+		$this->load->model('product');
 		$this->load->model('product_category');
 		$this->load->model('product_category_map');
 		$this->load->model('newss');
@@ -28,6 +29,7 @@ class Index extends CI_Controller {
 				foreach ($cate_id_ary as $k => $v) {
 					$ids[] = $v;
 				}
+
 				$hot_product = $this->product_category_map->get_product_by_cate($ids);
 				$product_cate[$key]['hot_product'] = $hot_product;
 				if($key == ($show_count-1))	//只展示前三楼
@@ -35,6 +37,9 @@ class Index extends CI_Controller {
 			}
 		}
 
+		$handpick_product = $this->product->lists(8,'','',array('handpick = 1'));
+
+		$data['handpick_product'] = $handpick_product;
 		$data['show_count'] = $show_count;
 		$data['product_cate'] = $product_cate;
 		$data['news'] = $this->newss->lists(array("status"=>"1","show_time >"=>local_to_gmt()),5,"a.show_time desc");//按发布时间

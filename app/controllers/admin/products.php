@@ -101,7 +101,10 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('recommend', ' ', 'integer');  
         $this->form_validation->set_rules('specials', ' ', 'integer');  
         $this->form_validation->set_rules('hot', ' ', 'integer');  
-        $this->form_validation->set_rules('allow_comment', ' ', 'integer');    
+        $this->form_validation->set_rules('allow_comment', ' ', 'integer');
+        $this->form_validation->set_rules('show_home', ' ', 'integer');
+        $this->form_validation->set_rules('handpick', ' ', 'integer');
+
         
         if($this->form_validation->run() == FALSE)
         {
@@ -122,6 +125,8 @@ class Products extends CI_Controller {
             $error['specials'] = form_error('specials');
             $error['hot'] = form_error('hot');
             $error['allow_comment'] = form_error('allow_comment');
+            $error['show_home'] = form_error('show_home');
+            $error['handpick'] = form_error('handpick');
             $data['msg'] = $this->lang->line('error_msg');
             $data['error'] = $error;
             echo json_encode($data);                                    
@@ -185,7 +190,9 @@ class Products extends CI_Controller {
             'recommend' => isset($post['recommend'])?intval($post['recommend']):0,
             'specials' => isset($post['specials'])?$post['specials']:0,
             'hot' => isset($post['hot'])?intval($post['hot']):0,
-            'allow_comment' => isset($post['allow_comment'])?intval($post['allow_comment']):0
+            'allow_comment' => isset($post['allow_comment'])?intval($post['allow_comment']):0,
+            'show_home' => isset($post['show_home'])?intval($post['show_home']):0,
+            'handpick' => isset($post['handpick'])?intval($post['handpick']):0
         );
         if($post['id'])
         {

@@ -192,6 +192,8 @@ CREATE TABLE `one_product` (
   `recommend` tinyint(3) NOT NULL default '0' COMMENT '是否推荐，1:推荐',
   `specials` tinyint(3) NOT NULL default '0' COMMENT '是否特卖,1:是',
   `allow_comment` tinyint(3) NOT NULL default '0' COMMENT '是否允许评论,1:是',
+  `show_home` tinyint(3) NOT NULL default '0' COMMENT '是否首页展示,0:不展示,1:展示',
+  `handpick` tinyint(3) NOT NULL default '0' COMMENT '是否精选商品,0:不是,1:是',
   `info` text COMMENT '简介',
   `hot` tinyint(3) NOT NULL default '0' COMMENT '是否热卖,1:是',
   `promise` text COMMENT '服务承诺',

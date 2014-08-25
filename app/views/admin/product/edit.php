@@ -234,6 +234,12 @@
 										</label>  
 										<label class="checkbox-inline">
 											<input type="checkbox" value="1" name='allow_comment' id="allow_comment" <?php echo isset($row)&&$row->allow_comment==1?"checked='checked'":''?>> 允许评论
+										</label> 
+										<label class="checkbox-inline">
+											<input type="checkbox" value="1" name='show_home' id="show_home" <?php echo isset($row)&&$row->show_home==1?"checked='checked'":''?>> 首页展示
+										</label> 
+										<label class="checkbox-inline">
+											<input type="checkbox" value="1" name='handpick' id="handpick" <?php echo isset($row)&&$row->handpick==1?"checked='checked'":''?>> 每日精选
 										</label>  
 									</div>
 								</div>

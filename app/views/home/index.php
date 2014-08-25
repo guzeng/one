@@ -219,108 +219,134 @@
     </div>
     <!-- 精选品牌 结束-->
     <!-- 每日精选 开始-->
+    <?php $CI =& get_instance(); ?>
+    <?php $CI->load->model('product');?>
     <div class='container jingxuan'>
+        <?if(isset($handpick_product) && !empty($handpick_product)):?>
         <div class='row'>
             <h3><span class='title'>每日精选</span><small class='subtitle'>精彩每一天</small></h3>
         </div>
         <div class='row'>
+            <?if(isset($handpick_product[0]) && $handpick_product[0]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6 item w-bg pull-left'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>品牌街</h4>
-                    <div class="s-name">新品上市</div>
-                    <div class="s-ext"><b>领50元优惠券</b></div>
-                    <ul class="s-hotword">
+                    <h4><?php echo $handpick_product[0]->name;?></h4>
+                    <!-- <div class="s-name">新品上市</div> -->
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[0]->price;?></b></div>
+                    <!-- <ul class="s-hotword">
                         <li><i></i>更多品牌</li>
                         <li><i></i>进入品牌街</li>
-                    </ul>
+                    </ul> -->
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-1.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[0]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
+            <?if(isset($handpick_product[1]) && $handpick_product[1]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6  item pull-left'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>天天低价</h4>
-                    <div class="s-name">NIKE休闲板鞋</div>
-                    <div class="s-ext"><b>288元秒杀</b></div>
+                    <h4><?php echo $handpick_product[1]->name;?></h4>
+                    <!-- <div class="s-name">NIKE休闲板鞋</div> -->
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[1]->price;?></b></div>
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-2.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[1]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
+            <?if(isset($handpick_product[2]) && $handpick_product[2]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6 item pull-left w-bg'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>精品周刊</h4>
-                    <div class="s-name">型男养成记</div>
-                    <div class="s-ext"><b>天王表低至3折</b></div>
+                    <h4><?php echo $handpick_product[2]->name;?></h4>
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[2]->price;?></b></div>
+                    <!-- <div class="s-name">型男养成记</div>
+                    <div class="s-ext"><b>￥天王表低至3折</b></div>
                     <ul class="s-hotword">
                         <li><i></i>型男休闲范儿</li>
-                    </ul>
+                    </ul> -->
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-3.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[2]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
+            <?if(isset($handpick_product[3]) && $handpick_product[3]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6 item tuangou pull-left'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>今日团购</h4>
-                    <div class="s-name">3D电影票</div>
-                    <div class="s-ext"><b></b></div>
+                    <h4><?php echo $handpick_product[3]->name;?></h4>
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[3]->price;?></b></div>
+                    <!-- <div class="s-name">3D电影票</div>
+                    <div class="s-ext"><b>￥</b></div>
                     <a target="_blank" href="" class="s-tuangou"> 
                         <span class='t'>团购价</span>
                         <strong class='price'>￥9.9</strong>
-                    </a>
+                    </a> -->
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-4.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[3]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
         </div>
         <div class='row'>
+            <?if(isset($handpick_product[4]) && $handpick_product[4]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6 item pull-left'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>首发</h4>
-                    <div class="s-name">三星NX系列镜</div>
-                    <div class="s-ext"><b>首发下单赠礼</b></div>
+                    <h4><?php echo $handpick_product[4]->name;?></h4>
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[4]->price;?></b></div>
+                    <!-- <div class="s-name">三星NX系列镜</div>
+                    <div class="s-ext"><b>￥首发下单赠礼</b></div>
                     <ul class="s-hotword">
-                    </ul>
+                    </ul> -->
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-5.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[4]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
+            <?if(isset($handpick_product[5]) && $handpick_product[5]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6 item w-bg pull-left'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>品牌特卖</h4>
-                    <div class="s-name">给宝宝的礼物</div>
-                    <div class="s-ext"><b>低至2折</b></div>
+                    <h4><?php echo $handpick_product[5]->name;?></h4>
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[5]->price;?></b></div>
+                    <!-- <div class="s-name">给宝宝的礼物</div>
+                    <div class="s-ext"><b>￥低至2折</b></div>
                     <ul class="s-hotword">
-                    </ul>
+                    </ul> -->
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-6.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[5]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
+            <?if(isset($handpick_product[6]) && $handpick_product[6]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6 item pull-left'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>预售</h4>
-                    <div class="s-name">苹果联合首发</div>
-                    <div class="s-ext"><b>全球限量预售</b></div>
+                    <h4><?php echo $handpick_product[6]->name;?></h4>
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[6]->price;?></b></div>
+                    <<!-- div class="s-name">苹果联合首发</div>
+                    <div class="s-ext"><b>￥全球限量预售</b></div>
                     <ul class="s-hotword">
-                    </ul>
+                    </ul> -->
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-7.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[6]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
+            <?if(isset($handpick_product[7]) && $handpick_product[7]->id):?>
             <div class='col-md-3 col-sm-3 col-xs-6 item w-bg pull-left'>
                 <div class="aside">
                     <a href="" target="_blank" class="s-link"></a>
-                    <h4>青春国际</h4>
-                    <div class="s-name">六一嘉年华</div>
-                    <div class="s-ext"><b>玩趣青春</b></div>
+                    <h4><?php echo $handpick_product[7]->name;?></h4>
+                    <div class="s-ext"><b>￥<?php echo $handpick_product[7]->price;?></b></div>
+                    <!-- <div class="s-name">六一嘉年华</div>
+                    <div class="s-ext"><b>￥玩趣青春</b></div>
                     <ul class="s-hotword">
                         <li><i></i>NB Kids</li>
                         <li><i></i>千趣会</li>
                         <li>...</li>
-                    </ul>
+                    </ul> -->
                 </div>
-                <a><img src="<?php echo base_url()?>assets/img/home/jx-8.jpg"></a>
+                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[7]->id,1,'thumb')?>"></a>
             </div>
+            <?endif;?>
         </div>
+        <?endif;?>
     </div>
     <!-- 每日精选 结束-->
 
@@ -384,7 +410,7 @@
                                 <?foreach($item['hot_product'] as $k => $i):?>
                             <div class='item pull-left'>
                                 <div class='img'>
-                                    <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f-1.png"></a>
+                                    <a><img class='img-responsive' src="<?php echo $CI->product->pic($i->product_id,1,'thumb')?>"></a>
                                 </div>
                                 <div class='name'>
                                     <a><?php echo $i->name;?></a>

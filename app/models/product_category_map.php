@@ -93,7 +93,8 @@ class Product_category_map  extends CI_Model{
         $this->db->from( $this->table.' as a');
         $this->db->join($this->table_product.' as p','p.id=a.product_id','left');
         $this->db->where_in('a.category_id',$cate_id_ary);
-        $this->db->where('p.hot',1);
+        $this->db->where('p.show_home',1);
+        $this->db->where('p.status',1);
 		$query = $this->db->get();
 		
 		if($query->num_rows()>0){

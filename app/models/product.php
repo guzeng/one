@@ -190,9 +190,9 @@ class Product extends CI_Model{
      * @author zeng.gu
      * 2014/3/31
      */    
-	public function lists($num=15,$orderby='',$groupby='')
+	public function lists($num=15,$orderby='',$groupby='',$cond = array())
     {
-        $_where = $this->condition();
+        $_where = $this->condition($cond);
         $_num = intval($num)>0 ? intval($num) : 15;
         $_start = (intval($this->page)-1)*$_num;
         $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
