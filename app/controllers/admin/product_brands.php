@@ -112,10 +112,11 @@ class Product_brands extends CI_Controller {
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
             }
+            $id = $post['id'];
         }
         else
         {
-            if(!$this->product_brand->insert($row))
+            if(!$id = $this->product_brand->insert($row))
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
             }
@@ -123,6 +124,23 @@ class Product_brands extends CI_Controller {
         if($data['code'] == '1000')
         {
             $data['goto'] = 'admin/product_brands';
+            //处理图片
+            if($post['link_pic_path'] && is_file(upload_folder('temp').DIRECTORY_SEPARATOR.$post['link_pic_path']))
+            {
+                $target = upload_folder('product_brand').DIRECTORY_SEPARATOR.file_save_dir($id);
+
+                create_folder($target);
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = upload_folder('temp').DIRECTORY_SEPARATOR.$post['link_pic_path'];
+                $config['create_thumb'] = false;
+                $config['maintain_ratio'] = TRUE;
+                $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'.png';
+                $config['width'] = 120;
+                $config['height'] = 80;
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+                @unlink($config['source_image']);
+            }
         }
         echo json_encode($data);
     }

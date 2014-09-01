@@ -1,7 +1,25 @@
 <?$this->load->view('home/header')?>
 <style type="text/css">
-    .mod_cate{position:relative;z-index:600;margin-top:-1px;float:left;background-color:#4593fd;box-shadow:2px -1px 3px rgba(55,55,55,.5)}.mod_cate a{color:#fff}.mod_cate a:hover{color:#fff}.mod_cate_on .mod_cate_hd{border-color:#3586f2}.mod_cate_on .mod_cate_bd{display:block}.mod_cate_on .mod_cate_hd_arrow{visibility:hidden}
-    .mod_subcate{position:absolute;display:none;z-index:4;left:100%;top:0px;color:#333;width:798px;height:626px;border:2px solid #4594fd;background-color:#fff;box-shadow:5px 5px 10px rgba(55,55,55,0.4);overflow:hidden}.mod_subcate a{color:#666}.mod_subcate a:hover{color:#333}.mod_subcate_item{position:relative;width:100%;zoom:1;overflow:hidden}.mod_subcate_main{float:left;width:100%;padding:0 20px;border-right:1px solid #ddd;padding-bottom:1000px;margin-bottom:-1000px}.mod_subcate_side{float:left;width:230px;padding-bottom:1000px;margin-bottom:-1000px}.mod_subcate_gg{clear:both;position:absolute;bottom:0;right:0;_right:-1px;_bottom:-1px}.mod_subcate_main dl{zoom:1;overflow:hidden;padding:10px 0 10px 65px;border-bottom:1px solid #e5e5e5}.mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:65px;font:700 12px/22px tahoma;color:#1d7ad9}.mod_subcate_main dd{overflow:hidden;zoom:1;line-height:22px}.mod_subcate_main dd a{display:inline;float:left;margin-left:5px;margin-right:5px;white-space:nowrap}.mod_subcate_main dd .hl,.mod_subcate_main dd .hl:hover{color:#ff7300}.mod_subcate_dotline{clear:both;display:block;width:100%;height:1px;margin-bottom:5px;font-size:0;overflow:hidden;border-top:5px solid #fff;border-bottom:1px dotted #dadada}.mod_subcate_channel{clear:both;margin-top:15px;padding-bottom:20px}
+    .mod_cate{position:relative;z-index:600;margin-top:-1px;float:left;background-color:#4593fd;box-shadow:2px -1px 3px rgba(55,55,55,.5)}
+    .mod_cate a{color:#fff}
+    .mod_cate a:hover{color:#fff}
+    .mod_cate_on .mod_cate_hd{border-color:#3586f2}
+    .mod_cate_on .mod_cate_bd{display:block}
+    .mod_cate_on .mod_cate_hd_arrow{visibility:hidden}
+    .mod_subcate{position:absolute;display:none;z-index:4;left:100%;top:0px;color:#333;width:798px;height:626px;border:2px solid #4594fd;background-color:#fff;box-shadow:5px 5px 10px rgba(55,55,55,0.4);overflow:hidden}
+    .mod_subcate a{color:#666}
+    .mod_subcate a:hover{color:#333}
+    .mod_subcate_item{position:relative;width:100%;zoom:1;overflow:hidden}
+    .mod_subcate_main{float:left;width:100%;padding:0 20px;border-right:1px solid #ddd;padding-bottom:1000px;margin-bottom:-1000px}
+    .mod_subcate_side{float:left;width:230px;padding-bottom:1000px;margin-bottom:-1000px}
+    .mod_subcate_gg{clear:both;position:absolute;bottom:0;right:0;_right:-1px;_bottom:-1px}
+    .mod_subcate_main dl{zoom:1;overflow:hidden;padding:10px 0 10px 65px;border-bottom:1px solid #e5e5e5}
+    .mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:65px;font:700 12px/22px tahoma;color:#1d7ad9}
+    .mod_subcate_main dd{overflow:hidden;zoom:1;line-height:22px}
+    .mod_subcate_main dd a{display:inline;float:left;margin-left:5px;margin-right:5px;white-space:nowrap}
+    .mod_subcate_main dd .hl,.mod_subcate_main dd .hl:hover{color:#ff7300}
+    .mod_subcate_dotline{clear:both;display:block;width:100%;height:1px;margin-bottom:5px;font-size:0;overflow:hidden;border-top:5px solid #fff;border-bottom:1px dotted #dadada}
+    .mod_subcate_channel{clear:both;margin-top:15px;padding-bottom:20px}
     #category .item:hover .mod_subcate{display: block;border-left:0px;}
     #category .item:hover{background-color: #FFFFFF;}
 
@@ -34,6 +52,7 @@
         color: #333;
     }
 </style>
+<script src="<?php echo base_url();?>assets/scripts/home/home.js" type="text/javascript"></script>
     <!-- categorys  -->
     <div class='container'>
         <div class='row'>
@@ -198,25 +217,22 @@
     
     <!-- 精选品牌 开始-->
     <div class='container sway'>
-        <div class='left pull-left'>
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </div>
-        <div class='right pull-right'>
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </div>
-        <div class='list'>
-            <img src="<?php echo base_url()?>assets/img/home/sway-1.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-2.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-3.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-4.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-5.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-6.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-7.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-8.png">
-            <img src="<?php echo base_url()?>assets/img/home/sway-9.png">
-            <img class='last' src="<?php echo base_url()?>assets/img/home/sway-10.png">
-        </div>
+        <div class="box">
+            <div class="picbox">
+                <ul class="piclist mainlist" style="list-style:none;">
+                    <?php if(isset($product_brand) && !empty($product_brand)): ?>
+            <?foreach($product_brand as $key => $item):?>
+               <li> <a target="_blank" href="<?php echo $item->id;?>"><img height="45" width="100" src='<?php echo $this->product_brand->pic($item->id)?>'></a></li>
+            <?endforeach;?>
+            <?endif;?>  
+                </ul>
+                <ul class="piclist swaplist"></ul>
+            </div>
+            <div class="og_prev"></div>
+            <div class="og_next"></div>
+        </div>  
     </div>
+    
     <!-- 精选品牌 结束-->
     <!-- 每日精选 开始-->
     <?php $CI =& get_instance(); ?>

@@ -32,6 +32,7 @@ $(function(){
             $('#upload-loading').find('div.progress-bar').find('span.sr-only').html('0%');
         },
         done: function (e, data) {
+            close_alert();
             //给隐藏值赋值
             var url = data['result']['files'][0]['thumbnailUrl'];
             $('#review_pic').html('');

@@ -74,6 +74,7 @@ class Links extends CI_Controller {
             $error['url'] = form_error('url');
             $data['msg'] = $this->lang->line('error_msg');
             $data['error'] = $error;
+            $data['code']='1001';
             echo json_encode($data);                                    
             exit;
         }
