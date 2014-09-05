@@ -98,10 +98,14 @@ class Register extends CI_Controller {
 
         if($data['code'] == '1000')
         {
-            $data['url'] = base_url();
+            $data['url'] = base_url()."/register/welcome";
             $data['msg'] = '注册成功';
         }
         echo json_encode($data);
+   }
+
+   public function welcome(){
+        return $this->load->view('home/register_success');
    }
 
 }

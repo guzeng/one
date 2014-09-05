@@ -216,20 +216,31 @@
     <!-- categorys end -->
     
     <!-- 精选品牌 开始-->
-    <div class='container sway'>
-        <div class="box">
-            <div class="picbox">
-                <ul class="piclist mainlist" style="list-style:none;">
-                    <?php if(isset($product_brand) && !empty($product_brand)): ?>
-            <?foreach($product_brand as $key => $item):?>
-               <li> <a target="_blank" href="<?php echo $item->id;?>"><img height="45" width="100" src='<?php echo $this->product_brand->pic($item->id)?>'></a></li>
-            <?endforeach;?>
-            <?endif;?>  
-                </ul>
-                <ul class="piclist swaplist"></ul>
-            </div>
-            <div class="og_prev"></div>
-            <div class="og_next"></div>
+    <div class='container sway m-t-20'>
+        <div class='left pull-left'>
+            <a id="skin_pre" href="javascript:void(0)"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        </div>
+        <div class='right pull-right'>
+            <a id="skin_next" href="javascript:void(0)"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+        <div class='list skin-content'>
+        <?php if(isset($product_brand) && !empty($product_brand)): ?>
+        <?foreach($product_brand as $key => $item):?>
+            <?if($key%9 == 0):?>
+                <?if($key>2):?>
+                <ul id="<?php echo floor(($key+1)/9)?>" class='list-inline hide'>
+                <?else:?>
+                <ul id="<?php echo floor(($key+1)/9)?>" class='list-inline show'>
+                <?endif;?>
+            <?endif;?>
+                <li item-index='<?php echo $item->id?>'>
+                    <a target="_blank" href="<?php echo $item->id;?>"><img height="45" width="105" src='<?php echo $this->product_brand->pic($item->id)?>'></a>
+                </li>
+            <?if(($key+1)%9 == 0):?>
+            </ul>
+            <?endif;?>
+        <?endforeach;?>
+        <?endif;?>  
         </div>  
     </div>
     
