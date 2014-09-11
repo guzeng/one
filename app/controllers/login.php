@@ -75,7 +75,7 @@ class Login extends CI_Controller {
             $update_row['last_login_time'] = $login_time;
             $update_row['last_login_ip'] = $this->input->ip_address();
             //自动保留登录15天
-            $this->auth->set_auto_login($user->username, $user->password);
+            $this->auth->set_auto_login($user->username, $password);
             if(isset($_COOKIE['lms_logout_url']))
             {
                 $data['url'] = $_COOKIE['lms_logout_url'];
@@ -86,7 +86,8 @@ class Login extends CI_Controller {
                 $data['url'] = base_url();
             }
             $this->user->update($update_row,$user->id);
-            
+            //保存session
+            $this->auth->save_login($user);
         }
         echo json_encode($data);
         exit;

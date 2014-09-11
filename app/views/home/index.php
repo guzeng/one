@@ -146,7 +146,7 @@
                         <img class="img-circle" src="<?php echo base_url();?>assets/img/home/user.png" >
                     </div>
                     <div class='pull-left username'>
-                        <div>Hi,Bevis </div>
+                        <div>Hi,<a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a> </div>
                         <div>170ES达人</div>
                     </div>
                     <div class='clearfix'></div>

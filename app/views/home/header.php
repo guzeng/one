@@ -17,7 +17,9 @@
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME STYLES --> 
     <link href="<?php echo base_url();?>assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo base_url();?>assets/css/home.css" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
     <script src="<?php echo base_url();?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
@@ -43,9 +45,11 @@
     <div id='top'>
         <div class='container text-right'>
             <div class='row'>
-            <span>欢迎您 ZEN</span>
-            <span>我的订单</span>
-            <span>登录 | 注册</span>
+            <?php if($this->auth->user_id()):?>
+            <span>欢迎您 <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a></span>
+            <span><a href="<?php echo base_url().'order/'.$this->auth->user_id();?>">我的订单</a></span>
+            <?endif;?>
+            <span><a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>/register">注册</a></span>
             </div>
         </div>
     </div>

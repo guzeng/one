@@ -218,10 +218,10 @@
 
 							<h4 class="form-section">商品状态</h4>       
 							<div class="form-group">
-								<div class="col-md-12">
-									<div class="checkbox-list">
+								<div class="col-md-12 checkbox-list">
+									<div class="">
 										<label class="checkbox-inline">
-											<input type="checkbox" style='margin-left:0px;margin-right:5px;' value="1" id="status" name='status' <?php echo isset($row)&&$row->status==1?"checked='checked'":''?>> 发布
+											<input type="checkbox" value="1" id="status" name='status' <?php echo isset($row)&&$row->status==1?"checked='checked'":''?>> 发布
 										</label>
 										<label class="checkbox-inline">
 											<input type="checkbox" value="1" name='recommend' id="recommend" <?php echo isset($row)&&$row->recommend==1?"checked='checked'":''?>> 推荐
