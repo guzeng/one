@@ -29,6 +29,7 @@ a:hover{color: #666666; }
 .p-15{padding: 15px;}
 .p-l-0{padding-left: 0px;}
 .p-l-10{padding-left: 10px;}
+.p-l-20{padding-left: 20px;}
 .p-l-25{padding-left: 25px;}
 .p-l-30{padding-left: 30px;}
 .p-r-0{padding-right: 0px;}
@@ -273,3 +274,110 @@ a:hover{color: #666666; }
 .f-green{color: #8FC31F;}
 .f-red{color: #EF5A30;}
 .f-blue{color: #30A8F1;}
+
+/** 用户中心 **/
+.o-mt{
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #e6e6e6 #e6e6e6 #c30000;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 2px;
+    height: 38px;
+    line-height: 33px;
+    margin-bottom: 10px;
+  }
+.o-mt h2 {
+    color: #cc0000;
+    float: left;
+    padding-left: 16px;
+    font-size: 14px;
+    margin:0px;
+    font-weight: bold;
+    line-height: 35px;
+}
+.mc{overflow: hidden;}
+.m3 {
+    background: none repeat scroll 0 0 #fffdee;
+    border: 1px solid #edd28b;
+}
+.m5 {
+   border: 1px solid #e6e6e6;
+}
+#safe04 .mc {
+    padding: 10px;
+}
+#safe05 {
+    border-top: 1px solid #e6e6e6;
+}
+#safe05 .mc {
+    padding: 30px 0;
+}
+#safe05 .fore1, #safe05 .fore2, #safe05 .fore3 {
+    float: left;
+    height: 32px;
+    line-height: 32px;
+}
+#safe05 .fore1 {
+    font-family: 微软雅黑;
+    font-size: 18px;
+    padding-left: 25px;
+    text-align: left;
+    width: 175px;
+}
+#safe05 .fore1 s, .icon-01 {
+    background: url("../img/icon-msg-one.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 33px;
+    margin-right: 33px;
+    vertical-align: middle;
+    width: 32px;
+}
+.icon-01, .icon-02, .icon-03 {
+    float: left;
+    margin-bottom: 10px;
+}
+#safe05 .fore1 strong {
+    margin-right: 5px;
+}
+.icon-id02 {
+    background-position: -14px 0;
+}
+.icon-id01d {
+    background-position: 0 -15px;
+}
+.icon-id02d {
+    background-position: -14px -15px;
+}
+#safe05 .fore1 .icon-01, #flexsuc .icon-01 {
+    background-position: -64px 0;
+}
+#safe05 .fore2 {
+    border-left: 1px solid #e6e6e6;
+    padding-left: 15px;
+    width: 450px;
+}
+#safe05 .fore3 {
+    text-align: center;
+    width: 150px;
+}
+#safe05 .fore3 a {
+    margin: 0 5px;
+}
+#safe05 .btn {
+    vertical-align: middle;
+}
+
+/** 帐户余额 **/
+.user-info-cont .num {
+    margin: 0 5px;
+}
+.user-info-cont strong {
+    font-family: "microsoft yahei";
+    font-size: 16px;
+}
+.ftx01, .ftx-01 {
+    color: #e4393c;
+}

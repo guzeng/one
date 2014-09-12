@@ -19,7 +19,7 @@ class Users extends CI_Controller {
 		$this->load->model('user');
 		$user = $this->user->get($user_id);
 
-		$data['user'] = $this->load->view('home/user-info',array('user'=>$user),true);
+		$data['user'] = $user;
 		$this->load->view('home/user',$data);
 	}
 
