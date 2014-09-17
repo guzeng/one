@@ -11,6 +11,7 @@ a{color: #666666; text-decoration: none;}
 a:hover{color: #666666; }
 .m-l-0{margin-left: 0px;}
 .m-l-15{margin-left: 15px;}
+.m-l-25{margin-left: 25px;}
 .m-r-0{margin-right: 0px;}
 .m-r-10{margin-right: 10px;}
 .m-r-15{margin-right: 15px;}
@@ -24,6 +25,7 @@ a:hover{color: #666666; }
 .m-b-10{margin-bottom: 10px;}
 .m-b-15{margin-bottom: 15px;}
 .m-b-20{margin-bottom: 20px;}
+.m-b-25{margin-bottom: 25px;}
 .m-b-30{margin-bottom: 30px;}
 .p-10{padding: 10px;}
 .p-15{padding: 15px;}
@@ -46,6 +48,7 @@ a:hover{color: #666666; }
 .absolute{position: absolute;}
 .c-6{color: #666666;}
 .c-9{color: #999999;}
+.bg-c-f5{background-color: #f5f5f5;}
 .black{color: #000000;}
 .f-14{font-size: 14px;}
 .f-12{font-size: 12px;}
@@ -65,6 +68,9 @@ a:hover{color: #666666; }
 #navbar a:hover,#navbar a:focus{background-color: #569E0C;}
 #navbar .navbar-toggle{padding:4px 10px; margin-right: 0px;}
 #navbar .navbar-toggle .icon-bar{background-color: #FFFFFF;}
+
+.clear {clear: both;}
+
 #categorys{background-color: #569E0C;}
 #categorys .navbar-brand{height: auto;}
 
@@ -94,6 +100,8 @@ a:hover{color: #666666; }
 .b-l{border-left:1px solid #EEEEEE;}
 .b-r{border-right:1px solid #EEEEEE;}
 .b-b{border-bottom:1px solid #EEEEEE;}
+.b-t{border-top:1px solid #EEEEEE;}
+
 .sway{border:1px solid #EEEEEE; height:80px; line-height:80px; padding:0px; overflow:hidden; color:#CECECE;}
 .sway .left {padding-left:6px; padding-right:6px; border-right:1px solid #EEEEEE; font-size:16px;} 
 .sway .right {padding-left:6px; padding-right:6px; border-left:1px solid #EEEEEE; font-size:16px;}
@@ -275,6 +283,7 @@ a:hover{color: #666666; }
 .f-red{color: #EF5A30;}
 .f-blue{color: #30A8F1;}
 
+#left-side ul li a{padding:10px 10px 10px 8px;}
 /** 用户中心 **/
 .o-mt{
     -moz-border-bottom-colors: none;
@@ -381,3 +390,7 @@ a:hover{color: #666666; }
 .ftx01, .ftx-01 {
     color: #e4393c;
 }
+
+/** 客户地址 **/
+#addressList .address-top{padding:10px 15px;display: block;height: 45px;line-height: 35px;}
+.address-foot{padding:10px 15px;}

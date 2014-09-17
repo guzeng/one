@@ -92,6 +92,8 @@
                             <?endif;?>
                         </div>
                     <?endforeach;?>
+                <?else:?>
+                暂未添加商品分类数据！
                 <?endif;?>
             </div>
             <div class='col-lg-7 col-p-10 m-t-10 o-h'>
@@ -146,8 +148,15 @@
                         <img class="img-circle" src="<?php echo base_url();?>assets/img/home/user.png" >
                     </div>
                     <div class='pull-left username'>
-                        <div>Hi,<a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a> </div>
-                        <div>170ES达人</div>
+                        <div>Hi,
+                            <?php if($this->auth->username()):?>
+                            <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>">
+                                <?php echo $this->auth->username();?>
+                            </a> 
+                            <?else:?>
+                                游客
+                            <?endif;?>
+                        </div>
                     </div>
                     <div class='clearfix'></div>
                 </div>
