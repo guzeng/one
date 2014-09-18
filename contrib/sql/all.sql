@@ -79,6 +79,7 @@ CREATE TABLE `one_member` (
   `username` varchar(30) NOT NULL default '' COMMENT '会员名',
   `pwd` varchar(50) NOT NULL default '' COMMENT '密码',
   `name` varchar(30) NOT NULL default '' COMMENT '姓名',
+  `alias` varchar(30) NOT NULL default '' COMMENT '昵称',
   `email` varchar(100) NOT NULL default '' COMMENT 'Email',
   `grade` tinyint(3) NOT NULL default '0' COMMENT '等级',
   `score` int(11) NOT NULL default '0' COMMENT '积分',
@@ -390,5 +391,6 @@ CREATE TABLE `one_user_address` (
   `phone` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '手机',
   `address` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '详细地址',
   `status` INT(1) NOT NULL DEFAULT '1' COMMENT '状态（1可用/0不可用）',
+  `default` INT(1) NOT NULL DEFAULT '0' COMMENT '默认地址（1默认/0不默认）',
   PRIMARY KEY  (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;

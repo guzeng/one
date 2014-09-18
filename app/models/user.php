@@ -174,6 +174,23 @@ class User  extends CI_Model{
     }
     //----------------------------------------------------------------
 
+    public function pic($id,$size='normal')
+	{
+		if(!$id){
+			return base_url().'assets/img/avatar.jpg';
+		}
+		
+		$this->config->load('upload');
+		$folder = $this->config->item('user_folder');
+		$file_save_dir = file_save_dir($id);
+		$file_save_name = file_save_name($id);
+		if(is_file($folder.DIRECTORY_SEPARATOR.$file_save_dir.DIRECTORY_SEPARATOR.$file_save_name.'.png'))
+		{
+			return base_url().$folder.'/'.$file_save_dir.'/'.$file_save_name.$size.'.png';
+		}
+		return base_url().'assets/img/avatar.jpg';
+	}
+
 }
 /* End of file product_brand.php */
 /* Location: ./application/models/product_brand.php */	

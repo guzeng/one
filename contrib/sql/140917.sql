@@ -11,6 +11,9 @@ CREATE TABLE `one_user_address` (
   `phone` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '手机',
   `address` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '详细地址',
   `status` INT(1) NOT NULL DEFAULT '1' COMMENT '状态（1可用/0不可用）',
+  `default` INT(1) NOT NULL DEFAULT '0' COMMENT '默认地址（1默认/0不默认）',
   PRIMARY KEY  (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `one_member`   
+  ADD COLUMN `alias` VARCHAR(30) DEFAULT ''  NOT NULL  COMMENT '昵称';

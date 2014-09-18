@@ -98,14 +98,18 @@ class Register extends CI_Controller {
 
         if($data['code'] == '1000')
         {
-            $data['url'] = base_url()."/register/welcome";
+            ///保存session
+            $user = $this->user->get_by_condition($post['username']);
+            $this->auth->save_login($user);
+
+            $data['url'] = base_url()."register/welcome";
             $data['msg'] = '注册成功';
         }
         echo json_encode($data);
    }
 
    public function welcome(){
-        return $this->load->view('home/register_success');
+        return $this->load->view('home/welcome');
    }
 
 }
