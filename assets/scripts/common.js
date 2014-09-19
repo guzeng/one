@@ -543,3 +543,57 @@ function hide_tree_list(compare, current)
     }
 }
 //------------------------------------------------------------------------
+
+/**
+ * 
+ * 获取地区
+ */
+function areaChange(obj,area_level)
+{
+    var id = $(obj).val();
+    $.ajax({
+        url:msg.base_url+"admin/areas/lists/"+id+"/"+area_level,
+        dataType:'json',
+        success:function(data){
+            if(data.code=='1000')
+            {
+                if(typeof(data.area)!='undefined')
+                {
+                    $(obj).next().has('option').html("<option value='0'>请选择</option>");
+                    $(obj).next().next().has('option').html("<option value='0'>请选择</option>");
+                    var option = "";
+                    
+                    if(data.zhi_xia_shi)
+                    {
+                        $(obj).next().hide();
+                        $(obj).next().next().html('');
+
+                        $.each(data.area,function(key,item){
+                            option += "<option value='"+item['area_id']+"'>"+item['area_name']+"</option>";
+                        })
+                        $(obj).next().next().append(option);
+                    }
+                    else
+                    {
+                        $(obj).next().show();
+                        $.each(data.area,function(key,item){
+                            option += "<option value='"+item['area_id']+"'>"+item['area_name']+"</option>";
+                        })
+                        $(obj).next().append(option);
+                    }
+                }
+            }
+            else
+            {
+                show_error(data.msg);
+            }
+        },
+        beforeSubmit:function(){
+            loading();
+        },
+        error:function(){
+            show_error();
+        }
+    })        
+}
+//------------------------------------------------------------------------

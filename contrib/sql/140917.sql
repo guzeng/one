@@ -17,3 +17,7 @@ CREATE TABLE `one_user_address` (
 
 ALTER TABLE `one_member`   
   ADD COLUMN `alias` VARCHAR(30) DEFAULT ''  NOT NULL  COMMENT '昵称';
+ALTER TABLE `one_member`   
+  ADD COLUMN `id_card_number` VARCHAR(30) DEFAULT ''  NOT NULL  COMMENT '身份证号码';
+ALTER TABLE `one_member`   
+  ADD COLUMN `birthday` int(10) DEFAULT '0'  NOT NULL  COMMENT '生日';

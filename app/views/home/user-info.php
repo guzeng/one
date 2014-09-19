@@ -10,6 +10,13 @@
     });
 
     $(function(){
+        //地区
+        $("#province").change(function(){
+            areaChange($("#province"),2);
+        });
+        $("#city").change(function(){
+            areaChange($("#city"),3);
+        });
         //时间
         $('#birthday').datepicker({
             format: 'yyyy-mm-dd',
@@ -89,7 +96,7 @@
                                 <div class="tab-content">
                                     <div id="account-info" class="tab-pane active">
                                         <div class="portlet-body form">
-                                            <form action="<?php echo base_url()?>admin/users/update_by_id" method="post" onsubmit='return false' role="form" id='user-form' class="form-horizontal">
+                                            <form action="<?php echo base_url()?>users/update_by_id" method="post" onsubmit='return false' role="form" id='user_info_form' class="form-horizontal">
                                                 <div class="form-body">
                                                     <div class="form-group">
                                                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">昵称：</label>
@@ -108,7 +115,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">生日：</label>
                                                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-9">
-                                                            <input readonly type="text" value="<?php echo isset($user)&&isset($user->birthday)?$user->birthday:'';?>" id="birthday" size="16" type="text"  name="birthday" maxlength="30" class="form-control">
+                                                            <input readonly type="text" value="<?php echo isset($user)&&isset($user->birthday) && $user->birthday?date('Y-m-d',$user->birthday):'';?>" id="birthday" size="16" type="text"  name="birthday" maxlength="30" class="form-control">
                                                             <span class="help-block"></span>
                                                         </div>
                                                     </div>
@@ -136,29 +143,56 @@
                                                     <div class="form-group">
                                                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">地区：</label>
                                                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-9">
-                                                            <select class="form-control input-small inline">
-                                                                <option>Option 1</option>
-                                                            </select>
-                                                            <select class="form-control input-small inline">
-                                                                <option>Option 1</option>
-                                                            </select>
-                                                            <select class="form-control input-small inline">
-                                                                <option>Option 1</option>
-                                                            </select>
-                                                            <span class="help-block"></span>
+                                                            <?php if(isset($user->area)&&$user->area):?>
+                                                                <select class="form-control input-small inline" id="province">
+                                                                    <option value="0">请选择</option>
+                                                                    <?php foreach($area['province'] as $key => $item):?>
+                                                                    <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
+                                                                    <?endforeach;?>
+                                                                </select>
+                                                                <?php if($area['city']):?>
+                                                                <select class="form-control input-small inline" id="city">
+                                                                    <option value="0">请选择</option>
+                                                                    <?php foreach($area['city'] as $key => $item):?>
+                                                                    <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
+                                                                    <?endforeach;?>
+                                                                </select>
+                                                                <?endif;?>
+                                                                <select class="form-control input-small inline" id="area" name="area">
+                                                                    <option value="0">请选择</option>
+                                                                    <?php foreach($area['qu'] as $key => $item):?>
+                                                                    <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
+                                                                    <?endforeach;?>
+                                                                </select>
+                                                                <span class="help-block"></span>
+                                                            <?else:?>
+                                                                <select class="form-control input-small inline" id="province">
+                                                                    <option value="0">请选择</option>
+                                                                    <?php foreach($area['province'] as $key => $item):?>
+                                                                    <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
+                                                                    <?endforeach;?>
+                                                                </select>
+                                                                <select class="form-control input-small inline" id="city">
+                                                                    <option value="0">请选择</option>
+                                                                </select>
+                                                                <select class="form-control input-small inline" id="area" name="area">
+                                                                    <option value="0">请选择</option>
+                                                                </select>
+                                                                <span class="help-block"></span>
+                                                            <?endif;?>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">地址：</label>
                                                         <div class="col-lg-7 col-md-7 col-sm-7 col-xs-9">
-                                                            <input type="text" id="address" name="address" maxlength="50" class="form-control">
+                                                            <input type="text" id="address" name="address" maxlength="50" class="form-control" value="<?php echo isset($user)?$user->address:'';?>">
                                                             <span class="help-block"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"></label>
                                                         <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
-                                                             <button type="submit" class="btn btn-block green" onclick="do_submit('user-form')" id='login_form_submit_btn'>保存</button>
+                                                             <button type="button" class="btn btn-block green" onclick="do_submit('user_info_form')" id='user_info_submit_btn'>保存</button>
                                                         </div>
                                                     </div>
                                                     <input type='hidden' id='id' name='id' value="<?php echo isset($user)?$user->id:'';?>">

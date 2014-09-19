@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Area  extends CI_Model{
-	private $table='product_category';
+	private $table='area';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -90,7 +90,6 @@ class Area  extends CI_Model{
             $this->db->where($_where);
         }
         $this->db->order_by($_orderby);
-        $this->db->limit($_num,$_start);
 		$query = $this->db->get ( $this->table);
         if($query->num_rows() > 0){
             return $query->result();

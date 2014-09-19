@@ -78,7 +78,7 @@ CREATE TABLE `one_member` (
   `id` int(11) NOT NULL auto_increment,
   `username` varchar(30) NOT NULL default '' COMMENT '会员名',
   `pwd` varchar(50) NOT NULL default '' COMMENT '密码',
-  `name` varchar(30) NOT NULL default '' COMMENT '姓名',
+  `name` varchar(30) NOT NULL default '' COMMENT '真实姓名',
   `alias` varchar(30) NOT NULL default '' COMMENT '昵称',
   `email` varchar(100) NOT NULL default '' COMMENT 'Email',
   `grade` tinyint(3) NOT NULL default '0' COMMENT '等级',
@@ -97,6 +97,8 @@ CREATE TABLE `one_member` (
   `gender` int(11) NOT NULL default '0' COMMENT '性别',
   `address` varchar(50) NOT NULL default '' COMMENT '详细地址',
   `money` decimal(2,0) NOT NULL default '0' COMMENT '预付款',
+  `birthday` int(10) DEFAULT '0'  NOT NULL  COMMENT '生日';
+  `id_card_number` VARCHAR(30) DEFAULT ''  NOT NULL  COMMENT '身份证号码';
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
