@@ -394,3 +394,56 @@ a:hover{color: #666666; }
 /** 客户地址 **/
 #addressList .address-top{padding:10px 15px;display: block;height: 45px;line-height: 35px;}
 .address-foot{padding:10px 15px;}
+
+
+/*详情页右侧*/
+.ad-box{background-color: #f9f9f9;}
+.pinfo-top-right .see2see,.pinfo-mid-right .ad{height: 32px;font-size: 12px;color: #999;text-align: center;line-height: 56px;}
+.pinfo-top-right .midline,.pinfo-mid-right .midline{margin-top: 38px;border-bottom: 1px solid #d8d8d8;position: relative;}
+.pinfo-top-right .midtext,.pinfo-mid-right .midtext{position: absolute;top: -28px;background-color: #eee;left:50%;padding:0 10px;margin-left: -33px}
+.pinfo-mid-right .midtext{background-color:#f9f9f9; }
+.pinfo-top-right .img,.pinfo-mid-right .img{text-align: center;}
+.pinfo-top-right .img img,.pinfo-mid-right .img img{margin:0 auto;width:120px;margin-bottom: 14px;}
+.pinfo-top-right .nav ,.pinfo-mid-right .nav {text-align: center;padding: 10px 50px;}
+.pinfo-top-right .nav span img,.pinfo-mid-right .nav span img{margin: 0 10px;}
+/*详细页中间*/
+.pro-x{border: 1px solid #f0f0f0;}
+.pro-x .nav-tabs{border-color: #f0f0f0;background-color:#f9f9f9; }
+.pro-x .nav-tabs > li.active > a,.pro-x  .nav-tabs > li.active > a:hover,.pro-x  .nav-tabs > li.active > a:focus{border: 1px solid #60ac22;background-color: #60ac22;color:#fff;}
+.pro-x .nav-tabs .coun{color:#60ac22;}
+
+.pro-x hr{margin: 3px 0; }
+.pro-x table td{color:#777;padding-left: 16px;font-size: 12px;line-height: 30px;height: 30px;}
+.item-xq-img img{margin-top: 20px;}
+
+/*用户中心左侧菜单*/
+.my-left-menu .head{font-weight: bold;padding:9px 9px;}
+.my-left-menu .nav > li > a{padding:9px 9px;background: none;color: #777;}
+.my-left-menu .nav > li > a:hover,.my-left-menu .nav > .active > a{background: url("../img/img.png") no-repeat scroll -197px 10px;}
+/*我的订单*/
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{font-size: 18px;border:0;border-bottom: 1px solid #56a109;}
+.nav-tabs > li > a:hover{background:none;color: #999;border:1px solid transparent;}
+#myorder .nav-tabs > li > a{font-size: 18px;}
+#myorder .nav-tabs > li > a>.coun{font-size: 18px;color:red;}
+#myorder .input-group-addon{font-size: 12px;padding:6px 8px;}
+#myorder .form-control{height: 27px;padding: 4px;font-size: 12px;}
+#myorder .btn{font-size: 12px;padding: 4px 0px;}
+#myorder .table-advance{margin-top: 15px;border: 1px #f0f0f0 solid;margin-bottom:3px; }
+#myorder .nav-tabs{margin-bottom: 16px;}
+#myorder .table-advance thead tr th {background-color: #f9f9f9;color: #666;font-size: 12px;font-weight: 400;text-align: center; }
+.pagination .active > a,.pagination .active > a:hover {  background: #60ac22;  border-color: #dddddd; color: #fff;}
+#myorder .pagination > .disabled > span, #myorder .pagination > .disabled > span:hover, #myorder .pagination > .disabled > span:focus, #myorder .pagination > .disabled > a, #myorder .pagination > .disabled > a:hover, #myorder .pagination > .disabled > a:focus,#myorder .pagination > li > a,#myorder .pagination > li > span{border-color:#eee;}
+#myTabContent .actions  {margin-top:16px;display: block;}
+#myTabContent .actions .btn{padding: 4px 6px;background-color: #fff;border: 1px solid #ddd;margin-left: 3px;}
+#myTabContent .table-striped > tbody > tr:nth-child(odd) > td{background-color: #fff;text-align: center;}
+#myTabContent .table-striped > tbody > tr:nth-child(odd) > td .title{text-align: left;}
+.first-title{text-align: left;}
+#myTabContent .img{float:left;border:1px solid #f0f0f0;margin-right: 10px;}
+#myTabContent .title{float:left;width: 220px;}
+#myTabContent .color{color:#999;margin-top: 6px;}
+#myTabContent table label{display:block;margin-top:6px;}
+#myTabContent table td{font-size: 12px;padding: 10px;}
+#myTabContent .price{width: 130px;float: left;}
+#myTabContent .coun{width: 60px;float: left;}
+#myTabContent .label-warning{background-color: #ff6710;}
+#myTabContent .label-default{background-color: #ccc;}
