@@ -7,7 +7,7 @@
         </ol>
     </div>
 </div>
-<div class='container'>
+<div class='container m-b-20'>' >
     <div class='row'>
         <div class='col-md-10 col-sm-10 col-xs-12 pinfo-top-left'>
             <div class='row'>
