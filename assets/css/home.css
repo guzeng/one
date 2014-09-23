@@ -95,7 +95,7 @@ a:hover{color: #666666; }
 .ad-top .ad-table{height:110px; color: #787878;}
 .ad-top .title{color: #000000;}
 .ad-top .ad-table td div{line-height: 23px;}
-
+.ad-top .ad-table td div img{max-width: 118px;}
 .b{border:1px solid #EEEEEE; }
 .b-l{border-left:1px solid #EEEEEE;}
 .b-r{border-right:1px solid #EEEEEE;}
