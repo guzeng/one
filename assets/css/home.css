@@ -392,5 +392,5 @@ a:hover{color: #666666; }
 }
 
 /** 客户地址 **/
-#addressList .address-top{padding:10px 15px;display: block;height: 45px;line-height: 35px;}
+.address-top{padding:10px 15px;display: block;height: 45px;line-height: 35px;}
 .address-foot{padding:10px 15px;}

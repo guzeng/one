@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class User  extends CI_Model{
-	private $table='member';
+class User_address  extends CI_Model{
+	private $table='user_address';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -19,6 +19,13 @@ class User  extends CI_Model{
 			return $this->db->update($this->table,$row);
 		}
 		return false;
+	}
+	//--------------------------------------------------------
+
+	public function update_by_default($id){
+		$this->db->where('id !=',$id);
+		$this->db->where('default',1);
+		return $this->db->update($this->table,array('default'=>0));
 	}
 	//--------------------------------------------------------
 
@@ -43,54 +50,6 @@ class User  extends CI_Model{
 	}
 	//---------------------------------------------------------
 
-	public function get_by_username($username){
-		if($username){
-			$this->db->where('username',$username);
-			$query = $this->db->get($this->table);
-			if($query->num_rows()>0){
-				return $query->row();
-			}
-		}
-		return false;
-	}
-	//---------------------------------------------------------
-
-	public function get_by_condition($login_item){
-		if($login_item){
-			$this->db->where('username',$login_item);
-			$this->db->or_where('email =',$login_item);
-			$this->db->or_where('phone =',$login_item);
-			$query = $this->db->get($this->table,1,0);
-			if($query->num_rows()>0){
-				return $query->row();
-			}
-		}
-		return false;
-	}
-	//---------------------------------------------------------
-
-    /**
-    *   exist
-    *   检查是否存在
-    *   @param int id
-    * 
-    */
-    public function exist($where)
-    {
-        if($where){
-            $this->db->from($this->table. ' as a');
-            $this->db->where($where);
-            $type = 'count(a.id) as count';
-            $this->db->select($type);
-            $query = $this->db->get();
-            if($query->row()->count > 0)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    //----------------------------------------------------------------
 	/**
 	 * lists
 	 * 查询, 用于分页显示列表
@@ -173,23 +132,6 @@ class User  extends CI_Model{
         return $this->db->count_all($this->table);
     }
     //----------------------------------------------------------------
-
-    public function pic($id,$size='normal')
-	{
-		if(!$id){
-			return base_url().'assets/img/avatar.jpg';
-		}
-		
-		$this->config->load('upload');
-		$folder = $this->config->item('user_folder');
-		$file_save_dir = file_save_dir($id);
-		$file_save_name = file_save_name($id);
-		if(is_file($folder.DIRECTORY_SEPARATOR.$file_save_dir.DIRECTORY_SEPARATOR.$file_save_name.'.png'))
-		{
-			return base_url().$folder.'/'.$file_save_dir.'/'.$file_save_name.'.png';
-		}
-		return base_url().'assets/img/avatar.jpg';
-	}
 
 }
 /* End of file product_brand.php */

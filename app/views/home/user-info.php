@@ -64,9 +64,12 @@
                 }
                 else
                 {
-                    $('#review_pic').prepend("<img src='"+url+"?"+Math.random()+"' id='user_pic' style='max-width:120px;height:68px;'>");   
+                    $('#review_pic').prepend("<img src='"+url+"?"+Math.random()+"' id='user_pic' class='relative' style='max-width:100px;height:100px;margin-bottom:10px;top:70px;'>");   
                 }
-                $('#link_pic_path').val(data['result']['files'][0]['name']);
+                $('#img_100').attr('src',url+"?"+Math.random());
+                $('#img_50').attr('src',url+"?"+Math.random());
+
+                $('#user_pic_path').val(data['result']['files'][0]['name']);
                 //$('#upload_file_con').hide();
                 data.context.text('');
                 $('#user_edit_upload').attr('disabled', false);
@@ -96,7 +99,7 @@
                                 <div class="tab-content">
                                     <div id="account-info" class="tab-pane active">
                                         <div class="portlet-body form">
-                                            <form action="<?php echo base_url()?>users/update_by_id" method="post" onsubmit='return false' role="form" id='user_info_form' class="form-horizontal">
+                                            <form action="<?php echo base_url()?>users/update" method="post" onsubmit='return false' role="form" id='user_info_form' class="form-horizontal">
                                                 <div class="form-body">
                                                     <div class="form-group">
                                                         <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">昵称：</label>
@@ -146,29 +149,33 @@
                                                             <?php if(isset($user->area)&&$user->area):?>
                                                                 <select class="form-control input-small inline" id="province">
                                                                     <option value="0">请选择</option>
-                                                                    <?php foreach($area['province'] as $key => $item):?>
-                                                                    <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
+                                                                    <?php foreach($area['province_list'] as $key => $item):?>
+                                                                    <option <?php echo $item->area_id == $area['province']->area_id?'selected':'';?> value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
                                                                     <?endforeach;?>
                                                                 </select>
-                                                                <?php if($area['city']):?>
+                                                                <?php if($area['city'] && !empty($area['city_list'])):?>
                                                                 <select class="form-control input-small inline" id="city">
                                                                     <option value="0">请选择</option>
-                                                                    <?php foreach($area['city'] as $key => $item):?>
-                                                                    <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
+                                                                    <?php foreach($area['city_list'] as $key => $item):?>
+                                                                    <option <?php echo $item->area_id == $area['city']->area_id?'selected':'';?> value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
                                                                     <?endforeach;?>
+                                                                </select>
+                                                                <?else:?>
+                                                                <select class="form-control input-small inline hide" id="city">
+                                                                    <option value="0">请选择</option>
                                                                 </select>
                                                                 <?endif;?>
                                                                 <select class="form-control input-small inline" id="area" name="area">
                                                                     <option value="0">请选择</option>
-                                                                    <?php foreach($area['qu'] as $key => $item):?>
-                                                                    <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
+                                                                    <?php foreach($area['qu_list'] as $key => $item):?>
+                                                                    <option <?php echo $item->area_id == $area['qu']->area_id?'selected':'';?> <?php $user->area==$item->area_id?'selected':'';?>value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
                                                                     <?endforeach;?>
                                                                 </select>
                                                                 <span class="help-block"></span>
                                                             <?else:?>
                                                                 <select class="form-control input-small inline" id="province">
                                                                     <option value="0">请选择</option>
-                                                                    <?php foreach($area['province'] as $key => $item):?>
+                                                                    <?php foreach($area['province_list'] as $key => $item):?>
                                                                     <option value="<?php echo $item->area_id;?>"><?php echo $item->area_name;?></option>
                                                                     <?endforeach;?>
                                                                 </select>
@@ -201,6 +208,7 @@
                                         </div>
                                     </div>
                                     <div id="account-pic" class="tab-pane">
+                                        <form action="<?php echo base_url()?>users/upload_pic" method="post" onsubmit='return false' role="form" id='user_pic_form' class="form-horizontal">
                                           <div class="row">
                                             <div class="col-md-8">
                                                 <div id="upload_pic">
@@ -227,27 +235,29 @@
                                                         <img src="<?php echo $this->user->pic($user->id,'normal')?>" id='user_pic' class="relative" style='width:100px;height:100px;margin-bottom:10px;top:70px;'> 
                                                     <?endif;?>
                                                 </div>
-                                                <!-- <button id="edit_btn" class="btn btn-default btn-lg green m-t-20">确定</button> -->
+                                                <button id="edit_btn" onclick="do_submit('user_pic_form')" class="btn btn-default btn-lg green m-t-20">确定</button>
                                             </div>
                                             <div class="col-md-4">
                                                  <h4>效果预览</h4>
                                                  <p>上传的图片会自动生成尺寸</p>
-                                                 <div class="padding:10px;">
+                                                 <div id="pic_review" class="padding:10px;">
                                                     <div class="m-b-10">
                                                         <?if(isset($user)&&$user->id>0):?>
-                                                        <img style="width:100px;height:100px" class="m-t-10 m-b-10" src="<?php echo $this->user->pic($user->id,'normal')?>" />
+                                                        <img id="img_100" style="width:100px;height:100px" class="m-t-10 m-b-10" src="<?php echo $this->user->pic($user->id,'normal')?>" />
                                                         <?endif;?>
                                                         <p>100*100像素</p>
                                                     </div>
                                                     <div class="m-b-10">
                                                         <?if(isset($user)&&$user->id>0):?>
-                                                        <img style="width:50px;height:50px" class="m-t-10 m-b-10" src="<?php echo $this->user->pic($user->id,'small')?>" />
+                                                        <img id="img_50" style="width:50px;height:50px" class="m-t-10 m-b-10" src="<?php echo $this->user->pic($user->id,'small')?>" />
                                                         <?endif;?>
                                                         <p>50*50像素</p>
                                                     </div>
                                                  </div>
                                             </div>
                                           </div>
+                                        <input type='hidden' id='user_pic_path' name='user_pic_path' value=''>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

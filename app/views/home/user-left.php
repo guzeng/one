@@ -9,6 +9,6 @@
         <li <?if($controller_name=='users' && $method_name=='index'):?>class="active"<?endif?>><a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"> 账户信息</a></li>
         <li <?if($controller_name=='users' && $method_name=='safe'):?>class="active"<?endif?>><a href="<?php echo base_url().'users/safe/'.$this->auth->user_id();?>">账户安全</a></li>
         <li <?if($controller_name=='users' && $method_name=='money'):?>class="active"<?endif?>><a href="<?php echo base_url().'users/money/'.$this->auth->user_id();?>">账户余额</a></li>
-        <li <?if($controller_name=='users' && $method_name=='address'):?>class="active"<?endif?>><a href="<?php echo base_url().'users/address/'.$this->auth->user_id();?>">收货地址</a></li>
+        <li <?if($controller_name=='address' && $method_name=='index'):?>class="active"<?endif?>><a href="<?php echo base_url().'address/index/'.$this->auth->user_id();?>">收货地址</a></li>
     </ul>
 </div>

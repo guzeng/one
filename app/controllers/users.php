@@ -10,6 +10,11 @@ class Users extends CI_Controller {
     {
         parent::__construct();
     }
+
+    /**
+     * 展示用户基本信息
+     * 
+     */
 	public function index($user_id)
 	{
 		if(!$user_id)
@@ -22,13 +27,31 @@ class Users extends CI_Controller {
 		$user = $this->user->get($user_id);
 		if(isset($user->area) && $user->area)
 		{
-			$area['qu'] = $this->area->lists(array('where' => 'area_level = 3 and area_id = '.$user->area));
-			$area['city'] = $this->area->lists(array('where' => 'area_level = 2 and parent_id = '.$area['qu']->parent_id));
-			$area['province'] = $this->area->lists(array('where' => 'area_level = 1'));
+			$qu = $this->area->get($user->area);
+
+			$qu_list = $this->area->lists(array('where' => 'parent_id = '.$qu->parent_id));
+			
+            $city = $this->area->lists(array('where' => 'area_level = 2 and area_id = '.$qu->parent_id));
+
+            $city_list = array();
+            if($city && !empty($city)){
+                $city = $city[0];
+                $city_list = $this->area->lists(array('where' => 'area_level = 2 and parent_id = '.$city->parent_id));
+                $province =  $this->area->get($city->parent_id);
+            }
+            else{
+                $province =  $this->area->get($qu->parent_id);
+            }
+            
+            $province_list = $this->area->lists(array('where' => 'area_level = 1'));
+
+            $area = array('qu'=>$qu,'qu_list'=>$qu_list,
+                'city'=>$city,'city_list'=>$city_list,
+                "province"=>$province,"province_list"=>$province_list);
 		}
 		else
 		{
-			$area['province'] = $this->area->lists(array('where' => 'area_level = 1') );
+			$area['province_list'] = $this->area->lists(array('where' => 'area_level = 1') );
 		}
 		
 		$data['user'] = $user;
@@ -37,6 +60,10 @@ class Users extends CI_Controller {
 		$this->load->view('home/user-info',$data);
 	}
 
+    /**
+     * 展示用户安全信息
+     * 
+     */
 	public function safe($user_id)
 	{
 		if(!$user_id)
@@ -50,6 +77,10 @@ class Users extends CI_Controller {
 		$this->load->view('home/user-safe',$data);
 	}
 
+    /**
+     * 展示用户余额信息
+     * 
+     */
 	public function money($user_id)
 	{
 		if(!$user_id)
@@ -63,20 +94,28 @@ class Users extends CI_Controller {
 		$this->load->view('home/user-money',$data);
 	}
 
+    /**
+     * 展示用户收货地址信息
+     * 
+     */
 	public function address($user_id)
 	{
 		if(!$user_id)
 		{
 			show_404('',false);
 		}
-		$this->load->model('user');
-		$user = $this->user->get($user_id);
+		$this->load->model('user_address');
+		$address = $this->user_address->lists();
 
-		$data['user'] = $user;
+		$data['address'] = $address;
 		$this->load->view('home/user-address',$data);
 	}
 
-	public function update_by_id()
+    /**
+     * 更新用户基本信息
+     * 
+     */
+	public function update()
     {
         $this->auth->check_login_json();
         $post = $this->input->post();
@@ -154,6 +193,52 @@ class Users extends CI_Controller {
         if($data['code'] == '1000')
         {
             $data['goto'] = 'users/index/'.$post['id'];
+        }
+        echo json_encode($data);
+    }
+
+    /**
+     * 上传用户头像
+     * 
+     */
+    public function upload_pic()
+    {
+        $post = $this->input->post();
+        $id = $this->auth->user_id();
+        $data = array('code' => '1000', 'msg' => '');
+
+        if(empty($post) && !$id)
+        {
+            show_error('参数错误');
+        }
+        //处理图片
+        if($post['user_pic_path'] && is_file(upload_folder('temp').DIRECTORY_SEPARATOR.$post['user_pic_path']))
+        {
+            $target = upload_folder('user').DIRECTORY_SEPARATOR.file_save_dir($id);
+
+            create_folder($target);
+            $config['image_library'] = 'gd2';
+            $config['source_image'] = upload_folder('temp').DIRECTORY_SEPARATOR.$post['user_pic_path'];
+            $config['create_thumb'] = false;
+            $config['maintain_ratio'] = TRUE;
+            $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'.png';
+            $config['width'] = 100;
+            $config['height'] = 100;
+            $this->load->library('image_lib', $config);
+            $this->image_lib->resize();
+
+            // $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'_small.png';
+            // $config['width'] = 50;
+            // $config['height'] = 50;
+            // $this->load->library('image_lib', $config);
+
+            // $this->image_lib->resize();
+            @unlink($config['source_image']);
+        }
+        else
+        {
+            $data['code'] ='1001';
+            $data['msg'] = '上传图片失败';
         }
         echo json_encode($data);
     }

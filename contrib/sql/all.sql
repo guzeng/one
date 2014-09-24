@@ -382,11 +382,11 @@ CREATE TABLE `one_ship` (
 
 DROP TABLE IF EXISTS `one_user_address`;
 CREATE TABLE `one_user_address` (
-  `id` INT(11) NOT NULL DEFAULT '0' COMMENT 'ID',
+  `id` INT(11) NOT NULL auto_increment,
   `user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户Id',
   `province_id` INT(11) NOT NULL DEFAULT '0' COMMENT '省的区域编号',
   `city_id` INT(11) NOT NULL DEFAULT '0' COMMENT '市的区域编号',
-  `qu_id` INT(11) NOT NULL DEFAULT '0' COMMENT '区的区域编号',
+  `area` INT(11) NOT NULL DEFAULT '0' COMMENT '区的区域编号',
   `consignee` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '收货人',
   `gender` INT(11) NOT NULL DEFAULT '0' COMMENT '性别',
   `telephone` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '固定电话',
