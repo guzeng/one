@@ -7,7 +7,7 @@
         </ol>
     </div>
 </div>
-<div class='container'>
+<div class='container m-b-20'>
     <div class='row'>
         <div class='col-md-10 col-sm-10 col-xs-12 pinfo-top-left'>
             <div class='row'>
@@ -95,8 +95,22 @@
                 </div>
             </div>
         </div>
-        <div class='col-md-2 col-sm-2 col-xs-12 pinfo-top-right'>
-asdfasdf
+        <div class='col-md-2 col-sm-2 col-xs-12 pinfo-top-right'>			
+            <div class="see2see">
+                <div class="midline">
+                    <div class="midtext">看了又看</div>
+                </div>
+            </div>
+            <div class="img">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-r1.jpg">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-r2.jpg">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-r3.jpg"></div>
+            <div class="nav">
+                <span class="pull-left">
+                    <img class='img-responsive' src="<?php echo base_url();?>assets/img/portlet-expand-icon2.png"></span>
+                <span clas="pull-left">
+                    <img class='img-responsive' src="<?php echo base_url();?>assets/img/portlet-collapse-icon2.png"></span>
+            </div>
         </div>
     </div>
 </div>
@@ -250,16 +264,86 @@ asdfasdf
         </div>
         <!-- left end -->
         <!-- right -->
-        <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
-            right
-        </div>
-        <!-- right end -->
-    </div>
-</div>
+        
+        <div class='col-lg-8 col-md-7 col-sm-7 col-xs-12 '>
+            <div class="pro-x">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li class="active">
+                        <a href="#home" role="tab" data-toggle="tab">商品详情</a>
+                    </li>
+                    <li class="">
+                        <a href="#profile" role="tab" data-toggle="tab">
+                            累计评价
+                            <span class="coun">32</span>
+                        </a>
+                    </li><li>
+                     <a href="#dropdown1" role="tab" data-toggle="tab">
+                        服务承诺</a>
+                    </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
 
-<div class='container m-b-20' id='ad-footer'>
-    <div class='row'>
-        <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/ad-footer.png'>
+                    <table width="100%" border="0">
+                      <tr>
+                        <td width="106">品牌名称：</td>
+                        <td>妮维雅</td>
+                      </tr>
+                    </table>
+                    <hr>
+                    <table width="100%" border="0">
+                      <tr>
+                        <td width="108">产品参数：</td>
+                        <td width="265">款号：1479396</td>
+                        <td width="165">材质：锦纶</td>
+                        <td>尺码：均码（高弹）</td>
+                      </tr>
+                      <tr>
+                        <td >&nbsp;</td>
+                        <td>颜色分类：绿色048 红色037 灰色084 </td>
+                        <td>图案: 其他</td>
+                        <td>尺码: 均码（高弹）</td>
+                      </tr>
+                      <tr>
+                        <td >&nbsp;</td>
+                        <td>衣长: 及胸</td>
+                        <td>服装款式细节: 印花</td>
+                        <td>价格区间: 50元以上</td>
+                      </tr>
+                    </table>
+
+                    <div class="tab-pane fade" id="profile">
+                        
+                    </div>
+                    <div class="tab-pane fade" id="dropdown1">
+                        
+                    </div>                   
+                </div>
+            </div>
+            <div class="item-xq-img">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-xq.jpg">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-xq1.jpg">
+            </div>
+        </div>
+        <div class='col-md-2 col-sm-2 col-xs-12 pinfo-mid-right ad-box'>
+            <div class="ad">
+                <div class="midline">
+                    <div class="midtext">广告位</div>
+                </div>
+            </div>
+            <div class="img">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-r1.jpg">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-r2.jpg">
+                <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/item-r3.jpg">
+            </div>
+
+            <!-- right end --> 
+        </div>
+    </div>
+
+    <div class='container m-b-20' id='ad-footer'>
+        <div class='row'>
+            <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/ad-footer.png'>
+        </div>
     </div>
 </div>
-<?$this->load->view('home/footer')?>
+    <?$this->load->view('home/footer')?>
