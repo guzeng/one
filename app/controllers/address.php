@@ -24,15 +24,31 @@ class Address extends CI_Controller {
             show_404('',false);
         }
         
-        $address = $this->user_address->lists(array('where'=>'user_id = '.$user_id.' and status = 1','order_by'=>'default desc,id desc'));
+        $address = $this->user_address->lists(array('where'=>'user_id = '.$user_id.' and status = 1','orderby'=>'default desc,id desc'));
         $address2 = array();
-        foreach ($address as $key => $item) {
+        if($address)
+        {
+            foreach ($address as $key => $item) {
             if($item->area)
             {
                 $qu = $this->area->get($item->area);
-                $item->area_name = $qu->area_name;
+                $city = $this->area->get($qu->parent_id);
+                if($city)
+                {
+                    $province = $this->area->get($city->parent_id);
+                }
+                else
+                {
+                    $province = $this->area->get($qu->parent_id);
+                }
+                
+
+                $item->qu = isset($qu->area_name)?$qu->area_name:'';
+                $item->city = isset($city->area_name)?$city->area_name:'';
+                $item->province = isset($province->area_name)?$province->area_name:'';
                 $address2[$key] = $item;
             }
+        }
         }
         $data['address'] = $address2;
         $this->load->view('home/address/lists',$data);
@@ -170,6 +186,13 @@ class Address extends CI_Controller {
         }
         else
         {
+            $count = $this->user_address->count();
+            if(intval($count)>=21){
+                $data = array('code'=>'1001','msg'=>"添加的收货地址不能超过20个");
+                echo json_encode($data);
+                exit;
+            }
+            
             $insert_id = $this->user_address->insert($row);
             if(!$insert_id)
             {

@@ -29,7 +29,7 @@
                                 <? foreach($address as $key=>$item):?>
                             <div id="address_<?php echo $item->id;?>" class="b m-b-20">
                                 <div class="address-top bg-c-f5 p-b-10 b-b">
-                                    <h3 class="pull-left p-l-5" style="margin:0px;"><?php echo $item->consignee;?><?php echo (isset($item->area_name))?'_'.$item->area_name:''?></h3>
+                                    <h3 class="pull-left p-l-5" style="margin:0px;"><?php echo $item->consignee;?><?php echo (isset($item->qu))?'_'.$item->qu:''?><?php echo $item->default == 1 ? "<span style='font-size:14px;'>(默认地址)</span>":"";?></h3>
                                     <div class="pull-right">
                                         <a class="m-r-20" href="<?php echo base_url().'address/edit/'.$item->id;?>">编辑</a>
                                         <a href="javascript:void(0)" onclick="doDelete('address/delete/<?php echo $item->id?>')">删除</a>
@@ -47,7 +47,7 @@
                                         <div class="item">
                                             <span class="pull-left">所在地区：</span>
                                             <div class="pull-left">
-                                                广东珠海市香洲区拱北区
+                                                <?php echo $item->province.$item->city.$item->qu;?>
                                             </div>
                                             <div class="clear"></div>
                                         </div>
