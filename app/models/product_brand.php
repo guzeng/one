@@ -142,7 +142,7 @@ class Product_brand  extends CI_Model{
 		{
 			return base_url().$folder.'/'.$file_save_dir.'/'.$file_save_name.'.png';
 		}
-		return base_url().'assets/img/default.jpg';
+		return base_url().'assets/img/105-45.jpg';
 	}
 
 

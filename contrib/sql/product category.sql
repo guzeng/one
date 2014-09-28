@@ -1,3 +1,4 @@
+truncate one_product_category;
 insert  into `one_product_category`(`id`,`name`,`parent_id`) values (1,'零食物语',0);
 insert  into `one_product_category`(`id`,`name`,`parent_id`) values (2,'休闲零食',1);
 insert  into `one_product_category`(`id`,`name`,`parent_id`) values (3,'坚果/蜜饯',1);
