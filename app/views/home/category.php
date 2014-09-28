@@ -165,22 +165,13 @@
                 </div>
                 <div class='col-md-11 b-l p-15'>
                     <div class='row m-b-10'>
-                        <div class='col-md-3'>德运/devondale</div>
-                        <div class='col-md-3'>德亚/Weidendorf</div>
-                        <div class='col-md-3'>维芬堡/WELFINBURGER</div>
-                        <div class='col-md-3'>安佳/Anchor</div>
-                    </div>
-                    <div class='row m-b-10'>
-                        <div class='col-md-3'>欧德堡/OLDENBURGER</div>
-                        <div class='col-md-3'>纽麦福/Meadow Fresh</div>
-                        <div class='col-md-3'>兰特/Lactel</div>
-                        <div class='col-md-3'>田园/COUNTRY GOODNESS</div>
-                    </div>
-                    <div class='row m-b-10'>
-                        <div class='col-md-3'>宾格瑞/Binggrae</div>
-                        <div class='col-md-3'>多美鲜/Suki</div>
-                        <div class='col-md-3'>艾思达/ASDA</div>
-                        <div class='col-md-3'>德拉米尔/delamere</div>
+                        <?foreach($product_brand as $key => $item):?>
+                            <?if($key > 0 && $key%4==0):?>
+                                </div>
+                                <div class='row m-b-10'>
+                            <?endif;?>
+                            <div class='col-md-3'><?php echo $item->name?></div>
+                        <?endforeach;?>
                     </div>
                 </div>
             </div>
