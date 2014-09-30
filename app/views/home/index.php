@@ -243,7 +243,9 @@
                 <?endif;?>
             <?endif;?>
                 <li item-index='<?php echo $item->id?>'>
-                    <a target="_blank" href="<?php echo $item->id;?>"><img height="45" width="105" src='<?php echo $this->product_brand->pic($item->id)?>'></a>
+                    <a target="_blank" href="<?php echo $item->id;?>">
+                        <img height="45" width="105" src='<?php echo $this->product_brand->pic($item->id)?>'>
+                    </a>
                 </li>
             <?if(($key+1)%9 == 0):?>
             </ul>
