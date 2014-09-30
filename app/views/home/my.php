@@ -2,7 +2,7 @@
   <div class="page-sidebar nav-collapse">
     <ul class="nav">
         <li class="head">订单中心</li>
-        <li class="active"><a href="order">我的订单</a></li>
+        <li class="active"><a href="orders">我的订单</a></li>
         <li><a href="history">浏览历史</a></li>
         <li><a href="#nav-tabs">邮件订阅</a></li>       
         <li class="head">客户服务</li>

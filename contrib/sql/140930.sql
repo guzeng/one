@@ -1,0 +1,1 @@
+﻿alter table one_order add column address_id int(11) not null default 0 COMMENT '用户收货地址ID' after price;
