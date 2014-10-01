@@ -7,23 +7,34 @@
 class Product extends CI_Model{
 	
 	private $table = 'product';
-    private $page = 1;
+    public $page = 1;
     private $per_page = 15;
-    private $param = array();
+    public $param = array();
     private $base_url = '';
     private $groupby = '';
+    public $params = array();
 
     //---------------------------------------------------------------
     public function __construct()
     {
         parent::__construct();
-        $params = $this->uri->uri_to_assoc(4);
+        if($this->router->fetch_directory()=='admin')
+        {
+            $params = $this->uri->uri_to_assoc(4);    
+        }
+        else
+        {
+            $params = $this->uri->uri_to_assoc(3);
+        }
+        $this->params = $params;
         $this->param['cate_id'] = $this->input->post('cate_id') ? $this->input->post('cate_id') : 
             (isset($params['cate_id']) ? urldecode($params['cate_id']) : 0);
         $this->param['code'] = $this->input->post('code')!='' ? trim($this->input->post('code')) : 
             (isset($params['code']) ? urldecode(trim($params['code'])) : '');
         $this->param['name'] = $this->input->post('name')!='' ? trim($this->input->post('name')) : 
             (isset($params['name']) ? urldecode(trim($params['name'])) : '');
+        $this->param['brand_id'] = $this->input->post('brand_id')!='' ? trim($this->input->post('brand_id')) : 
+            (isset($params['brand_id']) ? urldecode(trim($params['brand_id'])) : '');
         $this->page = isset($params['page']) ? trim($params['page']) : 1;
         $this->base_url = '';
     }
@@ -166,6 +177,11 @@ class Product extends CI_Model{
             $where[] = "a.name like '%".addslashes(str_replace('%', '\%', $this->param['name']))."%'";
             $this->base_url .= 'name/'.urlencode($this->param['name']).'/';
         }
+        if($this->param['brand_id'] != '')
+        {
+            $where[] = "a.brand_id='{$this->param['brand_id']}'";
+            $this->base_url .= 'brand_id/'.urlencode($this->param['brand_id']).'/';
+        }
         if($this->param['code'] != '')
         {
             $where[] = "a.code like '%".addslashes(str_replace('%', '\%', $this->param['code']))."%'";
@@ -211,6 +227,7 @@ class Product extends CI_Model{
         }
         $this->db->order_by($_orderby);
 		$query = $this->db->get();
+        //echo $this->db->last_query();
         if($query->num_rows() > 0){
             return $query->result();
         }
@@ -226,15 +243,18 @@ class Product extends CI_Model{
      * @author zeng.gu
      * 2014/3/31
      */    
-    public function all($where=array(),$orderby='',$groupby='')
+    public function all($where=array(),$orderby='',$groupby='',$num=0)
     {
-        //$_where = $this->condition($where);
         $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
         $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
         $_type = 'a.*';
         $this->db->select ( $_type );
         if(!empty($where)){
             $this->db->where($where);
+        }
+        if($num > 0)
+        {
+            $this->db->limit($num);    
         }
         $this->db->from($this->table.' as a');
         if($this->groupby!='')
@@ -262,10 +282,15 @@ class Product extends CI_Model{
     {
         $_where = $this->condition();
         $this->db->select ('count(a.id) as count');
-        if(isset($_where)){
+        if($_where){
             $this->db->where($_where);
         }
-        return $this->db->count_all($this->table);
+        $query = $this->db->get($this->table.' as a');
+        if($query->num_rows() > 0){
+            $a = $query->result();
+            return $a[0]->count;
+        }
+        return 0;
     }
     //----------------------------------------------------------------
 

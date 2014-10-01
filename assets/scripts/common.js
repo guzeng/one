@@ -220,7 +220,7 @@ function load_page(url, target, callback)
             url:url,
             dataType:'json',
             success:function(data){
-                //close_alert();
+                close_alert();
                 if(typeof(data.code)!='undefined' && data.code == '1002')
                 {
                     show_login();
@@ -232,7 +232,7 @@ function load_page(url, target, callback)
                 }
                 else if(typeof(data.msg)!='undefined')
                 {
-                    //show_alert(data.msg,'error');
+                    show_alert(data.msg);
                 }
 				place_holder();
                 if(typeof(callback)=='function')
@@ -242,10 +242,11 @@ function load_page(url, target, callback)
                 $("html,body").animate({scrollTop:$("#"+target).offset().top-85},1000);
             },
             error:function(){
-                //show_alert(msg.error, 'error');
+                show_alert(msg.error);
             },
             beforeSend:function(){
                 //show_alert(msg.loading, 'loading');
+                loading();
             }
         })
     }

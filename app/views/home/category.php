@@ -2,8 +2,8 @@
 <div class='container'>
     <div class='row'>
         <ol class="breadcrumb top-bar">
-            <li><a href="#">食品饮料</a></li>
-            <li class="active">进口食品</li>
+            <?if(isset($parent)):?><li><?php echo $parent->name?></li><?endif;?>
+            <li class="active"><?php echo $category->name?></li>
         </ol>
     </div>
 </div>
@@ -12,11 +12,15 @@
         <!-- left -->
         <div class='col-lg-2 col-md-3 col-sm-3 col-xs-12 col-no-padding'>
             <ul class="list-group m-b-10">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Morbi leo risus</li>
-              <li class="list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item">Vestibulum at eros</li>
+                <?if(!empty($child)):?>
+                <?foreach($child as $key => $value):?>
+                <li class="list-group-item">
+                    <a href="<?php echo base_url()?>category/index/cate_id/<?php echo $value->id?>">
+                    <?php echo $value->name?>
+                    </a>
+                </li>
+                <?endforeach;?>
+                <?endif;?>
             </ul>
             <!-- ad 1 -->
             <div class='m-b-10'>
@@ -26,132 +30,50 @@
             <div class='b m-b-10'>
                 <div class='p-10 b-b black'>本周销售排行</div>
                 <ul class="list-unstyled c-top10">
+                    <?if(!empty($hot)):?>
+                    <?foreach($hot as $key => $item):?>
                     <li>
                         <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
+                            <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>" target='_blank'>
+                                <img src="<?php echo $this->product->pic($item->id,1,'thumb');?>" class='img-responsive'>
+                            </a>
                         </div>
                         <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
+                            <div class=''>
+                                <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>" target='_blank'>
+                                    <?php echo $item->name?>
+                                </a>
+                            </div>
+                            <div class='price'>￥<?php echo sprintf('%.2f',$item->price)?></div>
                         </div>
                         <div class='clearfix'></div>
                     </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
-                    <li>
-                        <div class='img pull-left'>
-                            <img src="<?php echo base_url();?>assets/img/home/p-s.jpg" class='img-responsive'>
-                        </div>
-                        <div class='name'>
-                            <div class=' '><a>相思果园 正宗无锡阳山水蜜桃1个尝鲜装</a></div>
-                            <div class='price'>￥999.00</div>
-                        </div>
-                        <div class='clearfix'></div>
-                    </li>
+                    <?endforeach;?>
+                    <?endif;?>
                 </ul>
             </div>
 
             <div class='b'>
-                <div class='p-10 b-b black'>看过海产的顾客最终购买了</div>
+                <div class='p-10 b-b black'>看过<?php echo $category->name?>的顾客最终购买了</div>
                 <ul class="list-unstyled c-top10">
+                    <?if(!empty($last_buy)):?>
+                    <?foreach($last_buy as $key => $item):?>
                     <li>
                         <div class='m-b-10'>
-                            <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/p-s2.jpg">
+                            <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>" target='_blank'>
+                            <img class='img-responsive' src="<?php echo $this->product->pic($item->id,1);?>">
+                            </a>
                         </div>
                         <div class='m-b-10'>
-                            <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
+                            <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>" target='_blank'>
+                                <?php echo $item->name?>
+                            </a>
                         </div>
-                        <div class='m-b-5 price'>￥999.00</div>
-                        <div><a class='c-9'>已有3人评价</a></div>
+                        <div class='m-b-5 price'>￥<?php echo sprintf('%.2f',$item->price)?></div>
+                        <div><a class='c-9'>已有<?php echo $item->comment_num?>人评价</a></div>
                     </li>
-                    <li>
-                        <div class='m-b-10'>
-                            <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/p-s2.jpg">
-                        </div>
-                        <div class='m-b-10'>
-                            <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                        </div>
-                        <div class='m-b-5 price'>￥999.00</div>
-                        <div><a class='c-9'>已有3人评价</a></div>
-                    </li>
-                    <li>
-                        <div class='m-b-10'>
-                            <img class='img-responsive' src="<?php echo base_url();?>assets/img/home/p-s2.jpg">
-                        </div>
-                        <div class='m-b-10'>
-                            <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                        </div>
-                        <div class='m-b-5 price'>￥999.00</div>
-                        <div><a class='c-9'>已有3人评价</a></div>
-                    </li>
+                    <?endforeach;?>
+                    <?endif;?>
                 </ul>
             </div>
         </div>
@@ -170,7 +92,11 @@
                                 </div>
                                 <div class='row m-b-10'>
                             <?endif;?>
-                            <div class='col-md-3'><?php echo $item->name?></div>
+                            <div class='col-md-3'>
+                                <a href='javascript:void(0)' onclick="load_page('<?php echo base_url()?>category/plist/cate_id/<?php echo $cate_id?>/brand_id/<?php echo $item->id?>','c-plist')">
+                                <?php echo $item->name?>
+                                </a>
+                            </div>
                         <?endforeach;?>
                     </div>
                 </div>
@@ -190,397 +116,34 @@
                 </div>
             </div>
             <!-- 价格 end -->
-            <!-- order line -->
-            <div class='row m-t-10 m-l-0 order-line'>
-                <div class='col-md-1 p-t-6 order-line-title' >排序</div>
-                <div class='col-md-5 p-t-5 p-b-5 p-l-0'>
-                    <a><span class='order-item'>销量</span></a>
-                    <span class='order-item'>价格</span>
-                    <span class='order-item'>评论数</span>
-                    <span class='order-item'>上架时间</span>
-                </div>
-                <div class='col-md-6 p-t-5 p-b-5 text-right'>
-                    <span class='order-page total'>共 1787 个商品</span>
-                    <span class='order-page'><span class='order-page-current'>1</span>/51</span>
-                    <span class='order-page-btn'><button class='btn btn-default'>上一页</button> <button class='btn btn-default'>下一页</button></span>
-                </div>
-            </div>
-            <!-- order line end -->
             <!-- list -->
-            <div class='row m-b-20 '>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-            </div>
-            <div class='row m-b-20 '>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-            </div>
-            <div class='row m-b-20 '>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-            </div>
-            <div class='row m-b-20 '>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                    <div class=' m-b-5'><a>已有3人评价</a></div>
-                    <div class=''>
-                        <div class='pull-left input'>
-                            <input type='text' class=' form-control' value='80'>
-                            <button class='btn btn-default plus'>+</button>
-                            <button class='btn btn-default minus'>-</button>
-                        </div>
-                        <div class='pull-left ship-btn'><button class='btn btn-default'>加入购物车</button></div>
-                    </div>
-                </div>
+            <div id='c-plist'>
+                <?php echo $plist;?>
             </div>
             <!-- list end -->
             <div class='row m-l-0 m-b-20'><div class='col-md-12 guess-like'>猜您喜欢</div></div>
             <!-- like list -->
             <div class='row m-b-20 '>
+                <?if(!empty($like_list)):?>
+                <?foreach($like_list as $key => $item):?>
+                <?if($key>0 && $key%4==0):?>
+                    </div><div class='row m-b-20 '>
+                <?endif;?>
                 <div class='col-md-3 p-thumb'>
                     <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
+                        <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>" target='_blank'>
+                            <img src='<?php echo $this->product->pic($item->id);?>' class='img-responsive'>
+                        </a>
                     </div>
                     <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
+                        <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>" target='_blank'>
+                            <?php echo $item->name?>
+                        </a>
                     </div>
-                    <div class='price'>￥ 999.00</div>
+                    <div class='price'>￥ <?php echo sprintf('%.2f',$item->price);?></div>
                 </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                </div>
-            </div>
-            <div class='row m-b-20 '>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                </div>
-                <div class='col-md-3 p-thumb'>
-                    <div class='text-center m-b-10'>
-                        <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'>
-                    </div>
-                    <div class='m-b-5 title'>
-                        <a>海晏堂 淡干海参 刺参 干货 80g海参礼盒 淡干海参</a>
-                    </div>
-                    <div class='price'>￥ 999.00</div>
-                </div>
+                <?endforeach;?>
+                <?endif;?>
             </div>
             <!-- like list end -->
         </div>
