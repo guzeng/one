@@ -8,6 +8,8 @@ app/logs/*
 !app/logs/index.html
 !app/logs/.htaccess
 
+app/config/database.php
+
 upload/*
 !index.html
 
