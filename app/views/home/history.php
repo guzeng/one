@@ -1,17 +1,21 @@
-<?$this->
-load->view('home/header')?>
+<?$this->load->view('home/header')?>
 <div class='container m-t-20'>
-    <div class='row'>
+    <div class='row' id="history">
         <!-- left -->
         <?$this->load->view('home/my')?>
         <!-- left end -->
         <!-- right -->
-        <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
-
-            <h3 class="page-title">
+        
+        <div class='col-lg-11 col-md-11 col-sm-11 col-xs-12 '>
+            <ul class="timeline clearfix">
+                        <li class="timeline-yellow">
+                            <div class="timeline-icon col-md-1">vvvv
+                            </div>
+                            <div class="timeline-body col-md-11">
+            <h4 class="page-title">
                 今天
-                <small>2014-8-19 浏览了9件宝贝</small>
-            </h3>
+                <small><span class="time">2014-8-19</span> 浏览了9件宝贝</small>
+            </h4>
             <!-- list -->
             <div class='row m-b-20 '>
                 <div class='col-md-3 p-thumb'>
@@ -70,7 +74,9 @@ load->view('home/header')?>
 
             </div>
             <!-- like list end --> </div>
-        <!-- right end --> </div>
+        </li>
+    </ul>
+        <!-- right end --> </div></div>
 </div>
 
 <div class='container m-b-20' id='ad-footer'>
