@@ -61,7 +61,9 @@
                     <?foreach($product_cate as $key => $item):?>
                         <!-- 顶级分类 -->
                         <div class='item'>
-                            <a><?php echo $item['name'];?></a>
+                            <a href="<?php echo base_url()?>category/index/cate_id/<?php echo $item['id']?>">
+                                <?php echo $item['name'];?>
+                            </a>
                             <span class="more">></span>
                             
                             <?php if(isset($item['child']) && !empty($item['child'])): ?>
@@ -71,13 +73,17 @@
                                             <?foreach($item['child'] as $k => $i):?>
                                             <dl>
                                                 <!-- 二级分类 开始-->
-                                                <dt><?php echo $i['name'];?></dt>
+                                                <dt>
+                                                    <a href="<?php echo base_url()?>category/index/cate_id/<?php echo $i['id']?>">
+                                                        <?php echo $i['name'];?>
+                                                    </a>
+                                                </dt>
                                                 <!-- 二级分类 结束-->
                                                 <dd>
                                                     <!-- 三级分类 -->
                                                     <?php if(isset($i['child']) && !empty($i['child'])): ?>
                                                     <?foreach($i['child'] as $k3 => $v):?>
-                                                        <a href="<?php echo base_url().'/category/'.$v['id']?>" target="_blank"><?php echo $v['name'];?></a>
+                                                        <a href="<?php echo base_url().'/category/index/cate_id/'.$v['id']?>" target="_blank"><?php echo $v['name'];?></a>
                                                         <?if($k3 >6 && $k3%7 == 0):?>
                                                         <s class="mod_subcate_dotline"></s>
                                                         <?endif;?>
@@ -243,7 +249,9 @@
                 <?endif;?>
             <?endif;?>
                 <li item-index='<?php echo $item->id?>'>
-                    <a target="_blank" href="<?php echo $item->id;?>"><img height="45" width="105" src='<?php echo $this->product_brand->pic($item->id)?>'></a>
+                    <a target="_blank" href="<?php echo $item->id;?>">
+                        <img height="45" width="105" src='<?php echo $this->product_brand->pic($item->id)?>'>
+                    </a>
                 </li>
             <?if(($key+1)%9 == 0):?>
             </ul>

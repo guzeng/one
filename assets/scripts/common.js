@@ -220,7 +220,7 @@ function load_page(url, target, callback)
             url:url,
             dataType:'json',
             success:function(data){
-                //close_alert();
+                close_alert();
                 if(typeof(data.code)!='undefined' && data.code == '1002')
                 {
                     show_login();
@@ -232,7 +232,7 @@ function load_page(url, target, callback)
                 }
                 else if(typeof(data.msg)!='undefined')
                 {
-                    //show_alert(data.msg,'error');
+                    show_alert(data.msg);
                 }
 				place_holder();
                 if(typeof(callback)=='function')
@@ -242,10 +242,11 @@ function load_page(url, target, callback)
                 $("html,body").animate({scrollTop:$("#"+target).offset().top-85},1000);
             },
             error:function(){
-                //show_alert(msg.error, 'error');
+                show_alert(msg.error);
             },
             beforeSend:function(){
                 //show_alert(msg.loading, 'loading');
+                loading();
             }
         })
     }
@@ -355,6 +356,11 @@ function do_submit(formID, callback)
                             {
                                 $('#'+formID).find('textarea[name='+key+']').parent().addClass('has-error');
                                 $('#'+formID).find('textarea[name='+key+']').parent().find('span.help-block').html(item).addClass('error-span');
+                            }
+                            else if($('select[name='+key+']').length > 0)
+                            {
+                                $('#'+formID).find('select[name='+key+']').parent().addClass('has-error');
+                                $('#'+formID).find('select[name='+key+']').parent().find('span.help-block').html(item).addClass('error-span');
                             }
                         }
                     })
@@ -551,6 +557,11 @@ function hide_tree_list(compare, current)
 function areaChange(obj,area_level)
 {
     var id = $(obj).val();
+    if(parseInt(id) == 0)
+    {
+        $(obj).nextAll().has('option').html("<option value='0'>请选择</option>");
+        return;
+    }
     $.ajax({
         url:msg.base_url+"admin/areas/lists/"+id+"/"+area_level,
         dataType:'json',
@@ -565,21 +576,25 @@ function areaChange(obj,area_level)
                     
                     if(data.zhi_xia_shi)
                     {
-                        $(obj).next().hide();
-                        $(obj).next().next().html('');
+                        if($(obj).nextAll().size() >2 )
+                        {
+                            $(obj).next().has('option').hide();
+                        }
+                        $(obj).next().next().has('option').html("<option value='0'>请选择</option>");
 
                         $.each(data.area,function(key,item){
                             option += "<option value='"+item['area_id']+"'>"+item['area_name']+"</option>";
                         })
+
                         $(obj).next().next().append(option);
                     }
                     else
                     {
-                        $(obj).next().show();
+                        $(obj).next().has('option').show();
                         $.each(data.area,function(key,item){
                             option += "<option value='"+item['area_id']+"'>"+item['area_name']+"</option>";
                         })
-                        $(obj).next().append(option);
+                        $(obj).next().has('option').append(option);
                     }
                 }
             }

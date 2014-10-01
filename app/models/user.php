@@ -186,7 +186,7 @@ class User  extends CI_Model{
 		$file_save_name = file_save_name($id);
 		if(is_file($folder.DIRECTORY_SEPARATOR.$file_save_dir.DIRECTORY_SEPARATOR.$file_save_name.'.png'))
 		{
-			return base_url().$folder.'/'.$file_save_dir.'/'.$file_save_name.$size.'.png';
+			return base_url().$folder.'/'.$file_save_dir.'/'.$file_save_name.'.png';
 		}
 		return base_url().'assets/img/avatar.jpg';
 	}

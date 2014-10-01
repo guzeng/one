@@ -97,8 +97,8 @@ CREATE TABLE `one_member` (
   `gender` int(11) NOT NULL default '0' COMMENT '性别',
   `address` varchar(50) NOT NULL default '' COMMENT '详细地址',
   `money` decimal(2,0) NOT NULL default '0' COMMENT '预付款',
-  `birthday` int(10) DEFAULT '0'  NOT NULL  COMMENT '生日';
-  `id_card_number` VARCHAR(30) DEFAULT ''  NOT NULL  COMMENT '身份证号码';
+  `birthday` int(10) DEFAULT '0'  NOT NULL  COMMENT '生日',
+  `id_card_number` VARCHAR(30) DEFAULT ''  NOT NULL  COMMENT '身份证号码',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
@@ -149,7 +149,7 @@ CREATE TABLE `one_order` (
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
   `phone` varchar(20) NOT NULL default '' COMMENT '电话',
   `address` varchar(255) NOT NULL default '' COMMENT '地址',
-  `status` tinyint(3) NOT NULL default '0' COMMENT '状态,0,待处理,1,已发货,2,退货',
+  `status` tinyint(3) NOT NULL default '0' COMMENT '状态,0,待处理,1,已发货,2,待付款,3,待评价,4,退货,5,废弃订单',
   PRIMARY KEY  (`id`),
   KEY `user` (`user_id`),
   KEY `code` (`code`),
@@ -163,6 +163,7 @@ CREATE TABLE `one_order` (
 DROP TABLE IF EXISTS `one_order_detail`;
 CREATE TABLE `one_order_detail` (
   `id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) NOT NULL default '0' COMMENT '订单ID',
   `product_id` int(11) NOT NULL default '0' COMMENT '商品ID',
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
   `number` int(11) NOT NULL default '0' COMMENT '数量',
@@ -382,11 +383,11 @@ CREATE TABLE `one_ship` (
 
 DROP TABLE IF EXISTS `one_user_address`;
 CREATE TABLE `one_user_address` (
-  `id` INT(11) NOT NULL DEFAULT '0' COMMENT 'ID',
+  `id` INT(11) NOT NULL auto_increment,
   `user_id` INT(11) NOT NULL DEFAULT '0' COMMENT '用户Id',
   `province_id` INT(11) NOT NULL DEFAULT '0' COMMENT '省的区域编号',
   `city_id` INT(11) NOT NULL DEFAULT '0' COMMENT '市的区域编号',
-  `qu_id` INT(11) NOT NULL DEFAULT '0' COMMENT '区的区域编号',
+  `area` INT(11) NOT NULL DEFAULT '0' COMMENT '区的区域编号',
   `consignee` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '收货人',
   `gender` INT(11) NOT NULL DEFAULT '0' COMMENT '性别',
   `telephone` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '固定电话',
@@ -396,3 +397,15 @@ CREATE TABLE `one_user_address` (
   `default` INT(1) NOT NULL DEFAULT '0' COMMENT '默认地址（1默认/0不默认）',
   PRIMARY KEY  (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `one_user_browse_history`;
+CREATE TABLE `one_user_browse_history` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL default '0' COMMENT '用户ID',
+  `product_id` int(11) NOT NULL default '0' COMMENT '商品ID',
+  `create_time` int(10) NOT NULL default '0' COMMENT '创建时间',
+  PRIMARY KEY  (`id`),
+  KEY `user` (`user_id`),
+  KEY `product` (`product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户浏览商品历史表';

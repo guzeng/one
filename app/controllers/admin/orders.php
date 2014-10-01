@@ -29,9 +29,21 @@ class Orders extends CI_Controller {
         {
             $data['list'] = $this->order->all(array('status'=>'0'));
         }
+        else if($status == '1')
+        {
+            $data['list'] = $this->order->all(array('status'=>'1'));
+        }
         else if($status == '2')
         {
             $data['list'] = $this->order->all(array('status'=>'2'));
+        }
+        else if($status == '3')
+        {
+            $data['list'] = $this->order->all(array('status'=>'3'));
+        }
+        else if($status == '4')
+        {
+            $data['list'] = $this->order->all(array('status'=>'4'));
         }
         else
         {

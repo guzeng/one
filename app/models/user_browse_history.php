@@ -1,7 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Product_brand  extends CI_Model{
-	private $table='product_brand';
+class User_browse_history  extends CI_Model{
+	private $table='user_browse_history';
+	private $table_product = 'product';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -42,31 +43,10 @@ class Product_brand  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
-    /**
-    *   exist
-    *   检查是否存在
-    *   @param int id
-    * 
-    */
-    public function exist($where)
-    {
-        if($where){
-            $this->db->from($this->table. ' as a');
-            $this->db->where($where);
-            $type = 'count(a.id) as count';
-            $this->db->select($type);
-            $query = $this->db->get();
-            if($query->row()->count > 0)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    //----------------------------------------------------------------
+
 	/**
 	 * lists
-	 * 查询所有分类, 用于分页显示列表
+	 * 查询, 用于分页显示列表
 	 * 
 	 *	@param item array 
 	 *	@return array
@@ -83,15 +63,18 @@ class Product_brand  extends CI_Model{
         $_start = isset($_start) && intval($_start)>0 ? intval($_start) : 0;
         $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'id desc';
         if(!isset($_type)){
-            $_type = '*';
+            $_type = 'a.*,p.id,p.price,p.best_price,p.sale_num';
         }
 		$this->db->select ( $_type );
+        $this->db->from( $this->table.' as a');
+        $this->db->join($this->table_product.' as p','p.id=a.product_id','inner');
+
         if(isset($_where)){
             $this->db->where($_where);
         }
         $this->db->order_by($_orderby);
         $this->db->limit($_num,$_start);
-		$query = $this->db->get ( $this->table);
+		$query = $this->db->get ();
         if($query->num_rows() > 0){
             return $query->result();
         }
@@ -101,7 +84,7 @@ class Product_brand  extends CI_Model{
 	//---------------------------------------------------------
 	/**
 	 * all
-	 * 查询所有分类
+	 * 查询所有
 	 * 
 	 *	@param item array 
 	 *	@return array   
@@ -131,21 +114,22 @@ class Product_brand  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
-
-	public function pic($id)
-	{
-		$this->config->load('upload');
-		$folder = $this->config->item('product_brand_folder');
-		$file_save_dir = file_save_dir($id);
-		$file_save_name = file_save_name($id);
-		if(is_file($folder.DIRECTORY_SEPARATOR.$file_save_dir.DIRECTORY_SEPARATOR.$file_save_name.'.png'))
-		{
-			return base_url().$folder.'/'.$file_save_dir.'/'.$file_save_name.'.png';
-		}
-		return base_url().'assets/img/105-45.jpg';
-	}
-
+    /**
+     * count
+     * 查询所有数量
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/3/31
+     */    
+    public function count()
+    {
+        $this->db->select ('count(a.id) as count');
+        return $this->db->count_all($this->table);
+    }
+    //----------------------------------------------------------------
 
 }
-/* End of file product_brand.php */
-/* Location: ./application/models/product_brand.php */	
+/* End of file user_browse_history.php */
+/* Location: ./application/models/user_browse_history.php */	

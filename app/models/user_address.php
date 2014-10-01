@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Product_brand  extends CI_Model{
-	private $table='product_brand';
+class User_address  extends CI_Model{
+	private $table='user_address';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -19,6 +19,13 @@ class Product_brand  extends CI_Model{
 			return $this->db->update($this->table,$row);
 		}
 		return false;
+	}
+	//--------------------------------------------------------
+
+	public function update_by_default($id){
+		$this->db->where('id !=',$id);
+		$this->db->where('default',1);
+		return $this->db->update($this->table,array('default'=>0));
 	}
 	//--------------------------------------------------------
 
@@ -42,31 +49,10 @@ class Product_brand  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
-    /**
-    *   exist
-    *   检查是否存在
-    *   @param int id
-    * 
-    */
-    public function exist($where)
-    {
-        if($where){
-            $this->db->from($this->table. ' as a');
-            $this->db->where($where);
-            $type = 'count(a.id) as count';
-            $this->db->select($type);
-            $query = $this->db->get();
-            if($query->row()->count > 0)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    //----------------------------------------------------------------
+
 	/**
 	 * lists
-	 * 查询所有分类, 用于分页显示列表
+	 * 查询, 用于分页显示列表
 	 * 
 	 *	@param item array 
 	 *	@return array
@@ -101,7 +87,7 @@ class Product_brand  extends CI_Model{
 	//---------------------------------------------------------
 	/**
 	 * all
-	 * 查询所有分类
+	 * 查询所有
 	 * 
 	 *	@param item array 
 	 *	@return array   
@@ -131,20 +117,21 @@ class Product_brand  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
-
-	public function pic($id)
-	{
-		$this->config->load('upload');
-		$folder = $this->config->item('product_brand_folder');
-		$file_save_dir = file_save_dir($id);
-		$file_save_name = file_save_name($id);
-		if(is_file($folder.DIRECTORY_SEPARATOR.$file_save_dir.DIRECTORY_SEPARATOR.$file_save_name.'.png'))
-		{
-			return base_url().$folder.'/'.$file_save_dir.'/'.$file_save_name.'.png';
-		}
-		return base_url().'assets/img/105-45.jpg';
-	}
-
+    /**
+     * count
+     * 查询所有数量
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/3/31
+     */    
+    public function count()
+    {
+        $this->db->select ('count(a.id) as count');
+        return $this->db->count_all($this->table);
+    }
+    //----------------------------------------------------------------
 
 }
 /* End of file product_brand.php */
