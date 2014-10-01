@@ -7,7 +7,7 @@ body {
   direction: ltr;
 }
 h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
-a{color: #666666; text-decoration: none;}
+a{color: #0d638f; text-decoration: none;}
 a:hover{color: #666666; }
 .m-l-0{margin-left: 0px;}
 .m-l-15{margin-left: 15px;}

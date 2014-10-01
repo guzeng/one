@@ -163,6 +163,7 @@ CREATE TABLE `one_order` (
 DROP TABLE IF EXISTS `one_order_detail`;
 CREATE TABLE `one_order_detail` (
   `id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) NOT NULL default '0' COMMENT '订单ID',
   `product_id` int(11) NOT NULL default '0' COMMENT '商品ID',
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
   `number` int(11) NOT NULL default '0' COMMENT '数量',
