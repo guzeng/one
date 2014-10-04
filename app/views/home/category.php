@@ -1,4 +1,5 @@
 <?$this->load->view('home/header')?>
+<script src="<?php echo base_url();?>assets/scripts/home/item.js" type="text/javascript"></script>
 <div class='container'>
     <div class='row'>
         <ol class="breadcrumb top-bar">

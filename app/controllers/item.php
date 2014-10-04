@@ -11,6 +11,7 @@ class Item extends CI_Controller {
         parent::__construct();
         $this->load->model('product');
         $this->load->model('product_category');
+        $this->load->model('product_brand');
     }
 	public function index()
 	{
@@ -39,6 +40,12 @@ class Item extends CI_Controller {
 				$data['parent'] = $parent;
 				$data['child'] = $this->product_category->all(array('where'=>array('parent_id'=>$category->parent_id)));	
 			}
+		}
+		$brand = $this->product_brand->get($product->brand_id);
+		$data['brand_name'] = '';
+		if($brand)
+		{
+			$data['brand_name'] = $brand->name;
 		}
 		$data['product'] = $product;
 		//看了又看

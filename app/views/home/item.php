@@ -1,4 +1,5 @@
 <?$this->load->view('home/header')?>
+<script src="<?php echo base_url();?>assets/scripts/home/item.js" type="text/javascript"></script>
 <div class='container'>
     <?if(isset($category)):?>
     <div class='row'>
@@ -16,20 +17,23 @@
                 <div class='col-md-5 col-sm-5 col-xs-12 '>
                     <div class='img'>
                         <div class='m-b-20'>
-                            <img src="<?php echo $this->product->pic($product->id)?>" style='height:360px;' class='img-responsive'>
+                            <img src="<?php echo $this->product->pic($product->id)?>" id='item_img' class='img-responsive'>
                         </div>
                         <div class='text-center m-b-20'>
-                            <div class='pinfo-s m-r-20 active'>
-                                <img src="<?php echo $this->product->pic($product->id,2,'thumb')?>" class='img-responsive'>
+                            <div class='pinfo-s m-r-10 active'>
+                                <img src="<?php echo $this->product->pic($product->id,1,'thumb')?>" class='item-thumb img-responsive'>
                             </div>
-                            <div class='pinfo-s m-r-20'>
-                                <img src="<?php echo $this->product->pic($product->id,3,'thumb')?>" class='img-responsive'>
+                            <div class='pinfo-s m-r-10 '>
+                                <img src="<?php echo $this->product->pic($product->id,2,'thumb')?>" class='item-thumb img-responsive'>
                             </div>
-                            <div class='pinfo-s m-r-20'>
-                                <img src="<?php echo $this->product->pic($product->id,4,'thumb')?>" class='img-responsive'>
+                            <div class='pinfo-s m-r-10'>
+                                <img src="<?php echo $this->product->pic($product->id,3,'thumb')?>" class='item-thumb img-responsive'>
+                            </div>
+                            <div class='pinfo-s m-r-10'>
+                                <img src="<?php echo $this->product->pic($product->id,4,'thumb')?>" class='item-thumb img-responsive'>
                             </div>
                             <div class='pinfo-s'>
-                                <img src="<?php echo $this->product->pic($product->id,5,'thumb')?>" class='img-responsive'>
+                                <img src="<?php echo $this->product->pic($product->id,5,'thumb')?>" class='item-thumb img-responsive'>
                             </div>
                         </div>
                     </div>
@@ -75,10 +79,10 @@
                         <div class='col-md-2'>数量</div>
                         <div class='col-md-10 '>
                             <div class="pinfo">
-                                <input type="text" value="<?php echo $product->min_num?>" class=" form-control">
-                                <button class="btn btn-default plus">+</button>
-                                <button class="btn btn-default minus">-</button>
-                                <input type='hidden' id='min_num' value='<?php echo $product->min_num?>' >
+                                <input type="text" name='cart_num' value="<?php echo $product->min_num>0?$product->min_num:1;?>" class=" form-control">
+                                <button class="btn btn-default plus" onclick="cart_count('plus',this)">+</button>
+                                <button class="btn btn-default minus" onclick="cart_count('minus',this)">-</button>
+                                <input type='hidden' id='min_num' name='min_num' value='<?php echo $product->min_num?>' >
                             </div>
                         </div>
                     </div>
@@ -104,7 +108,7 @@
                     <div class="midtext">看了又看</div>
                 </div>
             </div>
-            <div class="img">
+            <div class="img relative" id='see_again'>
                 <?if(!empty($view_again)):?>
                 <?foreach($view_again as $key => $item):?>
                     <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>">
@@ -112,11 +116,17 @@
                     </a>
                 <?endforeach;?>
                 <?endif;?>
+                    <a href="<?php echo base_url()?>item/id/<?php echo $product->id?>" >
+                    <img class='img-responsive' src="<?php echo $this->product->pic($product->id)?>">
+                    </a>
+                    <a href="<?php echo base_url()?>item/id/<?php echo $product->id?>" class='hide'>
+                    <img class='img-responsive' src="<?php echo $this->product->pic($product->id)?>">
+                    </a>
             </div>
             <div class="nav">
-                <span class="pull-left">
+                <span class="pull-left hand" onclick="item_go('up')">
                     <img class='img-responsive' src="<?php echo base_url();?>assets/img/portlet-expand-icon2.png"></span>
-                <span clas="pull-left">
+                <span class="pull-left hand" onclick="item_go('down')">
                     <img class='img-responsive' src="<?php echo base_url();?>assets/img/portlet-collapse-icon2.png"></span>
             </div>
         </div>
@@ -204,7 +214,7 @@
                     <li class="">
                         <a href="#profile" role="tab" data-toggle="tab">
                             累计评价
-                            <span class="coun">32</span>
+                            <span class="coun"><?php echo $product->comment_num?></span>
                         </a>
                     </li><li>
                      <a href="#dropdown1" role="tab" data-toggle="tab">
@@ -216,7 +226,7 @@
                     <table width="100%" border="0">
                       <tr>
                         <td width="106">品牌名称：</td>
-                        <td>妮维雅</td>
+                        <td><?php echo $brand_name?></td>
                       </tr>
                     </table>
                     <hr>

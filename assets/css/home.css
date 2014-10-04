@@ -403,10 +403,12 @@ a:hover{color: #666666; }
 .pinfo-top-right .midline,.pinfo-mid-right .midline{margin-top: 38px;border-bottom: 1px solid #d8d8d8;position: relative;}
 .pinfo-top-right .midtext,.pinfo-mid-right .midtext{position: absolute;top: -28px;background-color: #eee;left:50%;padding:0 10px;margin-left: -33px}
 .pinfo-mid-right .midtext{background-color:#f9f9f9; }
-.pinfo-top-right .img,.pinfo-mid-right .img{text-align: center;}
+.pinfo-top-right .img,.pinfo-mid-right .img{text-align: center; height: 402px; }
 .pinfo-top-right .img img,.pinfo-mid-right .img img{margin:0 auto;width:120px;margin-bottom: 14px;}
-.pinfo-top-right .nav ,.pinfo-mid-right .nav {text-align: center;padding: 10px 50px;}
-.pinfo-top-right .nav span img,.pinfo-mid-right .nav span img{margin: 0 10px;}
+.pinfo-mid-right .nav {text-align: center;padding: 10px 50px;}
+.pinfo-mid-right .nav span img{margin: 0 10px;}
+.pinfo-top-right .nav {text-align: center;padding: 10px 55px;}
+.pinfo-top-right .nav span img{margin: 0 5px;}
 /*详细页中间*/
 .pro-x{border: 1px solid #f0f0f0;}
 .pro-x .nav-tabs{border-color: #f0f0f0;background-color:#f9f9f9; }
@@ -448,7 +450,6 @@ a:hover{color: #666666; }
 #myTabContent .coun{width: 60px;float: left;}
 #myTabContent .label-warning{background-color: #ff6710;}
 #myTabContent .label-default{background-color: #ccc;}
-<<<<<<< HEAD
 /*history*/
 #history .page-title{font-size: 18px;font-weight: bold;fon}
 #history .time{margin: auto 10px;}
@@ -497,5 +498,3 @@ a:hover{color: #666666; }
     display: block;
     text-align: right;
 }
-=======
->>>>>>> 8fe28c93eb5b2dd88e34658bbfb882412f23d816

@@ -328,7 +328,6 @@ class Product extends CI_Model{
     */
     public function pic($id='', $sort=1, $type='big')
     {
-        $default = base_url().'assets/img/default.jpg';
         if($id)
         {    
             $folder = upload_folder('product');
@@ -339,19 +338,25 @@ class Product extends CI_Model{
                 case 'small':
                 case 'thumb':
                     $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'_thumb.png';
+                    $default = base_url().'assets/img/product/p-default_thumb.png';
                 break;
                 case 'big':
                 case 'default':
                 default:
                     $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'.png';
+                    $default = base_url().'assets/img/product/p-default.png';
                 break;
             }
             if(file_exists($filePath))
             {
                 return base_url().$filePath.'?'.rand();
             }
+            else
+            {
+                return $default;
+            }
         }
-        return $default;
+        return false;
     }
 }
 /* End of file product.php */
