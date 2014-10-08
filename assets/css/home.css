@@ -72,8 +72,8 @@ a:hover{color: #666666; }
 .clear {clear: both;}
 
 #categorys{background-color: #569E0C;}
-#categorys .navbar-brand{height: auto;}
-
+#categorys .navbar-brand{height: auto;padding-left: 0;}
+.mod_cate{box-shadow:0;}
 #category{background-color: #FFFBE0; }
 #category .item{padding: 12px 8px 13px 9px; border-bottom: 1px solid #F1EBCA; color:#AD6C3E; margin-bottom: 0px;}
 #category .item a{color:#AD6C3E;font-size: 13px; font-weight: 600}
