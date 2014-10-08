@@ -47,7 +47,7 @@
             <div class='row'>
             <?php if($this->auth->user_id()):?>
             <span>欢迎您 <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a></span>
-            <span><a href="<?php echo base_url().'order/'.$this->auth->user_id();?>">我的订单</a></span>
+            <span><a href="<?php echo base_url().'orders'?>">我的订单</a></span>
             <?endif;?>
             <span><a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a></span>
             </div>
@@ -70,7 +70,9 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                         </div>
                     </div>
-                    <button class="btn btn-lg btn-cart" type="submit"><i class="fa icon-cart"></i>购物车</button>
+                    <a class="btn btn-lg btn-cart" href="<?php echo base_url()?>cart">
+                        <i class="fa icon-cart"></i> 购物车
+                    </a>
 
                 </form>
             </div>
