@@ -7,7 +7,7 @@ body {
   direction: ltr;
 }
 h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
-a{color: #0d638f; text-decoration: none;}
+a{color: #0d638f; text-decoration: none;cursor:pointer;}
 a:hover{color: #666666; }
 .m-l-0{margin-left: 0px;}
 .m-l-15{margin-left: 15px;}
@@ -439,6 +439,7 @@ a:hover{color: #666666; }
 #myTabContent .actions  {margin-top:16px;display: block;}
 #myTabContent .actions .btn{padding: 4px 6px;background-color: #fff;border: 1px solid #ddd;margin-left: 3px;}
 #myTabContent .table-striped > tbody > tr:nth-child(odd) > td{background-color: #fff;text-align: center;}
+#myTabContent .table-striped > tbody > tr > td{text-align: center;}
 #myTabContent .table-striped > tbody > tr:nth-child(odd) > td .title{text-align: left;}
 .first-title{text-align: left;}
 #myTabContent .img{float:left;border:1px solid #f0f0f0;margin-right: 10px;}
@@ -454,6 +455,7 @@ a:hover{color: #666666; }
 #history .page-title{font-size: 18px;font-weight: bold;fon}
 #history .time{margin: auto 10px;}
 #history small{font-size: 12px;}
+.round {position: absolute;left: -29px;top: -22px;width: 16px;width: 16px;height: 16px;font-size: 40px;line-heigth: 16px;text-align: center;color: rgba(95, 171, 34, 1);text-decoration: none;}
 .timeline {
     list-style-image: none;
     list-style-position: outside;

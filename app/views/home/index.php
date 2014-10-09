@@ -13,8 +13,8 @@
     .mod_subcate_main{float:left;width:100%;padding:0 20px;border-right:1px solid #ddd;padding-bottom:1000px;margin-bottom:-1000px}
     .mod_subcate_side{float:left;width:230px;padding-bottom:1000px;margin-bottom:-1000px}
     .mod_subcate_gg{clear:both;position:absolute;bottom:0;right:0;_right:-1px;_bottom:-1px}
-    .mod_subcate_main dl{zoom:1;overflow:hidden;padding:10px 0 10px 65px;border-bottom:1px solid #e5e5e5}
-    .mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:65px;font:700 12px/22px tahoma;color:#1d7ad9}
+    .mod_subcate_main dl{zoom:1;overflow:hidden;padding:0px 0 0px 65px;margin-top:10px;border-bottom:1px solid #e5e5e5}
+    .mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:185px;font:700 12px/22px tahoma;color:#1d7ad9}
     .mod_subcate_main dd{overflow:hidden;zoom:1;line-height:22px}
     .mod_subcate_main dd a{display:inline;float:left;margin-left:5px;margin-right:5px;white-space:nowrap}
     .mod_subcate_main dd .hl,.mod_subcate_main dd .hl:hover{color:#ff7300}
@@ -67,7 +67,7 @@
                             <span class="more">></span>
                             
                             <?php if(isset($item['child']) && !empty($item['child'])): ?>
-                            <div class="mod_subcate hide" style="width:350%; top: 0px; overflow: hidden; height: 372px;">
+                            <div class="mod_subcate hide" style="width:350%; top: 0px; overflow: hidden; height:auto;min-height: 372px;">
                                     <div id="panel0" class="mod_subcate_item" index="0" style="display: block;">
                                         <div class="mod_subcate_main">
                                             <?foreach($item['child'] as $k => $i):?>
@@ -257,6 +257,8 @@
             </ul>
             <?endif;?>
         <?endforeach;?>
+        <?else:?>
+        <p style="text-align:center;">站长暂未挑选精选品牌！<p>
         <?endif;?>  
         </div>  
     </div>
@@ -426,12 +428,18 @@
                                     <!-- 二级商品分类开始 -->
                                     <?php if(isset($item['child']) && !empty($item['child'])): ?>
                                     <?foreach($item['child'] as $k => $i):?>
+                                    <?if($k >= 4):?>
+                                    <?break;?>
+                                    <?endif;?>
                                     <dl class="sy_mod_key_dl">
                                         <dt><a href="#" target="_blank"><?php echo $i['name'];?></a></dt>
                                         <dd>
                                             <!-- 三级商品分类开始 -->
                                             <?php if(isset($i['child']) && !empty($i['child'])): ?>
                                             <?foreach($i['child'] as $k3 => $v):?>
+                                                <?if($k >= 4):?>
+                                                <?break;?>
+                                                <?endif;?>
                                                 <a href="<?php echo base_url().'/category/'.$v['id']?>" target="_blank"><?php echo $v['name'];?></a>
                                             <?endforeach;?>
                                             <?endif;?>
