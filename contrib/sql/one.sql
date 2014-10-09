@@ -3249,6 +3249,16 @@ INSERT INTO `one_area` VALUES (659001,'石河子市',659000,3,1,0);
 INSERT INTO `one_area` VALUES (659002,'阿拉尔市',659000,3,1,0);
 INSERT INTO `one_area` VALUES (659003,'图木舒克市',659000,3,1,0);
 INSERT INTO `one_area` VALUES (659004,'五家渠市',659000,3,1,0);
+DROP TABLE IF EXISTS `one_cart`;
+CREATE TABLE `one_cart` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL default '0' COMMENT '用户ID',
+  `product_id` int(11) NOT NULL default '0' COMMENT '产品ID',
+  `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
+  `save` float(10,2) NOT NULL default '0.00' COMMENT '优惠',
+  `count` int(11) NOT NULL default '0' COMMENT '数量',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='购物车';
 
 DROP TABLE IF EXISTS `one_join`;
 CREATE TABLE `one_join` (
@@ -3326,6 +3336,7 @@ CREATE TABLE `one_member` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 INSERT INTO `one_member` VALUES (1,'admin','497245c9e08975567103ce3cc382e761758a1679','admin','',0,0,0,0,0,'',0,'','','','',0,'','',0,'',0,'','',0);
+
 DROP TABLE IF EXISTS `one_news`;
 CREATE TABLE `one_news` (
   `id` int(11) NOT NULL auto_increment,
@@ -3356,6 +3367,7 @@ CREATE TABLE `one_order` (
   `code` varchar(20) NOT NULL default '' COMMENT '编号',
   `create_time` int(10) NOT NULL default '0' COMMENT '创建时间',
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
+  `address_id` int(11) NOT NULL default '0' COMMENT '用户收货地址ID',
   `phone` varchar(20) NOT NULL default '' COMMENT '电话',
   `address` varchar(255) NOT NULL default '' COMMENT '地址',
   `status` tinyint(3) NOT NULL default '0' COMMENT '状态,0,待处理,1,已发货,2,退货',
@@ -3368,6 +3380,7 @@ CREATE TABLE `one_order` (
 DROP TABLE IF EXISTS `one_order_detail`;
 CREATE TABLE `one_order_detail` (
   `id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) NOT NULL default '0' COMMENT '订单ID',
   `product_id` int(11) NOT NULL default '0' COMMENT '商品ID',
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
   `number` int(11) NOT NULL default '0' COMMENT '数量',
@@ -3430,19 +3443,8 @@ CREATE TABLE `one_product_brand` (
   `info` varchar(100) NOT NULL default '' COMMENT '备注',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='商品品牌';
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品品牌';
 
-INSERT INTO `one_product_brand` VALUES (1,'品牌一','工顶替枯在要');
-INSERT INTO `one_product_brand` VALUES (2,'品牌二','品牌二');
-INSERT INTO `one_product_brand` VALUES (3,'美的','');
-INSERT INTO `one_product_brand` VALUES (4,'九阳','');
-INSERT INTO `one_product_brand` VALUES (5,'苏泊尔','');
-INSERT INTO `one_product_brand` VALUES (6,'飞利浦','');
-INSERT INTO `one_product_brand` VALUES (7,'奔腾','');
-INSERT INTO `one_product_brand` VALUES (8,'松下','');
-INSERT INTO `one_product_brand` VALUES (9,'格兰仕','');
-INSERT INTO `one_product_brand` VALUES (10,'荣事达','');
-INSERT INTO `one_product_brand` VALUES (11,'飞科','');
 DROP TABLE IF EXISTS `one_product_category`;
 CREATE TABLE `one_product_category` (
   `id` int(11) NOT NULL auto_increment,
@@ -3638,11 +3640,11 @@ CREATE TABLE `one_storage` (
 
 DROP TABLE IF EXISTS `one_user_address`;
 CREATE TABLE `one_user_address` (
-  `id` int(11) NOT NULL default '0' COMMENT 'ID',
+  `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) NOT NULL default '0' COMMENT '用户Id',
   `province_id` int(11) NOT NULL default '0' COMMENT '省的区域编号',
   `city_id` int(11) NOT NULL default '0' COMMENT '市的区域编号',
-  `qu_id` int(11) NOT NULL default '0' COMMENT '区的区域编号',
+  `area` int(11) NOT NULL default '0' COMMENT '区的区域编号',
   `consignee` varchar(30) NOT NULL default '' COMMENT '收货人',
   `gender` int(11) NOT NULL default '0' COMMENT '性别',
   `telephone` varchar(30) NOT NULL default '' COMMENT '固定电话',
@@ -3651,7 +3653,18 @@ CREATE TABLE `one_user_address` (
   `status` int(1) NOT NULL default '1' COMMENT '状态（1可用/0不可用）',
   `default` int(1) NOT NULL default '0' COMMENT '默认地址（1默认/0不默认）',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `one_user_browse_history`;
+CREATE TABLE `one_user_browse_history` (
+  `id` int(11) NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL default '0' COMMENT '用户ID',
+  `product_id` int(11) NOT NULL default '0' COMMENT '商品ID',
+  `create_time` int(10) NOT NULL default '0' COMMENT '创建时间',
+  PRIMARY KEY  (`id`),
+  KEY `user` (`user_id`),
+  KEY `product` (`product_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='用户浏览商品历史表';
 
 DROP TABLE IF EXISTS `one_user_comment`;
 CREATE TABLE `one_user_comment` (
@@ -3662,4 +3675,3 @@ CREATE TABLE `one_user_comment` (
   `create_time` varchar(10) NOT NULL default '0' COMMENT '创建时间',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员留言';
-

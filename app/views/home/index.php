@@ -1,6 +1,6 @@
 <?$this->load->view('home/header')?>
 <style type="text/css">
-    .mod_cate{position:relative;z-index:600;margin-top:-1px;float:left;background-color:#4593fd;box-shadow:2px -1px 3px rgba(55,55,55,.5)}
+    .mod_cate{position:relative;z-index:600;margin-top:-1px;float:left;background-color:#4593fd;}
     .mod_cate a{color:#fff}
     .mod_cate a:hover{color:#fff}
     .mod_cate_on .mod_cate_hd{border-color:#3586f2}

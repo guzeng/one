@@ -70,7 +70,9 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                         </div>
                     </div>
-                    <button class="btn btn-lg btn-cart" type="submit"><i class="fa icon-cart"></i>购物车</button>
+                    <a class="btn btn-lg btn-cart" href="<?php echo base_url()?>cart">
+                        <i class="fa icon-cart"></i> 购物车
+                    </a>
 
                 </form>
             </div>
