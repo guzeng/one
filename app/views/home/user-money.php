@@ -1,16 +1,12 @@
 <?$this->load->view('home/header')?>
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("body").eq(0).css("overflow-y","scroll");
-    });
-</script>
-    <div class='container m-b-20 m-t-20'>
-        <div class='row'>
-            <div class="col-lg-2 col-md-2" style="padding:0px;">
-                <?$this->load->view('home/user-left')?>
-            </div>
-            <div class="col-lg-10 col-md-10">
+    <div class='container m-t-20'>
+        <div class='row' id="user-safe">
+            <!-- left -->
+            <?$this->load->view('home/my')?>
+            <!-- left end -->
+            <!-- right -->
+            <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
                 <div id="main">
                     <div class="tab-content">
                         <!-- 账户余额 -->
@@ -48,19 +44,9 @@
             </div>
         </div>
     </div>
-    <!-- BEGIN FOOTER -->
-    <!-- <div class="footer">
-        <div class="footer-inner">
-            2013 &copy; Zeng.
-        </div>
-        <div class="footer-tools">
-            <span class="go-top">
-            <i class="fa fa-angle-up"></i>
-            </span>
-        </div>
-    </div> -->
-    <!-- END FOOTER -->
 
-</body>
-<!-- END BODY -->
-</html>
+<div class='container m-b-20' id='ad-footer'>
+    <div class='row'>
+        <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/ad-footer.png'></div>
+</div>
+<?$this->load->view('home/footer')?>

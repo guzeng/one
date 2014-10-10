@@ -46,7 +46,7 @@
         <div class='container text-right'>
             <div class='row'>
             <?php if($this->auth->user_id()):?>
-            <span>欢迎您 <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a></span>
+            <span>欢迎您 <a href="<?php echo base_url().'home/users/index';?>"><?php echo $this->auth->username();?></a></span>
             <span><a href="<?php echo base_url().'home/orders/'.$this->auth->user_id();?>">我的订单</a></span>
             <?endif;?>
             <span><a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a></span>

@@ -57,7 +57,7 @@
                 <div style="margin:0 auto;width:100%;text-align:center;">
                     <p style="font-size:28px;font-weight:blod;" class="text-success">恭喜，您注册成功！</p>
                     <a href="<?php echo base_url();?>" class="btn btn-lg btn-success">马上购物</a>
-                    <p style="margin-top:20px;">您可以修改<a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>" sytle="ffont-size:15px;">个人资料</a></p>
+                    <p style="margin-top:20px;">您可以修改<a href="<?php echo base_url().'home/users/index';?>" sytle="ffont-size:15px;">个人资料</a></p>
                 </div>
             </div>
         </div>

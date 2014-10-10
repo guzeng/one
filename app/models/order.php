@@ -185,7 +185,7 @@ class Order extends CI_Model{
         $_type = 'a.*,address.consignee';
         
 		$this->db->select ( $_type );
-        if(isset($_where)){
+        if(isset($_where) && $_where){
             $this->db->where($_where);
         }
         $this->db->limit($_num,$_start);
@@ -254,10 +254,9 @@ class Order extends CI_Model{
     {
         $_where = $this->condition($where);
         $this->db->select ('count(a.id) as count');
-        if(isset($_where)){
+        if(isset($_where) && $_where){
             $this->db->where($_where);
         }
-
         $this->db->from($this->table.' as a');
         $this->db->join($this->detail_table.' as d','d.order_id=a.id','left');
         $this->db->join($this->product_table.' as p','d.product_id=p.id','left');

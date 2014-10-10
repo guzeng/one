@@ -1,16 +1,12 @@
 <?$this->load->view('home/header')?>
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("body").eq(0).css("overflow-y","scroll");
-    });
-</script>
-    <div class='container m-b-20 m-t-20'>
-        <div class='row'>
-            <div class="col-lg-2 col-md-2" style="padding:0px;">
-                <?$this->load->view('home/user-left')?>
-            </div>
-            <div class="col-lg-10 col-md-10">
+    <div class='container m-t-20'>
+        <div class='row' id="user-safe">
+            <!-- left -->
+            <?$this->load->view('home/my')?>
+            <!-- left end -->
+            <!-- right -->
+            <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
                 <div id="main">
                     <div class="tab-content">
                         <!-- 账户安全 -->
@@ -18,14 +14,13 @@
                             <div class="o-mt">
                                 <h2>安全中心</h2>
                             </div>
-                            <div id="safe04" class="m-b-10 m3">
-                                <div class="mc">
-                                    <strong class="fore fore1">安全级别：</strong>
-                                    <strong class="rank-text ftx-04">中级</strong><i class="icon-rank04"></i>
-                                    <span id="promptInfo" class="ftx-04">建议您启动全部安全设置，以保障账户及资金安全。</span>
-                                </div>
-                            </div>
                             <div id="safe05" class="m-b-10 m5">
+                                <div class="mc" style="border-width:0px;">
+                                    <strong class="m-l-25">安全级别：</strong>
+                                    <i class="icon-rank icon-rank04"></i>
+                                    <strong class="rank-text ftx-04">中高级</strong>
+                                    <div style="margin-left:95px;margin-top:15px;"><span style="color:orange;">建议您启动全部安全设置，以保障账户及资金安全。</span></div>
+                                </div>
                                 <div class="mc">
                                     <div class="fore1"><s class="icon-01"></s><strong>登录密码</strong></div>
                                     <div class="fore2"><span class="ftx-03"></span><span style="color:#cc0000;">互联网账号存在被盗风险，建议您定期更改密码以保护账户安全。</span></div>
@@ -97,19 +92,9 @@
             </div>
         </div>
     </div>
-    <!-- BEGIN FOOTER -->
-    <!-- <div class="footer">
-        <div class="footer-inner">
-            2013 &copy; Zeng.
-        </div>
-        <div class="footer-tools">
-            <span class="go-top">
-            <i class="fa fa-angle-up"></i>
-            </span>
-        </div>
-    </div> -->
-    <!-- END FOOTER -->
 
-</body>
-<!-- END BODY -->
-</html>
+<div class='container m-b-20' id='ad-footer'>
+    <div class='row'>
+        <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/ad-footer.png'></div>
+</div>
+<?$this->load->view('home/footer')?>

@@ -52,10 +52,10 @@
 	<!-- header end -->
     <div class='container' id='contain'>
         <div class='row'>
-            <div class='col-md-7' id='loginLeft'>
+            <div class='col-md-7' id='loginLeft' style="height:450px;">
                 <img src='<?php echo base_url()?>assets/img/home/loginLeft.png'>
             </div>
-            <div class='col-md-5' id='loginArea'>
+            <div class='col-md-5' id='loginArea' style="height:450px;">
                 <form action="<?=base_url()?>login/verify" method="post" onsubmit='return false' role="form" id='lms-form'>
                     <div class="form-group">
                         <label for="username"><strong>邮箱/用户名/手机</strong></label>

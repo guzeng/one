@@ -16,7 +16,7 @@
     <?$this->load->view('home/my')?>
     <!-- left end -->
     <!-- right -->
-    <div class='col-lg-11 col-md-9 col-sm-9 col-xs-12'>
+    <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
       <div class="order-tab">
       <form action="<?=base_url()?>home/orders/index" method="post" id='order_list_search_form'>
         <input type="hidden" name="status" id="status" value="<?php echo $status;?>"/>

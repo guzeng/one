@@ -55,6 +55,9 @@
 <script src="<?php echo base_url();?>assets/scripts/home/home.js" type="text/javascript"></script>
     <!-- categorys  -->
     <div class='container'>
+        <span onclick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.dabaoku.com');" style="CURSOR: hand">设为首页</span>
+
+<a href="javascript:void(0);" onClick="window.external.AddFavorite(document.location.href,document.title)">加入收藏</a>
         <div class='row'>
             <div id='category' class='col-lg-2 col-md-3 col-no-padding mod_cate mod_on' >
                 <?php if(isset($product_cate) && !empty($product_cate)): ?>
@@ -107,10 +110,10 @@
                     <img src="<?php echo base_url()?>assets/img/home/i.png" class="img-responsive">
                 </div>
                 <div class='ad-top'>
-                    <table class="table table-bordered ad-table" >
+                    <table class="table table-bordered" >
                         <tbody>
                             <tr>
-                                <td width='33.3%'>
+                                <td>
                                     <div class='pull-left'>
                                         <div class='title'><strong>进口水果</strong></div>
                                         <div>台湾凤梨</div>
@@ -121,7 +124,7 @@
                                         <img src="<?php echo base_url()?>assets/img/home/ad-s-1.png">
                                     </div>
                                 </td>
-                                <td width='33.3%'>
+                                <td>
                                     <div class='pull-left'>
                                         <div class='title'><strong>T恤节女装</strong></div>
                                         <div>条纹T恤</div>
@@ -132,7 +135,7 @@
                                         <img src="<?php echo base_url()?>assets/img/home/ad-s-2.png">
                                     </div>
                                 </td>
-                                <td width='33.3%'>
+                                <td>
                                     <div class='pull-left'>
                                         <div class='title'><strong>意尔康大牌日</strong></div>
                                         <div>高跟单鞋</div>
@@ -156,7 +159,7 @@
                     <div class='pull-left username'>
                         <div>Hi,
                             <?php if($this->auth->username()):?>
-                            <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>">
+                            <a href="<?php echo base_url().'home/users/index';?>">
                                 <?php echo $this->auth->username();?>
                             </a> 
                             <?else:?>
