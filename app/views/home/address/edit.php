@@ -2,7 +2,6 @@
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("body").eq(0).css("overflow-y","scroll");
          //地区
         $("#province").change(function(){
             areaChange($("#province"),2);
@@ -12,12 +11,13 @@
         });
     });
 </script>
-    <div class='container m-b-20 m-t-20'>
-        <div class='row'>
-            <div class="col-lg-2 col-md-2" style="padding:0px;">
-                <?$this->load->view('home/user-left')?>
-            </div>
-            <div class="col-lg-10 col-md-10">
+    <div class='container m-t-20'>
+        <div class='row' id="user-safe">
+            <!-- left -->
+            <?$this->load->view('home/my')?>
+            <!-- left end -->
+            <!-- right -->
+            <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
                 <div id="main">
                     <div class="tab-content">
                         <!-- 账户地址 -->
@@ -26,7 +26,7 @@
                                 <h2>收货地址</h2>
                             </div>
                             <div class="b">
-                                <form action="<?php echo base_url()?>address/update" method="post" onsubmit='return false' role="form" id='address_form' class="form-horizontal">
+                                <form action="<?php echo base_url()?>home/address/update" method="post" onsubmit='return false' role="form" id='address_form' class="form-horizontal">
                                     <div class="form-body">
                                         <div class="form-group">
                                             <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"><span class="req">*</span>收货人：</label>
@@ -78,7 +78,7 @@
                                                         <?endforeach;?>
                                                     </select>
                                                     <?else:?>
-                                                    <select class="form-control input-small inline hide" id="city">
+                                                    <select class="form-control input-small inline hide" style="display:none;" id="city">
                                                         <option value="0">请选择</option>
                                                     </select>
                                                     <?endif;?>
@@ -139,19 +139,9 @@
             </div>
         </div>
     </div>
-    <!-- BEGIN FOOTER -->
-    <!-- <div class="footer">
-        <div class="footer-inner">
-            2013 &copy; Zeng.
-        </div>
-        <div class="footer-tools">
-            <span class="go-top">
-            <i class="fa fa-angle-up"></i>
-            </span>
-        </div>
-    </div> -->
-    <!-- END FOOTER -->
 
-</body>
-<!-- END BODY -->
-</html>
+<div class='container m-b-20' id='ad-footer'>
+    <div class='row'>
+        <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/ad-footer.png'></div>
+</div>
+<?$this->load->view('home/footer')?>

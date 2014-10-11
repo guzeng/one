@@ -8,6 +8,8 @@ class Order extends CI_Model{
 	
 	private $table = 'order';
     private $detail_table = 'order_detail';
+    private $product_table = 'product';
+    private $address_table = 'user_address';
     private $page = 1;
     private $per_page = 15;
     private $param = array();
@@ -19,8 +21,8 @@ class Order extends CI_Model{
     {
         parent::__construct();
         $params = $this->uri->uri_to_assoc(4);
-        $this->param['code'] = $this->input->post('code')!='' ? trim($this->input->post('code')) : 
-            (isset($params['code']) ? urldecode(trim($params['code'])) : '');
+        $this->param['keyword'] = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : 
+            (isset($params['keyword']) ? urldekeyword(trim($params['keyword'])) : '');
         $this->page = isset($params['page']) ? trim($params['page']) : 1;
         $this->base_url = '';
     }
@@ -146,10 +148,11 @@ class Order extends CI_Model{
             $where[] = "a.user_id = '".$this->param['user_id']."'";
             $this->base_url .= 'user_id/'.urlencode($this->param['user_id']).'/';
         }
-        if(isset($this->param['code']) && $this->param['code'] != '')
+        if(isset($this->param['keyword']) && $this->param['keyword'] != '')
         {
-            $where[] = "a.code like '%".addslashes(str_replace('%', '\%', $this->param['code']))."%'";
-            $this->base_url .= 'code/'.urlencode($this->param['code']).'/';
+            $where[] = "a.code like '%".addslashes(str_replace('%', '\%', $this->param['keyword']))."%'".
+                        " or p.name like '%".addslashes(str_replace('%', '\%', $this->param['keyword']))."%'";
+            $this->base_url .= 'keyword/'.urlencode($this->param['keyword']).'/';
         }
         if(!empty($cond))
         {
@@ -179,13 +182,18 @@ class Order extends CI_Model{
         $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
         $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
         $this->per_page = $_num;
-        $_type = 'a.*';
+        $_type = 'a.*,address.consignee';
+        
 		$this->db->select ( $_type );
-        if(isset($_where)){
+        if(isset($_where) && $_where){
             $this->db->where($_where);
         }
         $this->db->limit($_num,$_start);
         $this->db->from($this->table.' as a');
+        $this->db->join($this->address_table.' as address','address.id=a.address_id','left');
+        $this->db->join($this->detail_table.' as d','d.order_id=a.id','left');
+        $this->db->join($this->product_table.' as p','d.product_id=p.id','left');
+
         if($this->groupby!='')
         {
             $this->db->group_by($this->groupby);
@@ -219,6 +227,8 @@ class Order extends CI_Model{
             $this->db->where($_where);
         }
         $this->db->from($this->table.' as a');
+        $this->db->join($this->detail_table.' as d','d.order_id=a.id','left');
+        $this->db->join($this->product_table.' as p','d.product_id=p.id','left');
         if($this->groupby!='')
         {
             $this->db->group_by($this->groupby);
@@ -231,7 +241,7 @@ class Order extends CI_Model{
         return false;   
     }
     //----------------------------------------------------------------
-    /**
+        /**
      * count
      * 查询所有数量
      * @param var orderby 排序方式
@@ -240,24 +250,34 @@ class Order extends CI_Model{
      * @author zeng.gu
      * 2014/3/31
      */    
-    public function count()
+    public function count($where = array())
     {
-        $_where = $this->condition();
+        $_where = $this->condition($where);
         $this->db->select ('count(a.id) as count');
-        if(isset($_where)){
+        if(isset($_where) && $_where){
             $this->db->where($_where);
         }
-        return $this->db->count_all($this->table);
+        $this->db->from($this->table.' as a');
+        $this->db->join($this->detail_table.' as d','d.order_id=a.id','left');
+        $this->db->join($this->product_table.' as p','d.product_id=p.id','left');
+        $this->db->group_by("a.id");
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+           $count = $query->result();
+           return $count[0]->count;
+        }
+        return false; 
     }
     //----------------------------------------------------------------
 
     /**
     * 分页
     */
-    public function pages()
+    public function pages($where = array())
     {
         $config['per_page'] = $this->per_page;
-        $config['total_rows'] = $this->count();
+        $total_rows = $this->count($where);
+        $config['total_rows'] = $total_rows ? $total_rows : 0;
         $config['base_url'] = rtrim($this->base_url,'/');
         $this->pagination->initialize($config);
         return $this->pagination->links();

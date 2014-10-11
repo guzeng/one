@@ -1,0 +1,1 @@
+﻿ALTER TABLE `one_product` ADD COLUMN `view_num` INT(10) DEFAULT 0  NOT NULL  COMMENT '浏览量';

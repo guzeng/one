@@ -15,8 +15,10 @@ class Users extends CI_Controller {
      * 展示用户基本信息
      * 
      */
-	public function index($user_id)
+	public function index()
 	{
+        $this->auth->check_login();
+        $user_id = $this->auth->user_id();
 		if(!$user_id)
 		{
 			show_404('',false);
@@ -64,8 +66,10 @@ class Users extends CI_Controller {
      * 展示用户安全信息
      * 
      */
-	public function safe($user_id)
+	public function safe()
 	{
+        $this->auth->check_login();
+        $user_id = $this->auth->user_id();
 		if(!$user_id)
 		{
 			show_404('',false);
@@ -81,8 +85,10 @@ class Users extends CI_Controller {
      * 展示用户余额信息
      * 
      */
-	public function money($user_id)
+	public function money()
 	{
+        $this->auth->check_login();
+        $user_id = $this->auth->user_id();
 		if(!$user_id)
 		{
 			show_404('',false);
@@ -92,23 +98,6 @@ class Users extends CI_Controller {
 
 		$data['user'] = $user;
 		$this->load->view('home/user-money',$data);
-	}
-
-    /**
-     * 展示用户收货地址信息
-     * 
-     */
-	public function address($user_id)
-	{
-		if(!$user_id)
-		{
-			show_404('',false);
-		}
-		$this->load->model('user_address');
-		$address = $this->user_address->lists();
-
-		$data['address'] = $address;
-		$this->load->view('home/user-address',$data);
 	}
 
     /**
@@ -192,7 +181,7 @@ class Users extends CI_Controller {
         }
         if($data['code'] == '1000')
         {
-            $data['goto'] = 'users/index/'.$post['id'];
+            $data['goto'] = 'home/users';
         }
         echo json_encode($data);
     }

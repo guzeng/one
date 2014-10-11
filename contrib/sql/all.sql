@@ -149,7 +149,7 @@ CREATE TABLE `one_order` (
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
   `phone` varchar(20) NOT NULL default '' COMMENT '电话',
   `address` varchar(255) NOT NULL default '' COMMENT '地址',
-  `status` tinyint(3) NOT NULL default '0' COMMENT '状态,0,待处理,1,已发货,2,待付款,3,待评价,4,退货,5,废弃订单',
+  `status` tinyint(3) NOT NULL default '0' COMMENT '状态,1,待付款,2,待发货,3,待收货,4,待评价,5,交易成功,6,退货,7,废弃订单',
   PRIMARY KEY  (`id`),
   KEY `user` (`user_id`),
   KEY `code` (`code`),
@@ -163,6 +163,7 @@ CREATE TABLE `one_order` (
 DROP TABLE IF EXISTS `one_order_detail`;
 CREATE TABLE `one_order_detail` (
   `id` int(11) NOT NULL auto_increment,
+  `order_id` int(11) NOT NULL default '0' COMMENT '订单ID',
   `product_id` int(11) NOT NULL default '0' COMMENT '商品ID',
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
   `number` int(11) NOT NULL default '0' COMMENT '数量',

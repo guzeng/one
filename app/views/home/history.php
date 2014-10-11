@@ -1,24 +1,26 @@
 <?$this->load->view('home/header')?>
 <div class='container m-t-20'>
-    <div class='row'>
+    <div class='row' id="history">
         <!-- left -->
         <?$this->load->view('home/my')?>
         <!-- left end -->
         <!-- right -->
-        <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
+        <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12' style="border-left:1px solid rgba(95, 171, 34, 1)">
+
             <?php if(isset($user_history) && !empty($user_history)):?>
             <?php foreach ($user_history as $key => $item):?>
-            <div class="same_date" style="m-b-10">
+            <div class="same_date relative" style="m-b-10">
+                  <a class="round">●</a>
                 <h3 class="page-title">
                     <?php echo $item[0]->show_date;?>
-                    <small><?php echo date('Y-m-d', $item[0]->create_time);?> 浏览了<?php echo count($item);?>个件宝贝</small>
+                    <small><?php if(!$item[0]->show_date):?><?php echo date('Y-m-d', $item[0]->create_time);?><?endif;?> 浏览了<?php echo count($item);?>个件宝贝</small>
                 </h3>
                 <!-- list -->
                 <div class='row m-b-20 '>
                     <?php foreach ($item as $key => $value):?>
                     <div class='col-md-3 p-thumb'>
                         <div class='text-center m-b-10'>
-                            <img src='<?php echo base_url()?>assets/img/home/p.jpg' class='img-responsive'></div>
+                            <img src='<?php echo base_url()?>assets/img/home/p.jpg' title='<?php echo $value->name;?>' class='img-responsive'></div>
 
                         <div class='price'>
                              ￥ <?php echo $value->price;?>

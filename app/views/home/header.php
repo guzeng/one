@@ -46,8 +46,8 @@
         <div class='container text-right'>
             <div class='row'>
             <?php if($this->auth->user_id()):?>
-            <span>欢迎您 <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a></span>
-            <span><a href="<?php echo base_url().'order/'.$this->auth->user_id();?>">我的订单</a></span>
+            <span>欢迎您 <a href="<?php echo base_url().'home/users/index';?>"><?php echo $this->auth->username();?></a></span>
+            <span><a href="<?php echo base_url().'home/orders/'.$this->auth->user_id();?>">我的订单</a></span>
             <?endif;?>
             <span><a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a></span>
             </div>
@@ -70,7 +70,9 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                         </div>
                     </div>
-                    <button class="btn btn-lg btn-cart" type="submit"><i class="fa icon-cart"></i>购物车</button>
+                    <a class="btn btn-lg btn-cart" href="<?php echo base_url()?>cart">
+                        <i class="fa icon-cart"></i> 购物车
+                    </a>
 
                 </form>
             </div>
@@ -91,10 +93,9 @@
             </div>
             <div class='col-md-9 col-sm-9 col-xs-12 navbar-collapse collapse' >
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">首页</a></li>					
-                    <li><a href="<?php echo base_url()?>category">分类</a></li>
-                    <li><a href="/index.php/item">产品详情</a></li>
-                    <li><a href="/index.php/order">我的订单</a></li>
+                    <li class="active"><a href="<?php echo base_url()?>">首页</a></li>
+                    <li><a href="<?php echo base_url().'item';?>">产品详情</a></li>
+                    <li><a href="<?php echo base_url().'home/orders';?>">我的订单</a></li>
                     <li><a href="#about">食品</a></li>
                     <li><a href="#contact">日用</a></li>
                     <li><a href="#contact">服装</a></li>

@@ -220,7 +220,7 @@ function load_page(url, target, callback)
             url:url,
             dataType:'json',
             success:function(data){
-                //close_alert();
+                close_alert();
                 if(typeof(data.code)!='undefined' && data.code == '1002')
                 {
                     show_login();
@@ -232,7 +232,7 @@ function load_page(url, target, callback)
                 }
                 else if(typeof(data.msg)!='undefined')
                 {
-                    //show_alert(data.msg,'error');
+                    show_alert(data.msg);
                 }
 				place_holder();
                 if(typeof(callback)=='function')
@@ -242,10 +242,11 @@ function load_page(url, target, callback)
                 $("html,body").animate({scrollTop:$("#"+target).offset().top-85},1000);
             },
             error:function(){
-                //show_alert(msg.error, 'error');
+                show_alert(msg.error);
             },
             beforeSend:function(){
                 //show_alert(msg.loading, 'loading');
+                loading();
             }
         })
     }
@@ -569,8 +570,8 @@ function areaChange(obj,area_level)
             {
                 if(typeof(data.area)!='undefined')
                 {
-                    $(obj).next().has('option').html("<option value='0'>请选择</option>");
-                    $(obj).next().next().has('option').html("<option value='0'>请选择</option>");
+                    $(obj).next().has('option').html("<option value='-1'>请选择</option>");
+                    $(obj).next().next().has('option').html("<option value='-1'>请选择</option>");
                     var option = "";
                     
                     if(data.zhi_xia_shi)
@@ -579,7 +580,7 @@ function areaChange(obj,area_level)
                         {
                             $(obj).next().has('option').hide();
                         }
-                        $(obj).next().next().has('option').html("<option value='0'>请选择</option>");
+                        $(obj).next().next().has('option').html("<option value='-1'>请选择</option>");
 
                         $.each(data.area,function(key,item){
                             option += "<option value='"+item['area_id']+"'>"+item['area_name']+"</option>";
