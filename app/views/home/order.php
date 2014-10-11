@@ -8,6 +8,14 @@
         // $("#search_type").prop("disabled",true);
         $("#order_list_search_form").submit();
     });
+    $("#create_time").change(function(){
+        $create_time = $("#create_time").val();
+        if($create_time)
+        {
+          $("#order_list_search_form").submit();
+        }
+    });
+
   });
 </script>
 <div class='container m-t-20' id="myorder">
@@ -51,7 +59,16 @@
         </ul>
         <div class="row">
           <div class="col-md-8 col-md-push-4">
-            <div class="btn-group">
+              <select class="form-control input-small inline" id="create_time" name="create_time">
+                  <option value="">购物时间</option>
+                  <option <?php echo isset($create_time) && $create_time == 1? 'selected':'';?>  value="1">最近三个月内</option>
+                  <option <?php echo isset($create_time) && $create_time == 2? 'selected':'';?> value="2"><?php echo date('Y',time());?>年</option>
+                  <option <?php echo isset($create_time) && $create_time == 3? 'selected':'';?> value="3"><?php echo date('Y',strtotime('-1 year'));?>年</option>
+                  <option <?php echo isset($create_time) && $create_time == 4? 'selected':'';?> value="4"><?php echo date('Y',strtotime('-2 year'));?>年</option>
+                  <option <?php echo isset($create_time) && $create_time == 5? 'selected':'';?> value="5"><?php echo date('Y',strtotime('-3 year'));?>年</option>
+                  <option <?php echo isset($create_time) && $create_time == 6? 'selected':'';?> value="6"><?php echo date('Y',strtotime('-3 year'));?>年之前</option>
+              </select>
+            <!-- <div class="btn-group">
                 <a data-toggle="dropdown" href="#" class=" ">
                    更多筛选条件 <i class="fa fa-angle-down"></i>
                 </a>
@@ -69,7 +86,7 @@
                   <li class="divider">
                   </li>
                 </ul>
-              </div>          
+              </div>      -->     
           </div>
           <div class="col-md-4 col-md-pull-8">
             <div class="input-group">
@@ -152,7 +169,7 @@
             </table> 
             <?endforeach;?>
           
-          <div class="portlet-title">                
+          <div class="portlet-title" style="margin-left:8px;">                
                 <div class="actions btn-set pull-left"><label class="checkbox-inline">
                       <div class="checker" id="uniform-inlineCheckbox1"><span><input type="checkbox" value="option1" id="inlineCheckbox1"></span></div> 全选 </label>
                       &nbsp;&nbsp;<button class="btn default" name="back" type="button">合并付款</button>

@@ -41,7 +41,7 @@ $(function(){
                     done: function (e, data) {
                         close_alert();
                         //给隐藏值赋值
-                        var url = var url = data['result']['files'][0]['thumbnailUrl'] ? data['result']['files'][0]['thumbnailUrl'] : data['result']['files'][0]['url'];
+                        var url = data['result']['files'][0]['thumbnailUrl'] ? data['result']['files'][0]['thumbnailUrl'] : data['result']['files'][0]['url'];
                         $('#pro_pic_'+i).attr('src',url+"?"+Math.random());
                         $('#pro_pic_path_'+i).val(data['result']['files'][0]['name']);
                         data.context.text('');

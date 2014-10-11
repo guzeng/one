@@ -42,6 +42,18 @@ class Product_brand  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
+	public function get_by_cateid($cate_id){
+		if($cate_id){
+			$this->db->select ( '*' );
+			$this->db->where('product_cate_id',$cate_id);
+			$query = $this->db->get($this->table);
+			if($query->num_rows()>0){
+				return $query->result();
+			}
+		}
+		return false;
+	}
+	//---------------------------------------------------------
     /**
     *   exist
     *   检查是否存在

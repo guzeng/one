@@ -64,6 +64,7 @@
 					                                    <?foreach($category_list as $item):?>
 					                                        <?if($item['hasChild']):?>
 					                                        <li style="margin-top:20px;margin-left:<?=$item['deep']*30?>px">
+																<input id="checkbox_<?=$item['id']?>" type="checkbox" style='margin: 5px 5px 0 0;' value="<?=$item['id']?>" id="status" name='status' > 
 																<strong><?=stripslashes($item['name']) ?></strong>
 															</li>
 															<?else:?>

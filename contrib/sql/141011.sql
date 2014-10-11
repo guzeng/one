@@ -1,0 +1,1 @@
+﻿ALTER TABLE `one_product_brand` ADD COLUMN `product_cate_id` INT(11) DEFAULT 0  NOT NULL  COMMENT '关联商品分类ID' after name;

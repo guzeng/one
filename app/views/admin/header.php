@@ -78,8 +78,8 @@
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <li class="dropdown user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <img alt="" src="<?php echo base_url()?>assets/img/avatar_small.jpg"/>
-                    <span class="username">Admin</span>
+                    <!-- <img alt="" src="<?php echo base_url()?>assets/img/avatar_small.jpg"/> -->
+                    <span class="username"><?php echo $this->auth->username();?></span>
                     <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">

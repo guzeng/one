@@ -55,9 +55,6 @@
 <script src="<?php echo base_url();?>assets/scripts/home/home.js" type="text/javascript"></script>
     <!-- categorys  -->
     <div class='container'>
-        <span onclick="var strHref=window.location.href;this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.dabaoku.com');" style="CURSOR: hand">设为首页</span>
-
-<a href="javascript:void(0);" onClick="window.external.AddFavorite(document.location.href,document.title)">加入收藏</a>
         <div class='row'>
             <div id='category' class='col-lg-2 col-md-3 col-no-padding mod_cate mod_on' >
                 <?php if(isset($product_cate) && !empty($product_cate)): ?>
@@ -106,55 +103,51 @@
                 <?endif;?>
             </div>
             <div class='col-lg-7 col-p-10 m-t-10 o-h'>
-                <div class='m-b-10 ad-top'>
-                    <img src="<?php echo base_url()?>assets/img/home/i.png" class="img-responsive">
-                </div>
-                <div class='ad-top'>
-                    <table class="table table-bordered" >
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class='pull-left'>
-                                        <div class='title'><strong>进口水果</strong></div>
-                                        <div>台湾凤梨</div>
-                                        <div>美国水果</div>
-                                        <div>意大利水果</div>
-                                    </div>
-                                    <div class='pull-right'>
-                                        <img src="<?php echo base_url()?>assets/img/home/ad-s-1.png">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class='pull-left'>
-                                        <div class='title'><strong>T恤节女装</strong></div>
-                                        <div>条纹T恤</div>
-                                        <div>假两件T</div>
-                                        <div>情侣T恤</div>
-                                    </div>
-                                    <div class='pull-right'>
-                                        <img src="<?php echo base_url()?>assets/img/home/ad-s-2.png">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class='pull-left'>
-                                        <div class='title'><strong>意尔康大牌日</strong></div>
-                                        <div>高跟单鞋</div>
-                                        <div>正装皮鞋</div>
-                                        <div>男帆布鞋</div>
-                                    </div>
-                                    <div class='pull-right'>
-                                        <img src="<?php echo base_url()?>assets/img/home/ad-s-3.png">
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <img src="<?php echo base_url()?>assets/img/home/i.png" class="img-responsive">
+                <table class="table table-bordered m-t-10" >
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class='pull-left'>
+                                    <div class='title'><strong>进口水果</strong></div>
+                                    <div>台湾凤梨</div>
+                                    <div>美国水果</div>
+                                    <div>意大利水果</div>
+                                </div>
+                                <div class='pull-right'>
+                                    <img src="<?php echo base_url()?>assets/img/home/ad-s-1.png">
+                                </div>
+                            </td>
+                            <td>
+                                <div class='pull-left'>
+                                    <div class='title'><strong>T恤节女装</strong></div>
+                                    <div>条纹T恤</div>
+                                    <div>假两件T</div>
+                                    <div>情侣T恤</div>
+                                </div>
+                                <div class='pull-right'>
+                                    <img src="<?php echo base_url()?>assets/img/home/ad-s-2.png">
+                                </div>
+                            </td>
+                            <td>
+                                <div class='pull-left'>
+                                    <div class='title'><strong>意尔康大牌日</strong></div>
+                                    <div>高跟单鞋</div>
+                                    <div>正装皮鞋</div>
+                                    <div>男帆布鞋</div>
+                                </div>
+                                <div class='pull-right'>
+                                    <img src="<?php echo base_url()?>assets/img/home/ad-s-3.png">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class='col-lg-3 col-no-padding m-t-10'>
                 <div id='userinfo'>
                     <div class='pull-left'>
-                        <img class="img-circle" src="<?php echo base_url();?>assets/img/home/user.png" >
+                        <img width=80 height=60 class="img-circle" src="<?php echo $this->user->pic($this->auth->user_id(),'small')?>" >
                     </div>
                     <div class='pull-left username'>
                         <div>Hi,
@@ -455,9 +448,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class='bottom'>
+                        <!-- <div class='bottom'>
                             <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class='col-md-8 col-no-padding' id='list'>
                         <div id='list1'>
@@ -475,12 +468,23 @@
                                 </div>
                             </div>
                                 <?endforeach;?>
+                            <?else:?>
+                            <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
                             <?endif;?>
-                            
                         </div>
                     </div>
                     <div class='col-md-2 col-no-padding' id='right'>
-                        <img class='img-responsive pull-right' src='<?php echo base_url()?>assets/img/home/1f-111.png'>
+                        <?php if(isset($item['product_cate_brand']) && !empty($item['product_cate_brand'])): ?>
+                            <ul class="nav">
+                            <?foreach($item['product_cate_brand'] as $k => $i):?>
+                            <li>
+                                <img class='img-responsive pull-right' src='<?php echo $this->product_brand->pic($i->id)?>'>
+                            </li>
+                            <?endforeach;?>
+                            </ul>
+                        <?else:?>
+                        暂无品牌显示，可以在品牌设置关联商品分类
+                        <?endif;?>
                     </div>
                 </div>
             </div>

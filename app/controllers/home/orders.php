@@ -21,9 +21,45 @@ class Orders extends CI_Controller {
         $keyword = urldecode(trim($keyword));
         $search_type = $this->input->post('search_type')!='' ? trim($this->input->post('search_type')) : (isset($param['search_type']) ? $param['search_type'] : '');
         $status = $this->input->post('status')!='' ? trim($this->input->post('status')) :  '';
-
+        $create_time = $this->input->post('create_time')!='' ? trim($this->input->post('create_time')) :  '';
         
         $condition = array("a.user_id = '".$user_id."'");
+        if($create_time)
+        {
+            switch ($create_time) {
+                case 1:
+                    $start_time = strtotime('-3 month');
+                    $end_time = time();
+                    break;
+                case 2:
+                    $start_time = strtotime(date('Y',time()).'-1-1');
+                    $end_time = strtotime(date('Y',time()).'-12-31');
+                    break;
+                case 3:
+                    $start_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-1).'-1-1')));
+                    $end_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-1).'-12-31')));
+                    break;
+                case 4:
+                    $start_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-2).'-1-1')));
+                    $end_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-2).'-12-31')));
+                    break;
+                case 5:
+                    $start_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-3).'-1-1')));
+                    $end_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-3).'-12-31')));
+                    break;
+                case 6:
+                    $start_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-20).'-1-1')));
+                    $end_time = strtotime(date('Y-m-d',strtotime((date('Y',time())-3).'-1-1')));
+                    break;
+                default:
+                    $start_time = strtotime('-1 year');
+                    $end_time = time();
+                    break;
+            }
+
+            $condition[] =$start_time." <= a.create_time";
+            $condition[] ="a.create_time <= ".$end_time;
+        }
 
         $all = $this->order->all($condition);
         $fu_kuan = 0;
@@ -58,7 +94,6 @@ class Orders extends CI_Controller {
         }
         
         $orderlist = $this->order->lists($condition,15,'a.id desc','a.id');
-
         if($orderlist)
         {
             foreach ($orderlist as $key => $item) {
@@ -77,34 +112,10 @@ class Orders extends CI_Controller {
         $data['keyword'] = stripslashes($keyword);
         $data['search_type'] = $search_type;
         $data['status'] = $status;
+        $data['create_time'] = $create_time;
 		$this->load->view('home/order',$data);
 	}
-
-    // public function list()
-    // {
-    //     $this->auth->check_login();
-    //     $user_id = $this->auth->user_id(); 
-        
-    //     $condition = array("a.user_id = '".$user_id."'");
-        
-
-    //     $orderlist = $this->order->lists($condition,15,'a.id desc','a.id');
-    //     if($orderlist)
-    //     {
-    //         foreach ($orderlist as $key => $item) {
-    //             $result = $this->order_detail->get($item->id,$item->address_id);
-    //             $item->order_detail = $result;
-    //         }
-    //     }
-
-    //     $data['order_list'] = $orderlist;
-    //     $data['pagination'] = $this->order->pages($condition);
-
-        
-
-    // }
-
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file orders.php */
+/* Location: ./application/controllers/orders.php */

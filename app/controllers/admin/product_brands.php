@@ -52,6 +52,9 @@ class Product_brands extends CI_Controller {
             }
             $data['row'] = $row;
         }
+        $this->load->model('product_category');
+        $category = $this->product_category->tree();
+        $data['category_list'] = $category;
         $this->load->view('admin/product_brand/edit',$data);
     }
     //-------------------------------------------------------------------------
@@ -104,7 +107,8 @@ class Product_brands extends CI_Controller {
         }
         $row = array(
             'name' => trim($post['name']),
-            'info' => trim($post['info'])
+            'info' => trim($post['info']),
+            'product_cate_id' => trim($post['product_cate_id'])
         );
         if($post['id'])
         {

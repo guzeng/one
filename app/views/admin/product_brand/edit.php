@@ -52,6 +52,32 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label col-md-3">品牌关联的分类</label>
+                                        <div class="col-md-7">
+                                            <select  class="form-control" id='product_cate_id' name='product_cate_id'>
+                                                    <?php if(isset($category_list) && !empty($category_list)): ?>
+                                                    <option value="0">请选择商品分类</option>
+                                                    <?php foreach($category_list as $key => $item):?>
+                                                        <?$selected = false;
+                                                            if(isset($row)){
+                                                                if($item['id']==$row->product_cate_id){
+                                                                    $selected = true;
+                                                                }
+                                                            }else if(isset($product_cate_id)&&$product_cate_id==$item['id'])
+                                                            {
+                                                                $selected = true;
+                                                            }
+                                                        ?>
+                                                        <option value="<?php echo $item['id']?>" <?if($selected):?>selected='selected' <? endif?>><?php echo $item['deep']>0?str_repeat('&nbsp;',$item['deep']*6).'|-':''?><?php echo $item['name']?></option>
+                                                    <?php endforeach;?>
+                                                    <?else:?>
+                                                    <option value="0">暂无商品分类数据</option>
+                                                    <?endif?>
+                                            </select>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label col-md-3"> 备注</label>
                                         <div class="col-md-7">
                                             <textarea id="info" name='info' class="form-control" maxLength='100' placeholder="100字符以内"><?php echo isset($row)?$row->info:''?></textarea>
@@ -62,7 +88,7 @@
 		                                <label class="col-md-3 control-label">图片</label>
 		                                <div class="col-md-9">
                                             <?if(isset($row)&&$row->id>0):?>
-                                                <img src="<?php echo $this->link->pic($row->id)?>" id='link_setting_pic' style='max-width:120px;height:68px;margin-bottom:10px;'> 
+                                                <img src="<?php echo $this->product_brand->pic($row->id)?>" id='link_setting_pic' style='max-width:120px;height:68px;margin-bottom:10px;'> 
                                             <?endif;?>
 		                                    <div id="review_pic" class='m-b-10'></div>
 		                                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
