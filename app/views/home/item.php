@@ -186,7 +186,7 @@
                     <li>
                         <div class='m-b-10'>
                             <a href="<?php echo base_url()?>item/id/<?php echo $item->id?>">
-                            <img src="<?php echo $this->product->pic($item->id,1,'thumb')?>" class='img-responsive'>
+                            <img src="<?php echo $this->product->pic($item->id,1)?>" class='img-responsive'>
                             </a>
                         </div>
                         <div class='m-b-10'>

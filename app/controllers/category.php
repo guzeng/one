@@ -11,6 +11,7 @@ class Category extends CI_Controller {
         parent::__construct();
         $this->load->model('product_category');
 		$this->load->model('product');
+		$this->load->model('product_brand');
         $this->list_type = '';
     }
 	public function index()
@@ -36,8 +37,6 @@ class Category extends CI_Controller {
 		}
 		$data['hot'] = $this->product->all(array('status'=>1),'a.sale_num desc','',10);
 		
-		$this->load->model('product_brand');
-		$data['product_brand'] = $this->product_brand->all();
 		$this->list_type = 'return';
 		$data['plist'] = $this->plist();
 		//猜你喜欢
@@ -75,6 +74,8 @@ class Category extends CI_Controller {
 		$data['desc'] = $desc=='desc' ? 'asc' : 'desc';
 		$data['cate_id'] = $this->product->param['cate_id'];
 		$data['brand_id'] = $this->product->param['brand_id'];
+		$data['price'] = $this->product->param['price'];
+		$data['product_brand'] = $this->product_brand->all();
         if($this->list_type == 'return')
         {
             return $this->load->view('home/category-plist',$data,true);

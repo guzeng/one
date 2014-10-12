@@ -81,43 +81,6 @@
         <!-- left end -->
         <!-- right -->
         <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
-            <!-- 品牌 -->
-            <div class='row m-l-0 b'>
-                <div class='col-md-1 p-15'>
-                    品牌
-                </div>
-                <div class='col-md-11 b-l p-15'>
-                    <div class='row m-b-10'>
-                        <?foreach($product_brand as $key => $item):?>
-                            <?if($key > 0 && $key%4==0):?>
-                                </div>
-                                <div class='row m-b-10'>
-                            <?endif;?>
-                            <div class='col-md-3'>
-                                <a href='javascript:void(0)' onclick="load_page('<?php echo base_url()?>category/plist/cate_id/<?php echo $cate_id?>/brand_id/<?php echo $item->id?>','c-plist')">
-                                <?php echo $item->name?>
-                                </a>
-                            </div>
-                        <?endforeach;?>
-                    </div>
-                </div>
-            </div>
-            <!-- 品牌end -->
-            <!-- 价格 -->
-            <div class='row m-l-0 b-l b-r b-b'>
-                <div class='col-md-1 p-15'>
-                    价格
-                </div>
-                <div class='col-md-11 b-l p-15'>
-                        <span class='m-r-30'>0-30元</span>
-                        <span class='m-r-30'>30-60元</span>
-                        <span class='m-r-30'>60-100元</span>
-                        <span class='m-r-30'>200-1000元</span>
-                        <span class=''>1000元以上</span>
-                </div>
-            </div>
-            <!-- 价格 end -->
-            <!-- list -->
             <div id='c-plist'>
                 <?php echo $plist;?>
             </div>

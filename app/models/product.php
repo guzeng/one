@@ -35,6 +35,9 @@ class Product extends CI_Model{
             (isset($params['name']) ? urldecode(trim($params['name'])) : '');
         $this->param['brand_id'] = $this->input->post('brand_id')!='' ? trim($this->input->post('brand_id')) : 
             (isset($params['brand_id']) ? urldecode(trim($params['brand_id'])) : '');
+        $this->param['price'] = $this->input->post('price')!='' ? trim($this->input->post('price')) : 
+            (isset($params['price']) ? urldecode(trim($params['price'])) : '');
+
         $this->page = isset($params['page']) ? trim($params['page']) : 1;
         $this->base_url = '';
     }
@@ -181,6 +184,26 @@ class Product extends CI_Model{
         {
             $where[] = "a.brand_id='{$this->param['brand_id']}'";
             $this->base_url .= 'brand_id/'.urlencode($this->param['brand_id']).'/';
+        }
+        if($this->param['price'] != '')
+        {
+            $_p = explode('-', $this->param['price']);
+            if(count($_p)==1)
+            {
+                $where[] = "a.price='{$this->param['price']}'";
+            }
+            else if(count($_p)==2)
+            {
+                if($_p[0])
+                {
+                    $where[] = "a.price>={$_p[0]}";
+                }
+                if($_p[1])
+                {
+                    $where[] = "a.price<={$_p[1]}"; 
+                }
+            }
+            $this->base_url .= 'price/'.urlencode($this->param['price']).'/';
         }
         if($this->param['code'] != '')
         {
