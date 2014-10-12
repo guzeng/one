@@ -268,9 +268,10 @@ class Products extends CI_Controller {
             exit;
         }
         foreach ($ids as $key => $product_id) {
-            $row = $this->product_category_map->get_by_product($product_id);
-            if($row && !empty($row))
+            $product = $this->product->get($product_id);
+            if($product && !empty($product))
             {
+                $row = $this->product_category_map->get_by_product($product_id);
                 $isExist = true; //商品是否已经分配过该分类
                 foreach ($row as $key => $item) {
                     if($item->category_id == $category_id)

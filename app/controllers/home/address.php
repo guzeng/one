@@ -17,8 +17,9 @@ class Address extends CI_Controller {
      * 展示用户收货地址信息
      * 
      */
-	public function index($user_id)
+	public function index()
 	{
+        $user_id = $this->auth->user_id();
 		if(!$user_id)
         {
             show_404('',false);
@@ -126,6 +127,7 @@ class Address extends CI_Controller {
         $this->form_validation->set_rules('telephone', ' ', 'required');
         $this->form_validation->set_rules('address', ' ', 'required');
 
+        $error = array();
         if($post['area'] == -1)
         {
             $error['area'] = '请选择地区';
@@ -152,7 +154,6 @@ class Address extends CI_Controller {
             echo json_encode($data);                                    
             exit;
         }
-        $error = array();
         
         if(!empty($error))
         {
@@ -207,7 +208,7 @@ class Address extends CI_Controller {
         }
         if($data['code'] == '1000')
         {
-            $data['goto'] = 'address/index/'.$this->auth->user_id();
+            $data['goto'] = 'home/address/';
         }
         echo json_encode($data);
     }

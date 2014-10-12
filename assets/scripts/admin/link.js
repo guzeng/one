@@ -34,7 +34,7 @@ $(function(){
         done: function (e, data) {
             close_alert();
             //给隐藏值赋值
-            var url = data['result']['files'][0]['thumbnailUrl'];
+            var url = data['result']['files'][0]['thumbnailUrl'] ? data['result']['files'][0]['thumbnailUrl'] : data['result']['files'][0]['url'];
             $('#review_pic').html('');
             if($('#link_setting_pic').length>0)
             {

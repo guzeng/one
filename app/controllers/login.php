@@ -98,6 +98,12 @@ class Login extends CI_Controller {
         create_my_captcha();
     }
 
+    public function out()
+    {
+        $this->auth->destroy();
+        redirect(base_url().'home');
+    }
+
 }
 
 /* End of file welcome.php */

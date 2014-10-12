@@ -570,8 +570,8 @@ function areaChange(obj,area_level)
             {
                 if(typeof(data.area)!='undefined')
                 {
-                    $(obj).next().has('option').html("<option value='0'>请选择</option>");
-                    $(obj).next().next().has('option').html("<option value='0'>请选择</option>");
+                    $(obj).next().has('option').html("<option value='-1'>请选择</option>");
+                    $(obj).next().next().has('option').html("<option value='-1'>请选择</option>");
                     var option = "";
                     
                     if(data.zhi_xia_shi)
@@ -580,7 +580,7 @@ function areaChange(obj,area_level)
                         {
                             $(obj).next().has('option').hide();
                         }
-                        $(obj).next().next().has('option').html("<option value='0'>请选择</option>");
+                        $(obj).next().next().has('option').html("<option value='-1'>请选择</option>");
 
                         $.each(data.area,function(key,item){
                             option += "<option value='"+item['area_id']+"'>"+item['area_name']+"</option>";

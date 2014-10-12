@@ -4,6 +4,7 @@ alter table one_order_detail add column order_id int(11) not null default 0 COMM
 CREATE TABLE `one_product_brand` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL default '' COMMENT '品牌名称',
+  `product_cate_id` int(11) NOT NULL DEFAULT '0' COMMENT '关联商品分类ID',
   `info` varchar(100) NOT NULL default '' COMMENT '备注',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name` (`name`)

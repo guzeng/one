@@ -7,10 +7,11 @@ body {
   direction: ltr;
 }
 h1,h2,h3,h4,h5,h6{font-family: "Microsoft YaHei","微软雅黑","宋体";}
-a{color: #0d638f; text-decoration: none;}
+a{color: #0d638f; text-decoration: none;cursor:pointer;}
 a:hover{color: #666666; }
 .m-l-0{margin-left: 0px;}
 .m-l-15{margin-left: 15px;}
+.m-l-20{margin-left: 20px;}
 .m-l-25{margin-left: 25px;}
 .m-r-0{margin-right: 0px;}
 .m-r-10{margin-right: 10px;}
@@ -94,8 +95,6 @@ a:hover{color: #666666; }
 .ad-top{width: 660px;}
 .ad-top .ad-table{height:110px; color: #787878; margin-bottom: 0px;}
 .ad-top .title{color: #000000;}
-.ad-top .ad-table td div{line-height: 23px;}
-.ad-top .ad-table td div img{max-width: 118px;}
 .b{border:1px solid #EEEEEE; }
 .b-l{border-left:1px solid #EEEEEE;}
 .b-r{border-right:1px solid #EEEEEE;}
@@ -290,18 +289,17 @@ a:hover{color: #666666; }
     -moz-border-left-colors: none;
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
-    border-color: #e6e6e6 #e6e6e6 #c30000;
+    border-color: #e6e6e6;
     border-image: none;
     border-style: solid;
-    border-width: 1px 1px 2px;
+    border-width: 0px 0px 1px;
     height: 38px;
     line-height: 33px;
     margin-bottom: 10px;
   }
 .o-mt h2 {
-    color: #cc0000;
     float: left;
-    padding-left: 16px;
+    padding-left: 18px;
     font-size: 14px;
     margin:0px;
     font-weight: bold;
@@ -315,14 +313,13 @@ a:hover{color: #666666; }
 .m5 {
    border: 1px solid #e6e6e6;
 }
-#safe04 .mc {
-    padding: 10px;
-}
 #safe05 {
-    border-top: 1px solid #e6e6e6;
+    border-width: 0px;
 }
 #safe05 .mc {
     padding: 30px 0;
+    border: 1px solid #e6e6e6;
+    margin: 20px 40px;
 }
 #safe05 .fore1, #safe05 .fore2, #safe05 .fore3 {
     float: left;
@@ -420,6 +417,7 @@ a:hover{color: #666666; }
 .item-xq-img img{margin-top: 20px;}
 
 /*用户中心左侧菜单*/
+#user-info .nav-tabs > li > a{font-size: 18px;}
 .my-left-menu .head{font-weight: bold;padding:9px 9px;}
 .my-left-menu .nav > li > a{padding:9px 9px;background: none;color: #777;}
 .my-left-menu .nav > li > a:hover,.my-left-menu .nav > .active > a{background: url("../img/img.png") no-repeat scroll -197px 10px;}
@@ -439,6 +437,7 @@ a:hover{color: #666666; }
 #myTabContent .actions  {margin-top:16px;display: block;}
 #myTabContent .actions .btn{padding: 4px 6px;background-color: #fff;border: 1px solid #ddd;margin-left: 3px;}
 #myTabContent .table-striped > tbody > tr:nth-child(odd) > td{background-color: #fff;text-align: center;}
+#myTabContent .table-striped > tbody > tr > td{text-align: center;}
 #myTabContent .table-striped > tbody > tr:nth-child(odd) > td .title{text-align: left;}
 .first-title{text-align: left;}
 #myTabContent .img{float:left;border:1px solid #f0f0f0;margin-right: 10px;}
@@ -454,6 +453,7 @@ a:hover{color: #666666; }
 #history .page-title{font-size: 18px;font-weight: bold;fon}
 #history .time{margin: auto 10px;}
 #history small{font-size: 12px;}
+.round {position: absolute;left: -29px;top: -22px;width: 16px;width: 16px;height: 16px;font-size: 40px;line-heigth: 16px;text-align: center;color: rgba(95, 171, 34, 1);text-decoration: none;}
 .timeline {
     list-style-image: none;
     list-style-position: outside;
@@ -497,4 +497,32 @@ a:hover{color: #666666; }
 .timeline > li .timeline-time span {
     display: block;
     text-align: right;
+}
+
+.icon-rank {
+    background: url("../img/icon-rank.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    font-size: 0;
+    height: 14px;
+    line-height: 0;
+    margin-right: 10px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 106px;
+}
+
+.icon-rank01 {
+    background-position: 0 -15px;
+}
+.icon-rank02 {
+    background-position: 0 -30px;
+}
+.icon-rank03 {
+    background-position: 0 -45px;
+}
+.icon-rank04 {
+    background-position: 0 -60px;
+}
+.icon-rank05 {
+    background-position: 0 -75px;
 }

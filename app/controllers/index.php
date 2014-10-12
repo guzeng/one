@@ -14,6 +14,7 @@ class Index extends CI_Controller {
 	{
 		$data = array();
 		$show_count = 3;//首页展示楼层数量
+		$this->load->model('user');
 		$this->load->model('product');
 		$this->load->model('product_category');
 		$this->load->model('product_category_map');
@@ -31,8 +32,10 @@ class Index extends CI_Controller {
 					$ids[] = $v;
 				}
 
-				$hot_product = $this->product_category_map->get_product_by_cate($ids);
+				$hot_product = $this->product_category_map->get_product_by_cate($ids);	//首页展示的商品
+				$brand = $this->product_brand->get_by_cateid($item['id']); 				//首页商品区展示的品牌
 				$product_cate[$key]['hot_product'] = $hot_product;
+				$product_cate[$key]['product_cate_brand'] = $brand;
 				if($key == ($show_count-1))	//只展示前三楼
 					break;
 			}

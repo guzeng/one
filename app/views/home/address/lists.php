@@ -2,7 +2,6 @@
 <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("body").eq(0).css("overflow-y","scroll");
          //地区
         $("#province").change(function(){
             areaChange($("#province"),2);
@@ -12,12 +11,13 @@
         });
     });
 </script>
-    <div class='container m-b-20 m-t-20'>
-        <div class='row'>
-            <div class="col-lg-2 col-md-2" style="padding:0px;">
-                <?$this->load->view('home/user-left')?>
-            </div>
-            <div class="col-lg-10 col-md-10">
+     <div class='container m-t-20'>
+        <div class='row' id="user-safe">
+            <!-- left -->
+            <?$this->load->view('home/my')?>
+            <!-- left end -->
+            <!-- right -->
+            <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
                 <div id="main">
                     <div class="tab-content">
                         <!-- 账户地址 -->
@@ -31,8 +31,8 @@
                                 <div class="address-top bg-c-f5 p-b-10 b-b">
                                     <h3 class="pull-left p-l-5" style="margin:0px;"><?php echo $item->consignee;?><?php echo (isset($item->qu))?'_'.$item->qu:''?><?php echo $item->default == 1 ? "<span style='font-size:14px;'>(默认地址)</span>":"";?></h3>
                                     <div class="pull-right">
-                                        <a class="m-r-20" href="<?php echo base_url().'address/edit/'.$item->id;?>">编辑</a>
-                                        <a href="javascript:void(0)" onclick="doDelete('address/delete/<?php echo $item->id?>')">删除</a>
+                                        <a class="m-r-20 text-success" href="<?php echo base_url().'home/address/edit/'.$item->id;?>">修改地址信息</a>
+                                        <a class="text-danger" href="javascript:void(0)" onclick="doDelete('home/address/delete/<?php echo $item->id?>')">删除</a>
                                     </div>
                                 </div>
                                 <div class="address-body p-10">
@@ -86,8 +86,11 @@
                                 <?endforeach;?>
                             <?endif;?>
                             <div class="address-foot">
-                                <a href="<?php echo base_url();?>address/edit">新增收货地址</a>
-                                <span class="ftx-03">您已创建<span class="ftx-02" id="addressNum_botton"><?php echo (isset($address) && !empty($address) ? count($address):0);?></span>个收货地址，最多可创建<span class="ftx-02">20</span>个</span>
+                                <a class="btn default" style="background-color: #fff;border: 1px solid #ddd;color:#3c763d;" href="<?php echo base_url();?>home/address/edit">
+                                    <i class="fa fa-plus"></i>
+                                    新增收货地址
+                                </a>
+                                <span class="m-l-15">您已创建<span class="ftx-02" id="addressNum_botton"><?php echo (isset($address) && !empty($address) ? count($address):0);?></span>个收货地址，最多可创建<span class="ftx-02">20</span>个</span>
                             </div>
                         </div>
                         <!-- 账户地址结束 -->
@@ -117,18 +120,8 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-    <!-- <div class="footer">
-        <div class="footer-inner">
-            2013 &copy; Zeng.
-        </div>
-        <div class="footer-tools">
-            <span class="go-top">
-            <i class="fa fa-angle-up"></i>
-            </span>
-        </div>
-    </div> -->
-    <!-- END FOOTER -->
-
-</body>
-<!-- END BODY -->
-</html>
+<div class='container m-b-20' id='ad-footer'>
+    <div class='row'>
+        <img class='img-responsive' src='<?php echo base_url()?>assets/img/home/ad-footer.png'></div>
+</div>
+<?$this->load->view('home/footer')?>

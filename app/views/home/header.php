@@ -46,10 +46,16 @@
         <div class='container text-right'>
             <div class='row'>
             <?php if($this->auth->user_id()):?>
-            <span>欢迎您 <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a></span>
-            <span><a href="<?php echo base_url().'orders'?>">我的订单</a></span>
+            <span>欢迎您 <a href="<?php echo base_url().'home/users/index';?>"><?php echo $this->auth->username();?></a></span>
+            <span><a href="<?php echo base_url().'home/orders';?>">我的订单</a></span>
             <?endif;?>
-            <span><a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a></span>
+            <span>
+                <?php if(!$this->auth->user_id()):?>
+                <a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a>
+                <?else:?>
+                <a href="<?php echo base_url()?>login/out"> 退出</a>
+                <?endif;?>
+            </span>
             </div>
         </div>
     </div>
@@ -94,8 +100,13 @@
             <div class='col-md-9 col-sm-9 col-xs-12 navbar-collapse collapse' >
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="<?php echo base_url()?>">首页</a></li>
+<<<<<<< HEAD
                     <li><a href="http://www.onethink.com/item/id/1">产品详情</a></li>
                     <li><a href="<?php echo base_url().'orders';?>">我的订单</a></li>
+=======
+                    <li><a href="<?php echo base_url().'item';?>">产品详情</a></li>
+                    <li><a href="<?php echo base_url().'home/orders';?>">我的订单</a></li>
+>>>>>>> 71098f096ef30ad33b3ca7d9e370015b5d8eacf5
                     <li><a href="#about">食品</a></li>
                     <li><a href="#contact">日用</a></li>
                     <li><a href="#contact">服装</a></li>

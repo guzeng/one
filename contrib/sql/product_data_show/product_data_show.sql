@@ -46,6 +46,7 @@ DROP TABLE IF EXISTS `one_product_brand`;
 CREATE TABLE `one_product_brand` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '品牌名称',
+  `product_cate_id` int(11) NOT NULL DEFAULT '0' COMMENT '关联商品分类ID',
   `info` varchar(100) NOT NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
