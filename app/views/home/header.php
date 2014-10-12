@@ -94,7 +94,7 @@
             <div class='col-md-9 col-sm-9 col-xs-12 navbar-collapse collapse' >
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="<?php echo base_url()?>">首页</a></li>
-                    <li><a href="<?php echo base_url().'item';?>">产品详情</a></li>
+                    <li><a href="http://www.onethink.com/item/id/1">产品详情</a></li>
                     <li><a href="<?php echo base_url().'orders';?>">我的订单</a></li>
                     <li><a href="#about">食品</a></li>
                     <li><a href="#contact">日用</a></li>
