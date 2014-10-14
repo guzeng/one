@@ -167,7 +167,7 @@ class Users extends CI_Controller {
             'phone' => $post['phone'],
             'name' => $post['name'],
             'birthday' => $post['birthday'] ? intval(strtotime($post['birthday'])):0,
-            'area' => $post['area'] != ''? $post['area'] : 0,
+            'area' => $post['area'] != '' && $post['area'] >0? $post['area'] : 0,
             'address' => $post['address'],
             'id_card_number' => $post['id_card_number']
         );

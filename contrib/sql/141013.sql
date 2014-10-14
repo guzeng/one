@@ -1,0 +1,16 @@
+﻿DROP TABLE IF EXISTS `one_ad`;
+CREATE TABLE `one_ad` (
+  `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `position_id` TINYINT(3) NOT NULL DEFAULT '0' COMMENT '广告位置：0,首页滚动图,1,',
+  `title` VARCHAR(60) NOT NULL DEFAULT '' COMMENT '名称',
+  `url` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '链接',
+  `create_time` INT(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `start_time` INT(11) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` INT(11) NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `link_man` VARCHAR(60) NOT NULL DEFAULT '' COMMENT '联系人',
+  `link_email` VARCHAR(60) NOT NULL DEFAULT '' COMMENT '联系人邮箱',
+  `link_phone` VARCHAR(60) NOT NULL DEFAULT '' COMMENT '联系手机号码',
+  `click_count` MEDIUMINT(8) NOT NULL DEFAULT '0' COMMENT '点击量',
+  `enabled` TINYINT(3) NOT NULL DEFAULT '1' COMMENT '是否显示',
+  PRIMARY KEY  (`id`)
+) ENGINE=MYISAM DEFAULT CHARSET=utf8;
