@@ -431,7 +431,7 @@ a:hover{color: #666666; }
 #myorder .btn{font-size: 12px;padding: 4px 0px;}
 #myorder .table-advance{margin-top: 15px;border: 1px #f0f0f0 solid;margin-bottom:3px; }
 #myorder .nav-tabs{margin-bottom: 16px;}
-#myorder .table-advance thead tr th {background-color: #f9f9f9;color: #666;font-size: 12px;font-weight: 400;text-align: center; }
+#myorder .table-advance thead tr th,#mycart .table-advance thead tr th{background-color: #f9f9f9;color: #666;font-size: 12px;font-weight: 400;text-align: center; }
 .pagination .active > a,.pagination .active > a:hover {  background: #60ac22;  border-color: #dddddd; color: #fff;}
 #myorder .pagination > .disabled > span, #myorder .pagination > .disabled > span:hover, #myorder .pagination > .disabled > span:focus, #myorder .pagination > .disabled > a, #myorder .pagination > .disabled > a:hover, #myorder .pagination > .disabled > a:focus,#myorder .pagination > li > a,#myorder .pagination > li > span{border-color:#eee;}
 #myTabContent .actions  {margin-top:16px;display: block;}
@@ -546,3 +546,8 @@ a:hover{color: #666666; }
 #rolling-pics li{float: left;height: 260px;line-height: 260px;list-style: none outside none;width: 100%;}
 #rolling-pics img{float: left;display: block;}
 /**首页轮播图片 结束*/
+
+#mycart .page-title{font-size: 18px;color: #579e0b;font-weight: bold;border-bottom:2px solid #579e0b;margin: 0;padding-bottom: 15px;}
+#mycart #myTabContent table label{margin-top: 0}
+#mycart .table-advance{border: #f0f0f0 1px solid;}
+
