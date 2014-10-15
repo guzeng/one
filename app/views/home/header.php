@@ -76,7 +76,7 @@
                             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
                         </div>
                     </div>
-                    <a class="btn btn-lg btn-cart" href="<?php echo base_url()?>cart">
+                    <a class="btn btn-lg btn-cart" href="<?php echo base_url()?>carts">
                         <i class="fa icon-cart"></i> 购物车
                     </a>
 

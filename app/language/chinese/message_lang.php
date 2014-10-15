@@ -38,3 +38,4 @@ $lang['login_outtime'] = "登录超时，请重新登录";
 $lang['check_now'] = "正在检测，请稍候...";
 $lang['modify'] = "修改";
 $lang['ensure'] = "确定";
+$lang['param_error'] = "参数错误";
