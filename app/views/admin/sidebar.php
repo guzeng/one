@@ -138,6 +138,11 @@ $method_name=$RTR->fetch_method();
                             友情链接
                             </a>
                         </li>
+                        <li class="<?if($controller_name=='ads'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/ads" >
+                            广告设置
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="<?if(in_array($controller_name, array('news','news_cate','questionnaires'))):?>open active<?endif;?>">

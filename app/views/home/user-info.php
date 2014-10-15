@@ -15,6 +15,7 @@
         });
         //时间
         $('#birthday').datepicker({
+            autoclose: true,
             format: 'yyyy-mm-dd',
             language: 'zh-CN'
       });

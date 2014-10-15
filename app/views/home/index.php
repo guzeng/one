@@ -53,6 +53,43 @@
     }
 </style>
 <script src="<?php echo base_url();?>assets/scripts/home/home.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var rolling;
+    var i=0;
+    $(function(){
+        $('#rollingHover').find('li').hover(function(){
+            clearInterval(rolling);
+            var index = parseInt($(this).index());
+            showPic(index);
+        },function(){
+            i = parseInt($(this).index());
+            startRoll();
+        })
+        startRoll();
+    })
+    function startRoll()
+    {
+        rolling = setInterval(function(){
+            i++;
+            showPic(i%<?php echo isset($ad_home)?count($ad_home):0;?>);
+        },5000);
+    }
+    function showPic(index)
+    {
+        var width = (0-index*1000)+'px';
+        $("#rolling-pics").animate({opacity:'fast'},"500",function(){
+            $(".rollingPic ul li").each(function(){
+                $(this).hide();
+            });
+        });
+        $('#rolling-pics').animate({opacity:'fast'},"500",function(){
+             $(".rollingPic ul li").eq(index).show();
+        });
+
+        $('#rollingHover').find('li.hover').removeClass('hover');
+        $('#rollingHover').find('li').eq(index).addClass('hover');
+    }
+</script>
     <!-- categorys  -->
     <div class='container'>
         <div class='row'>
@@ -103,7 +140,33 @@
                 <?endif;?>
             </div>
             <div class='col-lg-7 col-p-10 m-t-10 o-h'>
-                <img src="<?php echo base_url()?>assets/img/home/i.png" class="img-responsive">
+                <div class="layoutRolling_04" id='layoutRolling'>
+                    <div class="rollingPic">
+                        <div class='rollingContainer'>
+                            <?php if(isset($ad_home)&& !empty($ad_home)):?>
+                            <ul id='rolling-pics' style="padding-left:0px;">
+                                <?php foreach ($ad_home as $key => $value):?>
+                                   <li bg='<?php echo $key;?>'>
+                                        <a href="<?php echo $value->url;?>"><img style="min-height:260px;height:100%;width:100%;" src="<?php echo $this->ad->pic($value->id);?>"/></a>
+                                    </li>
+                                <?endforeach;?>
+                            </ul>
+                            <?endif;?>
+                        </div>
+                    </div>
+                    <div class="layoutRolling_bt">
+                      <div class="rollingPointer">
+                        <?php if(isset($ad_home)&& !empty($ad_home)):?>
+                        <ul id='rollingHover' style="list-style:none;">
+                            <?php foreach ($ad_home as $key => $value):?>
+                               <li class="<?php echo $key == 0?'hover':'';?>"></li>
+                            <?endforeach;?>
+                        </ul>
+                        <?endif;?>
+                        <div class="clear"></div>
+                      </div>
+                    </div>
+                </div>
                 <table class="table table-bordered m-t-10" >
                     <tbody>
                         <tr>
