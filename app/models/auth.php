@@ -61,7 +61,14 @@ class Auth extends CI_Model{
         if(!$this->is_login())
         {
             setcookie('lms_logout_url', $_SERVER["PHP_SELF"], time()+3600, '/');
-            echo "<script>window.location.href='".base_url().'admin/login'."';</script>";
+            if(strpos($_SERVER["PHP_SELF"],'admin') !== false)
+            {
+                echo "<script>window.location.href='".base_url().'admin/login'."';</script>";
+            }
+            else
+            {
+                echo "<script>window.location.href='".base_url().'login'."';</script>";
+            }
             exit;    
         }
     }

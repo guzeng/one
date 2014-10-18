@@ -19,7 +19,7 @@ class Carts extends CI_Controller {
         $user_id = $this->auth->user_id();
         if($user_id)
         {
-            $list = $this->cart->all(array('type'=>'a.product_id,a.count,p.name,p.price,p.best_price', 'where'=>array('user_id'=>$user_id)))->toArray();
+            $list = $this->cart->all(array('type'=>'a.product_id,a.count,p.name,p.price,p.best_price','join_product'=>true, 'where'=>array('user_id'=>$user_id)));
         }
         else
         {
@@ -32,8 +32,8 @@ class Carts extends CI_Controller {
 	public function add()
 	{
         $post = $this->input->post();
-        $product_id = $post['product_id'];
-        $count = $post['count'];
+        $product_id = intval($post['product_id']);
+        $count = intval($post['count']);
         $product = $this->product->get($product_id);
         if(!$product)
         {
@@ -43,30 +43,55 @@ class Carts extends CI_Controller {
 		if($this->auth->is_login())
         {
             $user_id = $this->auth->user_id();
-            $this->cart->insert(array('user_id'=>$user_id,'product_id'=>$product_id,'count'=>$count));
+            $exist = $this->cart->get_by_user($user_id,$product_id);
+            if($exist)
+            {
+                $this->cart->update(array('count'=>$exist->count+$count),$exist->id);
+            }
+            else
+            {
+                $this->cart->insert(array('user_id'=>$user_id,'product_id'=>$product_id,'count'=>$count));
+            }
+            $total = $this->cart->count();
         }
         else
         {
-            $p = array(
-                'product_id'=>$product_id,
-                'name' => $product->name,
-                'count'=>$count,
-                'price'=>$product->price,
-                'best_price'=>$product->best_price
-            );
             $cart = $this->session->userdata('cart');
             if(!$cart)
             {
                 $cart = array();
             }
-            $cart[] = $p;
+            $exist = false;
+            foreach($cart as $key => $value)
+            {
+                if($value['product_id'] == $product_id)
+                {
+                    $cart[$key]['count'] = $value['count']+$count;
+                    $exist = true;
+                    break;
+                }
+            }
+            if(!$exist)
+            {
+                $p = array(
+                    'product_id'=>$product_id,
+                    'name' => $product->name,
+                    'count'=>$count,
+                    'price'=>$product->price,
+                    'best_price'=>$product->best_price
+                );
+                $cart[] = $p;
+            }
             $this->session->set_userdata('cart', $cart);
+            $total = count($cart);
         }
-        echo json_encode(array('code'=>'1000','msg'=>$this->lang->line('success'),'data'=>$p));
+        echo json_encode(array('code'=>'1000','msg'=>$this->lang->line('success'),'total'=>$total));
 	}
 
-    public function del($product_id)
+    public function del()
     {
+        $post = $this->input->post();
+        $product_id = intval($post['product_id']);
         if(!$product_id)
         {
             echo json_encode(array('code'=>'1001','msg'=>$this->lang->line('param_error')));

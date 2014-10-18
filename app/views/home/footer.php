@@ -104,9 +104,27 @@
             <?endforeach;?>
             <?endif;?>  
             <!-- 友情链接 end-->
-
         </div>
     </div>
+    <!-- modal -->
+    <div aria-hidden="true" aria-labelledby="_confirm_dialogLabel" role="dialog" tabindex="-1" class="modal fade" id="_confirm_dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id='_confirm_btn'>确定</button>
+                    <button aria-hidden="true" data-dismiss="modal" class="btn btn-default">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal end -->
 </body>
 <!-- END BODY -->
 </html>

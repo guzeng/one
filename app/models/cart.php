@@ -52,6 +52,21 @@ class Cart  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
+	public function get_by_user($user_id,$product_id=''){
+		if($user_id){
+			$this->db->where('user_id',$user_id);
+			if($product_id)
+			{
+				$this->db->where('product_id',$product_id);
+			}
+			$query = $this->db->get($this->table);
+			if($query->num_rows()>0){
+				return $query->row();
+			}
+		}
+		return false;
+	}
+	//---------------------------------------------------------
     /**
     *   exist
     *   检查是否存在
@@ -74,6 +89,32 @@ class Cart  extends CI_Model{
         return false;
     }
     //----------------------------------------------------------------
+
+    public function count()
+    {
+    	if($this->auth->is_login())
+        {
+        	$user_id = $this->auth->user_id();
+        	$this->db->where('user_id', $user_id);
+			$this->db->select ('count(id) as count');
+	        $this->db->limit(1);
+			$query = $this->db->get ( $this->table);
+	        if($query->num_rows() > 0){
+	            $res = $query->result();
+	            return $res[0]->count;
+	        }
+	    }
+	    else
+	    {
+            $cart = $this->session->userdata('cart');
+            if(!$cart)
+            {
+                $cart = array();
+            }
+            return count($cart);
+	    }
+		return 0;
+    }
 	/**
 	 * lists
 	 * 查询所有分类, 用于分页显示列表
@@ -125,7 +166,7 @@ class Cart  extends CI_Model{
                 $$c = $val;
             }
         }
-        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'id asc';
+        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'a.id asc';
         if(!isset($_type)){
             $_type = '*';
         }
@@ -134,14 +175,14 @@ class Cart  extends CI_Model{
         if(isset($_where)){
             $this->db->where($_where);
         }
-        if(isset($_join))
+        if(isset($_join_product))
         {
         	$this->db->join($this->product_table.' as p','p.id=a.product_id','left');
         }
         $this->db->order_by($_orderby);
 		$query = $this->db->get();
         if($query->num_rows() > 0){
-            return $query->result();
+            return $query->result_array();
         }
 		return false;
 	}

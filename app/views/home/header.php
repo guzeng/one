@@ -25,7 +25,8 @@
     <script src="<?php echo base_url();?>assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script>
         var msg = {
-            'base_url':"<?php echo base_url();?>"
+            'base_url':"<?php echo base_url();?>",
+            'delete_success':"<?php echo $this->lang->line('delete_success');?>"
         };
     </script>
     <script src="<?php echo base_url();?>assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -77,7 +78,7 @@
                         </div>
                     </div>
                     <a class="btn btn-lg btn-cart" href="<?php echo base_url()?>carts">
-                        <i class="fa icon-cart"></i> 购物车
+                        <i class="fa icon-cart"></i> 购物车 <span id='cart_total'>(<?php echo $this->cart->count()?>)</span>
                     </a>
 
                 </form>

@@ -15,9 +15,8 @@
                 <thead>
                     <tr>
                       	<th width="130">
-                            <input value="option1" id="inlineCheckbox1" type="checkbox">
+                            <input value="option1" id="inlineCheckbox1" type="checkbox" title='全选'>
                         </th>
-                        <th width="50">全选 </th>
                         <th>商品</th>
                         <th width="150">价格</th>
                         <th width="120">优惠</th>
@@ -27,13 +26,17 @@
                 </thead>
                 <tbody> 
                     <?php foreach ($list as $key => $value) :?>
-                    <tr>
+                    <tr id='cart_row_<?php echo $value['product_id']?>'>
                         <td><span><input value="option1" id="inlineCheckbox1" type="checkbox"></span></td> 
                         <td><?php echo $value['name']?></td> 
                         <td><?php echo $value['price']?></td>
                         <td><?php echo $value['best_price']?></td> 
                         <td><?php echo $value['count']?></td> 
-                        <td></td> 
+                        <td>
+                            <button class='btn red btn-xs' onclick="confirm_dialog('<?php echo $this->lang->line('delete_confirm')?>', '<?php echo $this->lang->line('sure_to_delete')?>', delCart, '<?php echo $value['product_id']?>')">
+                                <i class='fa fa-trash-o'></i>
+                            </button>
+                        </td> 
                     </tr>
                     <?php endforeach;?>
                 </tbody>
