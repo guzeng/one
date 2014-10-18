@@ -627,6 +627,7 @@ function addCart(id)
         success:function(json){
             if(json.code=='1000')
             {
+                show_success(json.msg);
                 if(typeof(json.total)!='undefined')
                 {
                     $('#cart_total').html('('+json.total+')');
@@ -656,6 +657,7 @@ function delCart(id)
             {
                 $('#cart_row_'+id).remove();
                 show_success(msg.delete_success);
+                $('#cart_total').html('('+json.total+')');
             }
             else
             {

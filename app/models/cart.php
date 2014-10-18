@@ -106,7 +106,7 @@ class Cart  extends CI_Model{
 	    }
 	    else
 	    {
-            $cart = $this->session->userdata('cart');
+            $cart = $_SESSION['cart'];
             if(!$cart)
             {
                 $cart = array();

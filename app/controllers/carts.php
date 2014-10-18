@@ -15,15 +15,14 @@ class Carts extends CI_Controller {
     }
 	public function index()
 	{
-
-        $user_id = $this->auth->user_id();
-        if($user_id)
+        if($this->auth->is_login())
         {
+            $user_id = $this->auth->user_id();
             $list = $this->cart->all(array('type'=>'a.product_id,a.count,p.name,p.price,p.best_price','join_product'=>true, 'where'=>array('user_id'=>$user_id)));
         }
         else
         {
-            $list = $this->session->userdata('cart');
+            $list = $_SESSION['cart'];
         }
         $data['list'] = $list;
 		$this->load->view('home/cart', $data);
@@ -56,7 +55,7 @@ class Carts extends CI_Controller {
         }
         else
         {
-            $cart = $this->session->userdata('cart');
+            $cart = $_SESSION['cart'];
             if(!$cart)
             {
                 $cart = array();
@@ -82,7 +81,7 @@ class Carts extends CI_Controller {
                 );
                 $cart[] = $p;
             }
-            $this->session->set_userdata('cart', $cart);
+            $_SESSION['cart'] = $cart;
             $total = count($cart);
         }
         echo json_encode(array('code'=>'1000','msg'=>$this->lang->line('success'),'total'=>$total));
@@ -102,7 +101,8 @@ class Carts extends CI_Controller {
             $user_id = $this->auth->user_id();
             if($this->cart->del($user_id, $product_id))
             {
-                echo json_encode(array('code'=>'1000'));
+                echo json_encode(array('code'=>'1000','total'=>$this->cart->count()));
+                exit;
             }
             else
             {
@@ -112,7 +112,7 @@ class Carts extends CI_Controller {
         }
         else
         {
-            $cart = $this->session->userdata('cart');
+            $cart = $_SESSION['cart'];
             if(!empty($cart))
             {
                 foreach ($cart as $key => $value) {
@@ -122,9 +122,9 @@ class Carts extends CI_Controller {
                         break;
                     }
                 }
-                $this->session->set_userdata('cart',$cart);
+                $_SESSION['cart'] = $cart;
             }
-            echo json_encode(array('code'=>'1000'));
+            echo json_encode(array('code'=>'1000','total'=>$this->cart->count()));
         }
     }
 }
