@@ -5,6 +5,7 @@
     </div>
     <div class='col-md-11 b-l p-15'>
         <div class='row m-b-10'>
+            <?php if(isset($product_brand) && !empty($product_brand)):?>
             <?foreach($product_brand as $key => $item):?>
                 <?if($key > 0 && $key%4==0):?>
                     </div>
@@ -16,6 +17,7 @@
                     </a>
                 </div>
             <?endforeach;?>
+            <?php endif;?>
         </div>
     </div>
 </div>

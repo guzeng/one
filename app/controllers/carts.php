@@ -18,11 +18,11 @@ class Carts extends CI_Controller {
         if($this->auth->is_login())
         {
             $user_id = $this->auth->user_id();
-            $list = $this->cart->all(array('type'=>'a.product_id,a.count,p.name,p.price,p.best_price','join_product'=>true, 'where'=>array('user_id'=>$user_id)));
+            $list = $this->cart->all(array('type'=>'a.product_id,a.count,p.name,p.price,p.best_price,p.min_num','join_product'=>true, 'where'=>array('user_id'=>$user_id)));
         }
         else
         {
-            $list = $_SESSION['cart'];
+            $list = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
         }
         $data['list'] = $list;
 		$this->load->view('home/cart', $data);
@@ -55,8 +55,8 @@ class Carts extends CI_Controller {
         }
         else
         {
-            $cart = $_SESSION['cart'];
-            if(!$cart)
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
+            if(!is_array($cart))
             {
                 $cart = array();
             }
@@ -77,7 +77,8 @@ class Carts extends CI_Controller {
                     'name' => $product->name,
                     'count'=>$count,
                     'price'=>$product->price,
-                    'best_price'=>$product->best_price
+                    'best_price'=>$product->best_price,
+                    'min_num' => $product->min_num
                 );
                 $cart[] = $p;
             }
@@ -112,7 +113,7 @@ class Carts extends CI_Controller {
         }
         else
         {
-            $cart = $_SESSION['cart'];
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
             if(!empty($cart))
             {
                 foreach ($cart as $key => $value) {

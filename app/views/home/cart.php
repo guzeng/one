@@ -20,19 +20,26 @@
                 </tr>
                 </thead>
                 <tbody> 
-                 <tr>
-                  <td ><div class="left"><span class="select-item"><input value="option1" id="inlineCheckbox1" type="checkbox"> <img class='box' src="<?php echo base_url();?>assets/img/home/cart-item.jpg"></span></div></td> 
-                  <td><div class="left pro-title">EGStyle原创设计 连衣裙夏2014 欧美风 宽松中长袖</div>  <div class="left pro-title">个性休闲 裙子</div><div class="pro-mark">[赠品] 50元电子京券（订单完成后自动发放）</div></td>
-                  <td><span class="pro-price">&#165;998.00</span></td> <td><sapn class="pro-price2">&#165;998.00</sapn></td> 
-                  <td><div class="pinfo">
-                          <input type="text" name="cart_num" value="33" class=" form-control">
+                    <?php foreach ($list as $key => $value) :?>
+                    <tr>
+                    <td >
+                        <div class="left"><span class="select-item">
+                        <input value="option1" id="inlineCheckbox1" type="checkbox"> <img class='box' src="<?php echo base_url();?>assets/img/home/cart-item.jpg">
+                        </span></div>
+                    </td> 
+                    <td><div class="left pro-title"><?php echo $value['name']?></div>  <div class="left pro-title">个性休闲 裙子</div><div class="pro-mark">[赠品] 50元电子京券（订单完成后自动发放）</div></td>
+                    <td><span class="pro-price">&#165;<?php echo round($value['price'],2)?></span></td> 
+                    <td><sapn class="pro-price2">&#165;<?php echo round($value['best_price'],2)?></sapn></td> 
+                    <td><div class="pinfo">
+                          <input type="text" name="cart_num" value="<?php echo $value['count']?>" class=" form-control">
                           <button class="btn btn-default plus" onclick="cart_count('plus',this)">+</button>
                           <button class="btn btn-default minus" onclick="cart_count('minus',this)">-</button>
-                          <input type="hidden" id="min_num" name="min_num" value="33">
+                          <input type="hidden" id="min_num" name="min_num" value="<?php echo $value['min_num']?>">
                       </div>
-                  </td> 
-                  <td><a herf="">删除</a></td>
-                 </tr>
+                    </td> 
+                    <td><a herf="">删除</a></td>
+                    </tr>
+                    <?php endforeach;?>
                  <tr>
                   <td ><div class="left"><span class="select_item"><input value="option1" id="inlineCheckbox1" type="checkbox"> <img class='box' src="<?php echo base_url();?>assets/img/home/cart-item.jpg"></span></div></td> 
                   <td><div class="left pro-title">EGStyle原创设计 连衣裙夏2014 欧美风 宽松中长袖</div>  <div class="left pro-title">个性休闲 裙子</div><div class="pro-mark">[赠品] 50元电子京券（订单完成后自动发放）</div></td>

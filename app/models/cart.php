@@ -106,8 +106,8 @@ class Cart  extends CI_Model{
 	    }
 	    else
 	    {
-            $cart = $_SESSION['cart'];
-            if(!$cart)
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
+            if(!is_array($cart))
             {
                 $cart = array();
             }

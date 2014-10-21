@@ -613,6 +613,38 @@ function areaChange(obj,area_level)
 }
 //------------------------------------------------------------------------
 
+function cart_count(type,obj)
+{
+    if(typeof(type)=='undefined')
+    {
+        return false;
+    }
+    var c = $(obj).parent().find('input[name=cart_num]').val();
+
+    switch(type)
+    {
+        case 'plus':
+            $(obj).parent().find('input[name=cart_num]').val(parseInt(c)+1);
+        break;
+        case 'minus':
+            var min=$(obj).parent().find('input[name=min_num]').val();
+            if(min=='' || parseInt(min)<1)
+            {
+                min = 1;
+            }
+            if(parseInt(c)-1 > parseInt(min))
+            {
+                $(obj).parent().find('input[name=cart_num]').val(parseInt(c)-1);
+            }
+            else
+            {
+                $(obj).parent().find('input[name=cart_num]').val(min);
+            }
+        break;
+    }
+}
+
+
 function addCart(id)
 {
     if(typeof(id) == 'undefined' || id=='')
