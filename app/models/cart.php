@@ -122,32 +122,19 @@ class Cart  extends CI_Model{
 	 *	@param item array 
 	 *	@return array
 	 */    
-	public function lists($items=array()){
+	public function lists()
+	{
 		
-		if(count($items) >0 ){
-            foreach($items as $key => $val){
-                $c = '_'.$key;
-                $$c = $val;
-            }
+        if($this->auth->is_login())
+        {
+            $user_id = $this->auth->user_id();
+            $list = $this->all(array('type'=>'a.product_id,a.count,p.name,p.price,p.best_price,p.min_num,p.cate_id','join_product'=>true, 'where'=>array('user_id'=>$user_id)));
         }
-        $_num = isset($_num) && intval($_num)>0 ? intval($_num) : 10;
-        $_start = isset($_start) && intval($_start)>0 ? intval($_start) : 0;
-        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'id desc';
-        if(!isset($_type)){
-            $_type = '*';
+        else
+        {
+            $list = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
         }
-		$this->db->select ( $_type );
-        if(isset($_where)){
-            $this->db->where($_where);
-        }
-        $this->db->order_by($_orderby);
-        $this->db->limit($_num,$_start);
-		$query = $this->db->get ( $this->table);
-        if($query->num_rows() > 0){
-            return $query->result();
-        }
-		return false;	
-		
+        return $list;
 	}
 	//---------------------------------------------------------
 	/**
@@ -187,6 +174,20 @@ class Cart  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
+
+	public function price()
+	{
+		$lists = $this->lists();
+		$total_price = $total_best_price = 0;
+		if(!empty($lists))
+		{
+			foreach ($lists as $key => $value) {
+				$total_price += $value['price']*$value['count'];
+				$total_best_price += $value['best_price']*$value['count'];
+			}				
+		}
+		return array('total_price' => $total_price,'total_best_price'=>$total_best_price);
+	}
 }
 /* End of file cart.php */
 /* Location: ./application/models/cart.php */	

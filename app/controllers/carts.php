@@ -12,17 +12,19 @@ class Carts extends CI_Controller {
     	$this->load->library('session');
         $this->load->model('cart');
         $this->load->model('product');
+        $this->load->model('product_category');
     }
 	public function index()
 	{
-        if($this->auth->is_login())
+        $list = $this->cart->lists();
+        if(!empty($list))
         {
-            $user_id = $this->auth->user_id();
-            $list = $this->cart->all(array('type'=>'a.product_id,a.count,p.name,p.price,p.best_price,p.min_num','join_product'=>true, 'where'=>array('user_id'=>$user_id)));
-        }
-        else
-        {
-            $list = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
+            foreach ($list as $key => $value) {
+                if(isset($value['cate_id']) && $value['cate_id'])
+                {
+                   $list[$key]['category'] = $this->product_category->get_parent($value['cate_id']); 
+                }
+            }
         }
         $data['list'] = $list;
 		$this->load->view('home/cart', $data);
@@ -78,7 +80,8 @@ class Carts extends CI_Controller {
                     'count'=>$count,
                     'price'=>$product->price,
                     'best_price'=>$product->best_price,
-                    'min_num' => $product->min_num
+                    'min_num' => $product->min_num,
+                    'cate_id' => $product->cate_id
                 );
                 $cart[] = $p;
             }
@@ -100,12 +103,7 @@ class Carts extends CI_Controller {
         if($this->auth->is_login())
         {
             $user_id = $this->auth->user_id();
-            if($this->cart->del($user_id, $product_id))
-            {
-                echo json_encode(array('code'=>'1000','total'=>$this->cart->count()));
-                exit;
-            }
-            else
+            if(!$this->cart->del($user_id, $product_id))
             {
                 echo json_encode(array('code'=>'1001','msg'=>$this->lang->line('failed')));
                 exit;
@@ -125,8 +123,58 @@ class Carts extends CI_Controller {
                 }
                 $_SESSION['cart'] = $cart;
             }
-            echo json_encode(array('code'=>'1000','total'=>$this->cart->count()));
         }
+        echo json_encode(array('code'=>'1000','total'=>$this->cart->count(),'price'=>$this->cart->price()));
+        exit;
+    }
+
+    public function update()
+    {
+        $post = $this->input->post();
+        $product_id = intval($post['product_id']);
+        $count = intval($post['count']);
+        if(!$product_id)
+        {
+            echo json_encode(array('code'=>'1001','msg'=>$this->lang->line('param_error')));
+            exit;
+        }
+        $product = $this->product->get($product_id);
+        if(!$product)
+        {
+            echo json_encode(array('code'=>'1001','msg'=>$this->lang->line('no_data_exist')));
+            exit;
+        }
+        if($this->auth->is_login())
+        {
+            $user_id = $this->auth->user_id();
+            $cart = $this->cart->get_by_user($user_id,$product_id);
+            if(!$cart)
+            {
+                echo json_encode(array('code'=>'1001','msg'=>$this->lang->line('no_data_exist')));
+                exit;
+            }
+            if(!$this->cart->update(array('count'=>$count), $cart->id))
+            {
+                echo json_encode(array('code'=>'1001','msg'=>$this->lang->line('failed')));
+                exit;
+            }
+        }
+        else
+        {
+            $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
+            if(!empty($cart))
+            {
+                foreach ($cart as $key => $value) {
+                    if($value['product_id'] == $product_id)
+                    {
+                        $cart[$key]['count'] = $count;
+                        break;
+                    }
+                }
+                $_SESSION['cart'] = $cart;
+            }
+        }
+        echo json_encode(array('code'=>'1000','price'=>$this->cart->price()));
     }
 }
 

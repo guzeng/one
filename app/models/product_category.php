@@ -253,6 +253,23 @@ class Product_category  extends CI_Model{
         }
         return $ret;
     }
+
+    public function get_parent($pid)
+    {
+    	if(!$pid)
+    	{
+    		return false;
+    	}
+    	$this->db->select ('a.id,a.name,a.parent_id,p.name as parent_name');
+        $this->db->from($this->table.' as a');
+        $this->db->join($this->table.' as p','a.parent_id=p.id','left');
+        $this->db->where(array("a.id"=>$pid));
+		$query = $this->db->get ();
+        if($query->num_rows() > 0){
+			return $query->row();
+        }
+		return false;
+    }
 }
 /* End of file product_categorys.php */
 /* Location: ./application/models/product_categorys.php */	

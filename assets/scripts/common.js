@@ -613,18 +613,18 @@ function areaChange(obj,area_level)
 }
 //------------------------------------------------------------------------
 
-function cart_count(type,obj)
+function cart_count(type,obj,cart)
 {
     if(typeof(type)=='undefined')
     {
         return false;
     }
     var c = $(obj).parent().find('input[name=cart_num]').val();
-
+    var count;
     switch(type)
     {
         case 'plus':
-            $(obj).parent().find('input[name=cart_num]').val(parseInt(c)+1);
+            count = parseInt(c)+1;
         break;
         case 'minus':
             var min=$(obj).parent().find('input[name=min_num]').val();
@@ -634,13 +634,50 @@ function cart_count(type,obj)
             }
             if(parseInt(c)-1 > parseInt(min))
             {
-                $(obj).parent().find('input[name=cart_num]').val(parseInt(c)-1);
+                count = parseInt(c)-1;
             }
             else
             {
-                $(obj).parent().find('input[name=cart_num]').val(min);
+                count = min;
             }
         break;
+    }
+    $(obj).parent().find('input[name=cart_num]').val(count);
+    if(typeof(cart) != 'undefined')
+    {
+        $.ajax({
+            url:msg.base_url+'carts/update',
+            type:'post',
+            data:{'product_id':$(obj).parent().find('input[name=cart_num]').attr('product'),'count':count},
+            dataType:'json',
+            success:function(json)
+            {
+                if(json.code == '1000')
+                {
+                    if($('#total_price').length > 0 && typeof(json.price.total_price)!='undefined')
+                    {
+                        $('#total_price').html(json.price.total_price);
+                    }
+                    if($('#total_best_price').length > 0 && typeof(json.price.total_price)!='undefined' && typeof(json.price.total_best_price)!='undefined')
+                    {
+                        $('#total_best_price').html(json.price.total_price-json.price.total_best_price);
+                    }
+                    if($('#order_price').length > 0 && typeof(json.price.total_best_price)!='undefined')
+                    {
+                        $('#order_price').html(json.price.total_best_price);
+                    }
+                }
+                else
+                {
+                    show_error(json.msg);
+                }
+            },
+            error:function()
+            {
+                show_error('数量修改失败');
+                $(obj).parent().find('input[name=cart_num]').val(c);
+            }
+        })
     }
 }
 
@@ -689,7 +726,27 @@ function delCart(id)
             {
                 $('#cart_row_'+id).remove();
                 show_success(msg.delete_success);
-                $('#cart_total').html('('+json.total+')');
+                if($('#cart_total').length > 0)
+                {
+                    $('#cart_total').html('('+json.total+')');
+                }
+                if(json.total == 0)
+                {
+                    $('#myTabContent').hide();
+                    $('#cart-empty').show();
+                }
+                if($('#total_price').length > 0 && typeof(json.price.total_price)!='undefined')
+                {
+                    $('#total_price').html(json.price.total_price);
+                }
+                if($('#total_best_price').length > 0 && typeof(json.price.total_price)!='undefined' && typeof(json.price.total_best_price)!='undefined')
+                {
+                    $('#total_best_price').html(json.price.total_price-json.price.total_best_price);
+                }
+                if($('#order_price').length > 0 && typeof(json.price.total_best_price)!='undefined')
+                {
+                    $('#order_price').html(json.price.total_best_price);
+                }
             }
             else
             {
