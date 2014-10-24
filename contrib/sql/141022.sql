@@ -1,0 +1,1 @@
+ALTER TABLE one_order_detail ADD COLUMN user_id INT(11) NOT NULL DEFAULT 0 COMMENT '用户ID' AFTER order_id;
