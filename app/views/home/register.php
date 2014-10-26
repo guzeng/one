@@ -112,6 +112,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type='hidden' name='openid' value="<?php echo isset($openid)?$openid:''?>">
                     </form>
                 </div>
             </div>

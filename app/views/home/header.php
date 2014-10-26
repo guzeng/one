@@ -11,6 +11,7 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <meta name="MobileOptimized" content="320">
+    <meta property="qc:admins" content="11461700676170536375" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->          
     <link href="<?php echo base_url();?>assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo base_url();?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -52,7 +53,7 @@
             <?endif;?>
             <span>
                 <?php if(!$this->auth->user_id()):?>
-                <a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a>
+                <a href="<?php echo base_url()?>login">登录</a> | <a href="<?php echo base_url()?>register">注册</a>
                 <?else:?>
                 <a href="<?php echo base_url()?>login/out"> 退出</a>
                 <?endif;?>

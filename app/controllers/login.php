@@ -75,7 +75,7 @@ class Login extends CI_Controller {
             $update_row['last_login_time'] = $login_time;
             $update_row['last_login_ip'] = $this->input->ip_address();
             //自动保留登录15天
-            $this->auth->set_auto_login($user->username, $password);
+            $this->auth->set_auto_login($user->username, $user->password);
             if(isset($_COOKIE['lms_logout_url']))
             {
                 $data['url'] = $_COOKIE['lms_logout_url'];
@@ -104,6 +104,66 @@ class Login extends CI_Controller {
         redirect(base_url().'home');
     }
 
+    public function byqq()
+    {
+
+        require_once(APPPATH."libraries/QQAPI/qqConnectAPI.php");
+        $qc = new QC();
+        $qc->qq_login();
+    }
+
+    public function qqcallback()
+    {
+        $this->load->model('user');
+        $this->load->model('user_openid');
+        require_once(APPPATH."libraries/QQAPI/qqConnectAPI.php");
+        $qc = new QC();
+        $access_token = $qc->qq_callback();
+        $openid = $qc->get_openid();
+        $useropenid = $this->user_openid->get_by_openid($openid);
+        if(isset($useropenid->user_id) && $useropenid->user_id > 0)
+        {
+            $this->user_openid->update(array('token'=>$access_token,'create_time'=>time()),$useropenid->id);
+
+            $user = $this->user->get($useropenid->user_id);
+            $login_time = local_to_gmt();
+            $update_row['last_login_time'] = $login_time;
+            $update_row['last_login_ip'] = $this->input->ip_address();
+            //自动保留登录15天
+            $this->auth->set_auto_login($user->username, $user->password);
+            if(isset($_COOKIE['lms_logout_url']))
+            {
+                $url = $_COOKIE['lms_logout_url'];
+                setcookie('lms_logout_url', '', time()-3600, '/');
+            }
+            else
+            {
+                $url = base_url();
+            }
+            $this->user->update($update_row,$user->id);
+            //保存session
+            $this->auth->save_login($user);
+            redirect($url);
+        }
+        else
+        {
+            if(!$useropenid)
+            {
+                if($this->user_openid->insert(array('token'=>$access_token,'openid'=>$openid,'create_time'=>time())))
+                {
+                    redirect('register/openid/'.$openid);
+                }
+                else
+                {
+                    redirect('login/error/login_error');
+                }                
+            }
+            else
+            {
+                redirect('register/openid/'.$openid);
+            }
+        }
+    }
 }
 
 /* End of file welcome.php */

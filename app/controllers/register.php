@@ -15,6 +15,11 @@ class Register extends CI_Controller {
 		$this->load->view('home/register');
 	}
 
+    public function openid($openid)
+    {
+        $data['openid'] = $openid;
+        $this->load->view('home/register',$data);
+    }
     public function checkName()
     {
         $post = $this->input->post();
@@ -40,6 +45,7 @@ class Register extends CI_Controller {
     public function apply()
     {
         $this->load->model('user');
+        $this->load->model('user_openid');
         $post = $this->input->post();
 
         $data = array('code' => '1000', 'msg' => '');
@@ -90,10 +96,18 @@ class Register extends CI_Controller {
             'username' => $post['username'],
             'status'  => 1
         );
-
-        if(!$this->user->insert($row))
+        $user_id = $this->user->insert($row);
+        if(!$user_id)
         {
             $data = array('code'=>'1001','msg'=>"注册失败");
+        }
+        if($post['openid'])
+        {
+            $useropenid = $this->user_openid->get_by_openid($post['openid']);
+            if($useropenid)
+            {
+                $this->user_openid->update(array('user_id'=>$user_id),$useropenid->id);
+            }
         }
 
         if($data['code'] == '1000')

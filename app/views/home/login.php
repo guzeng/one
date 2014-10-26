@@ -43,7 +43,7 @@
 	<div id='header' class='container'>
         <div class='row'>
     		<div class="col-md-4 m-t-10">
-              	<a href="#">
+              	<a href="<?php echo base_url()?>">
               		<img src="<?php echo base_url()?>assets/img/logo.png">
               	</a>
             </div>
@@ -72,7 +72,7 @@
                 </form>
                 <div class='partnerTitle'><strong>使用合作网站账号登录170ES：</strong></div>
                 <div class='partner'>
-                    <a><span><strong>QQ</strong></span></a>
+                    <a href='<?php echo base_url()?>login/byqq'><span><strong>QQ</strong></span></a>
                     <span>|</span><span>
                     <a><strong>微信</strong></span></a>
                 </div>
