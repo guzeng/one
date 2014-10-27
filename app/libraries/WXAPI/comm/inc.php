@@ -1,0 +1,2 @@
+<?php die('forbidden'); ?>
+{"appid":"101164167","appkey":"4492a5b6e88313fc689979d3067b9f35","callback":"http://www.170es.com/login/wxcallback","scope":"get_user_info","errorReport":true,"storageType":"file","host":"localhost","user":"root","password":"root","database":"test"}
