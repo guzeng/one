@@ -214,9 +214,8 @@
                                                 <div class="row fileupload-buttonbar" id='upload_file_con'>
                                                     <div class="col-md-3">
                                                         <!-- The fileinput-button span is used to style the file input field as button -->
-                                                        <span class="btn blue fileinput-button">
-                                                        <i class="fa fa-plus"></i>
-                                                        <span>上传图片</span>
+                                                        <span class="btn default fileinput-button" style='padding-left:60px;padding-right:60px;border:1px solid #ccc;border-radius:2px !important;background-color:#f5f5f5'>
+                                                        <span>选择要上传的头像</span>
                                                         <input id="user_edit_upload" type="file" name="files" multiple="false">
                                                         </span>
                                                     </div>

@@ -54,6 +54,11 @@ class Item extends CI_Controller {
 		$data['goodsale'] = $this->product->all(array('status'=>1),'sale_num desc','',9);
 		//最终购买了
 		$data['last_buy'] = $this->product->all(array('status'=>1),'','',3);
+		if($this->auth->is_login())
+		{
+			$this->load->model('user_browse_history');
+			$this->user_browse_history->insert(array('user_id'=>$this->auth->user_id(),'product_id'=>$id,'create_time'=>local_to_gmt()));
+		}
 		$this->load->view('home/item',$data);
 	}
 }

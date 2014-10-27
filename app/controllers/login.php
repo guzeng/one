@@ -180,10 +180,10 @@ class Login extends CI_Controller {
         }
     }
 
-    public function bywx()
+    public function byweixin()
     {
 
-        require_once(APPPATH."libraries/WXAPI/qqConnectAPI.php");
+        require_once(APPPATH."libraries/WXAPI/wxConnectAPI.php");
         $qc = new QC();
         $qc->login();
     }
