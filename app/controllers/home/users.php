@@ -94,9 +94,11 @@ class Users extends CI_Controller {
 			show_404('',false);
 		}
 		$this->load->model('user');
+        $this->load->model('user_money_log');
 		$user = $this->user->get($user_id);
 
 		$data['user'] = $user;
+        $data['money_log'] = $this->user_money_log->all(array('where'=>array('user_id'=>$user_id)));
 		$this->load->view('home/user-money',$data);
 	}
 
