@@ -74,7 +74,7 @@
                 <div class='partner'>
                     <a href='<?php echo base_url()?>login/byqq'><span><strong>QQ</strong></span></a>
                     <span>|</span><span>
-                    <a><strong>微信</strong></span></a>
+                    <a href=''><strong>微信</strong></span></a>
                 </div>
                 <div class='register text-center'>
                     <a href="<?php echo base_url();?>register"><span><strong>免费注册</strong></span></a>

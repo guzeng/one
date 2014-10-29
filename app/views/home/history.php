@@ -20,7 +20,7 @@
                     <?php foreach ($item as $key => $value):?>
                     <div class='col-md-3 p-thumb'>
                         <div class='text-center m-b-10'>
-                            <img src='<?php echo base_url()?>assets/img/home/p.jpg' title='<?php echo $value->name;?>' class='img-responsive'></div>
+                            <img src='<?php echo $this->product->pic($value->product_id)?>' title='<?php echo $value->name;?>' class='img-responsive'></div>
 
                         <div class='price'>
                              ￥ <?php echo $value->price;?>

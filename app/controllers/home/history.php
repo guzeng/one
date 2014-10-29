@@ -10,6 +10,7 @@ class History extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('user_browse_history');
+        $this->load->model('product');
     }
 	public function index()
 	{
