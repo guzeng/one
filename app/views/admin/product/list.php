@@ -56,6 +56,7 @@
 									 批量分类
 									<i class="fa fa-angle-down"></i>
 									</button>
+									
 									<ul class="dropdown-menu pull-left" style="padding-bottom:10px">
 										<li>
 											<div id="cate_list_div" class="" style="width:400px;;display: block;">
@@ -87,6 +88,14 @@
 					                        </div>
 										</li>
 									</ul>
+
+									<button id="up_jia" type="button" class="btn blue" style="margin-left:15px;">
+									 批量上架
+									</button>
+
+									<button id="down_jia" type="button" class="btn blue" style="margin-left:15px;">
+									 批量下架
+									</button>
 								</div>
 							</div>
 							<?php echo $list;?>
@@ -116,7 +125,106 @@
                     }
                 });
             });
+		   //商品批量上架
+		   $("#up_jia").click(function(){
+		   		//选中的商品ID
+				var ids = new Array();
+				var status = 1;
+				$('#product_list .checkboxes').each(function(){
+					if($(this).attr('class') != 'group-checkable'){
+						if ($(this).is(":checked")) {
+                       		 ids.push($(this).val());
+                    	} 
+					}
+				});
+				if(ids.length<=0)
+				{
+					show_error("请选择要批量上架的商品");
+					return;
+				}
+				$.ajax({
+			        url:msg.base_url+"admin/products/bath_update_status",
+			        type:'post',
+			        data:{'ids':ids,'status':status},
+			        dataType:'json',
+			        success:function(json){
+			            if(json.code=='1000')
+			            {
+			                show_success(json.msg);
+			                $("#product_list input[type='checkbox']").prop("checked",false);
+			                var sta = status == 1 ? 0 : 1;
+			            	var sta_title = status == 1 ? "下架" : "上架";
+			            	var sta_class = status == 1 ? "danger" : "success";
 
+			            	for(key in ids){
+			            		var html = "<a id='product_td_a_"+ids[key]+"' href='javascript:void(0)' onclick='changeStatus(this,"+ids[key]+","+sta+")' >"
+			            				+"<span class='label label-"+sta_class+"'>"+sta_title+"</span></a>";
+			            		var parent_obj = $("#product_td_a_"+ids[key]).parent();
+			            		$("#product_td_a_"+ids[key]).remove();
+			            		parent_obj.append(html);
+			            	}
+			            }
+			            else if(json.code=='1002')
+			            {
+			                show_login();
+			            }
+			            else
+			            {
+			                show_error(json.msg);
+			            }
+			        }
+			    });
+		   });
+		   //商品批量下架
+		   $("#down_jia").click(function(){
+		   		//选中的商品ID
+				var ids = new Array();
+				var status = 0;
+				$('#product_list .checkboxes').each(function(){
+					if($(this).attr('class') != 'group-checkable'){
+						if ($(this).is(":checked")) {
+                       		 ids.push($(this).val());
+                    	} 
+					}
+				});
+				if(ids.length<=0)
+				{
+					show_error("请选择要批量下架的商品");
+					return;
+				}
+				$.ajax({
+			        url:msg.base_url+"admin/products/bath_update_status",
+			        type:'post',
+			        data:{'ids':ids,'status':status},
+			        dataType:'json',
+			        success:function(json){
+			            if(json.code=='1000')
+			            {
+			                show_success(json.msg);
+			                $("#product_list input[type='checkbox']").prop("checked",false);
+			                var sta = status == 1 ? 0 : 1;
+			            	var sta_title = status == 1 ? "下架" : "上架";
+			            	var sta_class = status == 1 ? "danger" : "success";
+
+			            	for(key in ids){
+			            		var html = "<a id='product_td_a_"+ids[key]+"' href='javascript:void(0)' onclick='changeStatus(this,"+ids[key]+","+sta+")' >"
+			            				+"<span class='label label-"+sta_class+"'>"+sta_title+"</span></a>";
+			            		var parent_obj = $("#product_td_a_"+ids[key]).parent();
+			            		$("#product_td_a_"+ids[key]).remove();
+			            		parent_obj.append(html);
+			            	}
+			            }
+			            else if(json.code=='1002')
+			            {
+			                show_login();
+			            }
+			            else
+			            {
+			                show_error(json.msg);
+			            }
+			        }
+			    });
+		   });
 		   //商品分类点击事件
 		   $("#cate_list_div input[type='checkbox']").click(function(e){
 				var category_id = $(this).val();	//商品分类ID
@@ -165,5 +273,41 @@
 			    });
 		   });
 		});
+		
+		function changeStatus(obj,product_id,status)
+		{
+			if(!product_id)
+			{
+				return;
+			}
+			$.ajax({
+		        url:msg.base_url+"admin/products/change_status/"+product_id,
+		        type:'post',
+		        data:{'status':status},
+		        dataType:'json',
+		        success:function(json){
+		            if(json.code=='1000')
+		            {
+		            	var sta = status == 1 ? 0 : 1;
+		            	var sta_title = status == 1 ? "下架" : "上架";
+		            	var sta_class = status == 1 ? "danger" : "success";
+
+		            	var html = "<a id='product_td_a_"+product_id+"' href='javascript:void(0)' onclick='changeStatus(this,"+product_id+","+sta+")' >"
+		            				+"<span class='label label-"+sta_class+"'>"+sta_title+"</span></a>";
+		            	$(obj).parent().append(html);
+		            	$(obj).remove();
+		                show_success(json.msg);
+		            }
+		            else if(json.code=='1002')
+		            {
+		                show_login();
+		            }
+		            else
+		            {
+		                show_error(json.msg);
+		            }
+		        }
+		    });
+		}
 	</script>
 <?$this->load->view('admin/footer');?>

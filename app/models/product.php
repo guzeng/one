@@ -69,14 +69,30 @@ class Product extends CI_Model{
     *   @param int id
     * 
     */
-	public function update($row,$id)
+    public function update($row,$id)
     {
-		if(!empty($row) && $id){
-			$this->db->where('id',$id);
-			return $this->db->update($this->table,$row);
-		}
-		return false;
-	}	
+        if(!empty($row) && $id){
+            $this->db->where('id',$id);
+            return $this->db->update($this->table,$row);
+        }
+        return false;
+    }   
+    //----------------------------------------------------------------
+    /**
+    *   bath_update_status
+    *   更新多个个商品状态
+    *   @param array row 数组
+    *   @param array id
+    * 
+    */
+    public function bath_update_status($row,$ids)
+    {
+        if(!empty($row) && $ids){
+            $this->db->where_in('id',$ids);
+            return $this->db->update($this->table,$row);
+        }
+        return false;
+    }   
     //----------------------------------------------------------------
 
     /**
