@@ -1,0 +1,1 @@
+alter TABLE `one_validation` add column user_id int(11) not null default 0 after `id`;
