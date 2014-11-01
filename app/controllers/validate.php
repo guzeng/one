@@ -36,6 +36,22 @@ class Validate extends CI_Controller {
 			));
 			exit;
 		}
+		if($user->validate_email == 1)
+		{
+			echo json_encode(array(
+				'code' => '1001',
+				'msg' => "您的邮箱已验证"
+			));
+			exit;
+		}
+		if(!$user->email)
+		{
+			echo json_encode(array(
+				'code' => '1004',
+				'msg' => '邮箱不存在'
+			));
+			exit;
+		}
 		//发邮件
 		$this->load->model('email');
 		$this->load->model('validation');
@@ -48,20 +64,20 @@ class Validate extends CI_Controller {
 		$data = array(
 			'username'=>$user->username,
 			'email' => $user->email,
-			'url' => base_url().'validate/email/'.base64_encode(base64_encode($user->email).'###'.$code)
+			'url' => base_url().'validate/email/'.str_replace('=','',base64_encode(base64_encode($user->email).'###'.$code))
 		);
 		$msg = $this->load->view('email/validate-email',$data,true);
 		if($this->email->send($user->email,'邮箱验证',$msg))
 		{
 			echo json_encode(array(
 				'code' => '1000',
-				'msg' => $this->lang->line('success')
+				'msg' => '邮件发送成功，请登录您的邮箱'.$user->email.'点击验证链接。'
 			));
 		}
 		else
 		{
 			echo json_encode(array(
-				'code' => '1001',
+				'code' => '1010',
 				'msg' => '邮件发送失败，请稍候重试'
 			));
 		}
@@ -73,8 +89,10 @@ class Validate extends CI_Controller {
 		{
 			show_error($this->lang->line('param_error'),500);
 		}
-		$code = base64_encode($code);
+		$code = base64_decode($code);
+
 		$arr = explode('###', $code);
+
 		if(count($arr) != 2)
 		{
 			show_error($this->lang->line('param_error'),500);
@@ -83,6 +101,7 @@ class Validate extends CI_Controller {
 		$c = $arr[1];
 		$this->load->model('validation');
 		$row = $this->validation->exist(array('email'=>$email,'code'=>$c));
+
 		if($row)
 		{
 			if($row->expires < local_to_gmt())
@@ -98,13 +117,16 @@ class Validate extends CI_Controller {
 				}
 				else
 				{
-					if($this->user->update(array('validate_email'=>1),$user_id))
+					if($this->user->update(array('validate_email'=>1),$row->user_id))
 					{
+						$this->validation->delete($row->id);
 						//验证成功
+						echo '验证成功';
 					}
 					else
 					{
 						//验证失败
+						echo '验证失败';
 					}
 				}
 			}
