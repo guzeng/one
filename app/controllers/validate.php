@@ -10,7 +10,10 @@ class Validate extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('user');
+
     }
+
+
 	public function phone()
 	{
 
@@ -18,14 +21,7 @@ class Validate extends CI_Controller {
 
 	public function sendemail()
 	{
-		if(!$this->auth->is_login())
-		{
-			echo json_encode(array(
-				'code' => '1001',
-				'msg' => $this->lang->line('login_outtime')
-			));
-			exit;
-		}
+		$this->auth->check_login_json();
 		$user_id = $this->auth->user_id();
 		$user = $this->user->get($user_id);
 		if(!$user)
@@ -71,7 +67,7 @@ class Validate extends CI_Controller {
 		{
 			echo json_encode(array(
 				'code' => '1000',
-				'msg' => '邮件发送成功，请登录您的邮箱'.$user->email.'点击验证链接。'
+				'msg' => '邮件发送成功，请登录您的邮箱'.$user->email.'，点击验证链接。'
 			));
 		}
 		else
@@ -136,6 +132,7 @@ class Validate extends CI_Controller {
 			show_error($this->lang->line('no_data_exist'));
 		}
 	}
+
 }
 
 /* End of file validate.php */

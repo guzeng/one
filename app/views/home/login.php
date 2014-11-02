@@ -117,6 +117,9 @@
     <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <script>
+    $(function(){
+        $('#username').focus();
+    })
     var base_url = "<?php echo base_url();?>";
     var login_msg = {
         'username_required':"请输入帐户",
