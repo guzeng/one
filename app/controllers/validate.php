@@ -6,9 +6,14 @@ class Validate extends CI_Controller {
 	 * Index Page for this controller.
 	 *
 	 */
-	public function index()
+	public function email()
 	{
+		
+	}
 
+	public function phone()
+	{
+		
 	}
 }
 
