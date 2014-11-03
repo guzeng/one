@@ -24,65 +24,41 @@
                                 <div class="mc">
                                     <div class="fore1"><s class="icon-01"></s><strong>登录密码</strong></div>
                                     <div class="fore2"><span class="ftx-03"></span><span style="color:#cc0000;">互联网账号存在被盗风险，建议您定期更改密码以保护账户安全。</span></div>
-                                    <div class="fore3"><a href="/validate/updatePassword">修改</a></div>
+                                    <div class="fore3"><a href="<?php echo base_url()?>home/users/password">修改</a></div>
                                 </div>
                                 <div class="mc">
                                     <div class="fore1">
-                                        <s class="icon-02"></s><strong>邮箱验证</strong><b class="icon-id01d">邮箱认证</b></div>
-                                        <div class="fore2"><span class="ftx-03">验证后，可用于快速找回登录密码，接收账户余额变动提醒。</span></div>
-                                        <div class="fore3"><a class="btn btn-7" href="/validate/verifyMail"><s></s>立即验证</a></div>
-                                                            
+                                        <s class="<?php echo $user->validate_email==1?'icon-01':'icon-02'?>"></s><strong>邮箱验证</strong></div>
+                                        <div class="fore2"><span class="ftx-03">验证后，可用于快速找回登录密码，安全性更高。</span></div>
+                                        <div class="fore3">
+                                            <?php if($user->validate_email==1):?>
+                                            已验证
+                                            <?php else:?>
+                                            <a class="btn btn-7" href="javascript:void(0)" onclick="ajaxRequest('validate/sendemail',this)">
+                                                立即验证
+                                            </a>
+                                            <?php endif;?>
+                                        </div>           
                                 </div>
-                                
                                 <div class="mc">
                                     <div class="fore1">
-                                        <s class="icon-01"></s><strong>手机验证</strong><b class="icon-id01">手机认证</b></div>
-                                        <div class="fore2"><span class="ftx-03">您验证的手机：</span>
-                                            <strong class="ftx-06" id="mobile">130*****905</strong>&nbsp;&nbsp;
-                                            <span class="ftx-03">若已丢失或停用，请立即更换，</span><span style="color:#cc0000;">避免账户被盗</span>
+                                        <s class="icon-01"></s><strong>手机验证</strong></div>
+                                        <div class="fore2">
+                                            验证后，账户余额或优选卡资金变动时，会短信提醒您。
                                         </div>
                                         <div class="fore3"><a href="/validate/updateMobile">修改</a></div>
                                     </div>
                         
                                 <div style="" id="usedFlagCloseDiv" class="mc">
-                                    <div class="fore1"><s class="icon-02"></s><strong>支付密码</strong><b class="icon-id02d">安全认证</b></div>
+                                    <div class="fore1"><s class="icon-02"></s><strong>支付密码</strong></div>
                                     <div class="fore2">
-                                        <span class="ftx-03">启用支付密码后，在使用账户资产时，需通过支付密码进行身份认证。</span>
+                                        <span class="ftx-03">设置后，在使用账户余额或优选卡支付时，需输入支付密码验证用户身份。</span>
                                     </div>
                                     <div class="fore3">
-                                        <a class="btn btn-7" href="/validate/payPwd/openPayPwd.action"><s></s>立即启用</a>
+                                        <a class="btn btn-7" href="<?php echo base_url()?>home/users/paypwd">立即启用</a>
                                     </div>
                                 </div>
                                 
-                                <div style="display:none" id="usedFlagCloseLhdlDiv" class="mc">
-                                    <div class="fore1"><s class="icon-02"></s><strong>支付密码</strong><b class="icon-id02d">安全认证</b></div>
-                                    <div class="fore2"><span class="ftx-03">为保障您的资金安全，建议您启用支付密码。</span><span style="color:#cc0000;">联合登录用户需要完善京东账户信息。</span></div>
-                                    <div class="fore3"><a class="btn btn-7" href="http://qq.jd.com/new/regbind.aspx"><s></s>立即完善</a></div>
-                                </div>
-                                
-                                <div style="display:none" id="usedFlagOpenDiv" class="mc">
-                                    <div class="fore1">
-                                        <s class="icon-01"></s>
-                                        <strong>支付密码</strong><b class="icon-id02">安全认证</b>
-                                    </div>
-                                    
-                                    <div class="fore2"><span class="ftx-03">安全程度：</span>
-                                        <i class="ir icon-s-01"></i> 
-                                        <span class="ftx-03">建议您设置更高强度的密码。</span>
-                                    </div>
-                                    <div class="fore3">
-                                        <a class="btn btn-7" href="/user/paymentpassword/findByPin.action"><s></s>支付密码管理</a>
-                                    </div>
-                                </div>
-                            
-                                <!--新增数字证书-->
-                                <div class="mc">                            
-                                <!--未开启支付密码-->
-                                    <div class="fore1"><s class="icon-02"></s><strong>数字证书</strong><b class="icon-id01d">手机认证</b></div>
-                                    <div class="fore2"><span class="ftx-03">安装数字证书后，即使密码被盗，对方也不能使用您的账户资产。</span></div>  
-                                    <div class="fore3"><a onclick="usedDCCheckThick('3')" href="#none" class="btn btn-7"><s></s>立即启用</a></div>
-                                </div>
-                                <!--新增数字证书结束-->
                             
                             </div>
                         </div>

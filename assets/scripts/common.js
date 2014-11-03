@@ -755,3 +755,49 @@ function delCart(id)
         }
     })
 }
+
+/**
+ * ajax请求
+ * @param url       
+ * @param data      
+ * @param btnId     提交按钮Id
+ * @param callback  回调函数
+ * @param type      请求类型，默认post
+ */
+function ajaxRequest(url,btn){
+    $.ajax({
+        url:msg.base_url+url,
+        type:'get',
+        dataType:'json',
+        success:function(json){ 
+            close_alert();
+            $(btn).attr('disabled',false);
+            if(typeof(json.code)!='undefined' && json.code == '1002')
+            {
+                show_login(json);
+            }
+            else if(json.code=='1000')
+            {
+                if(typeof(json.msg)!='undefined')
+                {
+                    show_success(json.msg);
+                }
+            }
+            else
+            {
+                if(typeof(json.msg)!='undefined')
+                {
+                    show_error(json.msg);
+                }
+            }
+        },
+        beforeSend:function(){
+            loading();
+            $(btn).attr('disabled',true);
+        },
+        error:function(){
+            show_error();
+            $(btn).attr('disabled',false);
+        }
+    });
+}

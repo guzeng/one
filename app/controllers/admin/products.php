@@ -298,6 +298,47 @@ class Products extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function bath_update_status(){
+        $this->auth->check_login_json();
+
+        $data = array('code' => '1000','msg'=>'批量处理成功' );
+        $ids = $this->input->post('ids');
+        $status = $this->input->post('status');
+        $row = array("status"=>$status);
+        if(is_array($ids) && empty($ids))
+        {
+            echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
+            exit;
+        }
+        if(!$this->product->bath_update_status($row,$ids))
+        {
+            $data['msg'] = '批量处理失败';
+            $data['code'] = 1001;
+        }
+        echo json_encode($data);
+    }
+
+    public function change_status($id)
+    {
+        $this->auth->check_login_json();
+        $status = $this->input->post('status');
+        $row = array("status"=>$status);
+        if(!$id)
+        {
+            echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
+            exit;
+        }
+        if($this->product->update($row,$id))
+        {
+            $data = array('code'=>'1000','msg'=>'修改成功','data'=>array('id'=>$id));
+        }
+        else
+        {
+            $data = array('code'=>'1001','msg'=>'修改失败');
+        }
+        echo json_encode($data);
+    }
+
     public function delete($id)
     {
         $this->auth->check_login_json();

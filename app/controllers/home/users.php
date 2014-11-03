@@ -234,6 +234,50 @@ class Users extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function password()
+    {
+        $this->load->view('home/user/password');
+    }
+
+    public function updatePassword()
+    {
+
+    }
+
+    public function payPwd()
+    {
+        $this->load->view('home/user/pay-pwd');
+    }
+
+    public function updatePayPwd()
+    {
+        $this->auth->check_login_json();
+        $post = $this->input->post('paypwd');
+        if(!isset($post['paypwd']))
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => $this->lang->line('param_error')
+            ));
+            exit;
+        }
+        $user_id = $this->auth->user_id();
+        $user = $this->user->get($user_id);
+        $row = array(
+            'pay_pwd' => $this->auth->encrypt($post['paypwd'],$user->username)
+        );
+        if($this->user->update($row,$user_id))
+        {
+            $data['code'] = '1000';
+            $data['msg'] = '设置成功';
+        }
+        else
+        {
+            $data['code'] = '1001';
+            $data['msg'] = '设置失败';
+        }
+        echo json_encode($data);
+    }
 }
 
 /* End of file welcome.php */

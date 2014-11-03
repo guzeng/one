@@ -26,6 +26,13 @@
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
 											<a href="javascript:void(0)" onclick="doDelete('admin/products/delete/'+<?php echo $item->id?>)">
 												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
+											<?php if(isset($item->status)&&$item->status == 1):?>
+											<a id="product_td_a_<?php echo $item->id;?>" href="javascript:void(0)" onclick="changeStatus(this,<?php echo $item->id?>,0)">
+												<span class='label label-danger'>下架</span></a>
+											<?else:?>
+											<a id="product_td_a_<?php echo $item->id;?>" href="javascript:void(0)" onclick="changeStatus(this,<?php echo $item->id?>,1)">
+												<span class='label label-success'>上架</span></a>
+											<?endif;?>
 										</td>
 									</tr>
                             		<?endforeach;?>
