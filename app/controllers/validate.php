@@ -6,6 +6,7 @@ class Validate extends CI_Controller {
 	 * Index Page for this controller.
 	 *
 	 */
+
     function __construct()
     {
         parent::__construct();
@@ -16,6 +17,7 @@ class Validate extends CI_Controller {
 
 	public function phone()
 	{
+
 		$this->auth->check_login();
 		$user_id = $this->auth->user_id();
 		$user = $this->user->get($user_id);
