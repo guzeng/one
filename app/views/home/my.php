@@ -13,7 +13,7 @@
         <li><a href="<?php echo base_url().'home/';?>users/safe">账户安全</a></li>
         <li><a href="<?php echo base_url().'home/';?>users/money">账户余额</a></li>
         <li><a href="<?php echo base_url().'home/';?>users/">消费记录</a></li>
-        <li><a href="<?php echo base_url().'home/';?>users/">我的积分</a></li>
+        <li><a href="<?php echo base_url().'home/';?>users/score">我的积分</a></li>
         <li><a href="<?php echo base_url().'home/';?>users/">优惠券</a></li>
         <li><a href="<?php echo base_url().'home/';?>address">收货地址</a></li>                  
     </ul>
