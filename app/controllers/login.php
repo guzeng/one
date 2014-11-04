@@ -192,7 +192,7 @@ class Login extends CI_Controller {
     {
         $this->load->model('user');
         $this->load->model('user_openid');
-        require_once(APPPATH."libraries/WXAPI/qqConnectAPI.php");
+        require_once(APPPATH."libraries/WXAPI/wxConnectAPI.php");
         $qc = new QC();
         $param = $qc->callback();
         //$openid = $qc->get_openid();

@@ -35,7 +35,11 @@ class Validate extends CI_Controller {
 
 	public function mobile()
 	{
-
+		$this->auth->check_login();
+		$post = $this->input->post();
+		$phone = $post['phone'];
+		$code = $post['validate_code'];
+		
 	}
 
 	public function sendemail()

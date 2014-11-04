@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"></label>
                             <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
-                                <button type="button" class="btn btn-lg green" onclick="do_submit('mobile_form')" id='mobile_submit_btn'>
+                                <button type="submit" class="btn btn-lg green" id='mobile_submit_btn'>
                                     保存
                                 </button> 
                                 <button type="button" class="btn btn-lg btn-default" onclick="goback()" id='mobile_back'>

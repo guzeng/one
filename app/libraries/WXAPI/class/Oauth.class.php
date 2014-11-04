@@ -36,7 +36,6 @@ class Oauth{
         //-------生成唯一随机串防CSRF攻击
         $state = md5(uniqid(rand(), TRUE));
         $this->recorder->write('state',$state);
-
         //-------构造请求参数列表
         $keysArr = array(
             "response_type" => "code",
@@ -45,15 +44,20 @@ class Oauth{
             "state" => $state,
             "scope" => 'snsapi_login'
         );
-
         $login_url =  $this->urlUtils->combineURL(self::GET_AUTH_CODE_URL, $keysArr);
-
         header("Location:$login_url");
     }
 
     public function callback(){
         $state = $this->recorder->read("state");
-
+/*
+echo $state;
+print_r($_SESSION);
+echo '<br>state:';
+//echo $_SESSION['wxstate'];
+echo '.<br>';
+print_r($_GET);
+        print_r($_SESSION);exit;*/
         //--------验证state防止CSRF攻击
         if($_GET['state'] != $state){
             $this->error->showError("30001");
@@ -70,8 +74,7 @@ class Oauth{
         //------构造请求access_token的url
         $token_url = $this->urlUtils->combineURL(self::GET_ACCESS_TOKEN_URL, $keysArr);
         $response = $this->urlUtils->get_contents($token_url);
-print_r($response);
-exit;
+
         /*
         正确的返回：
         {
