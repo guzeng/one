@@ -84,21 +84,60 @@ class Users extends CI_Controller {
      * 展示用户余额信息
      * 
      */
-	public function money()
-	{
+    public function money()
+    {
         $this->auth->check_login();
         $user_id = $this->auth->user_id();
+
 		if(!$user_id)
 		{
 			show_404('',false);
 		}
         $this->load->model('user_money_log');
-		$user = $this->user->get($user_id);
+        $user = $this->user->get($user_id);
 
-		$data['user'] = $user;
+        $data['user'] = $user;
         $data['money_log'] = $this->user_money_log->all(array('where'=>array('user_id'=>$user_id)));
-		$this->load->view('home/user-money',$data);
-	}
+        $this->load->view('home/user-money',$data);
+    }
+
+    /**
+     * 展示用户积分信息
+     * 
+     */
+    public function score($time_type = 'three_month_ago')
+    {
+        $this->auth->check_login();
+        $user_id = $this->auth->user_id();
+        $time_type_list = array('three_month_ago'=>"积分记录(近三个月记录)",
+                                'one_year_ago'=>"积分记录(近一年记录)",
+                                'all'=>"积分记录(全部记录)");
+        if(!$user_id)
+        {
+            show_404('',false);
+        }
+        $this->load->model('user');
+        $this->load->model('user_score_log');
+        $user = $this->user->get($user_id);
+
+        $three_month_ago = strtotime('-3 month');
+        $condition = array("a.user_id = '".$user_id."'");
+        $time = 0;
+        if($time_type == 'three_month_ago')
+            $time = strtotime('-3 month');
+        else if($time_type == 'three_month_ago')
+            $time = strtotime('-1 year');
+        $condition[] ="a.create_time >= ".$time;
+
+        $list = $this->user_score_log->all($condition,'a.id desc','a.id');
+
+        $data['user'] = $user;
+        $data['list'] = $list;
+        $data['time_type']=$time_type;
+        $data['time_type_list']=$time_type_list;
+        // $data['pagination'] = $this->user_score_log->pages($condition);
+        $this->load->view('home/user-score',$data);
+    }
 
     /**
      * 更新用户基本信息
