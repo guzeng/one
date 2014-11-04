@@ -46,7 +46,11 @@
                                         <div class="fore2">
                                             验证后，账户余额或优选卡资金变动时，会短信提醒您。
                                         </div>
-                                        <div class="fore3"><a href="/validate/updateMobile">修改</a></div>
+                                        <div class="fore3">
+                                            <a href="<?php echo base_url()?>validate/phone">
+                                                <?php if($user->validate_phone==1):?>修改<?php else:?>开始验证<?php endif;?>
+                                            </a>
+                                        </div>
                                     </div>
                         
                                 <div style="" id="usedFlagCloseDiv" class="mc">

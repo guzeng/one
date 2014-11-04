@@ -17,6 +17,28 @@ class Validate extends CI_Controller {
 
 	public function phone()
 	{
+
+		$this->auth->check_login();
+		$user_id = $this->auth->user_id();
+		$user = $this->user->get($user_id);
+		if(!$user)
+		{
+			echo json_encode(array(
+				'code' => '1001',
+				'msg' => $this->lang->line('no_data_exist')
+			));
+			exit;
+		}
+		$data['phone'] = $user->phone;
+		$this->load->view('home/user/validate-phone',$data);
+	}
+
+	public function mobile()
+	{
+		$this->auth->check_login();
+		$post = $this->input->post();
+		$phone = $post['phone'];
+		$code = $post['validate_code'];
 		
 	}
 

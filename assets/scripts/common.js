@@ -801,3 +801,88 @@ function ajaxRequest(url,btn){
         }
     });
 }
+
+function sendMobileCode(t,obj)
+{
+    if(typeof(obj)!='undefined' && typeof(t)!='undefined')
+    {
+        var regx=/^1[34578][0-9]{9}$/;
+        var tel = $('#'+t).val();
+        if(tel.match(regx)!=null)
+        {
+            var p = $(obj).parent();
+            $.ajax({
+                url:msg.base_url+'send/mobileCode',
+                type:'post',
+                dataType:'json',
+                data:{'mobile':tel},
+                success:function(json)
+                {
+                    if(json.code=='1000')
+                    {
+                        var html = "<span id='validate_key_timeout' style='margin-top:7px;'>60</span>秒后重新发送";
+                        p.html(html).css({'padding-top':'7px','font-size':'14px'});
+                        var s = setInterval(function(){
+                            var t = $('#validate_key_timeout').html();
+                            if(t=='1')
+                            {
+                                clearInterval(s);
+                                p.html(obj).css('padding-top','0px');
+                            }
+                            else
+                            {
+                                $('#validate_key_timeout').html(parseInt(t)-1);
+                            }
+                        },1000);
+                    }
+                    else
+                    {
+                        if(typeof(json.msg)!='undefined')
+                        {
+                            if($('#'+t).next('span[for='+t+']').length > 0)
+                            {
+                                $('#'+t).next('span[for='+t+']').html(json.msg);
+                            }
+                            else
+                            {
+                                $('#'+t).after("<span for='"+t+"' class='help-block'>"+json.msg+"</span>");
+                                $('#'+t).parents('.form-group').addClass('has-error');
+                            }
+                        }
+                        else
+                        {
+                            show_error();
+                        }
+                        p.html(obj);
+                    }
+                },
+                error:function()
+                {
+                    show_error();
+                },
+                beforeSend:function()
+                {
+                    $('#'+t).next('span[for='+t+']').remove();
+                    $('#'+t).parents('.form-group').removeClass('has-error');
+                    var input = $(obj).parent().parent().find('input[type=text]');
+                    input.val('');
+                    input.parents('.form-group').removeClass('has-error');
+                    $(obj).parent().parent().find('span[for='+input.attr('name')+']').remove();
+                    p.html("&nbsp; <img src='"+msg.base_url+"assets/img/loading.gif'> ");
+                }
+            })            
+        }
+        else
+        {
+            if($('#'+t).next('span[for='+t+']').length > 0)
+            {
+                $('#'+t).next('span[for='+t+']').html('错误的手机号码');
+            }
+            else
+            {
+                $('#'+t).after("<span for='"+t+"' class='help-block'>错误的手机号码</span>");
+                $('#'+t).parents('.form-group').addClass('has-error');
+            }            
+        }
+    }
+}
