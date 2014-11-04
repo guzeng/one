@@ -74,7 +74,7 @@
                 <div class='partner'>
                     <a href='<?php echo base_url()?>login/byqq'><span><strong>QQ</strong></span></a>
                     <span>|</span><span>
-                    <a href=''><strong>微信</strong></span></a>
+                    <a href='<?php echo base_url()?>login/byweixin'><strong>微信</strong></span></a>
                 </div>
                 <div class='register text-center'>
                     <a href="<?php echo base_url();?>register"><span><strong>免费注册</strong></span></a>
@@ -117,6 +117,9 @@
     <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
     <script>
+    $(function(){
+        $('#username').focus();
+    })
     var base_url = "<?php echo base_url();?>";
     var login_msg = {
         'username_required':"请输入帐户",
@@ -145,7 +148,7 @@
             success:function(json){
                 if(json.code != '1000')
                 {
-                    $('#login_form_submit_btn').attr('disabled',false).show();              
+                    $('#login_form_submit_btn').removeClass('disabled');              
                 }
                 if(json.code == '1011'){
                     $('#error_message').html(json.message).show();
@@ -165,7 +168,7 @@
                 }
             },
             beforeSubmit:function(){
-                $('#login_form_submit_btn').attr('disabled',true).hide();
+                $('#login_form_submit_btn').addClass('disabled');
                 $('#error_message').html('');
                 $('#error_message').parent().hide();
             },

@@ -1,0 +1,1 @@
+alter TABLE `one_member` add column pay_pwd varchar(40) not null default '' comment '支付密码';
