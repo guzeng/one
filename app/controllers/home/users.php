@@ -9,6 +9,7 @@ class Users extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->load->model('user');
     }
 
     /**
@@ -23,7 +24,6 @@ class Users extends CI_Controller {
 		{
 			show_404('',false);
 		}
-		$this->load->model('user');
 		$this->load->model('area');
 
 		$user = $this->user->get($user_id);
@@ -74,7 +74,6 @@ class Users extends CI_Controller {
 		{
 			show_404('',false);
 		}
-		$this->load->model('user');
 		$user = $this->user->get($user_id);
 
 		$data['user'] = $user;
@@ -93,7 +92,6 @@ class Users extends CI_Controller {
 		{
 			show_404('',false);
 		}
-		$this->load->model('user');
         $this->load->model('user_money_log');
 		$user = $this->user->get($user_id);
 
@@ -117,11 +115,9 @@ class Users extends CI_Controller {
         $data = array('code' => '1000', 'msg' => '');
         
         $this->load->library('form_validation');
-        $this->load->model('user');
 
         if($post['email'])
         {
-
             $this->form_validation->set_rules('email', ' ', 'valid_email');
         }
         if($post['email'] && $this->form_validation->run() == FALSE)
@@ -241,7 +237,81 @@ class Users extends CI_Controller {
 
     public function updatePassword()
     {
+        $this->auth->check_login_json();
+        $oldpassword = $this->input->post('oldpassword');
+        $password = $this->input->post('password');
+        $password_confirmation = $this->input->post('password_confirmation');
 
+        if(!$oldpassword)
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '请填写旧密码'
+            ));
+            exit;
+        }
+        if(!$password)
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '请填写新密码'
+            ));
+            exit;
+        }
+        if(!$password_confirmation)
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '请填写确认密码'
+            ));
+            exit;
+        }
+        $user_id = $this->auth->user_id();
+        $user = $this->user->get($user_id);
+        if($user->pwd != $this->auth->encrypt($oldpassword,$user->username))
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '旧密码错误'
+            ));
+            exit;
+        }
+        if(strlen($password)<6){
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '新密码不得小于六位'
+            ));
+            exit;
+        }
+        else if (strlen($password) != strlen($password_confirmation)) {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '新密码与确认密码长度不一致'
+            ));
+            exit;
+        }
+        else if($password != $password_confirmation){
+             echo json_encode(array(
+                'code' => '1001',
+                'msg' => '新密码与确认密码不相同'
+            ));
+            exit;
+        }
+        
+        $row = array(
+            'pwd' => $this->auth->encrypt($password,$user->username)
+        );
+        if($this->user->update($row,$user_id))
+        {
+            $data['code'] = '1000';
+            $data['msg'] = '设置成功';
+        }
+        else
+        {
+            $data['code'] = '1001';
+            $data['msg'] = '设置失败';
+        }
+        echo json_encode($data);
     }
 
     public function payPwd()
