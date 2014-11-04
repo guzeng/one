@@ -11,6 +11,11 @@
                 <div class="o-mt">
                     <h2>手机验证</h2>
                 </div>
+                <?php if($validate_phone == 1):?>
+                <div class="alert alert-success">
+                    <strong>您的手机已经验证!</strong> 如需更改，请在下方填写新的手机号码重新验证。
+                </div>
+                <?php endif;?>
                 <form action="<?php echo base_url()?>validate/mobile" method="post" onsubmit='return false' role="form" id='mobile_form' class="form-horizontal">
                     <div class="form-body">
                         <div class="form-group">
@@ -34,8 +39,8 @@
                         <div class="form-group">
                             <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2"></label>
                             <div class="col-lg-4 col-md-5 col-sm-7 col-xs-9">
-                                <button type="submit" class="btn btn-lg green" id='mobile_submit_btn'>
-                                    保存
+                                <button type="button" onclick="do_submit('mobile_form')" class="btn btn-lg green" id='mobile_submit_btn'>
+                                    验证
                                 </button> 
                                 <button type="button" class="btn btn-lg btn-default" onclick="goback()" id='mobile_back'>
                                     取消

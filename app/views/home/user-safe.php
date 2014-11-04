@@ -31,13 +31,14 @@
                                         <s class="<?php echo $user->validate_email==1?'icon-01':'icon-02'?>"></s><strong>邮箱验证</strong></div>
                                         <div class="fore2"><span class="ftx-03">验证后，可用于快速找回登录密码，安全性更高。</span></div>
                                         <div class="fore3">
+                                            <a class="btn btn-7" href="<?php echo base_url()?>validate/validate_email" >
                                             <?php if($user->validate_email==1):?>
-                                            已验证
+                                            修改
                                             <?php else:?>
-                                            <a class="btn btn-7" href="javascript:void(0)" onclick="ajaxRequest('validate/sendemail',this)">
-                                                立即验证
-                                            </a>
+                                            立即验证
                                             <?php endif;?>
+                                            </a>
+                                            
                                         </div>           
                                 </div>
                                 <div class="mc">

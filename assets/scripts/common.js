@@ -333,7 +333,7 @@ function do_submit(formID, callback)
             }
             else if(data.code=='1000')
             {
-                show_success();
+                show_success(data.msg);
                 if(typeof(data.goto)!='undefined')
                 {
                     window.location.href = msg.base_url+data.goto;
