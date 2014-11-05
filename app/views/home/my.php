@@ -6,7 +6,6 @@
         <li><a href="#nav-tabs">评价管理</a></li>
         <li><a href="<?php echo base_url().'home/';?>history">浏览历史</a></li>
         <li><a href="#nav-tabs">邮件订阅</a></li>  
-        <li><a href="<?php echo base_url().'home/';?>users/">我的积分</a></li>
         <li class="head">账户中心</li>
         <li><a href="<?php echo base_url().'home/';?>users">账户信息</a></li>
         <li><a href="<?php echo base_url().'home/';?>users/safe">账户安全</a></li>

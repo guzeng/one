@@ -74,7 +74,7 @@ print_r($_GET);
         //------构造请求access_token的url
         $token_url = $this->urlUtils->combineURL(self::GET_ACCESS_TOKEN_URL, $keysArr);
         $response = $this->urlUtils->get_contents($token_url);
-
+//print_r($response);
         /*
         正确的返回：
         {
@@ -89,14 +89,16 @@ print_r($_GET);
         "errcode":40029,"errmsg":"invalid code"
         } 
         */
-        $msg = json_decode($response);
+        $params = json_decode($response);
 
-        if(isset($msg->errcode)){
-            $this->error->showError($msg->errcode, $msg->errmsg);
+        if(isset($params->errcode)){
+            $this->error->showError($params->errcode, $params->errmsg);
         }
 
-        $params = array();
-        parse_str($response, $params);
+        //$params = array();
+        //parse_str($response, $params);
+        $params = (array)$params;
+        print_r($params);
 
         $this->recorder->write("access_token", $params["access_token"]);
         $this->recorder->write("openid", $params["openid"]);
