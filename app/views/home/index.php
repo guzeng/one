@@ -231,19 +231,19 @@
                     <div class=''>
                         <div class='col-md-4 info-items'>
                             <div class='text-center item'>
-                                <div class='p-t-10 p-b-10'>5</div>
+                                <div class='p-t-10 p-b-10'><?php echo $this->cart->count()?></div>
                                 <div>购物车</div>
                             </div>
                         </div>
                         <div class='col-md-4 info-items'>
                             <div class=' text-center item'>
-                                <div class='p-t-10 p-b-10'>8</div>
+                                <div class='p-t-10 p-b-10'><?php echo $order_count;?></div>
                                 <div>我的订单</div>
                             </div>
                         </div>
                         <div class='col-md-4 info-items'>
                             <div class=' text-center item'>
-                                <div class='p-t-10 p-b-10'>47</div>
+                                <div class='p-t-10 p-b-10'><?php echo $score;?></div>
                                 <div>积分</div>
                             </div>
                         </div>
@@ -263,7 +263,7 @@
                             <?php if(isset($news) && !empty($news)): ?>
                             <ul>
                             <?foreach($news as $key => $item):?>
-                                <li><a href="news/<?php echo $item->id;?>"><?php echo $item->title;?></a></li>
+                                <li><a href="<?php echo base_url()?>news/<?php echo $item->id;?>"><?php echo $item->title;?></a></li>
                             <?endforeach;?>
                             </ul>  
                             <?else:?>

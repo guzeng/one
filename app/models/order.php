@@ -269,7 +269,31 @@ class Order extends CI_Model{
         return false; 
     }
     //----------------------------------------------------------------
-
+        /**
+     * count
+     * 查询所有数量
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/3/31
+     */    
+    public function user_count($where = array())
+    {
+        $_where = $this->condition($where);
+        $this->db->select ('count(a.id) as count');
+        if(isset($_where) && $_where){
+            $this->db->where($_where);
+        }
+        $this->db->from($this->table.' as a');
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+           $count = $query->result();
+           return $count[0]->count;
+        }
+        return false; 
+    }
+    //----------------------------------------------------------------
     /**
     * 分页
     */
