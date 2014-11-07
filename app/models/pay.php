@@ -132,6 +132,27 @@ class Pay  extends CI_Model{
 	}
 	//---------------------------------------------------------
 
+    public function payType($t='')
+    {
+        $arr = array(
+            '1' => 'daofu'
+            '2' => 'alipay',
+            '3' => 'bank',
+            '4' => 'weixin'
+        );
+        if($t)
+        {
+            if(array_key_exists($t, $arr))
+            {
+                return $arr[$t];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return $arr;
+    }
 }
 /* End of file pay.php */
 /* Location: ./application/models/pay.php */	
