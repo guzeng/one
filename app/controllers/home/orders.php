@@ -114,6 +114,30 @@ class Orders extends CI_Controller {
         $data['create_time'] = $create_time;
 		$this->load->view('home/order',$data);
 	}
+
+    public function pay($n)
+    {    
+        $this->auth->check_login();
+        if(!$n)
+        {
+            show_404();
+        }
+        $this->order->get($n);
+        if(!$order)
+        {
+            show_404();
+        }
+        if($order->user_id != $this->auth->user_id())
+        {
+            show_404();
+        }
+        if($order->complete==1)
+        {
+            show_error('订单已完成',500);
+        }
+        $data['order'] = $order;
+        $this->load->view('home/pay',$data);
+    }
 }
 
 /* End of file orders.php */

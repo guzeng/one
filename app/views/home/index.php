@@ -237,13 +237,13 @@
                         </div>
                         <div class='col-md-4 info-items'>
                             <div class=' text-center item'>
-                                <div class='p-t-10 p-b-10'><?php echo $order_count;?></div>
+                                <div class='p-t-10 p-b-10'><?php echo isset($order_count)?$order_count:0;?></div>
                                 <div>我的订单</div>
                             </div>
                         </div>
                         <div class='col-md-4 info-items'>
                             <div class=' text-center item'>
-                                <div class='p-t-10 p-b-10'><?php echo $score;?></div>
+                                <div class='p-t-10 p-b-10'><?php echo isset($score)?$score:0;?></div>
                                 <div>积分</div>
                             </div>
                         </div>

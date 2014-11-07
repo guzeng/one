@@ -43,7 +43,7 @@ class Order extends CI_Model{
 		if(is_array($row) && !empty($row)){
             if(!isset($row['create_time']) || intval($row['create_time'])==0)
             {
-                $row['create_time'] = time();
+                $row['create_time'] = local_to_gmt();
             }
 			if($this->db->insert($this->table,$row)){
 				return $this->db->insert_id();
@@ -106,6 +106,28 @@ class Order extends CI_Model{
 		return false;
 	}
 	//----------------------------------------------------------------
+
+    /**
+    *   get
+    *   获取单个商品信息
+    *   @param int code
+    * 
+    */
+    public function get_by_code($code)
+    {
+        if($code){
+            $this->db->from($this->table. ' as a');
+            $this->db->where('a.code',$code);
+            $type = 'a.*';
+            $this->db->select($type);
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                return $query->row();
+            }
+        }
+        return false;
+    }
+    //----------------------------------------------------------------
 
     /**
     *   detail
