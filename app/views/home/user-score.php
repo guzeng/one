@@ -7,8 +7,8 @@
             <!-- left end -->
             <!-- right -->
             <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
-                <div id="main">
-                    <div class="tab-content">
+                <div id="myTabContent">
+                    <div id="myorder" class="tab-content">
                         <!-- 我的积分 -->
                         <div id="tab_1-3" class="tab-pane active">
                             <div class="o-mt">
@@ -16,21 +16,18 @@
                             </div>
                             <form action="<?=base_url()?>home/users/score" method="post" id='score_form'>
                                 <div class="mod-main mod-comm lefta-box">
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#last-three-month">积分记录(近三个月记录)</a></li>
-                                    </ul>
                                     <div class="btn-group">
-                                        <button style="border:0px" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                        <button style="border:0px;padding:10px 15px;" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
                                         <?if(isset($time_type_list)):?>
                                         <?php echo $time_type_list[$time_type];?>
                                         <?endif;?>
                                         <i class="fa fa-angle-down"></i>
                                         </button>
-                                        <ul class="dropdown-menu">
+                                        <ul class="dropdown-menu" style="font-size:12px;">
                                             <?if(isset($time_type_list)):?>
                                                 <?foreach($time_type_list as $key => $value):?>
                                                 <?if($key != $time_type):?>
-                                                <li><a href="<?=base_url()?>home/users/score/<?php echo $key;?>"><?php echo $value;?></a></li>
+                                                <li><a style="margin:0,10px;" href="<?=base_url()?>home/users/score/<?php echo $key;?>"><?php echo $value;?></a></li>
                                                 <?endif;?>
                                                 <?endforeach;?>
                                             <?endif;?>
@@ -52,10 +49,10 @@
                                                 <tbody>
                                                 <?foreach($list as $key => $value):?>
                                                     <tr>
-                                                        <th style="color:<?php echo $value->score>=0?'red':'grey';?>" width="15%"><?php echo $value->score>=0?'+':'-';?>&nbsp;<?php echo $value->score?></th>
-                                                        <th width="20%"><?php echo date('Y-m-d',$value->create_time)?></th>
-                                                        <th><?php echo $value->info?></th>
-                                                        <th width="15%"><?php echo $value->order_money?></th>
+                                                        <td style="color:<?php echo $value->score>=0?'red':'grey';?>" width="15%"><?php echo $value->score>=0?'+':'-';?>&nbsp;<?php echo $value->score?></td>
+                                                        <td width="20%"><?php echo date('Y-m-d',$value->create_time)?></td>
+                                                        <td><?php echo $value->info?></td>
+                                                        <td width="15%"><?php echo $value->order_money?></td>
                                                     </tr>
                                                 <?endforeach;?>
                                                 </tbody>

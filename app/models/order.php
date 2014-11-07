@@ -23,8 +23,13 @@ class Order extends CI_Model{
         $params = $this->uri->uri_to_assoc(4);
         $this->param['keyword'] = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : 
             (isset($params['keyword']) ? urldekeyword(trim($params['keyword'])) : '');
+        $status = $this->input->post('status')!='' ? trim($this->input->post('status')) : 
+            (isset($params['status']) ? trim($params['status']) : '');
         $this->page = isset($params['page']) ? trim($params['page']) : 1;
-        $this->base_url = '';
+        if($status)
+            $this->base_url = 'status/'.$status;
+        else
+            $this->base_url = '';
     }
     //----------------------------------------------------------------
     /**

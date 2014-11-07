@@ -1,16 +1,16 @@
 <?$this->load->view('home/header')?>
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#orderTab li a").click(function(){
-        $status = $(this).attr('data-status');
-        $("#status").val($status);
-        // $("#keyword").prop("disabled",true);
-        // $("#search_type").prop("disabled",true);
-        $("#order_list_search_form").submit();
-    });
+    // $("#create_time").change(function(){
+    //     var create_time = $("#create_time").val();
+    //     var current_status = $("#orderTab li").filter(".active").attr("data-status");
+    //     var status = current_status == all ? '' : "/status"+current_status;
+    //     if(create_time)
+    //       location.href = $("#order_list_search_form").attr("action")+"/create_time/"+create_time+status;
+    // });
     $("#create_time").change(function(){
-        $create_time = $("#create_time").val();
-        if($create_time)
+        var create_time = $("#create_time").val();
+        if(create_time)
         {
           $("#order_list_search_form").submit();
         }
@@ -30,28 +30,28 @@
         <input type="hidden" name="status" id="status" value="<?php echo $status;?>"/>
         <ul id="orderTab" class="nav nav-tabs" role="tablist">
           <li class="<?php echo $status === '' ? 'active' : '';?>">
-            <a href="#home" role="tab" data-toggle="tab" data-status="">所有订单</a>
+            <a href="<?=base_url()?>home/orders/index">所有订单</a>
           </li>
           <li class="<?php echo $status != '' && $status==1 ? 'active' : '';?>">
-            <a href="#profile" role="tab" data-toggle="tab" data-status="1">
+            <a href="<?=base_url()?>home/orders/index/status/1">
               待付款
               <span class="coun"><?php echo $fu_kuan;?></span>
             </a>
           </li>
           <li class="<?php echo $status != '' && $status==2 ? 'active' : '';?>">
-            <a href="#profile" role="tab" data-toggle="tab" data-status="2">
+            <a href="<?=base_url()?>home/orders/index/status/2">
               待发货
               <span class="coun"><?php echo $fa_huo;?></span>
             </a>
           </li>
           <li class="<?php echo $status != '' && $status==3 ? 'active' : '';?>">
-            <a href="#profile" role="tab" data-toggle="tab" data-status="3">
+            <a href="<?=base_url()?>home/orders/index/status/3">
               待收货
               <span class="coun"><?php echo $shou_huo;?></span>
             </a>
           </li>
           <li class="<?php echo $status != '' && $status==4 ? 'active' : '';?>">
-            <a href="#profile" role="tab" data-toggle="tab" data-status="4">
+            <a href="<?=base_url()?>home/orders/index/status/4">
               待评价
               <span class="coun"><?php echo $ping_jia;?></span>
             </a>

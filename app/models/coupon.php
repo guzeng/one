@@ -1,12 +1,13 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**********************************
-    * 文章
+    * 优惠券
     * @author alex.liang
-    * 2014/4/26
+    * 2014/11/7
 **********************************/
-class Newss extends CI_Model{
+class Coupon extends CI_Model{
 	
-	private $table = 'news';
+	private $table = 'coupon';
+    private $user_table = 'member';
     private $page = 1;
     private $per_page = 15;
     private $param = array();
@@ -17,19 +18,12 @@ class Newss extends CI_Model{
     public function __construct()
     {
         parent::__construct();
-        $params = $this->uri->uri_to_assoc(4);
-        $this->param['title'] = $this->input->post('title')!='' ? trim($this->input->post('title')) : 
-            (isset($params['title']) ? urldecode(trim($params['title'])) : '');
-        $this->page = isset($params['page']) ? trim($params['page']) : 1;
-        $this->base_url = '';
+        $param = $this->uri->uri_to_assoc(4);
+        $type = isset($param['type']) ? trim($param['type']) : 1;
+        $this->page = isset($param['page']) ? trim($param['page']) : 1;
+        $this->base_url = 'type/'.$type;
     }
     //----------------------------------------------------------------
-    /**
-    *   insert
-    *   插入文章
-    *   @param array row 数组
-    * 
-    */
 	public function insert($row)
     {
 		if(is_array($row) && !empty($row)){
@@ -43,46 +37,16 @@ class Newss extends CI_Model{
 		}
 		return false;
 	}
-    //----------------------------------------------------------------
-    /**
-    *   update
-    *   更新文章
-    *   @param array row 数组
-    *   @param int id
-    * 
-    */
-    public function update($row,$id)
+	public function update($row,$id)
     {
-        if(!empty($row) && $id){
-            $this->db->where('id',$id);
-            return $this->db->update($this->table,$row);
-        }
-        return false;
-    }   
+		if(!empty($row) && $id){
+			$this->db->where('id',$id);
+			return $this->db->update($this->table,$row);
+		}
+		return false;
+	}	
     //----------------------------------------------------------------
 
-    /**
-    *   update
-    *   更新文章类别ID
-    *   @param int id
-    * 
-    */
-    public function update_by_cate($id)
-    {
-        if($id){
-            $this->db->where('cate_id',$id);
-            return $this->db->update($this->table,array('cate_id' => 0, ));
-        }
-        return false;
-    }   
-    //----------------------------------------------------------------
-
-    /**
-    *   delete
-    *   删除文章
-    *   @param int id
-    * 
-    */
 	public function delete($id)
     {
 		if($id){
@@ -93,12 +57,6 @@ class Newss extends CI_Model{
 	}
     //----------------------------------------------------------------
 
-    /**
-    *   get
-    *   获取文章信息
-    *   @param int id
-    * 
-    */
 	public function get($id)
     {
 		if($id){
@@ -114,29 +72,6 @@ class Newss extends CI_Model{
 		return false;
 	}
 	//----------------------------------------------------------------
-
-    /**
-    *   exist
-    *   检查是否存在
-    *   @param int id
-    * 
-    */
-    public function exist($where)
-    {
-        if($where){
-            $this->db->from($this->table. ' as a');
-            $this->db->where($where);
-            $type = 'count(a.id) as count';
-            $this->db->select($type);
-            $query = $this->db->get();
-            if($query->row()->count > 0)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-    //----------------------------------------------------------------
 
     /**
     *   get_param
@@ -157,10 +92,10 @@ class Newss extends CI_Model{
     public function condition($cond=array())
     {
         $where = array();
-        if($this->param['title'] != '')
+        if(isset($this->param['user_id']) && $this->param['user_id'] != '')
         {
-            $where[] = "a.title like '%".addslashes(str_replace('%', '\%', $this->param['title']))."%'";
-            $this->base_url .= 'title/'.urlencode($this->param['title']).'/';
+            $where[] = "a.user_id = '".$this->param['user_id']."'";
+            $this->base_url .= 'user_id/'.urlencode($this->param['user_id']).'/';
         }
         if(!empty($cond))
         {
@@ -178,10 +113,10 @@ class Newss extends CI_Model{
      * @param var orderby 排序方式
      * @param var groupby 分组方式
      * @param int num 每页显示的个数
-     * @author zeng.gu
-     * 2014/3/31
+     * @author alex.liang
+     * 2014/11/7
      */    
-	public function lists($where=array(),$num=15,$orderby='',$groupby='')
+    public function lists($where=array(),$num=15,$orderby='',$groupby='')
     {
         $_where = $this->condition($where);
         $_num = intval($num)>0 ? intval($num) : 15;
@@ -190,7 +125,7 @@ class Newss extends CI_Model{
         $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
         $this->per_page = $_num;
         $_type = 'a.*';
-		$this->db->select ( $_type );
+        $this->db->select ( $_type );
         if(isset($_where)){
             $this->db->where($_where);
         }
@@ -201,21 +136,21 @@ class Newss extends CI_Model{
             $this->db->group_by($this->groupby);
         }
         $this->db->order_by($_orderby);
-		$query = $this->db->get();
+        $query = $this->db->get();
         if($query->num_rows() > 0){
             return $query->result();
         }
         return false;   
-	}
-	//----------------------------------------------------------------
+    }
+    //----------------------------------------------------------------
     /**
      * all
      * 查询所有 显示列表
      * @param var orderby 排序方式
      * @param var groupby 分组方式
      * @param int num 每页显示的个数
-     * @author zeng.gu
-     * 2014/3/31
+     * @author alex.liang
+     * 2014/11/7
      */    
     public function all($where=array(),$orderby='',$groupby='')
     {
@@ -224,7 +159,7 @@ class Newss extends CI_Model{
         $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
         $_type = 'a.*';
         $this->db->select ( $_type );
-        if(!empty($where)){
+        if(!empty($_where)){
             $this->db->where($_where);
         }
         $this->db->from($this->table.' as a');
@@ -246,75 +181,38 @@ class Newss extends CI_Model{
      * @param var orderby 排序方式
      * @param var groupby 分组方式
      * @param int num 每页显示的个数
-     * @author zeng.gu
-     * 2014/3/31
+     * @author alex.liang
+     * 2014/11/7
      */    
-    public function count()
+    public function count($where)
     {
-        $_where = $this->condition();
+        $_where = $this->condition($where);
         $this->db->select ('count(a.id) as count');
         if(isset($_where)){
             $this->db->where($_where);
         }
-        return $this->db->count_all($this->table);
+        $this->db->from($this->table.' as a');
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            $result = $query->result();
+            return $result[0]->count;
+        }
+        return 0; 
     }
     //----------------------------------------------------------------
 
     /**
     * 分页
     */
-    public function pages()
+    public function pages($where)
     {
         $config['per_page'] = $this->per_page;
-        $config['total_rows'] = $this->count();
+        $config['total_rows'] = $this->count($where);
         $config['base_url'] = rtrim($this->base_url,'/');
         $this->pagination->initialize($config);
         return $this->pagination->links();
     }
     //----------------------------------------------------------------
-
-    /**
-    * 分页，用于AJAX形式只更新页面部分内容
-    */
-    public function pages_ajax()
-    {
-        $config['per_page'] = $this->per_page;
-        $config['total_rows'] = $this->count();
-        $config['base_url'] = base_url().'admin/products/lists/'.rtrim($this->base_url,'/');
-        $config['target'] = 'list_view';
-        $this->pagination->init($config);
-        return $this->pagination->links_load_page();
-    }
-    //----------------------------------------------------------------
-
-    /**
-    *   取商品图片
-    *   @param int id 商品ID
-    *   @param var type 类型
-    */
-    public function pic($id, $type='big')
-    {
-        $default = base_url().'images/default_'.$type.'.jpg';
-        if($id)
-        {
-            $this->load->helper('file');
-            $dir = upload_dir($id);
-            $filePath = '';
-            if($type=='big')
-            {
-                $filePath = upload_folder('product').'/'.$dir.'/cover.png';
-            }
-            else if($type=='small')
-            {
-                $filePath = upload_folder('product').'/'.$dir.'/cover_thumb.png';
-            }
-            if(file_exists($filePath))
-            {
-                return base_url().$filePath.'?'.rand();
-            }
-        }
-        return $default;
-    }
 }
-/* End of file product.php */
-/* Location: ./app/models/product.php */	
+/* End of file Coupon.php */
+/* Location: ./app/models/Coupon.php */	

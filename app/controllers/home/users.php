@@ -125,7 +125,7 @@ class Users extends CI_Controller {
         $time = 0;
         if($time_type == 'three_month_ago')
             $time = strtotime('-3 month');
-        else if($time_type == 'three_month_ago')
+        else if($time_type == 'one_year_ago')
             $time = strtotime('-1 year');
         $condition[] ="a.create_time >= ".$time;
 
