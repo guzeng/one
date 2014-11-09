@@ -22,6 +22,7 @@ class Index extends CI_Controller {
 		$this->load->model('link');
 		$this->load->model('product_brand');
 		$this->load->model('ad');
+		$this->load->model('order');
 		
 		$product_cate = $this->product_category->get_level_tree();//树状产品类型
 		
@@ -51,6 +52,12 @@ class Index extends CI_Controller {
 		$data['link'] = $this->link->lists(array("num"=>"5"));//最新五条友情链接
 		$data['ad_home'] = $this->ad->lists(array("where"=>"position_id = 1"));
 		$data['product_brand'] = $this->product_brand->lists(array("num"=>"10"));//最新27条品牌信息
+		if($this->auth->is_login())
+		{
+			$data['order_count'] = $this->order->user_count(array('user_id'=>$this->auth->user_id()));
+			$user = $this->user->get($this->auth->user_id());
+			$data['score'] = $user->score;
+		}
 		$this->load->view('home/index',$data);
 	}
 

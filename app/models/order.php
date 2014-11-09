@@ -23,8 +23,13 @@ class Order extends CI_Model{
         $params = $this->uri->uri_to_assoc(4);
         $this->param['keyword'] = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : 
             (isset($params['keyword']) ? urldekeyword(trim($params['keyword'])) : '');
+        $status = $this->input->post('status')!='' ? trim($this->input->post('status')) : 
+            (isset($params['status']) ? trim($params['status']) : '');
         $this->page = isset($params['page']) ? trim($params['page']) : 1;
-        $this->base_url = '';
+        if($status)
+            $this->base_url = 'status/'.$status;
+        else
+            $this->base_url = '';
     }
     //----------------------------------------------------------------
     /**
@@ -38,7 +43,7 @@ class Order extends CI_Model{
 		if(is_array($row) && !empty($row)){
             if(!isset($row['create_time']) || intval($row['create_time'])==0)
             {
-                $row['create_time'] = time();
+                $row['create_time'] = local_to_gmt();
             }
 			if($this->db->insert($this->table,$row)){
 				return $this->db->insert_id();
@@ -101,6 +106,28 @@ class Order extends CI_Model{
 		return false;
 	}
 	//----------------------------------------------------------------
+
+    /**
+    *   get
+    *   获取单个商品信息
+    *   @param int code
+    * 
+    */
+    public function get_by_code($code)
+    {
+        if($code){
+            $this->db->from($this->table. ' as a');
+            $this->db->where('a.code',$code);
+            $type = 'a.*';
+            $this->db->select($type);
+            $query = $this->db->get();
+            if($query->num_rows()>0){
+                return $query->row();
+            }
+        }
+        return false;
+    }
+    //----------------------------------------------------------------
 
     /**
     *   detail
@@ -269,7 +296,31 @@ class Order extends CI_Model{
         return false; 
     }
     //----------------------------------------------------------------
-
+        /**
+     * count
+     * 查询所有数量
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/3/31
+     */    
+    public function user_count($where = array())
+    {
+        $_where = $this->condition($where);
+        $this->db->select ('count(a.id) as count');
+        if(isset($_where) && $_where){
+            $this->db->where($_where);
+        }
+        $this->db->from($this->table.' as a');
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+           $count = $query->result();
+           return $count[0]->count;
+        }
+        return false; 
+    }
+    //----------------------------------------------------------------
     /**
     * 分页
     */

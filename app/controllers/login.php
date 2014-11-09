@@ -75,7 +75,7 @@ class Login extends CI_Controller {
             $update_row['last_login_time'] = $login_time;
             $update_row['last_login_ip'] = $this->input->ip_address();
             //自动保留登录15天
-            $this->auth->set_auto_login($user->username, $user->password);
+            $this->auth->set_auto_login($user->username, $user->pwd);
             if(isset($_COOKIE['lms_logout_url']))
             {
                 $data['url'] = $_COOKIE['lms_logout_url'];
@@ -192,7 +192,7 @@ class Login extends CI_Controller {
     {
         $this->load->model('user');
         $this->load->model('user_openid');
-        require_once(APPPATH."libraries/WXAPI/qqConnectAPI.php");
+        require_once(APPPATH."libraries/WXAPI/wxConnectAPI.php");
         $qc = new QC();
         $param = $qc->callback();
         //$openid = $qc->get_openid();

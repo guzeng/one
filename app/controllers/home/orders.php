@@ -20,7 +20,10 @@ class Orders extends CI_Controller {
 		$keyword = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) :  '';
         $keyword = urldecode(trim($keyword));
         $search_type = $this->input->post('search_type')!='' ? trim($this->input->post('search_type')) : (isset($param['search_type']) ? $param['search_type'] : '');
-        $status = $this->input->post('status')!='' ? trim($this->input->post('status')) :  '';
+        
+        $params = $this->uri->uri_to_assoc(4);
+        $status = $this->param['status'] = $this->input->post('status')!='' ? trim($this->input->post('status')) : 
+            (isset($params['status']) ? trim($params['status']) : '');
         $create_time = $this->input->post('create_time')!='' ? trim($this->input->post('create_time')) :  '';
         
         $condition = array("a.user_id = '".$user_id."'");
@@ -84,10 +87,6 @@ class Orders extends CI_Controller {
             }
         }
 
-        // if($search_type && $keyword)
-        // {
-        //     $condition[$search_type] = $keyword;
-        // }
         if($status)
         {
             $condition[] = 'a.status = '.$status.' and a.status != 4 and a.status != 5 ';
@@ -115,6 +114,30 @@ class Orders extends CI_Controller {
         $data['create_time'] = $create_time;
 		$this->load->view('home/order',$data);
 	}
+
+    public function pay($n)
+    {    
+        $this->auth->check_login();
+        if(!$n)
+        {
+            show_404();
+        }
+        $this->order->get($n);
+        if(!$order)
+        {
+            show_404();
+        }
+        if($order->user_id != $this->auth->user_id())
+        {
+            show_404();
+        }
+        if($order->complete==1)
+        {
+            show_error('订单已完成',500);
+        }
+        $data['order'] = $order;
+        $this->load->view('home/pay',$data);
+    }
 }
 
 /* End of file orders.php */

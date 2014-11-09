@@ -9,7 +9,11 @@ class Validation  extends CI_Model{
 			{
 				$row['create_time'] = local_to_gmt();
 			}
-			$row['expires'] = $row['create_time'] + 24*3600;
+			if(!isset($row['expires']) || intval($row['expires'])<=0)
+			{
+				$row['expires'] = $row['create_time'] + 24*3600;
+			}
+			
 			if($this->db->insert($this->table,$row)){
 				return $this->db->insert_id();
 			}
@@ -21,6 +25,15 @@ class Validation  extends CI_Model{
 	public function delete($id){
 		if($id){
 			$this->db->where('id',$id);
+			return $this->db->delete($this->table);
+		}
+		return false;
+	}
+	//---------------------------------------------------------
+
+	public function delete_by($where){
+		if($where){
+			$this->db->where($where);
 			return $this->db->delete($this->table);
 		}
 		return false;

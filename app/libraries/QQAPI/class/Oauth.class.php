@@ -36,14 +36,13 @@ class Oauth{
         //-------生成唯一随机串防CSRF攻击
         $state = md5(uniqid(rand(), TRUE));
         $this->recorder->write('state',$state);
-
         //-------构造请求参数列表
         $keysArr = array(
             "response_type" => "code",
             "client_id" => $appid,
             "redirect_uri" => $callback,
             "state" => $state,
-            "scope" => $scope
+            //"scope" => $scope
         );
 
         $login_url =  $this->urlUtils->combineURL(self::GET_AUTH_CODE_URL, $keysArr);
@@ -53,7 +52,6 @@ class Oauth{
 
     public function qq_callback(){
         $state = $this->recorder->read("state");
-
         //--------验证state防止CSRF攻击
         if($_GET['state'] != $state){
             $this->error->showError("30001");
@@ -162,5 +160,20 @@ class Oauth{
         return $params;
 
     }
+
+    public function write($msg)
+    {
+        $fp = fopen(APPPATH.'logs/test.txt', "a+");//文件被清空后再写入
+        if($fp)
+        {
+            fwrite($fp,$msg."\r\n");
+        }
+        else
+        {
+            echo "打开文件失败";
+        }
+        fclose($fp);         
+    }
+
 
 }

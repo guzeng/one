@@ -9,6 +9,7 @@ class Users extends CI_Controller {
     function __construct()
     {
         parent::__construct();
+        $this->load->model('user');
     }
 
     /**
@@ -23,7 +24,6 @@ class Users extends CI_Controller {
 		{
 			show_404('',false);
 		}
-		$this->load->model('user');
 		$this->load->model('area');
 
 		$user = $this->user->get($user_id);
@@ -74,7 +74,6 @@ class Users extends CI_Controller {
 		{
 			show_404('',false);
 		}
-		$this->load->model('user');
 		$user = $this->user->get($user_id);
 
 		$data['user'] = $user;
@@ -85,22 +84,60 @@ class Users extends CI_Controller {
      * 展示用户余额信息
      * 
      */
-	public function money()
-	{
+    public function money()
+    {
         $this->auth->check_login();
         $user_id = $this->auth->user_id();
+
 		if(!$user_id)
 		{
 			show_404('',false);
 		}
-		$this->load->model('user');
         $this->load->model('user_money_log');
-		$user = $this->user->get($user_id);
+        $user = $this->user->get($user_id);
 
-		$data['user'] = $user;
+        $data['user'] = $user;
         $data['money_log'] = $this->user_money_log->all(array('where'=>array('user_id'=>$user_id)));
-		$this->load->view('home/user-money',$data);
-	}
+        $this->load->view('home/user-money',$data);
+    }
+
+    /**
+     * 展示用户积分信息
+     * 
+     */
+    public function score($time_type = 'three_month_ago')
+    {
+        $this->auth->check_login();
+        $user_id = $this->auth->user_id();
+        $time_type_list = array('three_month_ago'=>"积分记录(近三个月记录)",
+                                'one_year_ago'=>"积分记录(近一年记录)",
+                                'all'=>"积分记录(全部记录)");
+        if(!$user_id)
+        {
+            show_404('',false);
+        }
+        $this->load->model('user');
+        $this->load->model('user_score_log');
+        $user = $this->user->get($user_id);
+
+        $three_month_ago = strtotime('-3 month');
+        $condition = array("a.user_id = '".$user_id."'");
+        $time = 0;
+        if($time_type == 'three_month_ago')
+            $time = strtotime('-3 month');
+        else if($time_type == 'one_year_ago')
+            $time = strtotime('-1 year');
+        $condition[] ="a.create_time >= ".$time;
+
+        $list = $this->user_score_log->all($condition,'a.id desc','a.id');
+
+        $data['user'] = $user;
+        $data['list'] = $list;
+        $data['time_type']=$time_type;
+        $data['time_type_list']=$time_type_list;
+        // $data['pagination'] = $this->user_score_log->pages($condition);
+        $this->load->view('home/user-score',$data);
+    }
 
     /**
      * 更新用户基本信息
@@ -117,11 +154,9 @@ class Users extends CI_Controller {
         $data = array('code' => '1000', 'msg' => '');
         
         $this->load->library('form_validation');
-        $this->load->model('user');
 
         if($post['email'])
         {
-
             $this->form_validation->set_rules('email', ' ', 'valid_email');
         }
         if($post['email'] && $this->form_validation->run() == FALSE)
@@ -234,6 +269,124 @@ class Users extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function password()
+    {
+        $this->load->view('home/user/password');
+    }
+
+    public function updatePassword()
+    {
+        $this->auth->check_login_json();
+        $oldpassword = $this->input->post('oldpassword');
+        $password = $this->input->post('password');
+        $password_confirmation = $this->input->post('password_confirmation');
+
+        if(!$oldpassword)
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '请填写旧密码'
+            ));
+            exit;
+        }
+        if(!$password)
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '请填写新密码'
+            ));
+            exit;
+        }
+        if(!$password_confirmation)
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '请填写确认密码'
+            ));
+            exit;
+        }
+        $user_id = $this->auth->user_id();
+        $user = $this->user->get($user_id);
+        if($user->pwd != $this->auth->encrypt($oldpassword,$user->username))
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '旧密码错误'
+            ));
+            exit;
+        }
+        if(strlen($password)<6){
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '新密码不得小于六位'
+            ));
+            exit;
+        }
+        else if (strlen($password) != strlen($password_confirmation)) {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => '新密码与确认密码长度不一致'
+            ));
+            exit;
+        }
+        else if($password != $password_confirmation){
+             echo json_encode(array(
+                'code' => '1001',
+                'msg' => '新密码与确认密码不相同'
+            ));
+            exit;
+        }
+        
+        $row = array(
+            'pwd' => $this->auth->encrypt($password,$user->username)
+        );
+        if($this->user->update($row,$user_id))
+        {
+            $data['code'] = '1000';
+            $data['msg'] = '设置成功';
+        }
+        else
+        {
+            $data['code'] = '1001';
+            $data['msg'] = '设置失败';
+        }
+        echo json_encode($data);
+    }
+
+    public function payPwd()
+    {
+        $this->load->view('home/user/pay-pwd');
+    }
+
+    public function updatePayPwd()
+    {
+        $this->auth->check_login_json();
+        $post = $this->input->post('paypwd');
+        if(!isset($post['paypwd']))
+        {
+            echo json_encode(array(
+                'code' => '1001',
+                'msg' => $this->lang->line('param_error')
+            ));
+            exit;
+        }
+        $user_id = $this->auth->user_id();
+        $user = $this->user->get($user_id);
+        $row = array(
+            'pay_pwd' => $this->auth->encrypt($post['paypwd'],$user->username)
+        );
+        if($this->user->update($row,$user_id))
+        {
+            $data['code'] = '1000';
+            $data['msg'] = '设置成功';
+        }
+        else
+        {
+            $data['code'] = '1001';
+            $data['msg'] = '设置失败';
+        }
+        echo json_encode($data);
+    }
 }
 
 /* End of file welcome.php */

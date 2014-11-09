@@ -39,3 +39,4 @@ $lang['check_now'] = "正在检测，请稍候...";
 $lang['modify'] = "修改";
 $lang['ensure'] = "确定";
 $lang['param_error'] = "参数错误";
+$lang['deny_request'] ="你请求的操作是不允许的。";
