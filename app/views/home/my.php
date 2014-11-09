@@ -5,12 +5,8 @@
         <li class="active"><a href="<?php echo base_url().'home/';?>orders">我的订单</a></li>
         <li><a href="<?php echo base_url().'home/';?>evaluation">评价管理</a></li>
         <li><a href="<?php echo base_url().'home/';?>history">浏览历史</a></li>
-<<<<<<< HEAD
         <li><a href="<?php echo base_url().'home/';?>mailsubs">邮件订阅</a></li>  
         <li><a href="<?php echo base_url().'home/';?>myintegral">我的积分</a></li>
-=======
-        <li><a href="#nav-tabs">邮件订阅</a></li>  
->>>>>>> a4939dfd15352d570fd5e121f12086cd285cf25e
         <li class="head">账户中心</li>
         <li><a href="<?php echo base_url().'home/';?>users">账户信息</a></li>
         <li><a href="<?php echo base_url().'home/';?>users/safe">账户安全</a></li>
