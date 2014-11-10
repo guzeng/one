@@ -1,21 +1,18 @@
 <?$this->load->view('home/header')?>
 <script type="text/javascript">
   $(document).ready(function(){
-    // $("#create_time").change(function(){
-    //     var create_time = $("#create_time").val();
-    //     var current_status = $("#orderTab li").filter(".active").attr("data-status");
-    //     var status = current_status == all ? '' : "/status"+current_status;
-    //     if(create_time)
-    //       location.href = $("#order_list_search_form").attr("action")+"/create_time/"+create_time+status;
-    // });
     $("#create_time").change(function(){
         var create_time = $("#create_time").val();
-        if(create_time)
-        {
-          $("#order_list_search_form").submit();
-        }
+        var base_url = $("#orderTab li").filter(".active").find("a").attr('href');
+        if(create_time.length>0)
+          location.href = base_url+"/create_time/"+create_time;
     });
-
+    $("#search_btn").click(function(){
+        var keyword = $("#keyword").val();
+        var base_url = $("#orderTab li").filter(".active").find("a").attr('href');
+        if(keyword.length>0)
+          location.href = base_url+"/keyword/"+keyword;
+    });
   });
 </script>
 <div class='container m-t-20' id="myorder">
@@ -30,28 +27,28 @@
         <input type="hidden" name="status" id="status" value="<?php echo $status;?>"/>
         <ul id="orderTab" class="nav nav-tabs" role="tablist">
           <li class="<?php echo $status === '' ? 'active' : '';?>">
-            <a href="<?=base_url()?>home/orders/index">所有订单</a>
+            <a data-status="" href="<?=base_url()?>home/orders/index">所有订单</a>
           </li>
           <li class="<?php echo $status != '' && $status==1 ? 'active' : '';?>">
-            <a href="<?=base_url()?>home/orders/index/status/1">
+            <a data-status="1" href="<?=base_url()?>home/orders/index/status/1">
               待付款
               <span class="coun"><?php echo $fu_kuan;?></span>
             </a>
           </li>
           <li class="<?php echo $status != '' && $status==2 ? 'active' : '';?>">
-            <a href="<?=base_url()?>home/orders/index/status/2">
+            <a data-status="2" href="<?=base_url()?>home/orders/index/status/2">
               待发货
               <span class="coun"><?php echo $fa_huo;?></span>
             </a>
           </li>
-          <li class="<?php echo $status != '' && $status==3 ? 'active' : '';?>">
+          <li data-status="3" class="<?php echo $status != '' && $status==3 ? 'active' : '';?>">
             <a href="<?=base_url()?>home/orders/index/status/3">
               待收货
               <span class="coun"><?php echo $shou_huo;?></span>
             </a>
           </li>
           <li class="<?php echo $status != '' && $status==4 ? 'active' : '';?>">
-            <a href="<?=base_url()?>home/orders/index/status/4">
+            <a data-status="4" href="<?=base_url()?>home/orders/index/status/4">
               待评价
               <span class="coun"><?php echo $ping_jia;?></span>
             </a>
@@ -91,9 +88,9 @@
           <div class="col-md-4 col-md-pull-8">
             <div class="input-group">
               <input name="keyword" id="keyword" type="text" class="form-control" placeholder='订单号或商品名称' value="<?php echo isset($keyword) ? $keyword :'';?>" />
-              <input name="search_type" id="search_type" type="hidden" class="form-control" placeholder='' value='1' />
+              <input name="search_type" id="search_type" type="hidden" class="form-control" placeholder='' value='<?php echo isset($search_type) ? $search_type :'';?>' />
               <span class="input-group-btn">
-                  <input class="btn default" type="submit" onclick="" value="&nbsp;&nbsp;订单查询&nbsp;&nbsp;" >
+                  <input id="search_btn" class="btn default" type="button" value="&nbsp;&nbsp;订单查询&nbsp;&nbsp;" >
               </span>
             </div>
           </div>
