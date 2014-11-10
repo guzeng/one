@@ -66,7 +66,7 @@ class Category extends CI_Controller {
 				$orderby = 'putaway_time '.$desc;
 				break;
 		}
-		$data['list'] = $this->product->lists(16,$orderby,'',array("`status` = '1'"));
+		$data['list'] = $this->product->lists(16,$orderby,'',array("a.`status` = '1'"));
 		$data['count'] = $this->product->count();
 		$data['all_page'] = ceil($data['count']/16);
 		$data['per_page'] = $data['all_page'] > 0 ? $this->product->page : 0;

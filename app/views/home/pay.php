@@ -2,116 +2,115 @@
 <div class="main">
     <div class="container">
         <!-- BEGIN SIDEBAR & CONTENT -->
-        <div class="row margin-bottom-40">
+        <div class="row p-b-50">
           <!-- BEGIN CONTENT -->
             <div class="col-md-12 col-sm-12">
                 <div class="content-page">
                     <!-- BEGIN LEFT SIDEBAR -->  
                     <div class="row">          
                         <div class="col-md-12 p-l-30 p-r-30">
-                            <h2><?php echo Lang::get('text.pay_for_order');?></h2>
+                            <h2>订单支付</h2>
                             <div class='note m-t-30'>
-                                <p><?php echo Lang::get('text.order_code') ?> : <?php echo $order->code?></p>
-                                <p><?php echo Lang::get('text.money');?> : <?php echo round($order->money,2)?></p>
-                                <p><?php echo Lang::get('text.order_time');?> : <?php echo date('Y-m-d H:i:s', gmt_to_local($order->create_time))?></p>
+                                <p>订单号 : <?php echo $order->code?></p>
+                                <p>金额 : <?php echo round($order->price,2)?></p>
+                                <p>下单时间 : <?php echo date('Y-m-d H:i:s', gmt_to_local($order->create_time))?></p>
                             </div>
                         </div>
                     </div>
                     <hr>
                     <div class="row">    
                         <div class="col-md-12 p-l-30 p-r-30">
-                            <p><?php echo Lang::get('text.pay_tip1');?></p>
-                            <p><?php echo Lang::get('text.pay_tip2');?></p>
+                            <p>为了安全起见，无论您是否拥有支付宝账号都可通过点击支付宝完成支付</p>
                         </div>
                     </div>
                     <div class="row">    
                         <div class="col-md-12 p-l-30 p-r-30">
-                            <form action="<?php echo asset('pay')?>" method='post'>
+                            <form action="<?php echo base_url()?>payment" method='post'>
                             <div class="form-group m-b-20">
                                 <div class="col-md-12">
                                     <div class="radio-list">
                                         <label class='m-b-20'>
-                                            <input type="radio" checked="" value="1" id="pay_type_alipay" name="pay_type"> &nbsp;
-                                            <img class='' src="<?php echo asset('assets/img/alipay.jpg')?>" >
+                                            <input type="radio" checked="" value="alipay" id="pay_type_alipay" name="pay_type"> &nbsp;
+                                            <img class='' src="<?php echo base_url().'assets/img/alipay.jpg'?>" >
                                         </label>
                                         <label class='m-b-20'>
-                                            <input type="radio" value="2" id="pay_type_bank" name="pay_type"> &nbsp;
-                                            <img class='' src="<?php echo asset('assets/img/unionpay.jpg')?>" >
+                                            <input type="radio" value="banking" id="pay_type_bank" name="pay_type"> &nbsp;
+                                            <img class='' src="<?php echo base_url().'assets/img/unionpay.jpg'?>" >
                                         </label>
                                         <div id='banks' class='hide'>
                                             <div class="m-b-20">
                                                 <label class="radio-inline" style='margin-left:10px;'>
                                                     <input type="radio" name="bank_name" value="ICBCB2C" checked class='bankinput'> 
-                                                    <span class='bank ICBC' title='<?php echo Lang::get('text.ICBC')?>'></span>
+                                                    <span class='bank ICBC' title='中国工商银行'></span>
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="ABC" class='bankinput'>
-                                                    <span class='bank ABC' title='<?php echo Lang::get('text.ABC')?>'></span> 
+                                                    <span class='bank ABC' title='中国农业银行'></span> 
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="CCB" class='bankinput'>
-                                                    <span class='bank CCB' title='<?php echo Lang::get('text.CCB')?>'></span>  
+                                                    <span class='bank CCB' title='中国建设银行'></span>  
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="BOCB2C"  class='bankinput'>
-                                                    <span class='bank BOCB2C' title='<?php echo Lang::get('text.BOCB2C')?>'></span>   
+                                                    <span class='bank BOCB2C' title='中国银行'></span>   
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="CMB"  class='bankinput'> 
-                                                    <span class='bank CMB' title='<?php echo Lang::get('text.CMB')?>'></span>   
+                                                    <span class='bank CMB' title='招商银行'></span>   
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="POSTGC"  class='bankinput'>
-                                                    <span class='bank POSTGC' title='<?php echo Lang::get('text.POSTGC')?>'></span>
+                                                    <span class='bank POSTGC' title='中国邮政储蓄银行'></span>
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="COMM-DEBIT" class='bankinput'>
-                                                    <span class='bank COMM-DEBIT' title='<?php echo Lang::get('text.COMM-DEBIT')?>'></span> 
+                                                    <span class='bank COMM-DEBIT' title='交通银行'></span> 
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="GDB"  class='bankinput'>
-                                                    <span class='bank GDB' title='<?php echo Lang::get('text.GDB')?>'></span>  
+                                                    <span class='bank GDB' title='广发银行'></span>  
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="CMBC" class='bankinput'>
-                                                    <span class='bank CMBC' title='<?php echo Lang::get('text.CMBC')?>'></span>   
+                                                    <span class='bank CMBC' title='中国民生银行'></span>   
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="CITIC" class='bankinput'>
-                                                    <span class='bank CITIC' title='<?php echo Lang::get('text.CITIC')?>'></span>    
+                                                    <span class='bank CITIC' title='中信银行'></span>    
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="SPABANK"  class='bankinput'>
-                                                    <span class='bank SPABANK' title='<?php echo Lang::get('text.SPABANK')?>'></span>     
+                                                    <span class='bank SPABANK' title='平安银行'></span>     
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="CEB-DEBIT"  class='bankinput'>
-                                                    <span class='bank CEB-DEBIT' title='<?php echo Lang::get('text.CEB-DEBIT')?>'></span>      
+                                                    <span class='bank CEB-DEBIT' title='中国光大银行'></span>      
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="SHBANK" class='bankinput'>
-                                                    <span class='bank SHBANK' title='<?php echo Lang::get('text.SHBANK')?>'></span>       
+                                                    <span class='bank SHBANK' title='上海银行'></span>       
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="SPDB" class='bankinput'>
-                                                    <span class='bank SPDB' title='<?php echo Lang::get('text.SPDB')?>'></span>        
+                                                    <span class='bank SPDB' title='上海浦东发展银行'></span>        
                                                 </label>
                                                 <label class="radio-inline">
                                                     <input type="radio" name="bank_name" value="BJBANK"  class='bankinput'>
-                                                    <span class='bank BJBANK' title='<?php echo Lang::get('text.BJBANK')?>'></span>         
+                                                    <span class='bank BJBANK' title='北京银行'></span>         
                                                 </label>
                                             </div>
                                         </div>
                                         <label>
-                                            <input type="radio"  value="3" id="pay_type_cash" name="pay_type"> &nbsp;
-                                            <img class='' src="<?php echo asset('assets/img/cash.jpg')?>" >
+                                            <input type="radio"  value="daofu" id="pay_type_cash" name="pay_type"> &nbsp;
+                                            <img class='' src="<?php echo base_url().'assets/img/cash.jpg'?>" >
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12"> &nbsp; &nbsp; &nbsp;
-                                    <button class='btn btn-primary' type='submit'><?php echo Lang::get('text.confirm')?></button>
+                                <div class="col-md-12 p-20"> &nbsp; &nbsp; &nbsp;
+                                    <button class='btn btn-primary' type='submit'>提交</button>
                                 </div>
                             </div>
                             <input type='hidden' name='orderid' value="<?php echo $order->id?>">
@@ -126,15 +125,14 @@
         <!-- END SIDEBAR & CONTENT -->
     </div>
 </div>
-@stop
-@section('script')
+
 <script type="text/javascript">
 $(function(){
     $('input[name=pay_type]').click(function(){
-        if($(this).val()==2){$('#banks').show();}else{$('#banks').hide();}
+        if($(this).val()=='banking'){$('#banks').show();}else{$('#banks').hide();}
     })
 })
 </script>
-@stop
+
 <?$this->load->view('home/footer')?>
 

@@ -176,6 +176,49 @@ class Carts extends CI_Controller {
         }
         echo json_encode(array('code'=>'1000','price'=>$this->cart->price()));
     }
+
+    public function create_order()
+    {
+        $this->auth->check_login_json();
+        $list = $this->cart->lists();
+        if(empty($list))
+        {
+            echo json_encode(array('code'=>'1010','msg'=>'购物车内无任何商品'));
+            exit;
+        }
+        $total_price = 0;
+        foreach ($list as $key => $value) {
+            $total_price += $value['best_price']*$value['count'];
+        }
+        $this->load->model('order');
+        $this->load->model('order_detail');
+        $user_id = $this->auth->user_id();
+        $orderId = $this->order->insert(array(
+            'user_id' => $user_id,
+            'username' => $this->auth->username(),
+            'code'  => date('Y-m-dHis').'-'.$user_id,
+            'price' => $total_price
+        ));
+        if($orderId)
+        {
+            foreach ($list as $key => $value) {
+                $this->order_detail->insert(array(
+                    'order_id' => $orderId,
+                    'user_id'   =>$user_id,
+                    'product_id'    => $value['product_id'],
+                    'price' => $value['best_price'],
+                    'number'    => $value['count']
+                ));
+            }
+        }
+        else
+        {
+            echo json_encode(array('code'=>'1001','msg'=>'订单生成失败，请重试'));
+            exit;
+        }
+        $this->cart->clear();
+        echo json_encode(array('code'=>'1000','msg'=>'订单生成成功','url'=>base_url().'home/orders/pay/'.$orderId));
+    }
 }
 
 /* End of file cart.php */

@@ -75,7 +75,10 @@
                     </tr>
                 </tbody>
                 </table>
-                <div class="toorder">总计( 不含运费 ) :<span class="order_price">&#165;<span id='order_price'><?php echo round($total_best_price,2);?></span></span><button type="button" class="btn btn-danger">去结算</button></div>
+                <div class="toorder">总计( 不含运费 ) :
+                    <span class="order_price">&#165;<span id='order_price'><?php echo round($total_best_price,2);?></span></span>
+                    <button type="button" class="btn btn-danger" onclick="ajaxRequest('carts/create_order',this)">去结算</button>
+                </div>
                 
                 <div class="tab-pane fade" id="profile"></div>
                 <div class="tab-pane fade" id="dropdown1"></div> 

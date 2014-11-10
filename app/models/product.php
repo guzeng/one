@@ -7,6 +7,7 @@
 class Product extends CI_Model{
 	
 	private $table = 'product';
+    private $table_cate = "product_category_map";
     public $page = 1;
     private $per_page = 15;
     public $param = array();
@@ -175,19 +176,19 @@ class Product extends CI_Model{
     public function condition($cond=array())
     {
         $where = array();
-        $where[] = "`status` != '2'";
+        $where[] = "a.`status` != '2'";
         if(intval($this->param['cate_id']) > 0)
         {
             $this->load->model('product_category');
             $cat_childs = $this->product_category->get_all_children($this->param['cate_id']);
             if(count($cat_childs) == 0)
             {
-                $where[] = "a.cate_id='{$this->param['cate_id']}'";    
+                $where[] = "pc.category_id='{$this->param['cate_id']}'";    
             }
             else
             {
                 $cat_childs[] = $this->param['cate_id'];
-                $where[] = "a.cate_id in ('".implode("','", $cat_childs) ."')";
+                $where[] = "pc.category_id in ('".implode("','", $cat_childs) ."')";
             }
             $this->base_url .= 'cate_id/'.urlencode($this->param['cate_id']).'/';
         }
@@ -258,12 +259,18 @@ class Product extends CI_Model{
         if(isset($_where)){
             $this->db->where($_where);
         }
-        $this->db->limit($_num,$_start);
         $this->db->from($this->table.' as a');
+        if(intval($this->param['cate_id']) > 0)
+        {
+            $this->db->join($this->table_cate.' as pc','pc.product_id=a.id','right');
+        }
+        $this->db->limit($_num,$_start);
         if($this->groupby!='')
         {
             $this->db->group_by($this->groupby);
         }
+
+
         $this->db->order_by($_orderby);
 		$query = $this->db->get();
         //echo $this->db->last_query();
@@ -324,7 +331,12 @@ class Product extends CI_Model{
         if($_where){
             $this->db->where($_where);
         }
-        $query = $this->db->get($this->table.' as a');
+        $this->db->from($this->table.' as a');
+        if(intval($this->param['cate_id']) > 0)
+        {
+            $this->db->join($this->table_cate.' as pc','pc.product_id=a.id','right');
+        }
+        $query = $this->db->get();
         if($query->num_rows() > 0){
             $a = $query->result();
             return $a[0]->count;
@@ -367,33 +379,33 @@ class Product extends CI_Model{
     */
     public function pic($id='', $sort=1, $type='big')
     {
+        $filePath = $file_save_dir = $file_save_name = '';
+        $folder = upload_folder('product');
         if($id)
         {    
-            $folder = upload_folder('product');
             $file_save_dir = file_save_dir($id);
             $file_save_name = file_save_name($id);
-            $filePath = '';
-            switch ($type) {
-                case 'small':
-                case 'thumb':
-                    $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'_thumb.png';
-                    $default = base_url().'assets/img/product/p-default_thumb.png';
-                break;
-                case 'big':
-                case 'default':
-                default:
-                    $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'.png';
-                    $default = base_url().'assets/img/product/p-default.png';
-                break;
-            }
-            if(file_exists($filePath))
-            {
-                return base_url().$filePath.'?'.rand();
-            }
-            else
-            {
-                return $default;
-            }
+        }
+        switch ($type) {
+            case 'small':
+            case 'thumb':
+                $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'_thumb.png';
+                $default = base_url().'assets/img/product/p-default_thumb.png';
+            break;
+            case 'big':
+            case 'default':
+            default:
+                $filePath = $folder.'/'.$file_save_dir.'/'.$file_save_name.'_'.$sort.'.png';
+                $default = base_url().'assets/img/product/p-default.png';
+            break;
+        }
+        if(file_exists($filePath))
+        {
+            return base_url().$filePath.'?'.rand();
+        }
+        else
+        {
+            return $default;
         }
         return false;
     }

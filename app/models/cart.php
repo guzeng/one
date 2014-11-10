@@ -188,6 +188,24 @@ class Cart  extends CI_Model{
 		}
 		return array('total_price' => $total_price,'total_best_price'=>$total_best_price);
 	}
+    //---------------------------------------------------------
+
+    public function clear()
+    {
+
+        if($this->auth->is_login())
+        {
+            $user_id = $this->auth->user_id();
+            $this->db->where('user_id',$user_id);
+            $this->db->delete($this->table);
+        }
+        else if(isset($_SESSION['cart']))
+        {
+            unset($_SESSION['cart']);
+        }
+        return true;
+    }
+
 }
 /* End of file cart.php */
 /* Location: ./application/models/cart.php */	

@@ -1,0 +1,1 @@
+ALTER TABLE one_user_openid MODIFY token VARCHAR(200) NOT NULL DEFAULT '' COMMENT 'token',MODIFY refresh_token VARCHAR(200) NOT NULL DEFAULT '' COMMENT '刷新token';

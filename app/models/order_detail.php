@@ -9,23 +9,9 @@ class Order_detail extends CI_Model{
 	private $table = 'order';
     private $detail_table = 'order_detail';
     private $product_table = 'product';
-    private $address_table = 'user_address';
-    private $page = 1;
-    private $per_page = 15;
-    private $param = array();
-    private $base_url = '';
-    private $groupby = '';
 
-    //---------------------------------------------------------------
-    public function __construct()
-    {
-        parent::__construct();
-        $params = $this->uri->uri_to_assoc(4);
-        $this->param['code'] = $this->input->post('code')!='' ? trim($this->input->post('code')) : 
-            (isset($params['code']) ? urldecode(trim($params['code'])) : '');
-        $this->page = isset($params['page']) ? trim($params['page']) : 1;
-        $this->base_url = '';
-    }
+
+
     //----------------------------------------------------------------
     /**
     *   insert
@@ -36,7 +22,7 @@ class Order_detail extends CI_Model{
 	public function insert($row)
     {
 		if(is_array($row) && !empty($row)){
-			if($this->db->insert($this->table,$row)){
+			if($this->db->insert($this->detail_table,$row)){
 				return $this->db->insert_id();
 			}
 		}
@@ -54,7 +40,7 @@ class Order_detail extends CI_Model{
     {
 		if(!empty($row) && $id){
 			$this->db->where('id',$id);
-			return $this->db->update($this->table,$row);
+			return $this->db->update($this->detail_table,$row);
 		}
 		return false;
 	}	
@@ -70,7 +56,7 @@ class Order_detail extends CI_Model{
     {
 		if($id){
 			$this->db->where('id',$id);
-            return $this->db->delete($this->table);
+            return $this->db->delete($this->detail_table);
 		}
 		return false;
 	}
@@ -98,68 +84,6 @@ class Order_detail extends CI_Model{
 	}
 	//----------------------------------------------------------------
 
-    /**
-    *   detail
-    *   获取订单详细信息
-    *   @param int id
-    * 
-    */
-    public function get_detail($id)
-    {
-        if($id){
-            $this->db->from($this->detail_table. ' as a');
-            $this->db->where('a.order_id',$id);
-            $type = 'a.*';
-            $this->db->select($type);
-            $query = $this->db->get();
-            if($query->num_rows()>0){
-                return $query->result();
-            }
-        }
-        return false;
-    }
-    //----------------------------------------------------------------
-
-    /**
-    *   get_param
-    *   返回所有参数
-    *   @param return array
-    * 
-    */
-    public function get_param()
-    {
-        return $this->param;
-    }
-    //----------------------------------------------------------------
-
-    /**
-    *   condition
-    *   由传递的参数拼成查询条件
-    */
-    public function condition($cond=array())
-    {
-        $where = array();
-        if(isset($this->param['user_id']) && $this->param['user_id'] != '')
-        {
-            $where[] = "a.user_id = '".$this->param['user_id']."'";
-            $this->base_url .= 'user_id/'.urlencode($this->param['user_id']).'/';
-        }
-        if(isset($this->param['code']) && $this->param['code'] != '')
-        {
-            $where[] = "a.code like '%".addslashes(str_replace('%', '\%', $this->param['code']))."%'";
-            $where[] = "p.name like '%".addslashes(str_replace('%', '\%', $this->param['code']))."%'";
-            $this->base_url .= 'code/'.urlencode($this->param['code']).'/';
-        }
-        if(!empty($cond))
-        {
-            $where = array_merge($where,$cond);
-        }
-        if(!empty($where))
-        {
-            return "(".implode(") and (",$where).")";
-        }
-        return '';
-    }
 }
 /* End of file order_detail.php */
 /* Location: ./app/models/order_detail.php */	

@@ -122,7 +122,7 @@ class Orders extends CI_Controller {
         {
             show_404();
         }
-        $this->order->get($n);
+        $order = $this->order->get($n);
         if(!$order)
         {
             show_404();

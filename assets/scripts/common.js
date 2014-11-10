@@ -782,6 +782,10 @@ function ajaxRequest(url,btn){
                 {
                     show_success(json.msg);
                 }
+                if(typeof(json.url)!='undefined')
+                {
+                    document.location.href=json.url;
+                }
             }
             else
             {
