@@ -79,7 +79,7 @@
                         <div class='col-md-2'>数量</div>
                         <div class='col-md-10 '>
                             <div class="pinfo">
-                                <input type="text" name='cart_num' value="<?php echo $product->min_num>0?$product->min_num:1;?>" class=" form-control">
+                                <input type="text" name='cart_num' id="<?php echo $product->id?>_num" value="<?php echo $product->min_num>0?$product->min_num:1;?>" class=" form-control">
                                 <button class="btn btn-default plus" onclick="cart_count('plus',this)">+</button>
                                 <button class="btn btn-default minus" onclick="cart_count('minus',this)">-</button>
                                 <input type='hidden' id='min_num' name='min_num' value='<?php echo $product->min_num?>' >
@@ -90,7 +90,7 @@
                         <div class='col-md-2'></div>
                         <div class='col-md-10'>
                             <button class='btn btn-warning btn-buy m-r-10'>立即购买</button>
-                            <button class='btn btn-success btn-shopcart'>
+                            <button class='btn btn-success btn-shopcart' onclick="addCart('<?php echo $product->id?>')">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> 加入购物车
                             </button>
                         </div>

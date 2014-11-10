@@ -223,7 +223,7 @@ function load_page(url, target, callback)
                 close_alert();
                 if(typeof(data.code)!='undefined' && data.code == '1002')
                 {
-                    show_login();
+                    show_login(data);
                 }
                 else if(data.code=='1000')
                 {
@@ -268,26 +268,29 @@ function enterSumbit(){
  * @author zeng.gu
  * @2013/08
  */
-function show_login()
+function show_login(data)
 {
-    $('#_login_form').show();
-    $('body').append("<div class='modal-backdrop' id='_login_form_backdrop' style='z-index:2000'></div>");
-    //change_height('_login_form');
-    $('#_relogin_form').find('#password_f').val('');
-    $('#_relogin_form').find('#error_message').html('');
 
-    if($('#_login_form').find('#username').val()!='')
+    $('#_login_form').modal({backdrop: 'static'});
+    $('#_relogin_form').find('#password').val('');
+    $('#_relogin_form').find('#error_message').find('span.help-block').html('');
+    if($('#_relogin_form').find('#username').val()!='')
     {
-        $('#_login_form').find('#password_f').focus();
+        $('#_relogin_form').find('#password').focus();
     }
     else
     {
-        $('#_login_form').find('#username').focus();    
+        $('#_relogin_form').find('#username').focus();    
     }
-    if($('#_login_form').find('#login_captcha').length>0)
+    
+    if($('#_relogin_form').find('#login_captcha').length>0)
     {
-        refresh_captcha();    
+        refreshValidateKey();
+        $('#_relogin_form').find('input[name=validate_key]').val('');
     }
+    $('#_login_form').find('#relogin_form_submit_btn').attr('disabled',false).show();
+    $('#_login_form').find('#_login_form_loading').remove();
+
 }
 //------------------------------------------------------------------------
 
@@ -300,10 +303,48 @@ function show_login()
  */
 function hide_login_form()
 {
-    $('#_login_form').hide();
-    $('#_login_form_backdrop').remove();
+    $('#_login_form').modal('hide');
 }
 //------------------------------------------------------------------------
+
+function login()
+{
+    if($('#_relogin_form').find('#username').val()=='')
+    {
+        return false;
+    }
+    if($('#_relogin_form').find('#password').val()=='')
+    {
+        return false;
+    }
+    $('#_relogin_form').ajaxSubmit({
+        'dataType':'json',
+        success:function(json){
+            $('#relogin_form_submit_btn').show();
+            $('#_login_form_loading').remove();
+            if(json.code == '1000')
+            {
+                show_success(json.msg);
+                hide_login_form();                
+            }
+            else
+            {
+                $('#error_message').html("<span class='help-block'>"+json.msg+"</span>");
+                $('#error_message').addClass('has-error').show();
+                $('#error_message').parent().show();
+                $('#_relogin_form').find('input[name=password]').val('').focus();    
+            }
+        },
+        beforeSubmit:function(){
+            $('#_login_form').find('#relogin_form_submit_btn').before("<img id='_login_form_loading' src='"+msg.base_url+"assets/img/input-spinner.gif' height='16'>");
+            $('#relogin_form_submit_btn').hide();
+            $('#error_message').find('span.help-block').html('');
+            $('#error_message').removeClass('has-error').hide();
+        }
+    })
+}
+//------------------------------------------------------------------------
+
 /**
  * submit
  *
@@ -329,7 +370,7 @@ function do_submit(formID, callback)
             $('#'+formID).find('button').removeClass('disabled');
             if(typeof(data.code)!='undefined' && data.code == '1002')
             {
-                show_login();
+                show_login(data);
             }
             else if(data.code=='1000')
             {

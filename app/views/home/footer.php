@@ -125,6 +125,59 @@
         </div>
     </div>
     <!-- modal end -->
+    <!-- 登录表单 -->
+    <div id='_login_form' class='modal hide' role="dialog" tabindex="-1" aria-hidden="false" style='display:none;z-index:2015'>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button"></button>
+                    <h4 class="modal-title">登录</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post" action="<?php echo base_url().'login/verify'?>" id='_relogin_form'>
+                        <div class="form-group" >
+                            <label class="control-label col-md-3">用户名 :</label>
+                            <div class="col-md-7">
+                                <input type="text" id="username" name='username' value=""  maxlength='30' class="form-control" >
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="control-label col-md-3">密码 :</label>
+                            <div class="col-md-7">
+                              <input type="password" id="password" name='password' value="" maxlength='20' class="form-control" > 
+                            </div>
+                        </div>
+                        <div class="form-group hide" >
+                            <label class="control-label col-md-3">&nbsp;</label>
+                            <div class="red col-md-8" id='error_message'></div>
+                        </div>
+                        <div class="form-group" >
+                            <label class="control-label col-md-3">&nbsp;</label>
+                            <div class="col-md-7">
+                                <strong>使用合作网站账号登录170ES：</strong> 
+                            </div>
+                            <div class="col-md-7">
+                                <a href='<?php echo base_url()?>login/byqq'><span><strong>QQ</strong></span></a>
+                                <span>|</span><span>
+                                <a href='<?php echo base_url()?>login/byweixin'><strong>微信</strong></span></a>
+                            </div>
+                        </div>
+                        <div class='form-group'>
+                            <label class="control-label col-md-3">&nbsp;</label>
+                            <div class="col-md-8">
+                                如果您还不是会员，请先<a href="<?php echo base_url().'register';?>" target='_blank'>注册</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id='relogin_form_submit_btn' onclick="login();">登录</button> &nbsp;
+                    <button class="btn btn-default" data-dismiss="modal"  onclick="hide_login_form();">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="<?php echo base_url();?>assets/plugins/jquery/jquery.form.js" type="text/javascript"></script>
 </body>
 <!-- END BODY -->
 </html>

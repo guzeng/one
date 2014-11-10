@@ -1,0 +1,1 @@
+ALTER TABLE one_order_detail add column user_id int(11) not null default 0 AFTER order_id; 

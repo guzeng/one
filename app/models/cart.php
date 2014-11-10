@@ -206,6 +206,25 @@ class Cart  extends CI_Model{
         return true;
     }
 
+    public function save_db()
+    {
+
+        if($this->auth->is_login())
+        {
+            $user_id = $this->auth->user_id();
+            if(isset($_SESSION['cart']) && !empty($_SESSION['cart']))
+            {
+            	foreach ($_SESSION['cart'] as $key => $value) {
+            		$this->insert(array(
+            			'user_id' => $user_id,
+            			'product_id' => $value['product_id'],
+            			'count' => $value['count']
+            		));
+            	}
+            }
+        }
+    }
+
 }
 /* End of file cart.php */
 /* Location: ./application/models/cart.php */	

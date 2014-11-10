@@ -159,6 +159,8 @@ class Auth extends CI_Model{
             $_SESSION['email'] = $row->email;
             $_SESSION['name'] = $row->name;
             $_SESSION['is_admin'] = $row->is_admin;
+            $this->load->model('cart');
+            $res = $this->cart->save_db();
         }
     }
     //--------------------------------------------------------------------

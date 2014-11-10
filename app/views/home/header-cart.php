@@ -51,7 +51,13 @@
             <span>欢迎您 <a href="<?php echo base_url().'users/index/'.$this->auth->user_id();?>"><?php echo $this->auth->username();?></a></span>
             <span><a href="<?php echo base_url().'orders'?>">我的订单</a></span>
             <?endif;?>
-            <span><a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a></span>
+            <span>
+                <?php if(!$this->auth->user_id()):?>
+                <a href="<?php echo base_url()?>/login">登录</a> | <a href="<?php echo base_url()?>register">注册</a>
+                <?else:?>
+                    <a href="<?php echo base_url()?>login/out"> 退出</a>
+                <?endif;?>
+            </span>
             </div>
         </div>
    </div>

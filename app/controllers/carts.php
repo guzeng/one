@@ -180,18 +180,22 @@ class Carts extends CI_Controller {
     public function create_order()
     {
         $this->auth->check_login_json();
+        $this->load->model('order');
+        $this->load->model('order_detail');
         $list = $this->cart->lists();
+
         if(empty($list))
         {
-            echo json_encode(array('code'=>'1010','msg'=>'购物车内无任何商品'));
+            echo json_encode(array(
+                'code'=>'1010',
+                'msg'=>'购物车内无任何商品'
+            ));
             exit;
         }
         $total_price = 0;
         foreach ($list as $key => $value) {
             $total_price += $value['best_price']*$value['count'];
         }
-        $this->load->model('order');
-        $this->load->model('order_detail');
         $user_id = $this->auth->user_id();
         $orderId = $this->order->insert(array(
             'user_id' => $user_id,
@@ -217,6 +221,7 @@ class Carts extends CI_Controller {
             exit;
         }
         $this->cart->clear();
+
         echo json_encode(array('code'=>'1000','msg'=>'订单生成成功','url'=>base_url().'home/orders/pay/'.$orderId));
     }
 }
