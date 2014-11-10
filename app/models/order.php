@@ -21,15 +21,7 @@ class Order extends CI_Model{
     {
         parent::__construct();
         $params = $this->uri->uri_to_assoc(4);
-        $this->param['keyword'] = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : 
-            (isset($params['keyword']) ? urldekeyword(trim($params['keyword'])) : '');
-        $status = $this->input->post('status')!='' ? trim($this->input->post('status')) : 
-            (isset($params['status']) ? trim($params['status']) : '');
         $this->page = isset($params['page']) ? trim($params['page']) : 1;
-        if($status)
-            $this->base_url = 'status/'.$status;
-        else
-            $this->base_url = '';
     }
     //----------------------------------------------------------------
     /**
@@ -175,12 +167,6 @@ class Order extends CI_Model{
             $where[] = "a.user_id = '".$this->param['user_id']."'";
             $this->base_url .= 'user_id/'.urlencode($this->param['user_id']).'/';
         }
-        if(isset($this->param['keyword']) && $this->param['keyword'] != '')
-        {
-            $where[] = "a.code like '%".addslashes(str_replace('%', '\%', $this->param['keyword']))."%'".
-                        " or p.name like '%".addslashes(str_replace('%', '\%', $this->param['keyword']))."%'";
-            $this->base_url .= 'keyword/'.urlencode($this->param['keyword']).'/';
-        }
         if(!empty($cond))
         {
             $where = array_merge($where,$cond);
@@ -287,11 +273,11 @@ class Order extends CI_Model{
         $this->db->from($this->table.' as a');
         $this->db->join($this->detail_table.' as d','d.order_id=a.id','left');
         $this->db->join($this->product_table.' as p','d.product_id=p.id','left');
-        $this->db->group_by("a.id");
+        $this->db->group_by("d.order_id");
         $query = $this->db->get();
         if($query->num_rows() > 0){
            $count = $query->result();
-           return $count[0]->count;
+           return count($count);
         }
         return false; 
     }
@@ -324,12 +310,12 @@ class Order extends CI_Model{
     /**
     * 分页
     */
-    public function pages($where = array())
+    public function pages($url='',$where = array())
     {
         $config['per_page'] = $this->per_page;
         $total_rows = $this->count($where);
         $config['total_rows'] = $total_rows ? $total_rows : 0;
-        $config['base_url'] = rtrim($this->base_url,'/');
+        $config['base_url'] = rtrim($url,'/');
         $this->pagination->initialize($config);
         return $this->pagination->links();
     }

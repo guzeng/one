@@ -17,17 +17,37 @@ class Orders extends CI_Controller {
   	    $user_id = $this->auth->user_id();
         $this->load->model('product');
         $this->load->model('order_detail');
-		$keyword = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) :  '';
-        $keyword = urldecode(trim($keyword));
-        $search_type = $this->input->post('search_type')!='' ? trim($this->input->post('search_type')) : (isset($param['search_type']) ? $param['search_type'] : '');
-        
-        $params = $this->uri->uri_to_assoc(4);
+        $base_url = base_url().'/home/orders/index/';
+        $param = $this->uri->uri_to_assoc(4);
+
+        $keyword = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : 
+              (isset($param['keyword']) ? urldecode(trim($param['keyword'])) : '');
+        $search_type = $this->input->post('search_type')!='' ? trim($this->input->post('search_type')) : 
+              (isset($param['search_type']) ? urldecode(trim($param['search_type'])) : '');
         $status = $this->param['status'] = $this->input->post('status')!='' ? trim($this->input->post('status')) : 
-            (isset($params['status']) ? trim($params['status']) : '');
-        $create_time = $this->input->post('create_time')!='' ? trim($this->input->post('create_time')) :  '';
+            (isset($param['status']) ? trim($param['status']) : '');
+        $create_time = $this->param['create_time'] = $this->input->post('create_time')!='' ? trim($this->input->post('create_time')) : 
+            (isset($param['create_time']) ? trim($param['create_time']) : '');
         
         $condition = array("a.user_id = '".$user_id."'");
-        if($create_time)
+
+        if($keyword != '')
+        {
+            $condition[] = "a.code like '%".addslashes(str_replace('%', '\%', $keyword))."%'".
+                        " or p.name like '%".addslashes(str_replace('%', '\%', $keyword))."%'";
+            $base_url .= 'keyword/'.urlencode($keyword).'/';
+        }
+        // if($search_type != '')
+        // {
+        //     $where[] = "a.code like '%".addslashes(str_replace('%', '\%', $search_type))."%'";
+        //     $base_url .= 'search_type/'.urlencode($search_type).'/';
+        // }
+        if($status != '')
+        {
+            $where[] = "a.code like '%".addslashes(str_replace('%', '\%', $status))."%'";
+            $base_url .= 'status/'.urlencode($status).'/';
+        }
+        if($create_time != '')
         {
             switch ($create_time) {
                 case 1:
@@ -62,6 +82,7 @@ class Orders extends CI_Controller {
 
             $condition[] =$start_time." <= a.create_time";
             $condition[] ="a.create_time <= ".$end_time;
+            $base_url .= 'create_time/'.urlencode($create_time).'/';
         }
 
         $all = $this->order->all($condition);
@@ -107,9 +128,11 @@ class Orders extends CI_Controller {
         $data['ping_jia'] = $ping_jia;
 
         $data['order_list'] = $orderlist;
-        $data['pagination'] = $this->order->pages($condition);
+        $data['pagination'] = $this->order->pages($base_url,$condition);
         $data['keyword'] = stripslashes($keyword);
-        $data['search_type'] = $search_type;
+        $data['status'] = stripslashes($status);
+        $data['search_type'] = stripslashes($search_type);
+        $data['create_time'] = stripslashes($create_time);
         $data['status'] = $status;
         $data['create_time'] = $create_time;
 		$this->load->view('home/order',$data);
