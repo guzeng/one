@@ -335,6 +335,15 @@ class Order extends CI_Model{
     }
     //----------------------------------------------------------------
 
+    /**
+    * 生成订单号
+    * param int uid 用户ID
+    */
+    public function code($uid)
+    {
+        if(!$uid) return 0;
+        return date('Y-m-dHis').$uid;
+    }
 }
 /* End of file order.php */
 /* Location: ./app/models/order.php */	

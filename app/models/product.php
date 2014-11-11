@@ -8,6 +8,7 @@ class Product extends CI_Model{
 	
 	private $table = 'product';
     private $table_cate = "product_category_map";
+    private $table_category = "product_category";
     public $page = 1;
     private $per_page = 15;
     public $param = array();
@@ -406,6 +407,22 @@ class Product extends CI_Model{
         else
         {
             return $default;
+        }
+        return false;
+    }
+
+    public function get_category($id)
+    {
+        if(!$id) return false;
+
+        $this->db->select('c.*');
+        $this->db->from($this->table_cate.' as map');
+        $this->db->join($this->table_category.' as c','map.category_id=c.id','left');
+        $this->db->where(array('map.product_id'=>$id));
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->row();
         }
         return false;
     }

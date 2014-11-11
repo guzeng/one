@@ -12,11 +12,37 @@
                             <h2>订单支付</h2>
                             <div class='note m-t-30'>
                                 <p>订单号 : <?php echo $order->code?></p>
-                                <p>金额 : <?php echo round($order->price,2)?></p>
+                                <p>金额 : ￥<?php echo round($order->price,2)?></p>
                                 <p>下单时间 : <?php echo date('Y-m-d H:i:s', gmt_to_local($order->create_time))?></p>
                             </div>
                         </div>
                     </div>
+                    <hr>
+                    <div class='row' id='mycart'>
+                        <div class="col-md-12 p-l-30 p-r-30">
+                        <table class="table table-advance table-hover">
+                        <thead>
+                            <tr>
+                              <th width="46%">商品</th>
+                              <th width="16%">价格</th>
+                              <th width="15%">数量</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <?if(!empty($detail)):?>
+                            <?foreach($detail as $key => $item):?>
+                            <tr>
+                              <td><?php echo $item->name?></td>
+                              <td ><?php echo $item->price;?></td>
+                              <td ><?php echo $item->number;?></td>
+                            </tr>
+                            <?endforeach;?>
+                            <?endif;?>
+                        </tbody>
+                        </table>
+                        </div>
+                    </div>
+
                     <hr>
                     <div class="row">    
                         <div class="col-md-12 p-l-30 p-r-30">

@@ -71,9 +71,6 @@
               <img src="<?php echo base_url()?>assets/img/logo.png">
             </a>
         </div>
-        <div class="col-md-8 col-xs-12">
-            jlkjlj
-        </div>
     </div>
 </div> 
 

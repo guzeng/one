@@ -270,8 +270,7 @@ function enterSumbit(){
  */
 function show_login(data)
 {
-
-    $('#_login_form').modal({backdrop: 'static'});
+    $('#_login_form').modal();
     $('#_relogin_form').find('#password').val('');
     $('#_relogin_form').find('#error_message').find('span.help-block').html('');
     if($('#_relogin_form').find('#username').val()!='')
@@ -742,6 +741,10 @@ function addCart(id)
                 {
                     $('#cart_total').html('('+json.total+')');
                 }
+            }
+            else if(json.code=='1002')
+            {
+                show_login(json);
             }
             else
             {

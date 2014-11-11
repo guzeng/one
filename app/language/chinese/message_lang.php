@@ -40,3 +40,4 @@ $lang['modify'] = "修改";
 $lang['ensure'] = "确定";
 $lang['param_error'] = "参数错误";
 $lang['deny_request'] ="你请求的操作是不允许的。";
+$lang['no_product_exist'] = "商品不存在";

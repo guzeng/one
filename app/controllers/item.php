@@ -29,7 +29,7 @@ class Item extends CI_Controller {
 		{
 			show_404();
 		}
-		$category = $this->product_category->get($product->cate_id);
+		$category = $this->product->get_category($id);
 		
 		if($category)
 		{

@@ -16,6 +16,7 @@ class Carts extends CI_Controller {
     }
 	public function index()
 	{
+        $this->auth->check_login();
         $list = $this->cart->lists();
         if(!empty($list))
         {
@@ -32,6 +33,7 @@ class Carts extends CI_Controller {
 
 	public function add()
 	{
+        $this->auth->check_login_json();
         $post = $this->input->post();
         $product_id = intval($post['product_id']);
         $count = intval($post['count']);
@@ -93,6 +95,7 @@ class Carts extends CI_Controller {
 
     public function del()
     {
+        $this->auth->check_login_json();
         $post = $this->input->post();
         $product_id = intval($post['product_id']);
         if(!$product_id)
@@ -130,6 +133,7 @@ class Carts extends CI_Controller {
 
     public function update()
     {
+        $this->auth->check_login_json();
         $post = $this->input->post();
         $product_id = intval($post['product_id']);
         $count = intval($post['count']);
@@ -200,7 +204,7 @@ class Carts extends CI_Controller {
         $orderId = $this->order->insert(array(
             'user_id' => $user_id,
             'username' => $this->auth->username(),
-            'code'  => date('Y-m-dHis').'-'.$user_id,
+            'code'  => $this->order->code($user_id),
             'price' => $total_price
         ));
         if($orderId)
@@ -223,6 +227,47 @@ class Carts extends CI_Controller {
         $this->cart->clear();
 
         echo json_encode(array('code'=>'1000','msg'=>'订单生成成功','url'=>base_url().'home/orders/pay/'.$orderId));
+    }
+
+    /**
+    * 立即购买
+    */
+    public function buynow($pid)
+    {
+        $this->auth->check_login();
+        if(!$pid)
+            show_error($this->lang->line('param_error'),500);
+        $this->load->model('order');
+        $this->load->model('order_detail');
+        $product = $this->product->get($pid);
+        if(!$product)
+        {
+            show_error($this->lang->line('no_product_exist'),500);
+        }
+        $user_id = $this->auth->user_id();
+        $num = trim($this->input->post('cart_num'));
+
+        $orderId = $this->order->insert(array(
+            'user_id' => $user_id,
+            'username' => $this->auth->username(),
+            'code'  => $this->order->code($user_id),
+            'price' => round($product->best_price*intval($num),2)
+        ));
+        if($orderId)
+        {
+            $this->order_detail->insert(array(
+                'order_id' => $orderId,
+                'user_id'   =>$user_id,
+                'product_id'    => $pid,
+                'price' => $product->best_price,
+                'number'    => $num
+            ));
+        }
+        else
+        {
+            show_error('订单生成失败，请重试',500);
+        }
+        redirect('home/orders/pay/'.$orderId);
     }
 }
 

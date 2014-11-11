@@ -141,6 +141,7 @@ class Orders extends CI_Controller {
     public function pay($n)
     {    
         $this->auth->check_login();
+        $this->load->model('order_detail');
         if(!$n)
         {
             show_404();
@@ -159,8 +160,10 @@ class Orders extends CI_Controller {
             show_error('订单已完成',500);
         }
         $data['order'] = $order;
+        $data['detail'] = $this->order_detail->get($n);
         $this->load->view('home/pay',$data);
     }
+
 }
 
 /* End of file orders.php */
