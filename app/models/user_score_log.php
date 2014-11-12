@@ -13,11 +13,11 @@ class User_score_log  extends CI_Model{
     public function __construct()
     {
         parent::__construct();
-        $params = $this->uri->uri_to_assoc(4);
-        $this->param['keyword'] = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : 
-            (isset($params['keyword']) ? urldekeyword(trim($params['keyword'])) : '');
-        $this->page = isset($params['page']) ? trim($params['page']) : 1;
-        $this->base_url = '';
+        $param = $this->uri->uri_to_assoc(4);
+        $time_type = $this->param['time_type'] = $this->input->post('time_type')!='' ? trim($this->input->post('time_type')) : 
+            (isset($param['time_type']) ? urldecode(trim($param['time_type'])) : '');
+        $this->page = isset($param['page']) ? trim($param['page']) : 1;
+        $this->base_url = 'time_type/'.$time_type;
     }
 
     //---------------------------------------------------------------
@@ -193,24 +193,30 @@ class User_score_log  extends CI_Model{
      * @author zeng.gu
      * 2014/3/31
      */    
-    public function count()
+    public function count($condition=array())
     {
-        $_where = $this->condition();
+        $_where = $this->condition($condition);
         $this->db->select ('count(a.id) as count');
         if(isset($_where)){
             $this->db->where($_where);
         }
-        return $this->db->count_all($this->table);
+        $this->db->from($this->table.' as a');
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            $result = $query->result();
+            return $result[0]->count;
+        }
+        return 0; 
     }
     //----------------------------------------------------------------
 
     /**
     * 分页
     */
-    public function pages()
+    public function pages($condition=array())
     {
         $config['per_page'] = $this->per_page;
-        $config['total_rows'] = $this->count();
+        $config['total_rows'] = $this->count($condition);
         $config['base_url'] = rtrim($this->base_url,'/');
         $this->pagination->initialize($config);
         return $this->pagination->links();

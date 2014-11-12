@@ -106,6 +106,20 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
+                <li class="<?if(in_array($controller_name, array('coupons'))):?>open active<?endif;?>">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">优惠券管理</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu" <?if(in_array($controller_name, array('coupons/lists'))):?>style='display:block;'<?endif;?>>
+                        <li class="<?if($controller_name=='coupons'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/coupons" >
+                            所有优惠券
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="<?if(in_array($controller_name, array('settings','joins','links'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
