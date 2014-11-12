@@ -7,21 +7,21 @@
     <!-- right -->
     <div class='col-lg-10 col-md-9 col-sm-9 col-xs-12'>
       <div class="order-tab">
-        <form action="<?=base_url()?>home/coupons/index" method="post" id='list_search_form'>
+        <form action="<?=base_url()?>home/user_coupons/index" method="post" id='list_search_form'>
           <input type="hidden" name="type" id="type" value="<?php echo $type;?>"/>
           <ul id="coupon_tab" class="nav nav-tabs" role="tablist">
             <li class="<?php echo $type != '' && $type==1 ? 'active' : '';?>">
-              <a href="<?=base_url()?>home/coupons/index/type/1">
+              <a href="<?=base_url()?>home/user_coupons/index/type/1">
                 未使用优惠券
               </a>
             </li>
             <li class="<?php echo $type != '' && $type==2 ? 'active' : '';?>">
-              <a href="<?=base_url()?>home/coupons/index/type/2">
+              <a href="<?=base_url()?>home/user_coupons/index/type/2">
                 已使用优惠券
               </a>
             </li>
             <li class="<?php echo $type != '' && $type==3 ? 'active' : '';?>">
-              <a href="<?=base_url()?>home/coupons/index/type/3">
+              <a href="<?=base_url()?>home/user_coupons/index/type/3">
                 已过期优惠券
               </a>
             </li>
