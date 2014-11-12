@@ -1,28 +1,30 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Payment extends CI_Controller {
-        //支付类型
+    //支付类型
     private $payment_type = "1";
-        //必填，不能修改
-        //服务器异步通知页面路径
+    //必填，不能修改
+    //服务器异步通知页面路径
     private $notify_url = '';//"http://www.yuexingtrip.com/";
-        //需http://格式的完整路径，不能加?id=123这类自定义参数
+    //需http://格式的完整路径，不能加?id=123这类自定义参数
 
-        //页面跳转同步通知页面路径
+    //页面跳转同步通知页面路径
     private $return_url = '';//asset('pay/alipay-return');//"http://www.yuexingtrip.com/pay/alipay-return";
-        //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+    //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
-        //卖家支付宝帐户
+    //卖家支付宝帐户
     private $seller_email = 'gu__zeng@163.com';
-    private $alipayPath = APPPATH.'libraries/alipay/';
-        //必填
+    
+    private $alipayPath = '';
+    //必填
     function __construct()
     {
         parent::__construct();
+        $this->alipayPath = APPPATH.'libraries/alipay/';
         $this->load->model('pay');
         $this->load->model('order');
-        $this->notify_url = asset('pay/alipaynotify');
-        $this->return_url = asset('pay/alipayreturn');
+        $this->notify_url = base_url().'payment/alipaynotify';
+        $this->return_url = base_url().'payment/alipayreturn';
     }
 
 	public function index()
@@ -45,19 +47,19 @@ class Payment extends CI_Controller {
         {
             show_error($this->lang->line('no_data_exist'),500);
         }
-        if($order->user_id != Auth::user()->id)
+        if($order->user_id != $user_id)
         {
             show_404();
         }
-        if($order->status > 0 || $order->is_pay == 1 || $order->complete == 1)
+        if($order->status > 0 || $order->pay == 1 || $order->complete == 1)
         {
             show_error('您已付款或订单已处理',500);
         }
         switch (strtolower($pay_type)) {
             case 'daofu':
-                if($this->order->update(array('pay_type'=>$pay_type,'complete'=>1),$orderId))
+                if($this->order->update(array('pay_type'=>$this->pay->getType($pay_type),'complete'=>1),$orderId))
                 {
-                    redirect('pay/result/success');
+                    redirect('payment/result/success');
                 }
                 break;
             case 'alipay':
@@ -263,7 +265,7 @@ class Payment extends CI_Controller {
                 {
                     $notify_time = $_POST['notify_time'];
                     $p = array(
-                        'pay_type' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? 2 : 1,
+                        'pay_type' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? $this->pay->getType('bank') : $this->pay->getType('alipay'),
                         'bank_no' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? $_POST['bank_seq_no'] : '',
                         'buyer_email' => $_POST['buyer_email'],
                         'pay' => 1,
@@ -331,7 +333,7 @@ class Payment extends CI_Controller {
                 {
                     $notify_time = $_POST['notify_time'];
                     $p = array(
-                        'pay_type' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? 2 : 1,
+                        'pay_type' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? $this->pay->getType('bank') : $this->pay->getType('alipay'),
                         'bank_no' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? $_POST['bank_seq_no'] : '',
                         'buyer_email' => $_POST['buyer_email'],
                         'pay' => 1,
@@ -352,15 +354,15 @@ class Payment extends CI_Controller {
             }
             else {
                 $this->pay_log->insert(array('order_id'=>$order->id,'order_code'=>$out_trade_no,'from'=>'alipay','trade_no'=>$trade_no,'status'=>2,'info'=>'交易失败'));
-                redirect(base_url().'pay/result/failed');
+                redirect(base_url().'payment/result/failed');
             }
-            redirect(base_url().'pay/result/success');
+            redirect(base_url().'payment/result/success');
         }
         else {
             //验证失败
             //如要调试，请看alipay_notify.php页面的verifyReturn函数
             $this->pay_log->insert(array('order_id'=>0,'order_code'=>$_GET['out_trade_no'],'from'=>'alipay','trade_no'=>$_GET['trade_no'],'status'=>2,'info'=>'验证失败'));
-            redirect(base_url().'pay/result/failed');
+            redirect(base_url().'payment/result/failed');
         }
     }
 }

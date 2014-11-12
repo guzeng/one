@@ -135,7 +135,7 @@ class Pay  extends CI_Model{
     public function payType($t='')
     {
         $arr = array(
-            '1' => 'daofu'
+            '1' => 'daofu',
             '2' => 'alipay',
             '3' => 'bank',
             '4' => 'weixin'
@@ -152,6 +152,20 @@ class Pay  extends CI_Model{
             }
         }
         return $arr;
+    }
+
+    public function getType($type)
+    {
+        $types = $this->payType();
+        if($type)
+        {
+            $keys = array_flip($types);
+            if(array_key_exists($type, $keys))
+            {
+                return $keys[$type];
+            }
+        }
+        return false;
     }
 }
 /* End of file pay.php */
