@@ -1,6 +1,6 @@
 <?php
 
-class uploadHandler extends CI_Controller{
+class UploadHandler extends CI_Controller{
 
 	protected $options;
     // PHP File Upload error message codes:
