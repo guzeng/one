@@ -23,6 +23,7 @@ class Index extends CI_Controller {
 		$this->load->model('product_brand');
 		$this->load->model('ad');
 		$this->load->model('order');
+		$this->load->model('coupon');
 		
 		$product_cate = $this->product_category->get_level_tree();//树状产品类型
 		
@@ -48,10 +49,12 @@ class Index extends CI_Controller {
 		$data['handpick_product'] = $handpick_product;
 		$data['show_count'] = $show_count;
 		$data['product_cate'] = $product_cate;
-		$data['news'] = $this->newss->lists(array("status"=>"1","show_time >"=>local_to_gmt()),5,"a.show_time desc");//按发布时间
+		$data['news'] = $this->newss->lists(array("status='1' or (status='2' and show_time < ".local_to_gmt().")","cate_id='1'"),5,"a.show_time desc");//按发布时间
+		$data['vip_news'] = $this->newss->lists(array("status='1' or (status='2' and show_time < ".local_to_gmt().")","cate_id='2'"),5,"a.show_time desc");//按发布时间
 		$data['link'] = $this->link->lists(array("num"=>"5"));//最新五条友情链接
 		$data['ad_home'] = $this->ad->lists(array("where"=>"position_id = 1"));
 		$data['product_brand'] = $this->product_brand->lists(array("num"=>"10"));//最新27条品牌信息
+		$data['coupon'] = $this->coupon->lists(array("expirse_from < ".local_to_gmt(),"expirse_to > ".local_to_gmt()),5,"a.id desc");
 		if($this->auth->is_login())
 		{
 			$data['order_count'] = $this->order->user_count(array('user_id'=>$this->auth->user_id()));
