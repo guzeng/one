@@ -320,7 +320,7 @@
                 <?endif;?>
             <?endif;?>
                 <li item-index='<?php echo $item->id?>'>
-                    <a target="_blank" href="<?php echo $item->id;?>">
+                    <a target="_blank" href="<?php echo $item->id;?>" title='<?php echo $item->name?>'>
                         <img height="45" width="105" src='<?php echo $this->product_brand->pic($item->id)?>'>
                     </a>
                 </li>
@@ -503,7 +503,7 @@
                                     <?break;?>
                                     <?endif;?>
                                     <dl class="sy_mod_key_dl">
-                                        <dt><a href="#" target="_blank"><?php echo $i['name'];?></a></dt>
+                                        <dt><a href="<?php echo base_url().'category/index/cate_id/'.$i['id']?>" target="_blank"><?php echo $i['name'];?></a></dt>
                                         <dd>
                                             <!-- 三级商品分类开始 -->
                                             <?php if(isset($i['child']) && !empty($i['child'])): ?>
