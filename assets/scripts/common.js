@@ -360,7 +360,7 @@ function do_submit(formID, callback)
         type:'post',
         beforeSubmit:function(){
             loading();
-            $('#'+formID).find('div.form-group').removeClass('has-error');
+            $('#'+formID).find('div.has-error').removeClass('has-error');
             $('#'+formID).find('span.error-span').html('').removeClass('error-span');
             $('#'+formID).find('button').addClass('disabled');
         },
@@ -373,7 +373,7 @@ function do_submit(formID, callback)
             }
             else if(data.code=='1000')
             {
-                show_success();
+                show_success(data.msg);
                 if(typeof(data.goto)!='undefined')
                 {
                     window.location.href = msg.base_url+data.goto;

@@ -118,12 +118,6 @@
                     </a>
                 <?endforeach;?>
                 <?endif;?>
-                    <a href="<?php echo base_url()?>item/id/<?php echo $product->id?>" >
-                    <img class='img-responsive' src="<?php echo $this->product->pic($product->id)?>">
-                    </a>
-                    <a href="<?php echo base_url()?>item/id/<?php echo $product->id?>" class='hide'>
-                    <img class='img-responsive' src="<?php echo $this->product->pic($product->id)?>">
-                    </a>
             </div>
             <div class="nav">
                 <span class="pull-left hand" onclick="item_go('up')">

@@ -233,6 +233,7 @@ class Users extends CI_Controller {
 
     public function password()
     {
+        $this->auth->check_login();
         $this->load->view('home/user/password');
     }
 
@@ -243,59 +244,34 @@ class Users extends CI_Controller {
         $password = $this->input->post('password');
         $password_confirmation = $this->input->post('password_confirmation');
 
-        if(!$oldpassword)
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('oldpassword', ' ', 'required|min_length[6]');
+        $this->form_validation->set_rules('password', ' ', 'required|min_length[6]');
+        $this->form_validation->set_rules('password_confirmation', ' ', 'required|min_length[6]|matches[password]');
+        if($this->form_validation->run() == FALSE)
         {
-            echo json_encode(array(
-                'code' => '1001',
-                'msg' => '请填写旧密码'
-            ));
-            exit;
+            $this->form_validation->set_error_delimiters('', '');
+            $data['code'] = '1010';
+            $error['oldpassword'] = form_error('oldpassword');
+            $error['password'] = form_error('password');
+            $error['password_confirmation'] = form_error('password_confirmation');
+            $data['error'] = $error;
+            $data['msg'] = $this->lang->line('submit_error');
+            echo json_encode($data);                                    
+            exit;   
         }
-        if(!$password)
-        {
-            echo json_encode(array(
-                'code' => '1001',
-                'msg' => '请填写新密码'
-            ));
-            exit;
-        }
-        if(!$password_confirmation)
-        {
-            echo json_encode(array(
-                'code' => '1001',
-                'msg' => '请填写确认密码'
-            ));
-            exit;
-        }
+
         $user_id = $this->auth->user_id();
         $user = $this->user->get($user_id);
         if($user->pwd != $this->auth->encrypt($oldpassword,$user->username))
         {
-            echo json_encode(array(
-                'code' => '1001',
-                'msg' => '旧密码错误'
-            ));
-            exit;
-        }
-        if(strlen($password)<6){
-            echo json_encode(array(
-                'code' => '1001',
-                'msg' => '新密码不得小于六位'
-            ));
-            exit;
-        }
-        else if (strlen($password) != strlen($password_confirmation)) {
-            echo json_encode(array(
-                'code' => '1001',
-                'msg' => '新密码与确认密码长度不一致'
-            ));
-            exit;
-        }
-        else if($password != $password_confirmation){
-             echo json_encode(array(
-                'code' => '1001',
-                'msg' => '新密码与确认密码不相同'
-            ));
+            $error['oldpassword'] = '旧密码错误';
+            $error['password'] = '';
+            $error['password_confirmation'] = '';
+            $data['error'] = $error;
+            $data['code'] = '1004';
+            $data['msg'] = $this->lang->line('submit_error');
+            echo json_encode($data);                                    
             exit;
         }
         
@@ -305,47 +281,77 @@ class Users extends CI_Controller {
         if($this->user->update($row,$user_id))
         {
             $data['code'] = '1000';
-            $data['msg'] = '设置成功';
+            $data['msg'] = '密码设置成功';
         }
         else
         {
             $data['code'] = '1001';
-            $data['msg'] = '设置失败';
+            $data['msg'] = '密码设置失败';
         }
         echo json_encode($data);
     }
 
     public function payPwd()
     {
-        $this->load->view('home/user/pay-pwd');
+        $this->auth->check_login();
+        $data['user'] = $this->user->get($this->auth->user_id());
+        $this->load->view('home/user/pay-pwd',$data);
     }
 
     public function updatePayPwd()
     {
         $this->auth->check_login_json();
-        $post = $this->input->post('paypwd');
-        if(!isset($post['paypwd']))
-        {
-            echo json_encode(array(
-                'code' => '1001',
-                'msg' => $this->lang->line('param_error')
-            ));
-            exit;
-        }
         $user_id = $this->auth->user_id();
         $user = $this->user->get($user_id);
+        $oldpassword = $this->input->post('oldpassword');
+        $paypwd = $this->input->post('paypwd');
+        $paypwd_confirmation = $this->input->post('paypwd_confirmation');
+
+        $this->load->library('form_validation');
+        if($user->pay_pwd != '')
+        {
+            $this->form_validation->set_rules('oldpassword', ' ', 'required|min_length[6]');
+        }
+        $this->form_validation->set_rules('paypwd', ' ', 'required|min_length[6]');
+        $this->form_validation->set_rules('paypwd_confirmation', ' ', 'required|min_length[6]|matches[paypwd]');
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->form_validation->set_error_delimiters('', '');
+            $data['code'] = '1010';
+            if($user->pay_pwd != '')
+            {
+                $error['oldpassword'] = form_error('oldpassword');
+            }
+            $error['paypwd'] = form_error('paypwd');
+            $error['paypwd_confirmation'] = form_error('paypwd_confirmation');
+            $data['error'] = $error;
+            $data['msg'] = $this->lang->line('submit_error');
+            echo json_encode($data);                                    
+            exit;   
+        }
+        if($user->pay_pwd != '' && $user->pay_pwd != $this->auth->encrypt($oldpassword,$user->username))
+        {
+            $error['oldpassword'] = '旧密码错误';
+            $error['paypwd'] = '';
+            $error['paypwd_confirmation'] = '';
+            $data['error'] = $error;
+            $data['code'] = '1004';
+            $data['msg'] = $this->lang->line('submit_error');
+            echo json_encode($data);                                    
+            exit;
+        }
         $row = array(
-            'pay_pwd' => $this->auth->encrypt($post['paypwd'],$user->username)
+            'pay_pwd' => $this->auth->encrypt($paypwd, $user->username)
         );
         if($this->user->update($row,$user_id))
         {
             $data['code'] = '1000';
-            $data['msg'] = '设置成功';
+            $data['msg'] = '支付密码设置成功';
         }
         else
         {
             $data['code'] = '1001';
-            $data['msg'] = '设置失败';
+            $data['msg'] = '支付密码设置失败';
         }
         echo json_encode($data);
     }

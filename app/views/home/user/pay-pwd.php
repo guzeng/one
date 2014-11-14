@@ -13,10 +13,26 @@
                 </div>
                 <form action="<?php echo base_url()?>home/users/updatePayPwd" method="post" onsubmit='return false' role="form" id='paypwd_form' class="form-horizontal">
                     <div class="form-body">
+                        <?php if($user->pay_pwd != ''):?>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">原密码：</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-9">
+                                <input type="password" value="" id="oldpassword" name="oldpassword" class="form-control">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <?php endif;?>
                         <div class="form-group">
                             <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">支付密码：</label>
                             <div class="col-lg-7 col-md-7 col-sm-7 col-xs-9">
                                 <input value="" id="paypwd" type="password" name="paypwd" class="form-control">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 col-md-3 col-sm-3 col-xs-2">确认密码：</label>
+                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-9">
+                                <input value="" id="paypwd_confirmation" type="password" name="paypwd_confirmation" class="form-control">
                                 <span class="help-block"></span>
                             </div>
                         </div>
