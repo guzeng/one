@@ -119,8 +119,8 @@ class Ads extends CI_Controller {
                 $config['create_thumb'] = false;
                 $config['maintain_ratio'] = TRUE;
                 $config['new_image'] = $target.DIRECTORY_SEPARATOR.file_save_name($id).'.png';
-                $config['width'] = 120;
-                $config['height'] = 80;
+                //$config['width'] = 120;
+                //$config['height'] = 80;
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
                 @unlink($config['source_image']);

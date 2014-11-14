@@ -315,6 +315,27 @@ class Newss extends CI_Model{
         }
         return $default;
     }
+
+    public function get_status($status='')
+    {
+        $arr = array(
+            '0' => '关闭',
+            '1' => '发布',
+            '2' => '自动发布'
+        );
+        if($status)
+        {
+            if(array_key_exists($status, $arr))
+            {
+                return $arr[$status];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return $arr;
+    }
 }
 /* End of file product.php */
 /* Location: ./app/models/product.php */	

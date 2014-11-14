@@ -91,7 +91,7 @@
                         <div class='col-md-2'></div>
                         <div class='col-md-10'>
                             <button class='btn btn-warning btn-buy m-r-10' type='submit' >立即购买</button><!-- onclick="buyNow('<?php echo $product->id?>')"-->
-                            <button class='btn btn-success btn-shopcart' onclick="addCart('<?php echo $product->id?>')">
+                            <button class='btn btn-success btn-shopcart' type='button' onclick="addCart('<?php echo $product->id?>')">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> 加入购物车
                             </button>
                         </div>

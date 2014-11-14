@@ -272,16 +272,26 @@
                             <!-- 公告 end-->
                         </div>
                         <div id="profile" class="tab-pane fade active in">
+                            <?php if(isset($vip_news) && !empty($vip_news)): ?>
                             <ul>
-                                <li>白金、钻石VIP优先配送</li>
-                                <li>VIP专享活动规则</li>
-                                <li>会员等级制度</li>
-                                <li>每用户会员个人限购定义</li>
-                                <li>餐厨用品购买说明</li>
-                            </ul>
+                            <?foreach($vip_news as $key => $item):?>
+                                <li><a href="<?php echo base_url()?>news/<?php echo $item->id;?>"><?php echo $item->title;?></a></li>
+                            <?endforeach;?>
+                            </ul>  
+                            <?else:?>
+                            暂无VIP专享!
+                            <?endif;?>
                         </div>
                         <div id="profile1" class="tab-pane fade">
-                            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+                            <?php if(isset($coupon) && !empty($coupon)): ?>
+                            <ul>
+                            <?foreach($coupon as $key => $item):?>
+                                <li><a href="<?php echo base_url()?>coupon/<?php echo $item->id;?>"><?php echo $item->code;?></a></li>
+                            <?endforeach;?>
+                            </ul>  
+                            <?else:?>
+                            暂无VIP专享!
+                            <?endif;?>
                         </div>
                     </div>
                 </div>
@@ -310,7 +320,7 @@
                 <?endif;?>
             <?endif;?>
                 <li item-index='<?php echo $item->id?>'>
-                    <a target="_blank" href="<?php echo $item->id;?>">
+                    <a target="_blank" href="<?php echo $item->id;?>" title='<?php echo $item->name?>'>
                         <img height="45" width="105" src='<?php echo $this->product_brand->pic($item->id)?>'>
                     </a>
                 </li>
@@ -493,7 +503,7 @@
                                     <?break;?>
                                     <?endif;?>
                                     <dl class="sy_mod_key_dl">
-                                        <dt><a href="#" target="_blank"><?php echo $i['name'];?></a></dt>
+                                        <dt><a href="<?php echo base_url().'category/index/cate_id/'.$i['id']?>" target="_blank"><?php echo $i['name'];?></a></dt>
                                         <dd>
                                             <!-- 三级商品分类开始 -->
                                             <?php if(isset($i['child']) && !empty($i['child'])): ?>

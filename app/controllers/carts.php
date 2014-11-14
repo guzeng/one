@@ -90,7 +90,7 @@ class Carts extends CI_Controller {
             $_SESSION['cart'] = $cart;
             $total = count($cart);
         }
-        echo json_encode(array('code'=>'1000','msg'=>$this->lang->line('success'),'total'=>$total));
+        echo json_encode(array('code'=>'1000','msg'=>"商品已成功加入购物车",'total'=>$total));
 	}
 
     public function del()
