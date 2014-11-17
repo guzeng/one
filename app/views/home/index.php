@@ -263,7 +263,7 @@
                             <?php if(isset($news) && !empty($news)): ?>
                             <ul>
                             <?foreach($news as $key => $item):?>
-                                <li><a href="<?php echo base_url()?>news/<?php echo $item->id;?>"><?php echo $item->title;?></a></li>
+                                <li><a href="<?php echo base_url()?>news/info/<?php echo $item->id;?>" target='_blank'><?php echo $item->title;?></a></li>
                             <?endforeach;?>
                             </ul>  
                             <?else:?>
@@ -275,7 +275,7 @@
                             <?php if(isset($vip_news) && !empty($vip_news)): ?>
                             <ul>
                             <?foreach($vip_news as $key => $item):?>
-                                <li><a href="<?php echo base_url()?>news/<?php echo $item->id;?>"><?php echo $item->title;?></a></li>
+                                <li><a href="<?php echo base_url()?>news/info/<?php echo $item->id;?>" target='_blank'><?php echo $item->title;?></a></li>
                             <?endforeach;?>
                             </ul>  
                             <?else:?>

@@ -17,16 +17,20 @@
                 <div class="block title">购物邮箱提醒</div>
                 <div class="checkbox-list">
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="shoping_order" name="shoping_order" value="1" <?php echo ($user_mailsubs && $user_mailsubs->shoping_order == 1) ? 'checked' :'';?>> 下单成功提醒
+                        <input type="checkbox" id="inlineCheckbox21" value="order" name='subs' style="">
+                        下单成功提醒
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="shoping_not_pay" name="shoping_not_pay" value="1" <?php echo ($user_mailsubs && $user_mailsubs->shoping_not_pay == 1) ? 'checked' :'';?>> 未付款提醒
+                        <input type="checkbox" id="inlineCheckbox22" value="notPay" name='subs' style="">
+                        未付款提醒
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="shoping_pay_success" name="shoping_pay_success" value="1" <?php echo ($user_mailsubs && $user_mailsubs->shoping_pay_success == 1) ? 'checked' :'';?>> 付款成功提醒
+                        <input type="checkbox" id="inlineCheckbox23" value="pay" name='subs' style="">
+                        付款成功提醒
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="shoping_not_comment" name="shoping_not_comment" value="1" <?php echo ($user_mailsubs && $user_mailsubs->shoping_not_comment == 1) ? 'checked' :'';?>> 未评价提醒
+                        <input type="checkbox" id="inlineCheckbox23" value="notComment" name='subs' style="">
+                        未评价提醒
                     </label>
                 </div>
             </div>
@@ -34,20 +38,36 @@
                 <div class="block title">账户提醒邮件：</div>
                 <div class="checkbox-list">
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="account_coupon" name="account_coupon" value="1" <?php echo ($user_mailsubs && $user_mailsubs->account_coupon == 1) ? 'checked' :'';?>> 优惠券到账提醒
+                        <input type="checkbox" id="inlineCheckbox21" value="hasCoupon" name='subs' style="">
+                        优惠券到账提醒
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="account_not_pay" name="account_not_pay" value="1" <?php echo ($user_mailsubs && $user_mailsubs->account_not_pay == 1) ? 'checked' :'';?>> 未付款提醒
+                        <input type="checkbox" id="inlineCheckbox22" value="couponDue" name='subs' style="">
+                        优惠券到期提醒
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="account_pay_success" name="account_pay_success" value="1" <?php echo ($user_mailsubs && $user_mailsubs->account_pay_success == 1) ? 'checked' :'';?>> 付款成功提醒
+                        <input type="checkbox" id="inlineCheckbox23" value="memberLevel" name='subs' style="">
+                        会员级别变动提醒
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" id="account_not_comment" name="account_not_comment" value="1" <?php echo ($user_mailsubs && $user_mailsubs->account_not_comment == 1) ? 'checked' :'';?>> 未评价提醒
+                        <input type="checkbox" id="inlineCheckbox23" value="monthlyBill" name='subs' style="">
+                        月度账单提醒
                     </label>
                 </div>
             </div>
-            <div class="col-md-offset-2 col-md-3">
+            <div class="well"> 
+                <div class="block title">促销/活动邮件：</div>
+                <div class="checkbox-list">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox21" value="promotion" name='subs' style="">
+                        订阅
+                    </label>
+                    <label class="checkbox-inline">
+                        <strong>综合促销</strong> &nbsp; 每周最热门商品推荐、每周最新的促销物价抢购及神秘促销商品推荐
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-offset-2 col-md-3 m-b-20">
                 <button id="email_book_submit_btn" onclick="do_submit('email_book_form')" class="btn btn-block green" type="button">保存</button>
             </div>
         </form>
