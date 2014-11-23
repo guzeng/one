@@ -27,9 +27,13 @@ class Mailsubs extends CI_Controller {
 		}
 		$user = $this->user->get($user_id);
 		$user_mailsubs = $this->user_mailsubs->get($user_id);
-
+        $subs = array();
+        if($user_mailsubs->sub)
+        {
+            $subs = explode(",",$user_mailsubs->sub);
+        }
 		$data['user'] = $user;
-		$data['user_mailsubs'] = $user_mailsubs;
+		$data['subs'] = $subs;
 		$this->load->view('home/mailsubs',$data);
 	}
 
@@ -42,39 +46,37 @@ class Mailsubs extends CI_Controller {
         $this->auth->check_login_json();
         $post = $this->input->post();
         $user_id = $this->auth->user_id();
+
 		if(!$user_id)
 		{
 			show_404('',false);
 		}
 
         $data = array('code' => '1000', 'msg' => '');
-        // $row = array(
-        //     'shoping_order' => isset($post['shoping_order']) ? $post['shoping_order'] : 0,
-        //     'shoping_not_pay' => isset($post['shoping_not_pay']) ? $post['shoping_not_pay'] : 0,
-        //     'shoping_pay_success' => isset($post['shoping_pay_success']) ? $post['shoping_pay_success'] : 0,
-        //     'shoping_not_comment' => isset($post['shoping_not_comment']) ? $post['shoping_not_comment'] : 0,
-        //     'account_coupon' => isset($post['account_coupon']) ? $post['account_coupon'] : 0,
-        //     'account_not_pay' => isset($post['account_not_pay']) ? $post['account_not_pay'] : 0,
-        //     'account_pay_success' => isset($post['account_pay_success']) ? $post['account_pay_success'] : 0,
-        //     'account_not_comment' => isset($post['account_not_comment']) ? $post['account_not_comment'] : 0,
-        //     'user_id' => $user_id
-        // );
+        $subs = isset($post['subs']) ? $post['subs'] : '';
+        $subs_str = '';
+        if($subs)
+        {
+            $subs_str = implode(",",$subs);
+        }
+        $row = array("sub"=>$subs_str);
 
-        // $user_mailsubs = $this->user_mailsubs->get($user_id);
-        // if($user_mailsubs)
-        // {
-        //     if(!$this->user_mailsubs->update($row,$user_id))
-        //     {
-        //         $data = array('code'=>'1001','msg'=>$this->lang->line('update_failed'));
-        //     }
-        // }
-        // else
-        // {
-        // 	if(!$this->user_mailsubs->insert($row))
-        //     {
-        //         $data = array('code'=>'1001','msg'=>$this->lang->line('add_failed'));
-        //     }
-        // }
+        $user_mailsubs = $this->user_mailsubs->get($user_id);
+        if($user_mailsubs)
+        {
+            if(!$this->user_mailsubs->update($row,$user_id))
+            {
+                $data = array('code'=>'1001','msg'=>$this->lang->line('update_failed'));
+            }
+        }
+        else
+        {
+            $row["user_id"] = $user_id;
+        	if(!$this->user_mailsubs->insert($row))
+            {
+                $data = array('code'=>'1001','msg'=>$this->lang->line('add_failed'));
+            }
+        }
 
         if($data['code'] == '1000')
         {

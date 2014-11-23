@@ -6,7 +6,7 @@
 **********************************/
 class User_mailsubs extends CI_Model{
 	
-	private $table = 'user_mailsubs';
+	private $table = 'user_subscribe';
     private $user_table = 'member';
     private $page = 1;
     private $per_page = 15;
