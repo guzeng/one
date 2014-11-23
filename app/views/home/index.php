@@ -356,7 +356,7 @@
                         <li><i></i>进入品牌街</li>
                     </ul> -->
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[0]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[0]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[0]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
             <?if(isset($handpick_product[1]) && $handpick_product[1]->id):?>
@@ -367,7 +367,7 @@
                     <!-- <div class="s-name">NIKE休闲板鞋</div> -->
                     <div class="s-ext"><b>￥<?php echo $handpick_product[1]->price;?></b></div>
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[1]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[1]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[1]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
             <?if(isset($handpick_product[2]) && $handpick_product[2]->id):?>
@@ -382,7 +382,7 @@
                         <li><i></i>型男休闲范儿</li>
                     </ul> -->
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[2]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[2]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[2]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
             <?if(isset($handpick_product[3]) && $handpick_product[3]->id):?>
@@ -398,7 +398,7 @@
                         <strong class='price'>￥9.9</strong>
                     </a> -->
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[3]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[3]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[3]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
         </div>
@@ -414,7 +414,7 @@
                     <ul class="s-hotword">
                     </ul> -->
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[4]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[4]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[4]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
             <?if(isset($handpick_product[5]) && $handpick_product[5]->id):?>
@@ -428,7 +428,7 @@
                     <ul class="s-hotword">
                     </ul> -->
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[5]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[5]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[5]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
             <?if(isset($handpick_product[6]) && $handpick_product[6]->id):?>
@@ -442,7 +442,7 @@
                     <ul class="s-hotword">
                     </ul> -->
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[6]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[6]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[6]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
             <?if(isset($handpick_product[7]) && $handpick_product[7]->id):?>
@@ -459,7 +459,7 @@
                         <li>...</li>
                     </ul> -->
                 </div>
-                <a><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[7]->id,1,'thumb')?>"></a>
+                <a href="<?php echo base_url()."item/id/".$handpick_product[7]->id;?>"><img style="height:190px;width:99%;padding-right:1%" src="<?php echo $CI->product->pic($handpick_product[7]->id,1,'thumb')?>"></a>
             </div>
             <?endif;?>
         </div>
@@ -553,7 +553,7 @@
                             <ul class="nav">
                             <?foreach($item['product_cate_brand'] as $k => $i):?>
                             <li>
-                                <img class='img-responsive pull-right' src='<?php echo $this->product_brand->pic($i->id)?>'>
+                                <a href="<?php echo base_url()."category/index/cate_id/".$i->product_cate_id;?>"><img class='img-responsive pull-right' src='<?php echo $this->product_brand->pic($i->id)?>'></a>
                             </li>
                             <?endforeach;?>
                             </ul>

@@ -145,7 +145,7 @@
                 <?php foreach ($item->order_detail as $key => $value):?>
                 <tr>
                   <td width="*">
-                    <div class="img"><img width="150" height="100" src="<?php echo $this->product->pic($value->product_id);?>"></div>
+                    <div class="img"><a target="_bank" href="<?php echo base_url()."item/id/".$value->product_id?>"><img width="150" height="100" src="<?php echo $this->product->pic($value->product_id);?>"></a></div>
                     <div class="title" style="text-align:left"><?php echo $value->name;?> </div>
                     <!-- <div class="color">颜色分类：黑</div> -->
                     <!-- div class="price"></div>
@@ -153,7 +153,7 @@
                   </td>
                   <td width="130"><a><?php echo $value->price;?></a></td>                
                   <td width="100"><a><?php echo $value->number;?></a></td>                
-                  <td width="130"><a style="display:block;">查看</a></td>     
+                  <td width="130"><a style="display:block;" target="_bank" href="<?php echo base_url()."item/id/".$value->product_id?>">查看</a></td>     
                              
                   <td width="130"><?php echo $value->price;?><label>含运费：0.00</label></td>
                   <td width="130"><?php echo $item->status == 1 ? '待付款' : ($item->status == 2 ? '待发货' : 
