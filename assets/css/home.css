@@ -154,7 +154,7 @@ td {vertical-align:middle!important;;}
 }
 #f1 #list .item .img,
 #f2 #list .item .img,
-#f3 #list .item .img{margin-bottom: 5px;}
+#f3 #list .item .img{margin-bottom: 5px;height: 90px;}
 #f1 #list .item .name,
 #f2 #list .item .name,
 #f3 #list .item .name{

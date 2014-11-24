@@ -849,3 +849,27 @@ function ajaxRequest(url,btn){
         }
     });
 }
+
+function checkLogin(formID)
+{
+    $.ajax({
+        url:msg.base_url+'login/check',
+        dataType:'json',
+        success:function(json){
+            if(json.code == '1000')
+            {
+                $('#'+formID).submit();
+            }
+            else
+            {
+                show_login();
+            }
+        },
+        error:function(){
+            show_error();
+        },
+        beforeSend:function(){
+            loading();
+        }
+    })
+}

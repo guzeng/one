@@ -72,10 +72,10 @@
                     <div class='row m-b-20'>
                         <div class='col-md-2'>分类</div>
                         <div class='col-md-10'>
-                            <?php echo $category->name?>
+                            <?php echo isset($category->name)?$category->name:''?>
                         </div>
                     </div>
-                    <form name='buynow' method='post' action="<?php echo base_url().'carts/buynow/'.$product->id?>" target='_blank'>
+                    <form name='buynow' method='post' action="<?php echo base_url().'carts/buynow/'.$product->id?>" id='buynowform'  target='_blank'>
                     <div class='row m-b-20 h-35'>
                         <div class='col-md-2'>数量</div>
                         <div class='col-md-10 '>
@@ -90,7 +90,7 @@
                     <div class='row m-b-20'>
                         <div class='col-md-2'></div>
                         <div class='col-md-10'>
-                            <button class='btn btn-warning btn-buy m-r-10' type='submit' >立即购买</button><!-- onclick="buyNow('<?php echo $product->id?>')"-->
+                            <button class='btn btn-warning btn-buy m-r-10' type='button' onclick="checkLogin('buynowform');">立即购买</button><!-- onclick="buyNow('<?php echo $product->id?>')"-->
                             <button class='btn btn-success btn-shopcart' type='button' onclick="addCart('<?php echo $product->id?>')">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> 加入购物车
                             </button>

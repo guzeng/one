@@ -254,6 +254,20 @@ class Login extends CI_Controller {
             }
         }
     }
+
+    public function check()
+    {
+        if($this->auth->is_login())
+        {
+            $data['code'] = '1000';
+        }
+        else
+        {
+            $data['code'] = '1002';
+        }
+        echo json_encode($data);
+        exit;
+    }
 }
 
 /* End of file welcome.php */
