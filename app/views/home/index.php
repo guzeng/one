@@ -533,10 +533,12 @@
                                 <?foreach($item['hot_product'] as $k => $i):?>
                             <div class='item pull-left'>
                                 <div class='img'>
-                                    <a><img class='img-responsive' src="<?php echo $CI->product->pic($i->product_id,1,'thumb')?>"></a>
+                                    <a href="<?php echo base_url()."item/id/".$i->product_id;?>">
+                                        <img class='img-responsive' src="<?php echo $CI->product->pic($i->product_id,1,'thumb')?>">
+                                    </a>
                                 </div>
                                 <div class='name'>
-                                    <a><?php echo $i->name;?></a>
+                                    <a href="<?php echo base_url()."item/id/".$i->product_id;?>"><?php echo $i->name;?></a>
                                 </div>
                                 <div class='price'>
                                     <span>￥</span><?php echo $i->price;?></span>
