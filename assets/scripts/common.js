@@ -664,7 +664,15 @@ function cart_count(type,obj,cart)
     switch(type)
     {
         case 'plus':
-            count = parseInt(c)+1;
+            var max=$(obj).parent().find('input[name=max_num]').val();
+            if(parseInt(c)+1 > parseInt(max))
+            {
+                count = max;
+            }
+            else
+            {
+                count = parseInt(c)+1;
+            }
         break;
         case 'minus':
             var min=$(obj).parent().find('input[name=min_num]').val();

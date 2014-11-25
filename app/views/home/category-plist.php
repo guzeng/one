@@ -112,12 +112,13 @@
                 <div class=' m-b-5'><a>已有<?php echo $item->comment_num?>人评价</a></div>
                 <div class=''>
                     <div class='pull-left input'>
-                        <input type='text' name='cart_num' id='<?php echo $item->id?>_num' class=' form-control' value='<?php echo $item->min_num>0?$item->min_num:1;?>'>
-                        <button class='btn btn-default plus' onclick="cart_count('plus',this)">+</button>
-                        <button class='btn btn-default minus' onclick="cart_count('minus',this)">-</button>
+                        <input type='text' name='cart_num' id='<?php echo $item->id?>_num' class=' form-control' value='<?php echo $item->amount>0?($item->min_num>0?$item->min_num:1):0;?>'>
+                        <button class='btn btn-default plus <?php if($item->amount<=0):?>disabled<?php endif;?>' onclick="cart_count('plus',this)">+</button>
+                        <button class='btn btn-default minus <?php if($item->amount<=0):?>disabled<?php endif;?>' onclick="cart_count('minus',this)">-</button>
                         <input type='hidden' name='min_num' value="<?php echo $item->min_num?>">
+                        <input type='hidden' name='max_num' value="<?php echo $item->amount?>">
                     </div>
-                    <div class='pull-left ship-btn'><button class='btn btn-default' onclick="addCart('<?php echo $item->id?>')">加入购物车</button></div>
+                    <div class='pull-left ship-btn'><button class='btn btn-default <?php if($item->amount<=0):?>disabled<?php endif;?>' onclick="addCart('<?php echo $item->id?>')">加入购物车</button></div>
                 </div>
             </div>
             <?endforeach;?>

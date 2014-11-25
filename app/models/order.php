@@ -344,6 +344,61 @@ class Order extends CI_Model{
         if(!$uid) return 0;
         return date('Y-m-dHis').$uid;
     }
+
+    /**
+    * 生成订单
+    * param array list 产品列表
+    */
+    public function create($list)
+    {
+        $total_price = 0;
+        foreach ($list as $key => $value) {
+            $total_price += $value['best_price']*$value['count'];
+            $$value['product_id'] = $this->product->get($value['product_id']);
+            if($$value['product_id']->amount < $value['count'])
+            {
+                return array('error'=>$$value['product_id']->name.' '.$this->lang->line('product_shortage'));
+            }
+        }
+        $total_price = round($total_price,2);
+        $this->db->trans_begin();
+
+        $user_id = $this->auth->user_id();
+        $row = array(
+            'user_id' => $user_id,
+            'username' => $this->auth->username(),
+            'code'  => $this->code($user_id),
+            'price' => $total_price,
+            'create_time' => local_to_gmt()
+        );
+        $this->db->insert($this->table,$row);
+        $orderId = $this->db->insert_id();
+        if($orderId)
+        {
+            foreach ($list as $key => $value) {
+                $this->db->insert($this->detail_table, array(
+                    'order_id' => $orderId,
+                    'user_id'   =>$user_id,
+                    'product_id'    => $value['product_id'],
+                    'price' => $value['best_price'],
+                    'number'    => $value['count']
+                ));
+                //修改产品库存
+                $this->db->update($this->product_table, array('amount'=>$$value['product_id']->amount - $value['count']), "id = ".$value['product_id']);
+            }
+        }
+
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->trans_rollback();
+            return array('error'=>$this->lang->line('update_failed'));
+        }
+        else
+        {
+            $this->db->trans_commit();
+            return array('error'=>'','orderId'=>$orderId);
+        }
+    }
 }
 /* End of file order.php */
 /* Location: ./app/models/order.php */	

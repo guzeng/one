@@ -80,18 +80,19 @@
                         <div class='col-md-2'>数量</div>
                         <div class='col-md-10 '>
                             <div class="pinfo">
-                                <input type="text" name='cart_num' id="<?php echo $product->id?>_num" value="<?php echo $product->min_num>0?$product->min_num:1;?>" class=" form-control">
-                                <button class="btn btn-default plus" type='button' onclick="cart_count('plus',this)">+</button>
-                                <button class="btn btn-default minus" type='button' onclick="cart_count('minus',this)">-</button>
+                                <input type="text" name='cart_num' id="<?php echo $product->id?>_num" value="<?php echo $product->amount>0?($product->min_num>0?$product->min_num:1):0;?>" class=" form-control">
+                                <button class="btn btn-default plus <?php if($product->amount<=0):?>disabled<?php endif;?>" type='button' onclick="cart_count('plus',this)">+</button>
+                                <button class="btn btn-default minus <?php if($product->amount<=0):?>disabled<?php endif;?>" type='button' onclick="cart_count('minus',this)">-</button>
                                 <input type='hidden' id='min_num' name='min_num' value='<?php echo $product->min_num?>' >
+                                <input type='hidden' id='max_num' name='max_num' value='<?php echo $product->amount?>' >
                             </div>
                         </div>
                     </div>
                     <div class='row m-b-20'>
                         <div class='col-md-2'></div>
                         <div class='col-md-10'>
-                            <button class='btn btn-warning btn-buy m-r-10' type='button' onclick="checkLogin('buynowform');">立即购买</button><!-- onclick="buyNow('<?php echo $product->id?>')"-->
-                            <button class='btn btn-success btn-shopcart' type='button' onclick="addCart('<?php echo $product->id?>')">
+                            <button class='btn btn-warning btn-buy m-r-10 <?php if($product->amount<=0):?>disabled<?php endif;?>' type='button' onclick="checkLogin('buynowform');">立即购买</button><!-- onclick="buyNow('<?php echo $product->id?>')"-->
+                            <button class='btn btn-success btn-shopcart <?php if($product->amount<=0):?>disabled<?php endif;?>' type='button' onclick="addCart('<?php echo $product->id?>')">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> 加入购物车
                             </button>
                         </div>

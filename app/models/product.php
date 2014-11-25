@@ -426,6 +426,36 @@ class Product extends CI_Model{
         }
         return false;
     }
+
+    public function number($id,$num=1,$type='minus')
+    {
+        $row = $this->get($id);
+        if($row->amount < $num)
+        {
+            return array('error'=>$row->name.' '.$this->lang->line('product_shortage'));
+        }
+        $this->db->trans_begin();
+        switch ($type) {
+            case 'minus':
+                $this->update(array('amount'=>$row->amount - $num), $id);
+                break;
+            case 'plus':
+            default:
+                $this->update(array('amount'=>$row->amount + $num), $id);
+                break;
+        }
+        
+        if ($this->db->trans_status() === FALSE)
+        {
+            $this->db->trans_rollback();
+            return array('error'=>$this->lang->line('update_failed'));
+        }
+        else
+        {
+            $this->db->trans_commit();
+            return array('error'=>'');
+        }
+    }
 }
 /* End of file product.php */
 /* Location: ./app/models/product.php */	

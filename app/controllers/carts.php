@@ -196,6 +196,7 @@ class Carts extends CI_Controller {
             ));
             exit;
         }
+        /*
         $total_price = 0;
         foreach ($list as $key => $value) {
             $total_price += $value['best_price']*$value['count'];
@@ -219,14 +220,16 @@ class Carts extends CI_Controller {
                 ));
             }
         }
-        else
+        */
+        $create = $this->order->create($list);
+        if($create['error'] != '')
         {
-            echo json_encode(array('code'=>'1001','msg'=>'订单生成失败，请重试'));
+            echo json_encode(array('code'=>'1001','msg'=>'订单生成失败。'.$create['error']));
             exit;
         }
         $this->cart->clear();
 
-        echo json_encode(array('code'=>'1000','msg'=>'订单生成成功','url'=>base_url().'home/orders/pay/'.$orderId));
+        echo json_encode(array('code'=>'1000','msg'=>'订单生成成功','url'=>base_url().'home/orders/pay/'.$create['orderId']));
     }
 
     /**
@@ -244,9 +247,15 @@ class Carts extends CI_Controller {
         {
             show_error($this->lang->line('no_product_exist'),500);
         }
-        $user_id = $this->auth->user_id();
         $num = trim($this->input->post('cart_num'));
-
+        $list = array(array(
+                'product_id'    => $pid,
+                'price' => $product->price,
+                'best_price' => $product->best_price,
+                'count'    => $num
+        ));
+        /*
+        $user_id = $this->auth->user_id();
         $orderId = $this->order->insert(array(
             'user_id' => $user_id,
             'username' => $this->auth->username(),
@@ -263,11 +272,13 @@ class Carts extends CI_Controller {
                 'number'    => $num
             ));
         }
-        else
+        */
+        $create = $this->order->create($list);
+        if($create['error'] != '')
         {
-            show_error('订单生成失败，请重试',500);
+            show_error('订单生成失败。'.$create['error']);
         }
-        redirect('home/orders/pay/'.$orderId);
+        redirect('home/orders/pay/'.$create['orderId']);
     }
 }
 

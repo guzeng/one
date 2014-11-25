@@ -32,7 +32,7 @@
                             <?if(!empty($detail)):?>
                             <?foreach($detail as $key => $item):?>
                             <tr>
-                              <td><?php echo $item->name?></td>
+                              <td><a href="<?php echo base_url().'item/id/'.$item->product_id?>" target='_blank'><?php echo $item->name?></a></td>
                               <td ><?php echo $item->price;?></td>
                               <td ><?php echo $item->number;?></td>
                             </tr>

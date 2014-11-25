@@ -1,0 +1,3 @@
+ALTER TABLE one_product ENGINE = INNODB;
+ALTER TABLE one_order ENGINE = INNODB;
+ALTER TABLE one_order_detail ENGINE = INNODB;
