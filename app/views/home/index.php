@@ -290,7 +290,7 @@
                             <?endforeach;?>
                             </ul>  
                             <?else:?>
-                            暂无VIP专享!
+                            暂无优惠券!
                             <?endif;?>
                         </div>
                     </div>

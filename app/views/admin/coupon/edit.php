@@ -101,14 +101,14 @@ function couponSumbit(){
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="control-label"><span class='req'>*</span>有效期开始时间</label>
-												<input type="text" id="expirse_from" name='expirse_from' readonly class="form-control date-picker" maxLength='50' placeholder="" value="<?php echo isset($row)?date('Y-m-d h:m:s',$row->expirse_from):''?>">
+												<input type="text" id="expirse_from" name='expirse_from' readonly class="form-control date-picker" maxLength='50' placeholder="" value="<?php echo isset($row)?date('Y-m-d h:m',gmt_to_local($row->expirse_from)):''?>">
 												<span class="help-block"></span>
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label class="control-label"><span class='req'>*</span>有效期结束时间</label>
-												<input type="text" id="expirse_to" name='expirse_to' maxLength="50" readonly class="form-control date-picker" value="<?php echo isset($row)?date('Y-m-d h:m:s',$row->expirse_to):''?>">
+												<input type="text" id="expirse_to" name='expirse_to' maxLength="50" readonly class="form-control date-picker" value="<?php echo isset($row)?date('Y-m-d h:m',gmt_to_local($row->expirse_to)):''?>">
 												<span class="help-block"></span>
 											</div>
 										</div>

@@ -137,8 +137,8 @@ class Coupons extends CI_Controller {
             'value' => $post['value'],
             'use' => $post['use'],
             'type' => $post['type'],
-            'expirse_from' => strtotime($post['expirse_from']),
-            'expirse_to' => strtotime($post['expirse_to'])
+            'expirse_from' => local_to_gmt(strtotime($post['expirse_from'])),
+            'expirse_to' => local_to_gmt(strtotime($post['expirse_to']))
         );
 
         if($post['id'])

@@ -18,7 +18,7 @@
                                 		<td><?php echo $item->type == 1?'购物赠':'商家赠';?></td>
                                 		<td><?php echo $item->value?></td>
                                 		<td><?php echo isset($item->use) && $item->use ? "满".$item->use : "不限条件"?></td>
-                                		<td class="hidden-xs"><?php echo date('Y-m-d h:m:s',$item->expirse_from)."  至  ".date('Y-m-d h:m:s',$item->expirse_to)?></td>
+                                		<td class="hidden-xs"><?php echo date('Y-m-d h:m',gmt_to_local($item->expirse_from))."  至  ".date('Y-m-d h:m',gmt_to_local($item->expirse_to))?></td>
 										<td class="hidden-xs">
 											<a href="<?php echo base_url();?>admin/coupons/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
