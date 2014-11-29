@@ -37,6 +37,48 @@ class User_coupons extends CI_Controller {
         $data['type'] = $type;
         $this->load->view('home/coupon',$data);
     }
+
+    public function update()
+    {
+        $this->auth->check_login_json();
+        $post = $this->input->post();
+        $user_id = $this->auth->user_id();
+        if(empty($post))
+        {
+            show_error('参数错误');
+        }
+        if(!$user_id)
+        {
+            show_404('',false);
+        }
+        $data = array('code' => '1000', 'msg' => '成功领取');
+
+        $this->load->model('user_coupon');
+        $count = $this->user_coupon->exist(array("user_id"=>$user_id,"coupon_id"=>$post['id']));
+        if($count)
+        {
+            $data['code'] = "1001";
+            $data['msg'] = "你已经领取过了";             
+        }
+        else
+        {
+            $row = array(
+                'user_id' => $user_id,
+                'coupon_id' => $post['id'],
+                'is_use' => 0
+            );
+            if(!$this->user_coupon->insert($row))
+            {
+                $data = array('code'=>'1001','msg'=>$this->lang->line('add_failed'));
+            }
+        }
+        
+        // if($data['code'] == '1000')
+        // {
+        //     $data['goto'] = 'admin/coupons';
+        // }
+        echo json_encode($data);
+    }
 }
 
 /* End of file Coupons.php */

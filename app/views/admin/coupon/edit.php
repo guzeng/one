@@ -65,7 +65,7 @@ function couponSumbit(){
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="control-label"><span class='req'>*</span>编号</label>
+												<label class="control-label"><span class='req'>*</span>标题</label>
 												<input type="text" id="code" name='code' class="form-control" maxLength='50' placeholder="50字符以内" value="<?php echo isset($row)?$row->code:''?>">
 												<span class="help-block"></span>
 											</div>

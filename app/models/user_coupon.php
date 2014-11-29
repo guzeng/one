@@ -26,6 +26,38 @@ class User_coupon extends CI_Model{
     }
     //----------------------------------------------------------------
 
+    public function insert($row){
+        if(is_array($row) && !empty($row)){
+            if($this->db->insert($this->table,$row)){
+                return $this->db->insert_id();
+            }
+        }
+        return false;
+    }
+    //-------------------------------------------------------
+    
+    public function update($row,$id){
+        if(!empty($row) && $id){
+            $this->db->where('id',$id);
+            return $this->db->update($this->table,$row);
+        }
+        return false;
+    }
+    //--------------------------------------------------------
+
+    public function exist($where)
+    {
+        $this->db->select ('count(a.id) as count');
+        $this->db->from($this->table.' as a');
+        $this->db->where($where);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            $result = $query->result();
+            return $result[0]->count;
+        }
+        return 0; 
+    }
+
     /**
     *   get_param
     *   返回所有参数

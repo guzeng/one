@@ -100,7 +100,7 @@ class Coupons extends CI_Controller {
                 $where = array('code'=>$post['code'],'id !='=>$post['id']);
                 if($this->coupon->exist($where))
                 {
-                    $error['code'] = '编号已存在';
+                    $error['code'] = '标题已存在';
                 }                
             }
         }
@@ -111,7 +111,7 @@ class Coupons extends CI_Controller {
                 $where = array('code'=>$post['code']);
                 if($this->coupon->exist($where))
                 {
-                    $error['code'] = '编号已存在';
+                    $error['code'] = '标题已存在';
                 }
             }
         }
