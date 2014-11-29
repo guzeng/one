@@ -73,15 +73,18 @@
 									<div class="form-group">
 										<label class="control-label col-md-3"><span class='req'>*</span> 链接地址</label>
 										<div class="col-md-7">
-		                                    <input type="text" id="url" name="url" class="form-control" maxlength="200" placeholder="200字符以内" value="<?php echo isset($row)?$row->url:''?>">
+		                                    <input type="text" id="url" name="url" class="form-control" maxlength="200" placeholder="200字符以内,注意以http://开头" value="<?php echo isset($row)?$row->url:''?>">
 		                                    <span class="help-block" for='url'></span>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="control-label col-md-3"><span class='req'>*</span> 显示位置</label>
-										<div class="col-md-7">
+										<div class="col-md-7"> 
 		                                    <select id="position_id" name="position_id" class="form-control">
-		                                    	<option <?php isset($row) && $row->position_id == 1 ? 'checked' : '';?> value="1">首页滚动图</option>
+		                                    	<option <?php echo isset($row) && $row->position_id == 1 ? 'selected' : '';?> value="1">首页滚动图</option>
+		                                    	<option <?php echo isset($row) && $row->position_id == 2 ? 'selected' : '';?> value="2">首页1F区域</option>
+		                                    	<option <?php echo isset($row) && $row->position_id == 3 ? 'selected' : '';?> value="3">首页2F区域</option>
+		                                    	<option <?php echo isset($row) && $row->position_id == 4 ? 'selected' : '';?> value="4">首页3F区域</option>
 		                                    </select>
 		                                    <span class="help-block" for='url'></span>
 										</div>

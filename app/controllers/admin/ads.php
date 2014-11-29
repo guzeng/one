@@ -79,6 +79,17 @@ class Ads extends CI_Controller {
             exit;
         }
 
+        $error = array();
+        if(strpos($post['url'],"http://") === false)
+        {
+            $error['url'] = '链接地址请以http://';
+        }
+        if(!empty($error))
+        {
+            echo json_encode(array('code'=>'1010','msg'=>"出错",'error'=>$error));
+            exit;
+        }
+
         $row = array(
             'title' => trim($post['title']),
             'url' => trim($post['url']),

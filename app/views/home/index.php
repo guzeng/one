@@ -57,15 +57,17 @@
     var rolling;
     var i=0;
     $(function(){
+        //首页展示图片与左边栏等高
+        $("#layoutRolling ul li img").height($("#category").height()-10);
         $('#rollingHover').find('li').hover(function(){
             clearInterval(rolling);
             var index = parseInt($(this).index());
-            //showPic(index);
+            showPic(index);
         },function(){
             i = parseInt($(this).index());
-            //startRoll();
+            startRoll();
         })
-        //startRoll();
+        startRoll();
     })
     function startRoll()
     {
@@ -139,7 +141,7 @@
                 暂未添加商品分类数据！
                 <?endif;?>
             </div>
-            <div class='col-lg-7 col-p-10 m-t-10 o-h'>
+            <div class='col-lg-7 col-p-10 p-t-10 o-h'>
                 <div class="layoutRolling_04" id='layoutRolling'>
                     <div class="rollingPic">
                         <div class='rollingContainer'>
@@ -148,7 +150,7 @@
                                 <?php foreach ($ad_home as $key => $value):?>
                                    <li bg='<?php echo $key;?>' class="<?php if($key > 0):?>hide<?php endif;?>">
                                         <a href="<?php echo $value->url;?>">
-                                            <img style="height:100%;width:100%;" src="<?php echo $this->ad->pic($value->id);?>"/>
+                                            <img style="height:90%;width:100%;" src="<?php echo $this->ad->pic($value->id);?>"/>
                                         </a>
                                     </li>
                                 <?endforeach;?>
@@ -169,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-bordered m-t-10 m-b-0" >
+                <!-- <table class="table table-bordered m-t-10 m-b-0" >
                     <tbody>
                         <tr>
                             <td>
@@ -207,7 +209,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
+                </table> -->
             </div>
             <div class='col-lg-3 col-no-padding m-t-10'>
                 <div id='userinfo'>
@@ -551,16 +553,14 @@
                         </div>
                     </div>
                     <div class='col-md-2 col-no-padding' id='right'>
-                        <?php if(isset($item['product_cate_brand']) && !empty($item['product_cate_brand'])): ?>
-                            <ul class="nav">
-                            <?foreach($item['product_cate_brand'] as $k => $i):?>
-                            <li>
-                                <a href="<?php echo base_url()."category/index/cate_id/".$i->product_cate_id;?>"><img class='img-responsive pull-right' src='<?php echo $this->product_brand->pic($i->id)?>'></a>
-                            </li>
-                            <?endforeach;?>
-                            </ul>
+                        <?php $lou = "ad_".($key+1)."F";?>
+                        <?php $obj = $$lou;?>
+                        <?php if(isset($obj)&& !empty($obj)):?>
+                        <a target="_blank" href="<?php echo $obj[0]->url;?>">
+                            <img style="height:100%;width:100%;" src="<?php echo $this->ad->pic($obj[0]->id);?>"/>
+                        </a>
                         <?else:?>
-                        暂无品牌显示，可以在品牌设置关联商品分类
+                        暂无广告显示，可以在广告设置添加
                         <?endif;?>
                     </div>
                 </div>
