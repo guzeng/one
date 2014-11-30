@@ -158,7 +158,9 @@
                   <td width="130"><?php echo $value->price;?><label>含运费：0.00</label></td>
                   <td width="130"><?php echo $item->status == 1 ? '待付款' : ($item->status == 2 ? '待发货' : 
                   ($item->status == 3 ? '待收货' : ($item->status == 4 ? '待评价' : ($item->status == 5 ? '交易完成' : ($item->status == 6 ? '退货状态' : $item->status == 7 ? '废弃订单' : '--')))));?>  </td>
-                  <td width="130"><a>再次购买</a></td>               
+                  <td width="130">
+                    <a href="<?php echo base_url()."item/id/".$value->product_id?>">再次购买</a>
+                  </td>               
                 </tr>
                 <?endforeach;?>
                 <?endif;?>
