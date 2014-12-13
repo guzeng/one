@@ -28,6 +28,17 @@ $(document).ready(function(e) {
         }
         ctrl_skin();
     });
+    var f = ['f1','f2','f3'];
+    $.each(f,function(key,item){
+        $('#'+item).find('ul#list-tab').find('a').mouseover(function(){
+            var href = $(this).attr('href');
+            href = href.replace('#','');
+            var ul = $(this).parent().parent().attr('id');
+            $('#'+item).find('div#list').find('div.tabitem').hide();
+            $('#'+item).find('div#'+href).show();
+        })        
+    })
+
 });
 
 //控制按钮样式

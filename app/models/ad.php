@@ -47,6 +47,18 @@ class Ad  extends CI_Model{
 	}
 	//---------------------------------------------------------
 
+	public function get_by_position($position){
+		if($position){
+			$this->db->where('position_id',$position);
+			$query = $this->db->get($this->table);
+			if($query->num_rows()>0){
+				return $query->row();
+			}
+		}
+		return false;
+	}
+	//---------------------------------------------------------
+
 	/**
 	 * lists
 	 * 查询, 用于分页显示列表

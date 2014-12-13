@@ -134,7 +134,7 @@ td {vertical-align:middle!important;;}
 #f1 #title, #f2 #title, #f3 #title{ border-bottom: 2px solid #BBBBBB;}
 #f1 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
 #f1 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
-#f1 #left ul li{height: 25px; line-height: 25px; overflow: hidden; vertical-align: bottom;}
+#f1 #left ul li{height: 30px; line-height: 30px; overflow: hidden; vertical-align: bottom;}
 #f1 #left span{position: absolute; right: 0; top: 0; line-height: 0; z-index: 1;}
 #f1 #list-tab,#f2 #list-tab,#f3 #list-tab{margin-bottom: 0px; }
 #f1 #list-tab li,#f2 #list-tab li,#f3 #list-tab li{width: 20%; margin: 0px;}
@@ -176,6 +176,12 @@ td {vertical-align:middle!important;;}
 #f2 .floor-name{color: #0068B7; font-weight: bold; font-size: 18px;}
 #f2 #left,#f3 #left{padding-top: 5px;border-right: 1px solid rgb(221, 221, 221); height: 361px; position: relative;}
 #f2 #left .el,#f3 #left .el{margin-top: 10px;}
+
+#f2 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
+#f2 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
+#f2 #left ul li{height: 30px; line-height: 30px; overflow: hidden; vertical-align: bottom;}
+#f2 #left span{position: absolute; right: 0; bottom: 0; line-height: 0; z-index: 1;}
+
 #f2 #left .bottom,#f3 #left .bottom{position: absolute; bottom: 0px;}
 #f2 #list-tab.nav-pills > li > a:hover, 
 #f2 #list-tab.nav-pills > li > a:focus,
@@ -187,6 +193,11 @@ td {vertical-align:middle!important;;}
 
 #f3 .floor-sign{font-size: 18px; font-weight: 700; background-color: #22AC38; color: #FFFFFF; margin-right: 10px;}
 #f3 .floor-name{color: #22AC38; font-weight: bold; font-size: 18px;}
+#f3 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
+#f3 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
+#f3 #left ul li{height: 30px; line-height: 30px; overflow: hidden; vertical-align: bottom;}
+#f3 #left span{position: absolute; right: 0; bottom: 0; line-height: 0; z-index: 1;}
+
 #f3 #list-tab.nav-pills > li > a:hover, 
 #f3 #list-tab.nav-pills > li > a:focus,
 #f3 #list-tab.nav-pills > li.active > a, 
@@ -286,21 +297,21 @@ td {vertical-align:middle!important;;}
 
 /**首页轮播图片*/
 #layoutRolling{position: relative;}
-.rollingPic { width:100%; height:356px; margin:0 auto; position:relative;}
+.rollingPic { width:100%; height:240px; margin:0 auto; position:relative;}
 .fixedArea { position:absolute; bottom:35px; left:35px; z-index:101;}
 .fixedArea span { padding:0 5px 0 0;}
 
-.layoutRolling_bt { height:35px; padding:15px 0 0 0;position: absolute;right:10px;bottom:25px;}
+.layoutRolling_bt { height:35px; padding:15px 0 0 0;position: absolute;right:10px;bottom:10px;}
 
 .rollingPointer { width:100%; margin:0 auto;}
 .rollingPointer li { float:left; width:10px; height:10px; background:url(../img/rolling_pointor_normal.png) no-repeat; cursor:pointer; margin:0 5px 0 0;}
 .rollingPointer li:hover { background:url(../img/rolling_pointor_hover.png) no-repeat; cursor:pointer;}
 .rollingPointer li.hover { background:url(../img/rolling_pointor_hover.png) no-repeat; cursor:pointer;}
 
-.rollingContainer{width:100%;overflow: hidden;height: 356px;position: relative;}
+.rollingContainer{width:100%;overflow: hidden;height: 240px;position: relative;}
 #rolling-pics{position: absolute;width: 100%;}
 #rolling-pics ul{padding:0px;}
-#rolling-pics li{float: left;height: 356px;line-height: 356px;list-style: none outside none;width: 100%;}
+#rolling-pics li{float: left;height: 240px;line-height: 240px;list-style: none outside none;width: 100%;}
 #rolling-pics img{float: left;display: block;}
 /**首页轮播图片 结束*/
 

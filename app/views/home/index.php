@@ -171,7 +171,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- <table class="table table-bordered m-t-10 m-b-0" >
+                <table class="table table-bordered m-t-10 m-b-0" >
                     <tbody>
                         <tr>
                             <td>
@@ -209,7 +209,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table> -->
+                </table>
             </div>
             <div class='col-lg-3 col-no-padding m-t-10'>
                 <div id='userinfo'>
@@ -469,106 +469,481 @@
     </div>
     <!-- 每日精选 结束-->
 
-    <!-- 商品分类楼层 开始-->
-    <?php if(isset($product_cate) && !empty($product_cate)): ?>
-        <?foreach($product_cate as $key => $item):?>
-            <!-- 开放三个楼层,修改楼层数量显示，后台要相应加热门商品数据 -->
-            <?if($key == $show_count)
-                break;
-            ?>
-            <!-- 顶级分类 -->
-            <div class='container <?php if($key == 0):?><?php echo 'm-t-20';?><?endif;?>' id='f<?php echo $key+1;?>'>
-                <div class='row' id='title'>
-                    <div class='col-md-2 col-no-padding'>
-                        <span class="label floor-sign"><?php echo $key+1;?> F</span>
-                        <span class='floor-name'><?php echo $item['name'];?></span>
+    <!-- 顶级分类 服饰鞋包 -->
+    <div class='container m-t-20' id='f1'>
+        <div class='row' id='title'>
+            <div class='col-md-2 col-no-padding'>
+                <span class="label floor-sign">1F</span>
+                <span class='floor-name'>零食物语</span>
+            </div>
+            <div class='col-md-8 col-no-padding'>
+                <ul id="list-tab" class="nav nav-pills" role="tablist">
+                    <li class=""><a href="#f1top" role="tab" class="text-center" data-toggle="tab">爆品疯抢</a></li>
+                    <li class=""><a href="#f1new" role="tab" class="text-center" data-toggle="tab">新品专区</a></li>
+                    <li class=""><a href="#f1te" role="tab" class="text-center" data-toggle="tab">特价商品</a></li>
+                    <li class=""><a href="#f1hot" role="tab" class="text-center" data-toggle="tab">热卖推荐</a></li>
+                    <li class=""><a href="#f1good" role="tab" class="text-center" data-toggle="tab">好评商品</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='col-md-2 relative' id='left'>
+                <?php $cate1 = $this->product_category->all(array('where'=>array('parent_id'=>1))); ?>
+                <ul>
+                    <?php foreach($cate1 as $key => $item):?>
+                    <li><?php echo $item->name?></li>
+                    <?php endforeach;?>
+                </ul>
+                <span><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f.jpg"></span>
+            </div>
+            <div class='col-md-8 col-no-padding' id='list'>
+                <div id='f1top' class='tabitem'>
+                    <?php $listtop = $this->product->all(array('cate_id'=>1),'sale_num desc','',10);?>
+                    <?php if(!empty($listtop)): ?>
+                    <?foreach($listtop as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
                     </div>
-                    <div class='col-md-8 col-no-padding'>
-                        <ul id="list-tab" class="nav nav-pills" role="tablist">
-                            <li class=""><a href="#home2" role="tab" class="text-center" data-toggle="tab">爆品疯抢</a></li>
-                            <li class=""><a href="#profile2" role="tab" class="text-center" data-toggle="tab">新品专区</a></li>
-                            <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">特价商品</a></li>
-                            <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">热卖推荐</a></li>
-                            <li class=""><a href="#profile12" role="tab" class="text-center" data-toggle="tab">好评商品</a></li>
-                        </ul>
-                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
                 </div>
-                <div class='row'>
-                    <div class='col-md-2 relative' id='left'>
-                        <div class='row' >
-                            <div style="margin: 0px 10px;">
-                                <div class="sy_mod_key">
-                                    <!-- 二级商品分类开始 -->
-                                    <?php if(isset($item['child']) && !empty($item['child'])): ?>
-                                    <?foreach($item['child'] as $k => $i):?>
-                                    <?if($k >= 4):?>
-                                    <?break;?>
-                                    <?endif;?>
-                                    <dl class="sy_mod_key_dl">
-                                        <dt><a href="<?php echo base_url().'category/index/cate_id/'.$i['id']?>" target="_blank"><?php echo $i['name'];?></a></dt>
-                                        <dd>
-                                            <!-- 三级商品分类开始 -->
-                                            <?php if(isset($i['child']) && !empty($i['child'])): ?>
-                                            <?foreach($i['child'] as $k3 => $v):?>
-                                                <?if($k >= 4):?>
-                                                <?break;?>
-                                                <?endif;?>
-                                                <a href="<?php echo base_url().'/category/'.$v['id']?>" target="_blank"><?php echo $v['name'];?></a>
-                                            <?endforeach;?>
-                                            <?endif;?>
-                                            <!-- 三级商品分类结束 -->
-                                        </dd>
-                                    </dl>
-                                    <?endforeach;?>
-                                    <?endif;?>
-                                    <!-- 二级商品分类结束 -->
-                                </div>
-                            </div>
+                <div id='f1new' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>1),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
                         </div>
-                        <!-- <div class='bottom'>
-                            <a><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></a>
-                        </div> -->
-                    </div>
-                    <div class='col-md-8 col-no-padding' id='list'>
-                        <div id='list1'>
-                            <?php if(isset($item['hot_product']) && !empty($item['hot_product'])): ?>
-                                <?foreach($item['hot_product'] as $k => $i):?>
-                            <div class='item pull-left'>
-                                <div class='img'>
-                                    <a href="<?php echo base_url()."item/id/".$i->product_id;?>" target='_blank'>
-                                        <img class='img-responsive' src="<?php echo $CI->product->pic($i->product_id,1,'thumb')?>">
-                                    </a>
-                                </div>
-                                <div class='name'>
-                                    <a href="<?php echo base_url()."item/id/".$i->product_id;?>" target='_blank'><?php echo $i->name;?></a>
-                                </div>
-                                <div class='price'>
-                                    <span>￥</span><?php echo $i->price;?></span>
-                                </div>
-                            </div>
-                                <?endforeach;?>
-                            <?else:?>
-                            <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
-                            <?endif;?>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
                         </div>
                     </div>
-                    <div class='col-md-2 col-no-padding' id='right'>
-                        <?php $lou = "ad_".($key+1)."F";?>
-                        <?php $obj = $$lou;?>
-                        <?php if(isset($obj)&& !empty($obj)):?>
-                        <a target="_blank" href="<?php echo $obj[0]->url;?>">
-                            <img style="height:100%;width:100%;" src="<?php echo $this->ad->pic($obj[0]->id);?>"/>
-                        </a>
-                        <?else:?>
-                        暂无广告显示，可以在广告设置添加
-                        <?endif;?>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1te' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>1,'specials'=>1),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
                     </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1hot' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>1,'hot'=>1),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1good' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>1),'comment_num desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
                 </div>
             </div>
-            <!-- 顶级分类结束 -->
-        <?endforeach;?>
-    <?endif;?>
-    <!-- 商品分类楼层 结束-->
+            <div class='col-md-2 col-no-padding' id='right'>
+                
+                <?php $ad_1F = $this->ad->get_by_position(2);//1L广告?>
+                <?php if(isset($ad_1F)&& !empty($ad_1F)):?>
+                <a target="_blank" href="<?php echo $ad_1F->url;?>">
+                    <img style="height:100%;width:100%;" src="<?php echo $this->ad->pic($ad_1F->id);?>"/>
+                </a>
+                <?else:?>
+                暂无广告显示，可以在广告设置添加
+                <?endif;?>
+                
+            </div>
+        </div>
+    </div>
+    <!-- 顶级分类结束 -->
+
+    <!-- 顶级分类 百货日杂 -->
+    <div class='container m-t-20' id='f2'>
+        <?php $cate_id =  12;?>
+        <div class='row' id='title'>
+            <div class='col-md-2 col-no-padding'>
+                <span class="label floor-sign">2F</span>
+                <span class='floor-name'>百货日杂</span>
+            </div>
+            <div class='col-md-8 col-no-padding'>
+                <ul id="list-tab" class="nav nav-pills" role="tablist">
+                    <li class=""><a href="#f1top" role="tab" class="text-center" data-toggle="tab">爆品疯抢</a></li>
+                    <li class=""><a href="#f1new" role="tab" class="text-center" data-toggle="tab">新品专区</a></li>
+                    <li class=""><a href="#f1te" role="tab" class="text-center" data-toggle="tab">特价商品</a></li>
+                    <li class=""><a href="#f1hot" role="tab" class="text-center" data-toggle="tab">热卖推荐</a></li>
+                    <li class=""><a href="#f1good" role="tab" class="text-center" data-toggle="tab">好评商品</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='col-md-2 relative' id='left'>
+                <?php $cate1 = $this->product_category->all(array('where'=>array('parent_id'=>$cate_id))); ?>
+                <ul>
+                    <?php foreach($cate1 as $key => $item):?>
+                    <li><?php echo $item->name?></li>
+                    <?php endforeach;?>
+                </ul>
+                <span><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></span>
+            </div>
+            <div class='col-md-8 col-no-padding' id='list'>
+                <div id='f1top' class='tabitem'>
+                    <?php $listtop = $this->product->all(array('cate_id'=>$cate_id),'sale_num desc','',10);?>
+                    <?php if(!empty($listtop)): ?>
+                    <?foreach($listtop as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1new' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1te' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id,'specials'=>1),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1hot' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id,'hot'=>1),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1good' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id),'comment_num desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+            </div>
+            <div class='col-md-2 col-no-padding' id='right'>
+                
+                <?php $ad_2F = $this->ad->lists(array("where"=>"position_id = 3"));//2L广告?>
+                <?php if(isset($ad_2F)&& !empty($ad_2F)):?>
+                <?php foreach ($ad_2F as $key => $value):?>
+                    <a target="_blank" href="<?php echo $value->url;?>">
+                        <img  src="<?php echo $this->ad->pic($value->id);?>"/>
+                    </a>
+                <?php endforeach;?>
+                <?else:?>
+                暂无广告显示，可以在广告设置添加
+                <?endif;?>
+                
+            </div>
+        </div>
+    </div>
+    <!-- 顶级分类结束 二 -->
+
+    <!-- 顶级分类 百货日杂 -->
+    <div class='container m-t-20' id='f3'>
+        <?php $cate_id =  12;?>
+        <div class='row' id='title'>
+            <div class='col-md-2 col-no-padding'>
+                <span class="label floor-sign">3F</span>
+                <span class='floor-name'>粮油干货</span>
+            </div>
+            <div class='col-md-8 col-no-padding'>
+                <ul id="list-tab" class="nav nav-pills" role="tablist">
+                    <li class=""><a href="#f1top" role="tab" class="text-center" data-toggle="tab">爆品疯抢</a></li>
+                    <li class=""><a href="#f1new" role="tab" class="text-center" data-toggle="tab">新品专区</a></li>
+                    <li class=""><a href="#f1te" role="tab" class="text-center" data-toggle="tab">特价商品</a></li>
+                    <li class=""><a href="#f1hot" role="tab" class="text-center" data-toggle="tab">热卖推荐</a></li>
+                    <li class=""><a href="#f1good" role="tab" class="text-center" data-toggle="tab">好评商品</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class='row'>
+            <div class='col-md-2 relative' id='left'>
+                <?php $cate1 = $this->product_category->all(array('where'=>array('parent_id'=>$cate_id))); ?>
+                <ul>
+                    <?php foreach($cate1 as $key => $item):?>
+                    <li><?php echo $item->name?></li>
+                    <?php endforeach;?>
+                </ul>
+                <span><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></span>
+            </div>
+            <div class='col-md-8 col-no-padding' id='list'>
+                <div id='f1top' class='tabitem'>
+                    <?php $listtop = $this->product->all(array('cate_id'=>$cate_id),'sale_num desc','',10);?>
+                    <?php if(!empty($listtop)): ?>
+                    <?foreach($listtop as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1new' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1te' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id,'specials'=>1),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1hot' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id,'hot'=>1),'id desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+                <div id='f1good' class='tabitem hide'>
+                    <?php $listnew = $this->product->all(array('cate_id'=>$cate_id),'comment_num desc','',10);?>
+                    <?php if(!empty($listnew)): ?>
+                    <?foreach($listnew as $k => $i):?>
+                    <div class='item pull-left'>
+                        <div class='img'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
+                                <img class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
+                            </a>
+                        </div>
+                        <div class='name'>
+                            <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'><?php echo $i->name;?></a>
+                        </div>
+                        <div class='price'>
+                            <span>￥</span><?php echo $i->price;?></span>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                    <?else:?>
+                    <p style="text-align:center;vertical-align:middle;">站长暂未设置首页展示商品，在创建商品时勾选首页展示，便可以在此展示。</p>
+                    <?endif;?>
+                </div>
+            </div>
+            <div class='col-md-2 col-no-padding' id='right'>
+                
+                <?php $ad_2F = $this->ad->lists(array("where"=>"position_id = 4"));//3L广告?>
+                <?php if(isset($ad_2F)&& !empty($ad_2F)):?>
+                <?php foreach ($ad_2F as $key => $value):?>
+                    <a target="_blank" href="<?php echo $value->url;?>">
+                        <img  src="<?php echo $this->ad->pic($value->id);?>"/>
+                    </a>
+                <?php endforeach;?>
+                <?else:?>
+                暂无广告显示，可以在广告设置添加
+                <?endif;?>
+                
+            </div>
+        </div>
+    </div>
+    <!-- 顶级分类结束 三 -->
+
+
     
     <div class='container m-b-20' id='ad-footer'>
         <div class='row'>
