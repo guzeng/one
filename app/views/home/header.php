@@ -102,10 +102,10 @@
             <div class='col-md-9 col-sm-9 col-xs-12 navbar-collapse collapse' >
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="<?php echo base_url()?>">首页</a></li>
-                    <li><a href="#about">食品</a></li>
-                    <li><a href="#contact">日用</a></li>
-                    <li><a href="#contact">服装</a></li>
-                    <li><a href="#contact">促销</a></li>
+                    <li><a href="<?php echo base_url().'category/index/cate_id/12'?>">食品</a></li>
+                    <li><a href="<?php echo base_url().'category/index/cate_id/38'?>">日用</a></li>
+                    <li><a href="<?php echo base_url().'category/index/cate_id/70'?>">生活</a></li>
+                  
                 </ul>
             </div>
         </div>
