@@ -1,57 +1,5 @@
 <?$this->load->view('home/header')?>
-<style type="text/css">
-    .mod_cate{position:relative;z-index:600;float:left;background-color:#4593fd;}
-    .mod_cate a{color:#fff}
-    .mod_cate a:hover{color:#fff}
-    .mod_cate_on .mod_cate_hd{border-color:#3586f2}
-    .mod_cate_on .mod_cate_bd{display:block}
-    .mod_cate_on .mod_cate_hd_arrow{visibility:hidden}
-    .mod_subcate{position:absolute;display:none;z-index:4;left:100%;top:0px;color:#333;width:798px;height:626px;border:2px solid #4594fd;background-color:#fff;box-shadow:5px 5px 10px rgba(55,55,55,0.4);overflow:hidden}
-    .mod_subcate a{color:#666}
-    .mod_subcate a:hover{color:#333}
-    .mod_subcate_item{position:relative;width:100%;zoom:1;overflow:hidden}
-    .mod_subcate_main{float:left;width:100%;padding:0 20px;border-right:1px solid #ddd;padding-bottom:1000px;margin-bottom:-1000px}
-    .mod_subcate_side{float:left;width:230px;padding-bottom:1000px;margin-bottom:-1000px}
-    .mod_subcate_gg{clear:both;position:absolute;bottom:0;right:0;_right:-1px;_bottom:-1px}
-    .mod_subcate_main dl{zoom:1;overflow:hidden;padding:0px 0 0px 65px;margin-top:10px;border-bottom:1px solid #e5e5e5}
-    .mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:185px;font:700 12px/22px tahoma;color:#1d7ad9}
-    .mod_subcate_main dd{overflow:hidden;zoom:1;line-height:22px}
-    .mod_subcate_main dd a{display:inline;float:left;margin-left:5px;margin-right:5px;white-space:nowrap}
-    .mod_subcate_main dd .hl,.mod_subcate_main dd .hl:hover{color:#ff7300}
-    .mod_subcate_dotline{clear:both;display:block;width:100%;height:1px;margin-bottom:5px;font-size:0;overflow:hidden;border-top:5px solid #fff;border-bottom:1px dotted #dadada}
-    .mod_subcate_channel{clear:both;margin-top:15px;padding-bottom:20px}
-    #category .item:hover .mod_subcate{display: block;border-left:0px;}
-    #category .item:hover{background-color: #FFFFFF;}
 
-    .sy_mod_key_dl {
-        padding-bottom: 15px;
-    }
-    .sy_mod_key_dl dt, .sy_mod_key_dl dd {
-        display: inline;
-    }
-    .sy_mod_key_dl dt {
-        font-weight: 700;
-    }
-    .sy_mod_key_dl dt a {
-        color: #333;
-    }
-    .sy_mod_key_dl dt a:hover {
-        color: #333;
-    }
-    .sy_mod_key_dl dd {
-        padding-left: 8px;
-    }
-    .sy_mod_key_dl dd a {
-        color: #999;
-        padding-right: 2px;
-        white-space: nowrap;
-        word-break: keep-all;
-        word-wrap: normal;
-    }
-    .sy_mod_key_dl dd a:hover {
-        color: #333;
-    }
-</style>
 <script src="<?php echo base_url();?>assets/scripts/home/home.js" type="text/javascript"></script>
 <script type="text/javascript">
     var rolling;
@@ -106,33 +54,17 @@
                             <span class="more">></span>
                             
                             <?php if(isset($item['child']) && !empty($item['child'])): ?>
-                            <div class="mod_subcate hide" style="width:350%; top: 0px; overflow: hidden; height:auto;min-height: 372px;">
+                                <div id='mod_subcate' class="mod_subcate hide" style="color:#666666; top: 0px; overflow: hidden; height:auto;min-height: 400px;">
                                     <div id="panel0" class="mod_subcate_item" index="0" style="display: block;">
-                                        <div class="mod_subcate_main">
-                                            <?foreach($item['child'] as $k => $i):?>
-                                            <dl>
-                                                <!-- 二级分类 开始-->
-                                                <dt>
-                                                    <a href="<?php echo base_url()?>category/index/cate_id/<?php echo $i['id']?>">
-                                                        <?php echo $i['name'];?>
-                                                    </a>
-                                                </dt>
-                                                <!-- 二级分类 结束-->
-                                                <dd>
-                                                    <!-- 三级分类 -->
-                                                    <?php if(isset($i['child']) && !empty($i['child'])): ?>
-                                                    <?foreach($i['child'] as $k3 => $v):?>
-                                                        <a href="<?php echo base_url().'/category/index/cate_id/'.$v['id']?>" target="_blank"><?php echo $v['name'];?></a>
-                                                        <?if($k3 >6 && $k3%7 == 0):?>
-                                                        <s class="mod_subcate_dotline"></s>
-                                                        <?endif;?>
-                                                    <?endforeach;?>
-                                                    <?endif;?>
-                                                </dd>
-                                            </dl>
-                                            <?endforeach;?>
-                                        </div>
+                                        <div class="mod_subcate_main"></div>
                                     </div>
+                                            <?foreach($item['child'] as $k => $i):?>
+                                                <div class='cateitem'>
+                                                <a href="<?php echo base_url()?>category/index/cate_id/<?php echo $i['id']?>">
+                                                    <?php echo $i['name'];?></a>
+                                                </div>
+                                            <?endforeach;?>
+                                        
                                 </div>
                             <?endif;?>
                         </div>
@@ -950,7 +882,59 @@
     </div>
     <!-- 顶级分类结束 三 -->
 
+<style type="text/css">
+    .mod_cate{position:relative;z-index:600;float:left;background-color:#4593fd;}
+    .mod_cate a{color:#fff}
+    .mod_cate a:hover{color:#fff}
+    .mod_cate_on .mod_cate_hd{border-color:#3586f2}
+    .mod_cate_on .mod_cate_bd{display:block}
+    .mod_cate_on .mod_cate_hd_arrow{visibility:hidden}
+    .mod_subcate{position:absolute;display:none;z-index:4;left:100%;top:0px;color:#333;width:400px;height:626px;border:1px solid #999;background-color:#fff;box-shadow:5px 5px 10px rgba(55,55,55,0.4);overflow:hidden}
+    #mod_subcate a{color:#666; margin-right: 30px;  margin-bottom: 10px;}
+    #mod_subcate a:hover{color:#333}
+    .mod_subcate_item{position:relative;width:100%;zoom:1;overflow:hidden}
+    .mod_subcate_main{float:left;width:100%;padding:0 20px;border-right:1px solid #ddd;padding-bottom:1000px;margin-bottom:-1000px}
+    .mod_subcate_side{float:left;width:230px;padding-bottom:1000px;margin-bottom:-1000px}
+    .mod_subcate_gg{clear:both;position:absolute;bottom:0;right:0;_right:-1px;_bottom:-1px}
+    .mod_subcate_main dl{zoom:1;overflow:hidden;padding:0px 0 0px 65px;margin-top:10px;border-bottom:1px solid #e5e5e5}
+    .mod_subcate_main dt{float:left;#display:inline;margin-left:-65px;width:185px;font:700 12px/22px tahoma;color:#1d7ad9}
+    .mod_subcate_main dd{overflow:hidden;zoom:1;line-height:22px}
+    .mod_subcate_main dd a{display:inline;float:left;margin-left:5px;margin-right:5px;white-space:nowrap}
+    .mod_subcate_main dd .hl,.mod_subcate_main dd .hl:hover{color:#ff7300}
+    .mod_subcate_dotline{clear:both;display:block;width:100%;height:1px;margin-bottom:5px;font-size:0;overflow:hidden;border-top:5px solid #fff;border-bottom:1px dotted #dadada}
+    .mod_subcate_channel{clear:both;margin-top:15px;padding-bottom:20px}
+    #category .item:hover .mod_subcate{display: block;border-left:0px;}
+    #category .item:hover{background-color: #FFFFFF;}
 
+    .sy_mod_key_dl {
+        padding-bottom: 15px;
+    }
+    .sy_mod_key_dl dt, .sy_mod_key_dl dd {
+        display: inline;
+    }
+    .sy_mod_key_dl dt {
+        font-weight: 700;
+    }
+    .sy_mod_key_dl dt a {
+        color: #333;
+    }
+    .sy_mod_key_dl dt a:hover {
+        color: #333;
+    }
+    .sy_mod_key_dl dd {
+        padding-left: 8px;
+    }
+    .sy_mod_key_dl dd a {
+        color: #999;
+        padding-right: 2px;
+        white-space: nowrap;
+        word-break: keep-all;
+        word-wrap: normal;
+    }
+    .sy_mod_key_dl dd a:hover {
+        color: #333;
+    }
+</style>
     
     <div class='container m-b-20' id='ad-footer'>
         <div class='row'>
