@@ -132,6 +132,7 @@ td {vertical-align:middle!important;;}
 #f1 .floor-sign{font-size: 18px; font-weight: 700; background-color: #E0402A; color: #FFFFFF; margin-right: 10px;}
 #f1 .floor-name{color: #E0402A; font-weight: bold; font-size: 18px;}
 #f1 #title, #f2 #title, #f3 #title{ border-bottom: 2px solid #BBBBBB;}
+#f1 #left a,#f2 #left a,#f3 #left a{color:#666;}
 #f1 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
 #f1 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
 #f1 #left ul li{height: 30px; line-height: 30px; overflow: hidden; vertical-align: bottom;}
@@ -176,11 +177,11 @@ td {vertical-align:middle!important;;}
 #f2 .floor-name{color: #0068B7; font-weight: bold; font-size: 18px;}
 #f2 #left,#f3 #left{padding-top: 5px;border-right: 1px solid rgb(221, 221, 221); height: 361px; position: relative;}
 #f2 #left .el,#f3 #left .el{margin-top: 10px;}
-
-#f2 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px;}
+#f2 #left{border-right: 1px solid rgb(221, 221, 221); height: 361px; padding-left: 5px;}
 #f2 #left ul{position: absolute;left: 0; top: 0px; padding: 5px; z-index: 2;}
 #f2 #left ul li{height: 30px; line-height: 30px; overflow: hidden; vertical-align: bottom;}
-#f2 #left span{position: absolute; right: 0; bottom: 0; line-height: 0; z-index: 1;}
+#f2 #left span.cat{display:block;float:left;margin-right: 20px; margin-bottom: 10px;}
+#f2 #left span.img{position: absolute; left: 0; bottom: 0; line-height: 0; z-index: 1;}
 
 #f2 #left .bottom,#f3 #left .bottom{position: absolute; bottom: 0px;}
 #f2 #list-tab.nav-pills > li > a:hover, 

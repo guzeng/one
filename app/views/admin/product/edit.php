@@ -83,7 +83,20 @@
 									<span class="help-block"></span>
 								</div>
 							</div>
-
+							<div class="form-group">
+								<label class="control-label col-md-3">大类</label>
+								<div class="col-md-7">
+									<select  class="form-control" id='cate' name='cate'>
+										<option value="0">请选择</option>
+										<?if(!empty($cate_list)):?>
+										<?foreach($cate_list as $key => $value):?>
+										<option value="<?php echo $value->id;?>" <?if(isset($row)&&$row->cate_id==$value->id):?>selected='selected'<?endif;?>><?php echo $value->name;?></option>
+										<?endforeach;?>
+										<?endif;?>
+									</select>
+									<span class="help-block"></span>
+								</div>
+							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3">分类</label>
 								<div class="col-md-7">

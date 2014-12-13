@@ -492,7 +492,10 @@
                 <?php $cate1 = $this->product_category->all(array('where'=>array('parent_id'=>1))); ?>
                 <ul>
                     <?php foreach($cate1 as $key => $item):?>
-                    <li><?php echo $item->name?></li>
+                    <li>
+                        <a href="<?php echo base_url().'category/index/cate_id/'.$item->id?>">
+                        <?php echo $item->name?></a>
+                    </li>
                     <?php endforeach;?>
                 </ul>
                 <span><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/1f.jpg"></span>
@@ -627,7 +630,7 @@
 
     <!-- 顶级分类 百货日杂 -->
     <div class='container m-t-20' id='f2'>
-        <?php $cate_id =  12;?>
+        <?php $cate_id =  38;?>
         <div class='row' id='title'>
             <div class='col-md-2 col-no-padding'>
                 <span class="label floor-sign">2F</span>
@@ -646,13 +649,15 @@
 
         <div class='row'>
             <div class='col-md-2 relative' id='left'>
-                <?php $cate1 = $this->product_category->all(array('where'=>array('parent_id'=>$cate_id))); ?>
-                <ul>
+                <?php $cate1 = $this->product_category->lists(array('where'=>array('parent_id'=>$cate_id),'num'=>16)); ?>
+             
                     <?php foreach($cate1 as $key => $item):?>
-                    <li><?php echo $item->name?></li>
+                    <a href="<?php echo base_url().'category/index/cate_id/'.$item->id;?>">
+                        <span class='cat'><?php echo $item->name?></span>
+                    </a>
                     <?php endforeach;?>
-                </ul>
-                <span><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></span>
+                
+                <span class='img'><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></span>
             </div>
             <div class='col-md-8 col-no-padding' id='list'>
                 <div id='f1top' class='tabitem'>
@@ -784,7 +789,7 @@
     </div>
     <!-- 顶级分类结束 二 -->
 
-    <!-- 顶级分类 百货日杂 -->
+    <!-- 顶级分类 粮油干货 -->
     <div class='container m-t-20' id='f3'>
         <?php $cate_id =  12;?>
         <div class='row' id='title'>
@@ -808,7 +813,9 @@
                 <?php $cate1 = $this->product_category->all(array('where'=>array('parent_id'=>$cate_id))); ?>
                 <ul>
                     <?php foreach($cate1 as $key => $item):?>
-                    <li><?php echo $item->name?></li>
+                    <li><a href="<?php echo base_url().'category/index/cate_id/'.$item->id?>">
+                        <?php echo $item->name?></a>
+                    </li>
                     <?php endforeach;?>
                 </ul>
                 <span><img class='img-responsive' src="<?php echo base_url()?>assets/img/home/2f.png"></span>

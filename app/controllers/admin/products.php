@@ -70,6 +70,7 @@ class Products extends CI_Controller {
             }
         }
         $data['cate'] = $cate;
+        $data['cate_list'] = $this->product_category->all(array('where'=>array('parent_id'=>0)));
         $data['cates'] = $this->product_category->all();
         $data['types'] = $this->product_type->all();
         $data['brands'] = $this->product_brand->all();
@@ -179,6 +180,7 @@ class Products extends CI_Controller {
             'amount' => $post['amount'] ? $post['amount'] : 0,
             'sale_num' => $post['sale_num'] ? $post['sale_num'] : 0,
             'type_id' => $post['type_id'],
+            'cate_id' => $post['cate'],
             'brand_id' => $post['brand_id'],
             'unit' => $post['unit'],
             'weight' => isset($post['weight'])?floor($post['weight']):0,
