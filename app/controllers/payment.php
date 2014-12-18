@@ -5,26 +5,26 @@ class Payment extends CI_Controller {
     private $payment_type = "1";
     //必填，不能修改
     //服务器异步通知页面路径
-    private $notify_url = '';//"http://www.yuexingtrip.com/";
+    private $notify_url = 'http://www.170es.com/payment/alipaynotify';//base_url()."http://www.yuexingtrip.com/";
     //需http://格式的完整路径，不能加?id=123这类自定义参数
 
     //页面跳转同步通知页面路径
-    private $return_url = '';//asset('pay/alipay-return');//"http://www.yuexingtrip.com/pay/alipay-return";
+    private $return_url = 'http://www.170es.com/payment/alipayreturn';//base_url().asset('pay/alipay-return');//"http://www.yuexingtrip.com/pay/alipay-return";
     //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
     //卖家支付宝帐户
     private $seller_email = 'yixin-es@qq.com';
     
-    private $alipayPath = '';
+    private $alipayPath = 'app/libraries/alipay/';
     //必填
     function __construct()
     {
         parent::__construct();
-        $this->alipayPath = APPPATH.'libraries/alipay/';
+        //$this->alipayPath = ;
         $this->load->model('pay');
         $this->load->model('order');
-        $this->notify_url = base_url().'payment/alipaynotify';
-        $this->return_url = base_url().'payment/alipayreturn';
+        //$this->notify_url = base_url().'payment/alipaynotify';
+        //$this->return_url = base_url().'payment/alipayreturn';
     }
 
 	public function index()
@@ -94,7 +94,7 @@ class Payment extends CI_Controller {
         //商户网站订单系统中唯一订单号，必填
 
         //订单名称
-        $subject = 'Order Number:'.$order->code;//'壹心E购, 订单号:'.$order->code;
+        $subject = 'OrderNumber:'.$order->code;//'壹心E购, 订单号:'.$order->code;
         //必填
 
         //付款金额
@@ -103,7 +103,7 @@ class Payment extends CI_Controller {
 
         //订单描述
 
-        $body = 'Order Number:'.$order->code;//'壹心E购, 订单号:'.$order->code;
+        $body = 'OrderNumber:'.$order->code;//'壹心E购, 订单号:'.$order->code;
         //商品展示地址
         $show_url = base_url().'item/id/'.$order->id;//$_POST['WIDshow_url'];
         //需以http://开头的完整路径，例如：http://www.xxx.com/myorder.html
@@ -132,13 +132,13 @@ class Payment extends CI_Controller {
                 "total_fee" => $total_fee,
                 "body"  => $body,
                 "show_url"  => $show_url,
-                "anti_phishing_key" => $anti_phishing_key,
-                "exter_invoke_ip"   => $exter_invoke_ip,
+                //"anti_phishing_key" => $anti_phishing_key,
+                //"exter_invoke_ip"   => $exter_invoke_ip,
                 "_input_charset"    => trim(strtolower($alipay_config['input_charset']))
         );
         //建立请求
         $alipaySubmit = new AlipaySubmit($alipay_config);
-        $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
+        $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "submit");
         echo $html_text;
 
     }
