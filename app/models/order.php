@@ -342,7 +342,7 @@ class Order extends CI_Model{
     public function code($uid)
     {
         if(!$uid) return 0;
-        return date('Y-m-dHis').$uid;
+        return date('YmdHis').$uid;
     }
 
     /**

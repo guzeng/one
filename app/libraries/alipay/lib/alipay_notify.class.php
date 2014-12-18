@@ -86,15 +86,15 @@ class AlipayNotify {
 			if (! empty($_GET["notify_id"])) {$responseTxt = $this->getResponse($_GET["notify_id"]);}
 			
 			//写日志记录
-			//if ($isSign) {
-			//	$isSignStr = 'true';
-			//}
-			//else {
-			//	$isSignStr = 'false';
-			//}
-			//$log_text = "responseTxt=".$responseTxt."\n return_url_log:isSign=".$isSignStr.",";
-			//$log_text = $log_text.createLinkString($_GET);
-			//logResult($log_text);
+			if ($isSign) {
+				$isSignStr = 'true';
+			}
+			else {
+				$isSignStr = 'false';
+			}
+			$log_text = "responseTxt=".$responseTxt."\n return_url_log:isSign=".$isSignStr.",";
+			$log_text = $log_text.createLinkString($_GET);
+			logResult($log_text);
 			
 			//验证
 			//$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
@@ -119,7 +119,7 @@ class AlipayNotify {
 		
 		//对待签名参数数组排序
 		$para_sort = argSort($para_filter);
-		
+
 		//把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
 		$prestr = createLinkstring($para_sort);
 		

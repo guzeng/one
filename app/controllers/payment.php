@@ -13,7 +13,7 @@ class Payment extends CI_Controller {
     //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
 
     //卖家支付宝帐户
-    private $seller_email = 'gu__zeng@163.com';
+    private $seller_email = 'yixin-es@qq.com';
     
     private $alipayPath = '';
     //必填
@@ -94,7 +94,7 @@ class Payment extends CI_Controller {
         //商户网站订单系统中唯一订单号，必填
 
         //订单名称
-        $subject = '壹心E购, 订单号:'.$order->code;
+        $subject = 'Order Number:'.$order->code;//'壹心E购, 订单号:'.$order->code;
         //必填
 
         //付款金额
@@ -103,7 +103,7 @@ class Payment extends CI_Controller {
 
         //订单描述
 
-        $body = '';
+        $body = 'Order Number:'.$order->code;//'壹心E购, 订单号:'.$order->code;
         //商品展示地址
         $show_url = base_url().'item/id/'.$order->id;//$_POST['WIDshow_url'];
         //需以http://开头的完整路径，例如：http://www.xxx.com/myorder.html
@@ -301,7 +301,6 @@ class Payment extends CI_Controller {
         require_once($this->alipayPath."alipay.config.php");
         require_once($this->alipayPath."lib/alipay_notify.class.php");
         $this->load->model('pay_log');
-
         //计算得出通知验证结果
         $alipayNotify = new AlipayNotify($alipay_config);
         $verify_result = $alipayNotify->verifyReturn();
