@@ -78,8 +78,10 @@ class AlipayNotify {
 			return false;
 		}
 		else {
+			
 			//生成签名结果
 			$isSign = $this->getSignVeryfy($_GET, $_GET["sign"]);
+			
 			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
 			$responseTxt = 'true';
 			if (! empty($_GET["notify_id"])) {$responseTxt = $this->getResponse($_GET["notify_id"]);}
@@ -114,7 +116,6 @@ class AlipayNotify {
 	function getSignVeryfy($para_temp, $sign) {
 		//除去待签名参数数组中的空值和签名参数
 		$para_filter = paraFilter($para_temp);
-		
 		//对待签名参数数组排序
 		$para_sort = argSort($para_filter);
 

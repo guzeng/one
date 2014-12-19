@@ -51,11 +51,19 @@ function createLinkstringUrlencode($para) {
  * return 去掉空值与签名参数后的新签名参数组
  */
 function paraFilter($para) {
+
+	$para_filter = array();
+	foreach ($para as $key => $value) {
+		if($key == "sign" || $key == "sign_type" || $value == ""){continue;}
+		else	{$para_filter[$key] = $para[$key];}
+	}
+	/*
 	$para_filter = array();
 	while (list ($key, $val) = each ($para)) {
-		if($key == "sign" || $key == "sign_type" || $val == "")continue;
-		else	$para_filter[$key] = $para[$key];
+		if($key == "sign" || $key == "sign_type" || $val == ""){continue;}
+		else	{$para_filter[$key] = $para[$key];}
 	}
+	*/
 	return $para_filter;
 }
 /**

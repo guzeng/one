@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <title>Error</title>
+<meta charset="utf-8" />
 <style type="text/css">
 
 ::selection{ background-color: #E13300; color: white; }

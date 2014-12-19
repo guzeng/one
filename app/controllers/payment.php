@@ -330,11 +330,11 @@ class Payment extends CI_Controller {
                     //如果有做过处理，不执行商户的业务程序
                 if($order && $order->pay==0 && $order->pay_code=='' && $order->complete==0 && $order->pay_time<=0)
                 {
-                    $notify_time = $_POST['notify_time'];
+                    $notify_time = $_GET['notify_time'];
                     $p = array(
-                        'pay_type' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? $this->pay->getType('bank') : $this->pay->getType('alipay'),
-                        'bank_no' => (isset($_POST['bank_seq_no'])&&$_POST['bank_seq_no']!='') ? $_POST['bank_seq_no'] : '',
-                        'buyer_email' => $_POST['buyer_email'],
+                        'pay_type' => (isset($_GET['bank_seq_no'])&&$_GET['bank_seq_no']!='') ? $this->pay->getType('bank') : $this->pay->getType('alipay'),
+                        'bank_no' => (isset($_GET['bank_seq_no'])&&$_GET['bank_seq_no']!='') ? $_GET['bank_seq_no'] : '',
+                        'buyer_email' => $_GET['buyer_email'],
                         'pay' => 1,
                         'notify_time' => $notify_time,
                         'pay_time' => local_to_gmt(strtotime($notify_time)),
