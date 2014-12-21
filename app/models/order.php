@@ -399,6 +399,32 @@ class Order extends CI_Model{
             return array('error'=>'','orderId'=>$orderId);
         }
     }
+
+    public function status($code='')
+    {
+        $arr = array(
+            '0' => '待付款',
+            '1' => '已付款',
+            '2' => '已发货',
+            '3' => '待评价',//已收货
+            '4' => '退货',
+            '5' => '已评价',
+            '9' => '退货',
+            '10'=> '已取消'
+        );
+        if($code!=='')
+        {
+            if(array_key_exists($code, $arr))
+            {
+                return $arr[$code];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return $arr;
+    }
 }
 /* End of file order.php */
 /* Location: ./app/models/order.php */	
