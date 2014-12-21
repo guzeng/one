@@ -29,26 +29,26 @@
           <li class="<?php echo $status === '' ? 'active' : '';?>">
             <a data-status="" href="<?=base_url()?>home/orders/index">所有订单</a>
           </li>
-          <li class="<?php echo $status != '' && $status==1 ? 'active' : '';?>">
-            <a data-status="1" href="<?=base_url()?>home/orders/index/status/1">
+          <li class="<?php echo $status != '' && $status==0 ? 'active' : '';?>">
+            <a data-status="1" href="<?=base_url()?>home/orders/index/status/0">
               待付款
               <span class="coun"><?php echo $fu_kuan;?></span>
             </a>
           </li>
-          <li class="<?php echo $status != '' && $status==2 ? 'active' : '';?>">
-            <a data-status="2" href="<?=base_url()?>home/orders/index/status/2">
+          <li class="<?php echo $status != '' && $status==1 ? 'active' : '';?>">
+            <a data-status="2" href="<?=base_url()?>home/orders/index/status/1">
               待发货
               <span class="coun"><?php echo $fa_huo;?></span>
             </a>
           </li>
-          <li data-status="3" class="<?php echo $status != '' && $status==3 ? 'active' : '';?>">
-            <a href="<?=base_url()?>home/orders/index/status/3">
+          <li data-status="3" class="<?php echo $status != '' && $status==2 ? 'active' : '';?>">
+            <a href="<?=base_url()?>home/orders/index/status/2">
               待收货
               <span class="coun"><?php echo $shou_huo;?></span>
             </a>
           </li>
-          <li class="<?php echo $status != '' && $status==4 ? 'active' : '';?>">
-            <a data-status="4" href="<?=base_url()?>home/orders/index/status/4">
+          <li class="<?php echo $status != '' && $status==3 ? 'active' : '';?>">
+            <a data-status="4" href="<?=base_url()?>home/orders/index/status/3">
               待评价
               <span class="coun"><?php echo $ping_jia;?></span>
             </a>
@@ -111,12 +111,22 @@
             </thead>
           </table>  
           <?php if(isset($order_list) && !empty($order_list)):?>
-          <div class="portlet-title">                
-                <div class="actions btn-set pull-left" style="margin-left:8px;"><label class="checkbox-inline">
-                      <div class="checker" id="uniform-inlineCheckbox1"><span><input type="checkbox" value="option1" id="inlineCheckbox1"></span></div> 全选 </label>
+          <div class="portlet-title">
+                <?php if($status != '' && ($status==0 || $status ==2)):?>
+                <div class="actions btn-set pull-left" style="margin-left:8px;">
+                    <label class="checkbox-inline">
+                        <div class="checker" id="uniform-inlineCheckbox1">
+                            <span><input type="checkbox" value="option1" id="inlineCheckbox1"></span>
+                        </div> 全选 
+                    </label>
+                    <?php if($status==0):?>
                       &nbsp;&nbsp;<button class="btn default" name="back" type="button">合并付款</button>
-                      <button class="btn default">批量收货</button>                 
+                    <?php endif;?>
+                    <?php if($status==2):?>
+                      &nbsp;&nbsp;<button class="btn default">批量收货</button>
+                    <?php endif;?>
                 </div>
+                <?php endif;?>
                 <!-- paginition start -->
                 <?if(isset($pagination)):?>
                 <div class="pagination pagination-right padding-right-20 pull-right">
@@ -130,12 +140,14 @@
             <table class="table table-striped table-advance table-bordered" style="border:none;border-top:1px solid #f0f0f0">
               <thead>
                 <tr>
-                  <th colspan="7">
+                    <th colspan="7">
                     <div class="first-title">
-                      <input type="checkbox" value="" id='order_<?php echo $item->id;?>' /> 
-                      <span class="m-r-10"><?php echo date('Y-m-d',$item->create_time);?></span>    
-                      <span class="m-r-10">订单号：<?php echo $item->code;?></span> - 
-                      <span class="m-r-10"><?php echo $item->consignee;?></span>
+                        <?php if($status != '' && ($status==0 || $status ==2)):?>
+                        <input type="checkbox" value="" id='order_<?php echo $item->id;?>' /> 
+                        <?php endif;?>
+                        <span class="m-r-10"><?php echo date('Y-m-d',$item->create_time);?></span>    
+                        <span class="m-r-10">订单号：<?php echo $item->code;?></span> - 
+                        <span class="m-r-10"><?php echo $item->consignee;?></span>
                     </div>
                     </th>
                 </tr>
@@ -156,8 +168,7 @@
                   <td width="130"><a style="display:block;" target="_bank" href="<?php echo base_url()."item/id/".$value->product_id?>">查看</a></td>     
                              
                   <td width="130"><?php echo $value->price;?><label>含运费：0.00</label></td>
-                  <td width="130"><?php echo $item->status == 1 ? '待付款' : ($item->status == 2 ? '待发货' : 
-                  ($item->status == 3 ? '待收货' : ($item->status == 4 ? '待评价' : ($item->status == 5 ? '交易完成' : ($item->status == 6 ? '退货状态' : $item->status == 7 ? '废弃订单' : '--')))));?>  </td>
+                  <td width="130"><?php echo $this->order->status($item->status);?>  </td>
                   <td width="130">
                     <a href="<?php echo base_url()."item/id/".$value->product_id?>">再次购买</a>
                   </td>               
@@ -168,12 +179,22 @@
             </table> 
             <?endforeach;?>
           
-          <div class="portlet-title" style="margin-left:8px;">                
-                <div class="actions btn-set pull-left"><label class="checkbox-inline">
-                      <div class="checker" id="uniform-inlineCheckbox1"><span><input type="checkbox" value="option1" id="inlineCheckbox1"></span></div> 全选 </label>
+            <div class="portlet-title" style="margin-left:8px;">
+                <?php if($status != '' && ($status==0 || $status ==2)):?>
+                <div class="actions btn-set pull-left">
+                    <label class="checkbox-inline">
+                    <div class="checker" id="uniform-inlineCheckbox1">
+                        <span><input type="checkbox" value="option1" id="inlineCheckbox1"></span>
+                    </div> 全选 
+                    </label>
+                    <?php if($status != '' && $status==0):?>
                       &nbsp;&nbsp;<button class="btn default" name="back" type="button">合并付款</button>
-                      <button class="btn default">批量收货</button>                 
+                    <?php endif;?>
+                    <?php if($status != '' && $status==2):?>
+                      <button class="btn default">批量收货</button>     
+                    <?php endif;?>            
                 </div>
+                <?php endif;?>
                 <!-- paginition start -->
                 <?if(isset($pagination)):?>
                 <div class="pagination pagination-right padding-right-20 pull-right">

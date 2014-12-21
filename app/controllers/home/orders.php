@@ -93,24 +93,24 @@ class Orders extends CI_Controller {
         if($all)
         {
             foreach ($all as $key => $item) {
-                if(intval($item->status) == 1){
+                if(intval($item->status) == 0){
                     $fu_kuan++;
                 }
-                else if(intval($item->status) == 2){
+                else if(intval($item->status) == 1){
                     $fa_huo++;
                 }   
-                else if(intval($item->status) == 3){
+                else if(intval($item->status) == 2){
                     $shou_huo++;
                 }
-                else if(intval($item->status) == 4){
+                else if(intval($item->status) == 3){
                     $ping_jia++;
                 }
             }
         }
 
-        if($status)
+        if($status !== '')
         {
-            $condition[] = 'a.status = '.$status.' and a.status != 4 and a.status != 5 ';
+            $condition[] = 'a.status = '.$status;
         }
         
         $orderlist = $this->order->lists($condition,15,'a.id desc','a.id');

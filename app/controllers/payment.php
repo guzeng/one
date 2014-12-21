@@ -261,7 +261,7 @@ class Payment extends CI_Controller {
                 //该种交易状态只在一种情况下出现——开通了高级即时到账，买家付款成功后。
 
                 //调试用，写文本函数记录程序运行情况是否正常
-                if($order && $order->pay==0 && $order->pay_code=='' && $order->complete==0 && $order->pay_time<=0)
+                if($order && $order->pay==0 && $order->pay_code=='' && $order->status==0 && $order->pay_time<=0)
                 {
                     $notify_time = $_POST['notify_time'];
                     $p = array(
@@ -272,7 +272,7 @@ class Payment extends CI_Controller {
                         'notify_time' => $notify_time,
                         'pay_time' => local_to_gmt(),
                         'pay_code' => $trade_no,
-                        'complete' => 1
+                        'status' => 1
                     );
                     if($this->order->update($p,$order->id))
                     {
@@ -328,7 +328,7 @@ class Payment extends CI_Controller {
                 //判断该笔订单是否在商户网站中已经做过处理
                     //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                     //如果有做过处理，不执行商户的业务程序
-                if($order && $order->pay==0 && $order->pay_code=='' && $order->complete==0 && $order->pay_time<=0)
+                if($order && $order->pay==0 && $order->pay_code=='' && $order->status==0 && $order->pay_time<=0)
                 {
                     $notify_time = $_GET['notify_time'];
                     $p = array(
@@ -339,7 +339,7 @@ class Payment extends CI_Controller {
                         'notify_time' => $notify_time,
                         'pay_time' => local_to_gmt(strtotime($notify_time)),
                         'pay_code' => $trade_no,
-                        'complete' => 1
+                        'status' => 1
                     );
                     if($this->order->update($p,$order->id))
                     {
