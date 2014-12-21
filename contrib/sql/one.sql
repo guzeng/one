@@ -3384,6 +3384,7 @@ CREATE TABLE `one_order_detail` (
   `product_id` int(11) NOT NULL default '0' COMMENT '商品ID',
   `price` float(10,2) NOT NULL default '0.00' COMMENT '价格',
   `number` int(11) NOT NULL default '0' COMMENT '数量',
+  `create_time` int(10) NOT NULL default '0' COMMENT '创建时间',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='订单详情';
 

@@ -257,7 +257,7 @@
                 </div>
             </div>
             <div class="item-xq-img">
-                <?php echo $item->info?>
+                <?php echo isset($item->info)?$item->info:''?>
             </div>
         </div>
         <div class='col-md-2 col-sm-2 col-xs-12 pinfo-mid-right ad-box'>

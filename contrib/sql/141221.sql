@@ -1,0 +1,1 @@
+ALTER TABLE one_order_detail add column create_time int(10) not null default 0; 

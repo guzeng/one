@@ -1,4 +1,15 @@
 <?$this->load->view('home/header')?>
+<script type="text/javascript">
+    $("document").ready(function(){
+        
+    });  
+    function show_pingjia($id)
+    {
+        if($("#tr_pingjia_"+$id).length>0){
+           $("#tr_pingjia_"+$id).toggle();
+        }
+    }  
+</script>
 <div class='container m-t-20'>
     <div class='row' id="evaluation">
         <!-- left -->
@@ -35,38 +46,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <?if(!empty($list)):?>
+                        <?foreach($list as $key => $value):?>
+                        <tr id="tr_<?php echo $value->id;?>">
                             <td >
                                 <div class="text-left">
                                     <span class="select-item">
-                                        <a href="" target='_blank'>
-                                            <img class='box' src="" width='48' height='48'></a>
-                                        [赠品] 50元电子京券（订单完成后自动发放）
+                                        <a target="_bank" href="<?php echo base_url()."item/id/".$value->product_id?>">
+                                            <img width="150" height="100" src="<?php echo $this->product->pic($value->product_id);?>">
+                                            <?php echo $value->name;?>
+                                        </a>
                                     </span>
                                 </div>
                             </td>
-                            <td>2014-12-10</td>
+                            <td><?php echo date('Y-m-d',$value->create_time);?></td>
                             <td>
-                                <a herf="javascript:void(0)" onclick="confirm_dialog('', '', delCart, '66')">发表评价</a>
+                                <a herf="javascript:void(0)" onclick="show_pingjia(<?php echo $value->id;?>)">发表评价</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td >
-                                <div class="text-left">
-                                    <span class="select-item">
-                                        <a href="" target='_blank'>
-                                            <img class='box' src="" width='48' height='48'></a>
-                                        [赠品] 50元电子京券（订单完成后自动发放）
-                                    </span>
-                                </div>
-                            </td>
-                            <td>2014-12-10</td>
-                            <td>
-                                <a herf="javascript:void(0)" onclick="confirm_dialog('', '', delCart, '66')">发表评价</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td  colspan="3" class="tdorder text-left">
+                        <tr id="tr_pingjia_<?php echo $value->id;?>" class="hide">
+                            <td colspan="3" class="tdorder text-left">
 
                                 <div class="message">
                                     <span class="arrow"></span>
@@ -113,55 +112,18 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td >
-                                    <div class="text-left">
-                                        <span class="select-item">
-                                            <a href="" target='_blank'>
-                                                <img class='box' src="" width='48' height='48'></a>
-                                            [赠品] 50元电子京券（订单完成后自动发放）
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>2014-12-10</td>
-                                <td>
-                                    <a herf="javascript:void(0)" onclick="confirm_dialog('', '', delCart, '66')">发表评价</a>
-                                </td>
-                            </tr>
-
+                        <?endforeach;?>
+                        <?endif;?>
                         </tbody>
                     </table>
                     <div class="text-right">
-                        <ul class="pagination">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li>
-                                <a href="#">6</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        <!-- paginition start -->
+                        <?if(isset($pagination)):?>
+                        <div class="pagination pagination-right padding-right-20 pull-right">
+                        <?=isset($pagination)?$pagination:''?>
+                        </div>
+                        <?endif;?>
+                        <!-- paginition end -->
                     </div>
                 </div>
 

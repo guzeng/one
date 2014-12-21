@@ -6,12 +6,19 @@
 **********************************/
 class Order_detail extends CI_Model{
 	
-	private $table = 'order';
-    private $detail_table = 'order_detail';
+	private $table = 'order_detail';
     private $product_table = 'product';
+    private $page = 1;
+    private $per_page = 15;
+    private $param = array();
+    private $base_url = '';
 
-
-
+    public function __construct()
+    {
+        parent::__construct();
+        $param = $this->uri->uri_to_assoc(4);
+        $this->page = isset($param['page']) ? trim($param['page']) : 1;
+    }
     //----------------------------------------------------------------
     /**
     *   insert
@@ -22,6 +29,10 @@ class Order_detail extends CI_Model{
 	public function insert($row)
     {
 		if(is_array($row) && !empty($row)){
+            if(!isset($row['create_time']) || intval($row['create_time'])==0)
+            {
+                $row['create_time'] = local_to_gmt();
+            }
 			if($this->db->insert($this->detail_table,$row)){
 				return $this->db->insert_id();
 			}
@@ -84,6 +95,131 @@ class Order_detail extends CI_Model{
 	}
 	//----------------------------------------------------------------
 
+    /**
+    *   condition
+    *   由传递的参数拼成查询条件
+    */
+    public function condition($cond=array())
+    {
+        $where = array();
+        if(isset($this->param['user_id']) && $this->param['user_id'] != '')
+        {
+            $where[] = "a.user_id = '".$this->param['user_id']."'";
+            $this->base_url .= 'user_id/'.urlencode($this->param['user_id']).'/';
+        }
+        if(!empty($cond))
+        {
+            $where = array_merge($where,$cond);
+        }
+        if(!empty($where))
+        {
+            return "(".implode(") and (",$where).")";
+        }
+        return '';
+    }
+    /**
+     * lists
+     * 查询所有 显示列表
+     * @param array where 查询条件
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/3/31
+     */    
+    public function lists($where = array(), $num=15,$orderby='')
+    {
+        $_where = $this->condition($where);
+        $_num = intval($num)>0 ? intval($num) : 15;
+        $_start = (intval($this->page)-1)*$_num;
+        $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
+        $this->per_page = $_num;
+        $_type = 'a.*,p.name,p.name';
+        
+        $this->db->select ( $_type );
+        if(isset($_where) && $_where){
+            $this->db->where($_where);
+        }
+        $this->db->limit($_num,$_start);
+        $this->db->from($this->table.' as a');
+        $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
+
+        $this->db->order_by($_orderby);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;   
+    }
+    //----------------------------------------------------------------
+    /**
+     * all
+     * 查询所有 显示列表
+     * @param array where 查询条件
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/4/11
+     */    
+    public function all($where = array(), $orderby='')
+    {
+        $_where = $this->condition($where);
+        $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
+        $_type = 'a.*,p.name';
+        $this->db->select ( $_type );
+        if(isset($_where) && !empty($_where)){
+            $this->db->where($_where);
+        }
+        $this->db->from($this->table.' as a');
+        $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
+        $this->db->order_by($_orderby);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;   
+    }
+    //----------------------------------------------------------------
+        /**
+     * count
+     * 查询所有数量
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author zeng.gu
+     * 2014/3/31
+     */    
+    public function count($where = array())
+    {
+        $_where = $this->condition($where);
+        $this->db->select ('count(a.id) as count');
+        if(isset($_where) && $_where){
+            $this->db->where($_where);
+        }
+        $this->db->from($this->table.' as a');
+        $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+           $count = $query->result();
+           return $count[0]->count;
+        }
+        return false; 
+    }
+    //----------------------------------------------------------------
+    /**
+    * 分页
+    */
+    public function pages($url='',$where = array())
+    {
+        $config['per_page'] = $this->per_page;
+        $total_rows = $this->count($where);
+        $config['total_rows'] = $total_rows ? $total_rows : 0;
+        $config['base_url'] = rtrim($url,'/');
+        $this->pagination->initialize($config);
+        return $this->pagination->links();
+    }
+    //----------------------------------------------------------------
 }
 /* End of file order_detail.php */
 /* Location: ./app/models/order_detail.php */	
