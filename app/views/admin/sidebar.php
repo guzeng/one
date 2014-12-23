@@ -101,7 +101,7 @@ $method_name=$RTR->fetch_method();
                         </li>
                         <li class="<?if($controller_name=='user_comment'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/user_comments" >
-                            会员留言
+                            会员评论
                             </a>
                         </li>
                     </ul>

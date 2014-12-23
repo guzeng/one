@@ -6,7 +6,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						回复留言
+						回复评论
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -22,7 +22,7 @@
 						</li>
 						<?if(isset($row)):?>
 						<li>
-							回复留言
+							回复评论
 						</li>
 						<?endif;?>
 						<li class='btn-group'>
@@ -46,7 +46,7 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
-												<label class="control-label"><span class='req'>*</span>留言内容</label>
+												<label class="control-label"><span class='req'>*</span>评论内容</label>
 												<textarea rows="4" id="content" name='content' class="form-control" maxLength='100' readonly><?php echo isset($row)?$row->content:''?></textarea>
 												<span class="help-block"></span>
 											</div>
