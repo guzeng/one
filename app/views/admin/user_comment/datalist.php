@@ -3,8 +3,8 @@
 								<thead>
 									<tr>
 										<th>会员名</th>
-										<th>留言</th>
-										<th>留言时间</th>
+										<th>评论</th>
+										<th>评论时间</th>
 										<th class="hidden-xs">操作</th>
 									</tr>
 								</thead>

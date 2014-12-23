@@ -43,6 +43,17 @@ class User_comment  extends CI_Model{
 		return false;
 	}
 	//---------------------------------------------------------
+
+	public function get_by_orderdetail($order_detail_id){
+		if($order_detail_id){
+			$this->db->where('order_detail_id',$order_detail_id);
+			$query = $this->db->get($this->table);
+			if($query->num_rows()>0){
+				return $query->row();
+			}
+		}
+		return false;
+	}
 	/**
 	 * lists
 	 * 查询所有分类, 用于分页显示列表

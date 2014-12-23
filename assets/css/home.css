@@ -622,3 +622,15 @@ td {vertical-align:middle!important;;}
 #mailsubs .well .checkbox-list .checkbox-inline{margin:0 20px;}
 #mailsubs .well .checkbox-list{margin:5px 50px;}
 #mailsubs .faq p{color: #999;}
+
+.grade a {
+    background: url("../img/star.png") no-repeat scroll 0 0 transparent;
+    display: inline-block;
+    height: 16px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 16px;
+}
+.grade a.selected, .grade a.hover, .grade a:hover {
+    background-position: -34px 0;
+}

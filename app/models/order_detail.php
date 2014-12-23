@@ -8,6 +8,7 @@ class Order_detail extends CI_Model{
 	
 	private $table = 'order_detail';
     private $product_table = 'product';
+    private $order_table = 'order';
     private $page = 1;
     private $per_page = 15;
     private $param = array();
@@ -143,6 +144,7 @@ class Order_detail extends CI_Model{
         $this->db->limit($_num,$_start);
         $this->db->from($this->table.' as a');
         $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
+        // $this->db->join($this->order_table.' as o','a.order_id=o.id','left');
 
         $this->db->order_by($_orderby);
         $query = $this->db->get();
@@ -173,6 +175,7 @@ class Order_detail extends CI_Model{
         }
         $this->db->from($this->table.' as a');
         $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
+        // $this->db->join($this->order_table.' as o','a.order_id=o.id','left');
         $this->db->order_by($_orderby);
         $query = $this->db->get();
         if($query->num_rows() > 0){
@@ -199,6 +202,7 @@ class Order_detail extends CI_Model{
         }
         $this->db->from($this->table.' as a');
         $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
+        // $this->db->join($this->order_table.' as o','a.order_id=o.id','left');
         $query = $this->db->get();
         if($query->num_rows() > 0){
            $count = $query->result();
