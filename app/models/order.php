@@ -130,10 +130,13 @@ class Order extends CI_Model{
     public function get_detail($id)
     {
         if($id){
-            $this->db->from($this->detail_table. ' as a');
-            $this->db->where('a.order_id',$id);
-            $type = 'a.*';
-            $this->db->select($type);
+            $_type = 'd.order_id,d.user_id,d.product_id,d.price,d.number,p.name,p.best_price';
+            
+            $this->db->select ( $_type );
+            $this->db->from($this->detail_table.' as d');
+            $this->db->join($this->product_table.' as p','d.product_id=p.id','left');
+            $this->db->where('d.order_id',$id);
+            $this->db->select($_type);
             $query = $this->db->get();
             if($query->num_rows()>0){
                 return $query->result();

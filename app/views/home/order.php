@@ -170,7 +170,13 @@
                   <td width="130"><?php echo $value->price;?><label>含运费：0.00</label></td>
                   <td width="130"><?php echo $this->order->status($item->status);?>  </td>
                   <td width="130">
+                    <?php if($item->status!='' && $item->status==0):?>
+                    <a href="<?php echo base_url().'home/orders/pay/'.$item->id?>"><button class='btn blue pay'>付款</button></a>
+                    <?php elseif($item->status==2):?>
+                    <button class='btn blue pay'>收货</button>
+                    <?php else:?>
                     <a href="<?php echo base_url()."item/id/".$value->product_id?>">再次购买</a>
+                    <?php endif;?>
                   </td>               
                 </tr>
                 <?endforeach;?>

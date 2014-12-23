@@ -84,6 +84,7 @@ class User_coupon extends CI_Model{
         }
         if(!empty($cond))
         {
+            print_r($where);
             $where = array_merge($where,$cond);
         }
         if(!empty($where))
@@ -124,6 +125,40 @@ class User_coupon extends CI_Model{
         }
         $this->db->order_by($_orderby);
         $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;   
+    }
+    //----------------------------------------------------------------
+    /**
+     * all
+     * 查询所有 显示列表
+     * @param var orderby 排序方式
+     * @param var groupby 分组方式
+     * @param int num 每页显示的个数
+     * @author alex.liang
+     * 2014/11/7
+     */    
+    public function all($where=array(),$orderby='',$groupby='')
+    {
+        $_where = $this->condition($where);
+        $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
+        $this->groupby = isset($groupby) && $groupby!='' ? $groupby : '';
+        $_type = 'a.*,c.*';
+        $this->db->select ( $_type );
+        $this->db->from($this->table.' as a');
+        $this->db->join($this->coupon_table.' as c','a.coupon_id=c.id','left');
+        if(isset($_where)){
+            $this->db->where($_where);
+        }
+        if($this->groupby!='')
+        {
+            $this->db->group_by($this->groupby);
+        }
+        $this->db->order_by($_orderby);
+        $query = $this->db->get();
+        echo $this->db->last_query();
         if($query->num_rows() > 0){
             return $query->result();
         }

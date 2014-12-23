@@ -469,6 +469,7 @@ td {vertical-align:middle!important;;}
 #myorder .input-group-addon{font-size: 12px;padding:6px 8px;}
 #myorder .form-control{height: 27px;padding: 4px;font-size: 12px;}
 #myorder .btn{font-size: 12px;padding: 4px 0px;}
+#myorder .btn.pay{padding: 2px 7px;}
 .table-advance{margin-top: 15px;border: 1px #f0f0f0 solid;margin-bottom:3px; }
 .nav-tabs{margin-bottom: 16px;}
 .table-advance thead tr th,.table-advance thead tr th{background-color: #f9f9f9;color: #666;font-size: 12px;font-weight: 400;text-align: center; }

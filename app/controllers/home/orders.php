@@ -117,7 +117,7 @@ class Orders extends CI_Controller {
         if($orderlist)
         {
             foreach ($orderlist as $key => $item) {
-                $result = $this->order_detail->get($item->id,$item->address_id);
+                $result = $this->order->get_detail($item->id);
                 $item->order_detail = $result;
             }
         }
@@ -142,6 +142,8 @@ class Orders extends CI_Controller {
     {    
         $this->auth->check_login();
         $this->load->model('order_detail');
+        $this->load->model('user_coupon');
+
         if(!$n)
         {
             show_404();
@@ -160,7 +162,14 @@ class Orders extends CI_Controller {
             show_error('订单已完成',500);
         }
         $data['order'] = $order;
-        $data['detail'] = $this->order_detail->get($n);
+        $data['detail'] = $this->order->get_detail($n);
+        //优惠券
+        $data['coupon'] = $this->user_coupon->all(array(
+            'a.user_id='.$this->auth->user_id(),
+            'a.is_use="0"',
+            'c.expirse_from <= '. local_to_gmt(),
+            'c.expirse_to >='. local_to_gmt()
+        ));
         $this->load->view('home/pay',$data);
     }
 

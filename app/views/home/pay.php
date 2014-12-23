@@ -134,6 +134,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- 优惠券-->
+                            <div class='form-group m-b-20'>
+                                <?php if(!empty($coupon)):?>
+                                    <p>优惠券</p>
+                                    <div class="radio-list">
+                                        <?php foreach($coupon as $key => $item):?>
+                                        <label class='m-b-20'>
+                                            <input type="radio" checked="" value="alipay" id="pay_type_alipay" name="pay_type"> &nbsp;
+                                            <?php echo $item->value;?> 
+                                        </label>
+                                        <?php endforeach;?>
+                                    </div>
+                                <?php endif;?>
+                            </div>
+                            <!-- coupon end -->
                             <div class="form-group">
                                 <div class="col-md-12 p-20"> &nbsp; &nbsp; &nbsp;
                                     <button class='btn btn-primary' type='submit'>提交</button>
