@@ -69,14 +69,6 @@
 				登录 <i class="m-icon-swapright m-icon-white"></i>
 				</button>            
 			</div>
-			<div class="forget-password">
-				<p>用户名：admin, 密码：admin</p>
-				<h4></h4>
-				<!--
-				<p>
-					<a href="javascript:;"  id="forget-password">忘记密码 ?</a>
-				</p>-->
-			</div>
 		<?php echo form_close();?>
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->

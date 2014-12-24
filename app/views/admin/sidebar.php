@@ -183,6 +183,25 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
+                <li class="<?if(in_array($controller_name, array('statistic'))):?>open active<?endif;?>">
+                    <a href="javascript:;">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">统计管理</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub-menu" <?if(in_array($controller_name, array('statistic'))):?>style='display:block;'<?endif;?>>
+                        <li class="<?if($method_name=='product'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/statistic/product" >
+                            商品统计
+                            </a>
+                        </li>
+                        <li class="<?if($method_name=='order'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/statistic/order" >
+                            订单统计
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

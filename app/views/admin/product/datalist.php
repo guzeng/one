@@ -8,6 +8,7 @@
 										<th>名称</th>
 										<th>价格</th>
 										<th class="hidden-xs">优惠价</th>
+										<th class='hidden-xs'>特性</th>
 										<th class="hidden-xs">操作</th>
 									</tr>
 								</thead>
@@ -20,8 +21,16 @@
                                 		<td><?php echo $item->code?></td>
                                 		<td><?php echo $item->name?></td>
                                 		<td><?php echo $item->price?></td>
-                                		<td><?php echo $item->best_price?></td>
-										<td>
+                                		<td class='hidden-xs'><?php echo $item->best_price?></td>
+							    		<td class='hidden-xs'>
+							    			<?php if($item->recommend==1):?><div>推荐</div><?php endif;?>
+							    			<?php if($item->specials==1):?><div>特卖</div><?php endif;?>
+							    			<?php if($item->allow_comment==1):?><div>允许评论</div><?php endif;?> 
+							    			<?php if($item->show_home==1):?><div>首页显示</div><?php endif;?>
+							    			<?php if($item->handpick==1):?><div>精选商品</div><?php endif;?>
+							    			<?php if($item->hot==1):?><div>热卖</div><?php endif;?>
+							    		</td>
+										<td class='hidden-xs'>
 											<a href="<?php echo base_url();?>admin/products/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
 											<a href="javascript:void(0)" onclick="doDelete('admin/products/delete/'+<?php echo $item->id?>)">

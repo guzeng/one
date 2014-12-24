@@ -45,6 +45,14 @@ class Orders extends CI_Controller {
         {
             $data['list'] = $this->order->all(array('status'=>'4'));
         }
+        else if($status == '9')
+        {
+            $data['list'] = $this->order->all(array('status'=>'9'));
+        }
+        else if($status == '10')
+        {
+            $data['list'] = $this->order->all(array('status'=>'10'));
+        }
         else
         {
             $data['list'] = $this->order->all();
@@ -67,7 +75,7 @@ class Orders extends CI_Controller {
     {
         $this->list_type = 'return';
         $data['param'] = $this->order->get_param();//stripslashes
-        $data['list'] = $this->lists();
+        $data['list'] = $this->lists(1);
         $this->load->view('admin/order/list_send',$data);
     }
     //-------------------------------------------------------------------------
@@ -76,7 +84,7 @@ class Orders extends CI_Controller {
     {
         $this->list_type = 'return';
         $data['param'] = $this->order->get_param();//stripslashes
-        $data['list'] = $this->lists();
+        $data['list'] = $this->lists(9);
         $this->load->view('admin/order/list_back',$data);
     }
     //-------------------------------------------------------------------------

@@ -18,6 +18,7 @@
                                 		<td><?php echo $item->code?></td>
                                 		<td><?php echo $item->username?></td>
                                 		<td><?php echo $item->price?></td>
+                                		<td><?php echo $this->order->status($item->status);?></td>
                                 		<td><?php echo date('Y-m-d H:i:s',$item->create_time)?></td>
                                 		<td><?php echo $item->phone?></td>
 										<td>
