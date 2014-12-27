@@ -25,33 +25,9 @@ class Orders extends CI_Controller {
 
     public function lists($status = '')
     {
-        if($status === '0')
+        if($status !== '')
         {
-            $data['list'] = $this->order->all(array('status'=>'0'));
-        }
-        else if($status == '1')
-        {
-            $data['list'] = $this->order->all(array('status'=>'1'));
-        }
-        else if($status == '2')
-        {
-            $data['list'] = $this->order->all(array('status'=>'2'));
-        }
-        else if($status == '3')
-        {
-            $data['list'] = $this->order->all(array('status'=>'3'));
-        }
-        else if($status == '4')
-        {
-            $data['list'] = $this->order->all(array('status'=>'4'));
-        }
-        else if($status == '9')
-        {
-            $data['list'] = $this->order->all(array('status'=>'9'));
-        }
-        else if($status == '10')
-        {
-            $data['list'] = $this->order->all(array('status'=>'10'));
+            $data['list'] = $this->order->all(array('a.status="'.$status.'"'));
         }
         else
         {
@@ -71,15 +47,16 @@ class Orders extends CI_Controller {
     }
     //-------------------------------------------------------------------------
 
-    public function send()
+    public function other($status)
     {
         $this->list_type = 'return';
         $data['param'] = $this->order->get_param();//stripslashes
-        $data['list'] = $this->lists(1);
+        $data['list'] = $this->lists($status);
+        $data['title'] = $this->order->status($status);
         $this->load->view('admin/order/list_send',$data);
     }
     //-------------------------------------------------------------------------
-
+    /*
     public function back()
     {
         $this->list_type = 'return';
@@ -87,20 +64,32 @@ class Orders extends CI_Controller {
         $data['list'] = $this->lists(9);
         $this->load->view('admin/order/list_back',$data);
     }
+    */
     //-------------------------------------------------------------------------
 
     public function info($id='')
     {
+        $this->load->model('pay');
+        $data = array();
         if($id)
         {
             $row = $this->order->get($id);
             if(!$row)
             {
-                show_404('',false);
+                echo json_encode(array('code'=>'1001','msg'=>'订单不存在'));
+                exit;
             }
-            $data['row'] = $row;
+            $data['order'] = $row;
+            echo json_encode(array(
+                'code'=>'1000',
+                'data'=>$this->load->view('admin/order/detail',$data,true)
+            ));
         }
-        $this->load->view('admin/order/info',$data);
+        else
+        {
+            echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
+            exit;
+        }
     }
     //-------------------------------------------------------------------------
 
@@ -153,6 +142,31 @@ class Orders extends CI_Controller {
             $data = array('code'=>'1001','msg'=>'删除失败');
         }
         echo json_encode($data);
+    }
+
+    public function cancel($id)
+    {
+        if(!$id)
+        {
+            echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
+            exit;
+        }
+        $order = $this->order->get($id);
+        if(!$order)
+        {
+            echo json_encode(array('code'=>'1004','msg'=>'订单不存在'));
+            exit;
+        }
+        if($order->status!=='0')
+        {
+            echo json_encode(array('code'=>'1004','msg'=>'订单不能取消'));
+            exit;
+        }
+        if(!$this->order->update(array('status'=>10),$id))
+        {
+            echo json_encode(array('code'=>'1001','msg'=>'订单取消失败'));
+        }
+        echo json_encode(array('code'=>'1000','msg'=>'订单取消成功','id'=>$id));
     }
 }
 /* End of file orders.php */

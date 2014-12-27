@@ -317,6 +317,47 @@ class Product extends CI_Model{
     }
     //----------------------------------------------------------------
     /**
+     * fetch_items
+     * 查询所有
+     * 
+     *  @param item array 
+     *  @return array   
+     *  @author chunhua.hong
+     *  2013/1/10 11:12:56
+     */    
+    public function fetch_items($items=array())
+    {
+        if(count($items) >0 ){
+            foreach($items as $key => $val){
+                $c = '_'.$key;
+                $$c = $val;
+            }
+        }
+        $_num = isset($_num) && intval($_num)>0 ? intval($_num) : 10;
+        $_start = isset($_start) && intval($_start)>0 ? intval($_start) : 0;
+        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'a.id desc';
+        $this->db->from( $this->table.' as a');
+        if(!isset($_type)){
+            $_type = 'a.*';
+        }
+        $this->db->select ( $_type );
+        if(isset($_where)){
+            $this->db->where($_where);
+        }
+        if(isset($_join_cate))
+        {
+            $this->db->join($this->table_cate.' as pc','pc.product_id=a.id','left');
+        }
+        $this->db->order_by($_orderby);
+        $this->db->limit($_num,$_start);
+        $query = $this->db->get ();
+        if($query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;
+    }
+    //---------------------------------------------------------
+    /**
      * count
      * 查询所有数量
      * @param var orderby 排序方式

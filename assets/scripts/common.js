@@ -228,7 +228,6 @@ function load_page(url, target, callback)
                 else if(data.code=='1000')
                 {
                     $('#'+target).html(data.data);
-                    //adjust_footer();
                 }
                 else if(typeof(data.msg)!='undefined')
                 {
@@ -808,6 +807,8 @@ function delCart(id)
     })
 }
 
+
+
 /**
  * ajax请求
  * @param url       
@@ -816,10 +817,18 @@ function delCart(id)
  * @param callback  回调函数
  * @param type      请求类型，默认post
  */
-function ajaxRequest(url,btn){
+function ajaxRequest(url,btn,callback,type){
+    if(typeof(type)!='undefined' && type!='' && type!='undefined')
+    {
+        type = type;
+    }
+    else
+    {
+        type ="post";
+    }
     $.ajax({
         url:msg.base_url+url,
-        type:'get',
+        type:type,
         dataType:'json',
         success:function(json){ 
             close_alert();
@@ -834,6 +843,10 @@ function ajaxRequest(url,btn){
                 {
                     show_success(json.msg);
                 }
+                if(typeof(callback)!='undefined' && callback!='' && callback!='undefined')
+                {
+                    callback(json);
+                }
                 if(typeof(json.url)!='undefined')
                 {
                     document.location.href=json.url;
@@ -844,6 +857,30 @@ function ajaxRequest(url,btn){
                 if(typeof(json.msg)!='undefined')
                 {
                     show_error(json.msg);
+                }
+                if(typeof(json.error)!='undefined')
+                {
+                    $.each(json.error,function(key,item){
+                        if(item != '') 
+                        {
+                            var tips = "";
+                            for (var i = 0; i < item.length; i++) {
+                                tips = tips + item[i];
+                            }
+                            if($('input[name='+key+']').length > 0)
+                            {
+                                if($('input[name='+key+']').closest('.form-group').find('span.help-block[for='+key+']').length > 0)
+                                {
+                                    $('input[name='+key+']').closest('.form-group').find('span.help-block[for='+key+']').html(item);
+                                }
+                                else
+                                {
+                                    $('input[name='+key+']').after("<span class='help-block' for='"+key+"'>"+item+"</span>");
+                                }
+                                $('input[name='+key+']').closest('.form-group').addClass('has-error').show();
+                            }
+                        }
+                    })                      
                 }
             }
         },
@@ -880,4 +917,66 @@ function checkLogin(formID)
             loading();
         }
     })
+}
+
+
+function load_modal(url)
+{
+    if(typeof(url)=='undefined' || url=='' ||  url==null)
+    {
+        return false;
+    }
+    $.ajax({
+        url:msg.base_url+url,
+        type:'get',
+        dataType:'json',
+        success:function(json){
+            close_alert();
+            if(json.code=='1000')
+            {
+                var html = "<div id='_load_modal' class='modal' tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='false'>"+json.data+"<div class='clearfix'></div></div>";
+                if($('#_load_modal').length > 0)
+                {
+                    $('#_load_modal').remove();
+                }
+                $('body').append(html);
+                $('#_load_modal').find('button[aria-hidden=true]').on('click',function(){
+                    unload_modal();
+                })
+                $('#_load_modal').modal();
+            }
+            else if(json.code=='1002')
+            {
+                show_login(json);
+            }
+            else
+            {
+                if(typeof(json.msg)!='undefined')
+                {
+                    show_error(json.msg);
+                }
+                else
+                {
+                    show_error(msg.error);
+                }
+            }
+            
+        },
+        beforeSend:function(){
+            loading();
+        },
+        error:function(err){
+            show_error(msg.error);
+        }
+    })
+}
+
+function unload_modal(id)
+{
+    if(typeof(id)=='undefined')
+    {
+        id = '_load_modal';
+    }
+    $('#_load_modal').modal('hide');
+    close_alert();
 }

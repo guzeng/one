@@ -15,18 +15,24 @@
                             		<?if(!empty($list)):?>
                             		<?foreach($list as $key => $item):?>
 									<tr id='<?php echo $item->id;?>'>
-                                		<td><?php echo $item->code?></td>
+                                		<td><a href="javascript:void(0)" onclick="load_modal('admin/orders/info/<?php echo $item->id?>')">
+                                			<?php echo $item->code?></a>
+                                		</td>
                                 		<td><?php echo $item->username?></td>
                                 		<td><?php echo $item->price?></td>
-                                		<td><?php echo $this->order->status($item->status);?></td>
+                                		<td id='<?php echo $item->id;?>_status'><?php echo $this->order->status($item->status);?></td>
                                 		<td><?php echo date('Y-m-d H:i:s',$item->create_time)?></td>
                                 		<td><?php echo $item->phone?></td>
-										<td>
-											<a href="<?php echo base_url();?>admin/orders/edit/<?php echo $item->id?>">
-												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
+										<td id='<?php echo $item->id;?>_operate'>
+											<?php if($item->status==0):?>
+											<a href="javascript:void(0)" onclick="_cancel('<?php echo $item->id?>')" id='<?php echo $item->id;?>_cancel'>
+												<span class='label label-danger'><i class='fa fa-trash-o'></i></span>
+											</a> 
+											<?php endif;?>
 										</td>
 									</tr>
                             		<?endforeach;?>
                             		<?endif;?>
 								</tbody>
 							</table>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/scripts/admin/order.js"></script>

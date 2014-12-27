@@ -7,7 +7,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						待处理订单
+						<?php echo $title;?>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -19,7 +19,7 @@
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							待处理
+							<?php echo $title;?>
 						</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -34,7 +34,7 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue" id='list-box'>
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-list"></i>待处理订单</div>
+							<div class="caption"><i class="fa fa-list"></i><?php echo $title;?></div>
 							<div class="actions">
 								<div class="btn-group">
 									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','order_list','admin/orders/lists/0')"><i class='fa fa-refresh'></i></a>

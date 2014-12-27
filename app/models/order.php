@@ -251,6 +251,7 @@ class Order extends CI_Model{
         }
         $this->db->order_by($_orderby);
         $query = $this->db->get();
+        //echo $this->db->last_query();
         if($query->num_rows() > 0){
             return $query->result();
         }
@@ -410,8 +411,7 @@ class Order extends CI_Model{
             '1' => '已付款',
             '2' => '已发货',
             '3' => '待评价',//已收货
-            '4' => '退货',
-            '5' => '已评价',
+            '4' => '已评价',
             '9' => '退货',
             '10'=> '已取消'
         );

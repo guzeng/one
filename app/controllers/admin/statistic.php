@@ -20,8 +20,47 @@ class Statistic extends CI_Controller {
         $this->load->model('product_category_map');
         $category = $this->product_category->tree();
         $data['category_list'] = $category;
-        $data['param'] = $this->product->get_param();//stripslashes
-        $data['list'] = $this->product_lists();
+
+        $param = $this->uri->uri_to_assoc(4);
+        $keyword = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : (isset($param['keyword']) ?       $param['keyword'] : '');
+        $keyword = urldecode(trim($keyword));
+        $page = isset($param['page']) ? trim($param['page']) : 1;
+        $base_url = '';
+        $items = array();
+        $where = array();
+        if($keyword != '')
+        {
+            $where[] = "a.name like '%".addslashes(str_replace('%', '\%', $keyword))."%' ";
+            $base_url .= 'keyword/'.urlencode($keyword).'/';
+        }
+        if(!empty($where))
+        {
+            $items['where'] = "(".implode(") and (",$where).")";
+        }
+        
+        $config['per_page'] = 2;
+        $items['type'] = 'count(a.id) as count';
+        $all = $this->product->fetch_items($items);
+        $count = $all[0]->count;
+        if($count > 0)
+        {
+            $items['type'] = 'a.*';
+            $items['num'] = $config['per_page'];
+            $items['start'] = (intval($page)-1)*$config['per_page'];
+            //$items['join_user'] = true;
+            $list = $this->product->fetch_items($items);
+            $config['total_rows'] = $count;
+            $config['base_url'] = rtrim($base_url,'/');
+            $this->pagination->initialize($config);
+            $data['pagination'] = $this->pagination->links();
+        }
+        else
+        {
+            $list = array();
+        }
+        $data['keyword'] = stripslashes($keyword);
+        $data['list'] = $list;
+
 		$this->load->view('admin/statistic/product_list', $data);
 	}
     //-------------------------------------------------------------------------
@@ -49,6 +88,12 @@ class Statistic extends CI_Controller {
         $this->auth->check_login();
         $this->list_type = 'return';
 		$this->load->model('order');
+        $s = $this->order->status();
+        $count = array();
+        foreach($s as $key => $value)
+        {
+            
+        }
 		$this->load->view('admin/statistic/order_list', $data);
     }
 }

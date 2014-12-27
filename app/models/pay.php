@@ -132,19 +132,41 @@ class Pay  extends CI_Model{
 	}
 	//---------------------------------------------------------
 
-    public function payType($t='')
+    public function payType($t='',$type=false)
     {
         $arr = array(
-            '1' => 'daofu',
-            '2' => 'alipay',
-            '3' => 'bank',
-            '4' => 'weixin'
+            '1' => array(
+                    'id' => 'daofu',
+                    'name' => '货到付款'
+                ),
+            '2' => array(
+                    'id' => 'alipay',
+                    'name' => '支付宝'
+                ),
+            '3' => array(
+                    'id' => 'bank',
+                    'name' => '网上银行'
+                ),
+            '4' => array(
+                    'id' => 'weixin',
+                    'name' => '微支付'
+                )
         );
         if($t)
         {
             if(array_key_exists($t, $arr))
             {
-                return $arr[$t];
+                if($type)
+                {
+                    switch (strtolower($type)) {
+                        case 'name':
+                            return $arr[$t]['name'];
+                            break;
+                        default:
+                            return $arr[$t]['id'];
+                            break;
+                    }
+                }
             }
             else
             {
@@ -157,13 +179,18 @@ class Pay  extends CI_Model{
     public function getType($type)
     {
         $types = $this->payType();
+        $k = '';
         if($type)
         {
-            $keys = array_flip($types);
-            if(array_key_exists($type, $keys))
+            foreach($types as $key => $value)
             {
-                return $keys[$type];
+                if($type == $value['id'])
+                {
+                    $k = $key;
+                    break;
+                }
             }
+            return $k;
         }
         return false;
     }

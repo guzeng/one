@@ -69,16 +69,17 @@ $method_name=$RTR->fetch_method();
                             所有订单
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='orders' && $method_name=='send'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/orders/send" >
-                            待发货
+                        <?php $CI = &get_instance(); $CI->load->model('order');?>
+                        <?php $order_status = $CI->order->status();?>
+                        <?if(!empty($order_status)):?>
+                        <?php foreach ($order_status as $key => $value):?> 
+                        <li class="<?if($controller_name=='orderss' ):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/orders/other/<?php echo $key;?>" >
+                            <?php echo $value;?>
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='orders' && $method_name=='back'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/orders/back" >
-                            退货单
-                            </a>
-                        </li>
+                        <?php endforeach;?>
+                        <?endif;?>
                     </ul>
                 </li>
                 <li class="<?if(in_array($controller_name, array('storages'))):?>open active<?endif;?>">
@@ -152,12 +153,13 @@ $method_name=$RTR->fetch_method();
                             友情链接
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='ads'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/ads" >
-                            广告设置
-                            </a>
-                        </li>
                     </ul>
+                </li>
+                <li class="<?if(in_array($controller_name, array('ads'))):?>open active<?endif;?>">
+                    <a href="<?php echo base_url()?>admin/ads">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">广告设置</span>
+                    </a>
                 </li>
                 <li class="<?if(in_array($controller_name, array('news','news_cate','questionnaires'))):?>open active<?endif;?>">
                     <a href="javascript:;">
