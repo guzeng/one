@@ -50,6 +50,18 @@
 					</div>
 				</div>
 				<div class="portlet-body">
+					<div class="table-toolbar">
+						<div class="btn-group">
+							<button class="btn dropdown-toggle" data-toggle="dropdown">库存低于<?php echo isset($stock)?$stock:''?> <i class="fa fa-angle-down"></i></button>
+							<ul class="dropdown-menu pull-right">
+								<li><a href="javascript:void(0)" class='stock'>5</a></li>
+								<li><a href="javascript:void(0)" class='stock'>10</a></li>
+								<li><a href="javascript:void(0)" class='stock'>20</a></li>
+								<li><a href="javascript:void(0)" class='stock'>50</a></li>
+								<li><a href="javascript:void(0)" class='stock'>100</a></li>
+							</ul>
+						</div>
+					</div>
 					<table class="table table-striped table-bordered table-hover" id="product_list">
 						<thead>
 							<tr>
@@ -115,5 +127,9 @@
                 });
             });
 		});
+		$('.stock').click(function(){
+			var num = parseInt($(this).html());
+			window.location.href = msg.base_url+"admin/statistic/product/stock/"+num;
+		})
 	</script>
 <?$this->load->view('admin/footer');?>

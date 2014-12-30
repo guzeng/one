@@ -74,6 +74,7 @@ class Login extends CI_Controller {
             // $update_row['visit_count'] =  $user->visit_count + 1;
             $update_row['last_login_time'] = $login_time;
             $update_row['last_login_ip'] = $this->input->ip_address();
+            $update_row['login_num'] = $user->login_num+1;
             //自动保留登录15天
             $this->auth->set_auto_login($user->username, $user->pwd);
             if(isset($_COOKIE['lms_logout_url']))

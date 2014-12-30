@@ -24,6 +24,11 @@ class Statistic extends CI_Controller {
         $param = $this->uri->uri_to_assoc(4);
         $keyword = $this->input->post('keyword')!='' ? trim($this->input->post('keyword')) : (isset($param['keyword']) ?       $param['keyword'] : '');
         $keyword = urldecode(trim($keyword));
+
+        $stock = $this->input->post('stock')!='' ? trim($this->input->post('stock')) : 
+                    (isset($param['stock']) ? $param['stock'] : '');
+        $stock = intval(urldecode(trim($stock)));
+        
         $page = isset($param['page']) ? trim($param['page']) : 1;
         $base_url = '';
         $items = array();
@@ -32,6 +37,10 @@ class Statistic extends CI_Controller {
         {
             $where[] = "a.name like '%".addslashes(str_replace('%', '\%', $keyword))."%' ";
             $base_url .= 'keyword/'.urlencode($keyword).'/';
+        }
+        if($stock > 0)
+        {
+            $where[]="a.amount <= ".$stock;
         }
         if(!empty($where))
         {
@@ -60,6 +69,7 @@ class Statistic extends CI_Controller {
         }
         $data['keyword'] = stripslashes($keyword);
         $data['list'] = $list;
+        $data['stock'] = $stock;
 
 		$this->load->view('admin/statistic/product_list', $data);
 	}
@@ -90,10 +100,16 @@ class Statistic extends CI_Controller {
 		$this->load->model('order');
         $s = $this->order->status();
         $count = array();
+        $total = 0;
         foreach($s as $key => $value)
         {
-            
+            $c= $this->order->count(array('status="'.$key.'"'));
+            $a = array('status'=>$key,'count'=>$c);
+            $count[$value] = $a;
+            $total += $c;
         }
+        $data['count'] = $count;
+        $data['total'] = $total>0?$total:1;
 		$this->load->view('admin/statistic/order_list', $data);
     }
 }

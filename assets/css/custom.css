@@ -1,10 +1,13 @@
 .m-r-5{margin-right: 5px;}
 .m-l-0{margin-left: 0px;}
 .m-b-10{margin-bottom:10px;}
+.m-b-20{margin-bottom:20px;}
 .m-b-0{margin-bottom:0px;}
 .p-20{padding: 20px;}
 .p-t-50{padding-top: 50px;}
 .p-b-50{padding-bottom: 50px;}
+.m-r-20{margin-right: 20px;}
+.m-r-10{margin-right: 10px;}
 .show-alert{position: fixed;top:5px; z-index: 10000; width: auto; border-radius:5px; left:50%;padding: 5px 35px 5px 15px; }
 .show-alert .close{top:5px;}
 .req{color:#FF0000;}

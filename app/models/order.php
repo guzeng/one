@@ -275,13 +275,9 @@ class Order extends CI_Model{
             $this->db->where($_where);
         }
         $this->db->from($this->table.' as a');
-        $this->db->join($this->detail_table.' as d','d.order_id=a.id','left');
-        $this->db->join($this->product_table.' as p','d.product_id=p.id','left');
-        $this->db->group_by("d.order_id");
         $query = $this->db->get();
         if($query->num_rows() > 0){
-           $count = $query->result();
-           return count($count);
+           return $query->row()->count;
         }
         return false; 
     }

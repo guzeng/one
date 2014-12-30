@@ -1,0 +1,1 @@
+alter table one_member add column login_num int(11) not null default 0 comment '登录次数';
