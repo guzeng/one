@@ -112,6 +112,11 @@ class Statistic extends CI_Controller {
         $data['total'] = $total>0?$total:1;
 		$this->load->view('admin/statistic/order_list', $data);
     }
+
+    public function visit()
+    {
+        $this->load->view('admin/statistic/visit');
+    }
 }
 
 /* End of file statistic.php */

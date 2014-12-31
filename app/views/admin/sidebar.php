@@ -192,6 +192,11 @@ $method_name=$RTR->fetch_method();
                     <span class="arrow "></span>
                     </a>
                     <ul class="sub-menu" <?if(in_array($controller_name, array('statistic'))):?>style='display:block;'<?endif;?>>
+                        <li class="<?if($method_name=='visit'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/statistic/visit" >
+                            访问统计
+                            </a>
+                        </li>
                         <li class="<?if($method_name=='product'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/statistic/product" >
                             商品统计
