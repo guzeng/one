@@ -41,6 +41,21 @@ class Index extends CI_Controller {
 			}
 		}
 		$data['days'] = $o;
+		/*
+			订单饼图数据
+		*/
+        $s = $this->order->status();
+        $count = array();
+        $total = 0;
+        foreach($s as $key => $value)
+        {
+            $c= $this->order->count(array('status="'.$key.'"'));
+            $a = array('status'=>$key,'count'=>$c);
+            $count[$value] = $a;
+            $total += $c;
+        }
+        $data['order_pie_count'] = $count;
+        $data['order_pie_total'] = $total>0?$total:1;
 		$this->load->view('admin/index', $data);
 	}
 	/**

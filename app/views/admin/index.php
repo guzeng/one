@@ -65,7 +65,7 @@
 			<div class="clearfix"></div>
 
 			<div class="row">
-				<div class="col-md-12 col-sm-12">
+				<div class="col-md-6 col-sm-12">
 					<!-- BEGIN PORTLET-->
 					<div class="portlet solid bordered light-grey">
 						<div class="portlet-title">
@@ -82,6 +82,18 @@
 						</div>
 					</div>
 					<!-- END PORTLET-->
+				</div>
+
+				<div class="col-md-6 col-sm-12">
+					<div class="portlet solid bordered light-grey">
+						<div class="portlet-title">
+							<div class="caption"><i class="fa fa-globe"></i>订单情况</div>
+							
+						</div>
+						<div class="portlet-body">
+							<div id="order_pie_chart" class="chart"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 <script type="text/javascript">
@@ -111,11 +123,52 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 <script src="<?php echo base_url();?>assets/plugins/flot/jquery.flot.js" type="text/javascript"></script>
 <script src="<?php echo base_url();?>assets/plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
+
+<script src="<?php echo base_url();?>assets/plugins/flot/jquery.flot.pie.js"></script>
+<script src="<?php echo base_url();?>assets/plugins/flot/jquery.flot.stack.js"></script>
+<script src="<?php echo base_url();?>assets/plugins/flot/jquery.flot.crosshair.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <script src="<?php echo base_url();?>assets/scripts/index.js" type="text/javascript"></script>
 <script>
     jQuery(document).ready(function() {
        Index.initCharts(); // init index page's custom scripts
+
+		var data = [];
+		var i = 0;
+		<?foreach($order_pie_count as $key => $item):?>
+			data[i]= {
+				label: "<?php echo $key?>",
+				data: parseInt(<?php echo $item['count']?>)*100/parseInt(<?php echo $order_pie_total?>)
+			};
+			++i;
+		<?endforeach;?>
+        $.plot($("#order_pie_chart"), data, {
+                series: {
+                    pie: {
+                        show: true,
+                        radius: 1,
+                        tilt: 1,
+                        label: {
+                            show: true,
+                            radius: 1,
+                            formatter: function (label, series) {
+                                return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+                            },
+                            background: {
+                                opacity: 0.8
+                            }
+                        },
+                        combine: {
+                            color: '#999',
+                            threshold: 0
+                        }
+                    }
+                },
+                legend: {
+                    show: false
+                }
+            });
+
     });
 </script>
 <?$this->load->view('admin/footer');?>

@@ -63,7 +63,6 @@
 				};
 				++i;
 			<?endforeach;?>
-			console.log(data);
             $.plot($("#pie_chart_9"), data, {
                     series: {
                         pie: {
