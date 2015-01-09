@@ -52,8 +52,7 @@
                     <div class="row">    
                         <div class="col-md-12 p-l-30 p-r-30">
                             <form action="<?php echo base_url()?>payment" method='post'>
-                            <div class="form-group m-b-20">
-                                <div class="col-md-12">
+                                <div class="form-group m-b-20">
                                     <div class="radio-list">
                                         <label class='m-b-20'>
                                             <input type="radio" checked="" value="alipay" id="pay_type_alipay" name="pay_type"> &nbsp;
@@ -133,28 +132,27 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- 优惠券-->
-                            <div class='form-group m-b-20'>
+                                <!-- 优惠券-->
+                                <div class='form-group m-b-20'>
                                 <?php if(!empty($coupon)):?>
-                                    <p>优惠券</p>
+                                    <h4 class='p-t-20'>使用优惠券</h4>
                                     <div class="radio-list">
                                         <?php foreach($coupon as $key => $item):?>
                                         <label class='m-b-20'>
-                                            <input type="radio" checked="" value="alipay" id="pay_type_alipay" name="pay_type"> &nbsp;
-                                            <?php echo $item->value;?> 
+                                            <input type="checkbox" value="alipay" id="" name="coupons" value='<?php echo $item->coupon_id?>'> &nbsp;
+                                            <?php echo $item->code;?> (<?php echo $this->coupon->get_type($item->type)?>，价值<?php echo $item->value?>，满<?php echo $item->use?>元使用)
                                         </label>
                                         <?php endforeach;?>
                                     </div>
                                 <?php endif;?>
-                            </div>
-                            <!-- coupon end -->
-                            <div class="form-group">
-                                <div class="col-md-12 p-20"> &nbsp; &nbsp; &nbsp;
-                                    <button class='btn btn-primary' type='submit'>提交</button>
                                 </div>
-                            </div>
-                            <input type='hidden' name='orderid' value="<?php echo $order->id?>">
+                                <!-- coupon end -->
+                                <div class="form-group">
+                                    <div class="col-md-12 p-20"> &nbsp; &nbsp; &nbsp;
+                                        <button class='btn btn-lg btn-primary' type='submit'>提交支付</button>
+                                    </div>
+                                </div>
+                                <input type='hidden' name='orderid' value="<?php echo $order->id?>">
                             </form>
                         </div>
                     </div>

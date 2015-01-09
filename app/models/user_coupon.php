@@ -28,6 +28,10 @@ class User_coupon extends CI_Model{
 
     public function insert($row){
         if(is_array($row) && !empty($row)){
+            if(!isset($row['create_time']) || $row['create_time']=='')
+            {
+                $row['create_time'] = local_to_gmt();
+            }
             if($this->db->insert($this->table,$row)){
                 return $this->db->insert_id();
             }
@@ -39,6 +43,15 @@ class User_coupon extends CI_Model{
     public function update($row,$id){
         if(!empty($row) && $id){
             $this->db->where('id',$id);
+            return $this->db->update($this->table,$row);
+        }
+        return false;
+    }
+    //--------------------------------------------------------
+    
+    public function update_by($row,$where){
+        if(!empty($row) && $where){
+            $this->db->where($where);
             return $this->db->update($this->table,$row);
         }
         return false;
@@ -56,6 +69,18 @@ class User_coupon extends CI_Model{
             return $result[0]->count;
         }
         return 0; 
+    }
+
+    public function get($where)
+    {
+        $this->db->select ('a.*');
+        $this->db->from($this->table.' as a');
+        $this->db->where($where);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->row();
+        }
+        return false; 
     }
 
     /**
@@ -84,7 +109,6 @@ class User_coupon extends CI_Model{
         }
         if(!empty($cond))
         {
-            print_r($where);
             $where = array_merge($where,$cond);
         }
         if(!empty($where))
@@ -158,7 +182,6 @@ class User_coupon extends CI_Model{
         }
         $this->db->order_by($_orderby);
         $query = $this->db->get();
-        echo $this->db->last_query();
         if($query->num_rows() > 0){
             return $query->result();
         }

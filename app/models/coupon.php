@@ -234,6 +234,27 @@ class Coupon extends CI_Model{
         return false;
     }
     //----------------------------------------------------------------
+
+    public function get_type($type='')
+    {
+        $arr = array(
+            '1' => '购物赠送',
+            '2' => '商家赠送'
+        );
+        if($type!=='')
+        {
+            if(array_key_exists($type, $arr))
+            {
+                return $arr[$type];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return $arr;
+    }
+
 }
 /* End of file Coupon.php */
 /* Location: ./app/models/Coupon.php */	

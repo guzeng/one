@@ -23,8 +23,10 @@ class Payment extends CI_Controller {
         //$this->alipayPath = ;
         $this->load->model('pay');
         $this->load->model('order');
+        $this->load->model('user_coupon');
         //$this->notify_url = base_url().'payment/alipaynotify';
         //$this->return_url = base_url().'payment/alipayreturn';
+        $this->use_coupons = array();
     }
 
 	public function index()
@@ -35,6 +37,7 @@ class Payment extends CI_Controller {
         $orderId = trim($post['orderid']);
         $pay_type = trim($post['pay_type']);
         $bank_name = trim($post['bank_name']);
+        $this->use_coupons = $post['coupons'];//使用的优惠券
         $payType = $this->pay->payType();
 
         
@@ -57,8 +60,28 @@ class Payment extends CI_Controller {
         }
         switch (strtolower($pay_type)) {
             case 'daofu':
-                if($this->order->update(array('pay_type'=>$this->pay->getType($pay_type),'complete'=>1),$orderId))
+                $row = array('pay_type'=>$this->pay->getType($pay_type),'complete'=>1);
+                if(!empty($this->use_coupons))
                 {
+                    $row['use_coupon'] = 1;
+                }
+                if($this->order->update($row, $orderId))
+                {
+                    if(!empty($this->use_coupons))
+                    {
+                        foreach ($this->use_coupons as $key => $couponId) {
+                            $this->user_coupon->update_by(
+                                array(
+                                    'order_id'=>$orderId,
+                                    'order_code'=>$order->code,
+                                    'is_use'=>1,
+                                    'use_time'=>local_to_gmt()
+                                ),array(
+                                    'user_id'=>$user_id,
+                                    'coupon_id'=>$couponId
+                                ));
+                        }
+                    }
                     redirect('payment/result/success');
                 }
                 break;

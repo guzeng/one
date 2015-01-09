@@ -21,15 +21,14 @@ class User_coupons extends CI_Controller {
         $condition = array("a.user_id = '".$user_id."'");
 
         if ($type == "1") {
-            $condition[] = 'a.is_use = 1 and c.expirse_to > '.time();
+            $condition[] = 'a.is_use = 0 and c.expirse_to > '.time();
         }
         else if($type == "2"){
-            $condition[] = 'a.is_use = 2';
+            $condition[] = 'a.is_use = 1';
         }
         else if($type == "3"){
-            $condition[] = 'a.is_use = 1 and c.expirse_to <'.time();
+            $condition[] = 'a.is_use = 0 and c.expirse_to <'.time();
         }
-        
         $list = $this->user_coupon->lists($condition,15,'a.id desc');
 
         $data['list'] = $list;
@@ -51,8 +50,6 @@ class User_coupons extends CI_Controller {
         {
             show_404('',false);
         }
-        $data = array('code' => '1000', 'msg' => '成功领取');
-
         $this->load->model('user_coupon');
         $count = $this->user_coupon->exist(array("user_id"=>$user_id,"coupon_id"=>$post['id']));
         if($count)
@@ -71,12 +68,12 @@ class User_coupons extends CI_Controller {
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('add_failed'));
             }
+            else
+            {
+                $data = array('code' => '1000', 'msg' => '您已成功领取');
+            }
         }
-        
-        // if($data['code'] == '1000')
-        // {
-        //     $data['goto'] = 'admin/coupons';
-        // }
+
         echo json_encode($data);
     }
 }

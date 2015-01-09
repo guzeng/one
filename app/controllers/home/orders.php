@@ -143,6 +143,7 @@ class Orders extends CI_Controller {
         $this->auth->check_login();
         $this->load->model('order_detail');
         $this->load->model('user_coupon');
+        $this->load->model('coupon');
 
         if(!$n)
         {
@@ -168,7 +169,8 @@ class Orders extends CI_Controller {
             'a.user_id='.$this->auth->user_id(),
             'a.is_use="0"',
             'c.expirse_from <= '. local_to_gmt(),
-            'c.expirse_to >='. local_to_gmt()
+            'c.expirse_to >='. local_to_gmt(),
+            'c.use <= '.$order->price
         ));
         $this->load->view('home/pay',$data);
     }

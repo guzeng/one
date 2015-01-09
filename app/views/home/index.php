@@ -220,7 +220,7 @@
                             <?php if(isset($coupon) && !empty($coupon)): ?>
                             <ul>
                             <?foreach($coupon as $key => $item):?>
-                                <li><a href="<?php echo base_url()?>home/coupons/index/<?php echo $item->id;?>"><?php echo $item->code;?></a></li>
+                                <li><a target='_blank' href="<?php echo base_url()?>coupons/index/<?php echo $item->id;?>"><?php echo $item->code;?></a></li>
                             <?endforeach;?>
                             </ul>  
                             <?else:?>
