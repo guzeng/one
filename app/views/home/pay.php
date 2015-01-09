@@ -59,7 +59,7 @@
                                             <img class='' src="<?php echo base_url().'assets/img/alipay.jpg'?>" >
                                         </label>
                                         <label class='m-b-20'>
-                                            <input type="radio" value="banking" id="pay_type_bank" name="pay_type"> &nbsp;
+                                            <input type="radio" value="bank" id="pay_type_bank" name="pay_type"> &nbsp;
                                             <img class='' src="<?php echo base_url().'assets/img/unionpay.jpg'?>" >
                                         </label>
                                         <div id='banks' class='hide'>
@@ -139,7 +139,7 @@
                                     <div class="radio-list">
                                         <?php foreach($coupon as $key => $item):?>
                                         <label class='m-b-20'>
-                                            <input type="checkbox" value="alipay" id="" name="coupons" value='<?php echo $item->coupon_id?>'> &nbsp;
+                                            <input type="checkbox" id="" name="coupons[]" value='<?php echo $item->coupon_id?>'> &nbsp;
                                             <?php echo $item->code;?> (<?php echo $this->coupon->get_type($item->type)?>，价值<?php echo $item->value?>，满<?php echo $item->use?>元使用)
                                         </label>
                                         <?php endforeach;?>
@@ -168,7 +168,7 @@
 <script type="text/javascript">
 $(function(){
     $('input[name=pay_type]').click(function(){
-        if($(this).val()=='banking'){$('#banks').show();}else{$('#banks').hide();}
+        if($(this).val()=='bank'){$('#banks').show();}else{$('#banks').hide();}
     })
 })
 </script>

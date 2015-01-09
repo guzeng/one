@@ -176,6 +176,19 @@ class Pay  extends CI_Model{
         return $arr;
     }
 
+    public function getTypes()
+    {
+        $types = $this->payType();
+        $type = array();
+        if($types)
+        {
+            foreach ($types as $key => $value) {
+                $type[] = $value['id'];
+            }
+        }
+        return $type;
+    }
+
     public function getType($type)
     {
         $types = $this->payType();

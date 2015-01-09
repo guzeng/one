@@ -24,6 +24,7 @@ class Payment extends CI_Controller {
         $this->load->model('pay');
         $this->load->model('order');
         $this->load->model('user_coupon');
+        $this->load->model('coupon');
         //$this->notify_url = base_url().'payment/alipaynotify';
         //$this->return_url = base_url().'payment/alipayreturn';
         $this->use_coupons = array();
@@ -37,10 +38,9 @@ class Payment extends CI_Controller {
         $orderId = trim($post['orderid']);
         $pay_type = trim($post['pay_type']);
         $bank_name = trim($post['bank_name']);
-        $this->use_coupons = $post['coupons'];//使用的优惠券
-        $payType = $this->pay->payType();
+        $this->use_coupons = isset($post['coupons']) ? $post['coupons'] : array();//使用的优惠券
+        $payType = $this->pay->getTypes();
 
-        
         if(!$orderId || !in_array($pay_type, $payType))
         {
             show_error($this->lang->line('param_error'),500);
@@ -67,28 +67,14 @@ class Payment extends CI_Controller {
                 }
                 if($this->order->update($row, $orderId))
                 {
-                    if(!empty($this->use_coupons))
-                    {
-                        foreach ($this->use_coupons as $key => $couponId) {
-                            $this->user_coupon->update_by(
-                                array(
-                                    'order_id'=>$orderId,
-                                    'order_code'=>$order->code,
-                                    'is_use'=>1,
-                                    'use_time'=>local_to_gmt()
-                                ),array(
-                                    'user_id'=>$user_id,
-                                    'coupon_id'=>$couponId
-                                ));
-                        }
-                    }
+                    $this->_use_coupon($order,true);//使用优惠券
                     redirect('payment/result/success');
                 }
                 break;
             case 'alipay':
                 $this->alipay($order);
                 break;
-            case 'banking':
+            case 'bank':
                 $this->bank($order,$bank_name);
                 break;
             default:
@@ -97,6 +83,33 @@ class Payment extends CI_Controller {
         }
 
 	}
+
+    private function _use_coupon($order,$use=false)
+    {
+        if(!empty($this->use_coupons))
+        {
+            foreach ($this->use_coupons as $key => $couponId) {
+                $row = array(
+                    'order_id'=>$order->id,
+                    'order_code'=>$order->code,
+                    'use_time'=>local_to_gmt()
+                );
+                if($use)
+                {
+                    $row['is_use'] = 1;
+                }
+                $this->user_coupon->update_by($row, array(
+                        'user_id'=>$this->auth->user_id(),
+                        'coupon_id'=>$couponId
+                    ));
+            }
+        }
+    }
+
+    private function _confirm_use_coupon($order)
+    {
+        $this->user_coupon->update_by(array('is_use'=>1,'use_time'=>local_to_gmt()),array('order_id'=>$order->id));
+    }
 
     public function result($msg)
     {
@@ -138,7 +151,20 @@ class Payment extends CI_Controller {
         //客户端的IP地址
         $exter_invoke_ip = "";
         //非局域网的外网IP地址，如：221.0.0.1
-
+        $coupon_fee = 0;
+        //优惠券
+        if(!empty($this->use_coupons))
+        {
+            foreach ($this->use_coupons as $key => $couponId) {
+                $coupon = $this->coupon->get($couponId);
+                if($coupon)
+                {
+                    $coupon_fee += $coupon->value;
+                    $total_fee -= $coupon->value;
+                }
+            }
+            $this->_use_coupon($order);//使用优惠券
+        }
 
         /************************************************************/
 
@@ -178,7 +204,7 @@ class Payment extends CI_Controller {
         //商户网站订单系统中唯一订单号，必填
 
         //订单名称
-        $subject = '壹心E购, 订单号:'.$order->code;
+        $subject = 'OrderNumber:'.$order->code;
         //必填
 
         //付款金额
@@ -187,7 +213,7 @@ class Payment extends CI_Controller {
 
         //订单描述
 
-        $body = $order->info;
+        $body = 'OrderNumber:'.$order->code;//'壹心E购, 订单号:'.$order->code;
         //默认支付方式
         $paymethod = "bankPay";
         //必填
@@ -207,6 +233,19 @@ class Payment extends CI_Controller {
         $exter_invoke_ip = "";
         //非局域网的外网IP地址，如：221.0.0.1
 
+        //优惠券
+        if(!empty($this->use_coupons))
+        {
+            foreach ($this->use_coupons as $key => $couponId) {
+                $coupon = $this->coupon->get($couponId);
+                if($coupon)
+                {
+                    $coupon_fee += $coupon->value;
+                    $total_fee -= $coupon->value;
+                }
+            }
+            $this->_use_coupon($order);//使用优惠券
+        }
 
         /************************************************************/
 
@@ -229,8 +268,7 @@ class Payment extends CI_Controller {
                 "exter_invoke_ip"   => $exter_invoke_ip,
                 "_input_charset"    => trim(strtolower($alipay_config['input_charset']))
         );
-        $order->bank = $defaultbank;
-        $order->save();
+        $this->order->update(array('bank'=>$defaultbank),$order->id);
         //建立请求
         $alipaySubmit = new AlipaySubmit($alipay_config);
         $html_text = $alipaySubmit->buildRequestForm($parameter,"get", "确认");
@@ -299,6 +337,7 @@ class Payment extends CI_Controller {
                     );
                     if($this->order->update($p,$order->id))
                     {
+                        $this->_confirm_use_coupon($order);
                         $this->pay_log->insert(array('order_id'=>$order->id,'order_code'=>$out_trade_no,'from'=>'alipay','trade_no'=>$trade_no,'info'=>'支付成功，支付时间:'.$notify_time));
                     }                    
                 }
@@ -366,6 +405,7 @@ class Payment extends CI_Controller {
                     );
                     if($this->order->update($p,$order->id))
                     {
+                        $this->_confirm_use_coupon($order);
                         $this->pay_log->insert(array('order_id'=>$order->id,'order_code'=>$out_trade_no,'from'=>'alipay','trade_no'=>$trade_no,'info'=>'支付成功，支付时间:'.$notify_time));
                     }
                 }
