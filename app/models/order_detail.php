@@ -82,10 +82,10 @@ class Order_detail extends CI_Model{
     */
 	public function get($order_id)
     {
-        $_type = 'd.order_id,d.product_id,d.price,d.number,p.name,p.best_price';
+        $_type = 'd.order_id,d.product_id,d.price,d.number,p.name,p.best_price,p.score,p.unit';
         
         $this->db->select ( $_type );
-        $this->db->from($this->detail_table.' as d');
+        $this->db->from($this->table.' as d');
         $this->db->join($this->product_table.' as p','d.product_id=p.id','left');
         $this->db->where('d.order_id',$order_id);
         $query = $this->db->get();

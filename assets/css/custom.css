@@ -87,4 +87,5 @@ input.bankinput{margin-top:12px;}
 .BJBANK{background-position:0 -36px}
 /** questionnaires style end **/
 
+a.noline:hover{text-decoration: none;}
 /* here you can put your own css to customize and override the theme */

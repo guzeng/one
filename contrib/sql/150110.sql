@@ -1,0 +1,2 @@
+alter table one_user_score_log add column product_id int(11) not null default 0 comment '商品ID',add column order_code varchar(20) not null default '' comment '订单号';
+alter table one_user_money_log add column order_id int(11) not null default 0 comment '订单ID',add column order_code varchar(20) not null default '' comment '订单号';

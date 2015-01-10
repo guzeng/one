@@ -165,20 +165,26 @@
                     <div class=''>
                         <div class='col-md-4 info-items'>
                             <div class='text-center item'>
+                                <a href="<?php echo base_url()?>carts" class='noline'>
                                 <div class='p-t-10 p-b-10'><?php echo $this->cart->count()?></div>
                                 <div>购物车</div>
+                                </a>
                             </div>
                         </div>
                         <div class='col-md-4 info-items'>
                             <div class=' text-center item'>
+                                <a href="<?php echo base_url()?>home/orders" class='noline'>
                                 <div class='p-t-10 p-b-10'><?php echo isset($order_count)?$order_count:0;?></div>
                                 <div>我的订单</div>
+                                </a>
                             </div>
                         </div>
                         <div class='col-md-4 info-items'>
                             <div class=' text-center item'>
+                                <a href="<?php echo base_url()?>home/myintegral" class='noline'>
                                 <div class='p-t-10 p-b-10'><?php echo isset($score)?$score:0;?></div>
                                 <div>积分</div>
+                                </a>
                             </div>
                         </div>
                     </div>

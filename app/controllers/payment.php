@@ -60,7 +60,7 @@ class Payment extends CI_Controller {
         }
         switch (strtolower($pay_type)) {
             case 'daofu':
-                $row = array('pay_type'=>$this->pay->getType($pay_type),'complete'=>1);
+                $row = array('pay_type'=>$this->pay->getType($pay_type),'complete'=>1,'status'=>1);//状态改为待发货
                 if(!empty($this->use_coupons))
                 {
                     $row['use_coupon'] = 1;
@@ -68,6 +68,7 @@ class Payment extends CI_Controller {
                 if($this->order->update($row, $orderId))
                 {
                     $this->_use_coupon($order,true);//使用优惠券
+                    $this->_score($order);//增加积分
                     redirect('payment/result/success');
                 }
                 break;
@@ -105,10 +106,78 @@ class Payment extends CI_Controller {
             }
         }
     }
-
+    /**
+     * 订单支付，该订单内使用的优惠券状态改为已用
+     * order object 订单
+     */
     private function _confirm_use_coupon($order)
     {
         $this->user_coupon->update_by(array('is_use'=>1,'use_time'=>local_to_gmt()),array('order_id'=>$order->id));
+    }
+
+    /** 
+     * 增加积分
+     * order object 订单
+     */
+    private function _score($order)
+    {
+        $this->load->model('order_detail');
+        $this->load->model('user_score_log');
+        $this->load->model('user');
+        if($order)
+        {
+            $detail = $this->order_detail->get($order->id);
+            if(!empty($detail))
+            {
+                $total = 0;
+                $log = array();
+                foreach ($detail as $key => $v) {
+                    if($v->score > 0)
+                    {
+                        $total += $v->score*$v->number;
+                        $log[] = array('score'=>$v->score,'product_id'=>$v->product_id,'pnumber'=>$v->number,'pname'=>$v->name,'punit'=>$v->unit);
+                    }
+                }
+                if($total > 0)
+                {
+                    $user_id = $this->auth->user_id();
+                    $user = $this->user->get($user_id);
+                    if($this->user->update(array('score'=>$user->score+$total),$user_id))
+                    {
+                        foreach ($log as $k => $l) {
+                            $this->user_score_log->insert(array(
+                                'user_id'=>$user_id,
+                                'score' => $l['score']*$l['pnumber'],
+                                'order_money' => $order->price,
+                                'type' => 2,
+                                'product_id' => $l['product_id'],
+                                'order_code' => $order->code,
+                                'info' => '购买'.$l['pnumber'].$l['punit'].$l['pname'].'送积分'
+                            ));
+                        }
+                    }
+                }
+            }            
+        }
+    }
+
+    /**
+     * 记录支付记录
+     */
+    private function _money_log($order)
+    {
+        $this->load->model('user_money_log');
+        if($order)
+        {
+            $this->user_money_log->insert(array(
+                'user_id' => $this->auth->user_id(),
+                'money' => $order->price,
+                'type' => 1,
+                'info' => '支付订单'.$order->code,
+                'order_id' => $order->id,
+                'order_code' => $order->code
+            ));
+        }
     }
 
     public function result($msg)
@@ -338,6 +407,8 @@ class Payment extends CI_Controller {
                     if($this->order->update($p,$order->id))
                     {
                         $this->_confirm_use_coupon($order);
+                        $this->_score($order);//增加积分
+                        $this->_money_log($order);//记录LOG
                         $this->pay_log->insert(array('order_id'=>$order->id,'order_code'=>$out_trade_no,'from'=>'alipay','trade_no'=>$trade_no,'info'=>'支付成功，支付时间:'.$notify_time));
                     }                    
                 }
@@ -406,6 +477,8 @@ class Payment extends CI_Controller {
                     if($this->order->update($p,$order->id))
                     {
                         $this->_confirm_use_coupon($order);
+                        $this->_score($order);//增加积分
+                        $this->_money_log($order);//记录LOG
                         $this->pay_log->insert(array('order_id'=>$order->id,'order_code'=>$out_trade_no,'from'=>'alipay','trade_no'=>$trade_no,'info'=>'支付成功，支付时间:'.$notify_time));
                     }
                 }
