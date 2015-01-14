@@ -28,7 +28,7 @@ class Mailsubs extends CI_Controller {
 		$user = $this->user->get($user_id);
 		$user_mailsubs = $this->user_mailsubs->get($user_id);
         $subs = array();
-        if($user_mailsubs->sub)
+        if($user_mailsubs)
         {
             $subs = explode(",",$user_mailsubs->sub);
         }

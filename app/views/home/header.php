@@ -66,16 +66,16 @@
     <div id='header' class='container'>
         <div class='row'>
             <div class="col-md-4 m-t-10">
-                <a href="#">
+                <a href="<?php echo base_url()?>">
                     <img src="<?php echo base_url()?>assets/img/logo.png">
                 </a>
             </div>
             <div class="col-md-8 col-xs-12">
-                <form role="form" class="navbar-form navbar-right" id='search-form'>
+                <form role="form" class="navbar-form navbar-right" id='search-form' action='<?php echo base_url()?>search' method='post'>
                     <div class='form-group m-r-15'>
                         <div class="input-group">
-                            <input type="text" class="form-control" id='search' placeholder="搜索商品">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                            <input type="text" class="form-control" id='search' name='keyword' placeholder="搜索商品">
+                            <button class="input-group-addon btn" type='submit' style='padding-top:9px;padding-bottom:9px;'><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
                     <a class="btn btn-lg btn-cart" href="<?php echo base_url()?>carts">
