@@ -231,7 +231,7 @@ function load_page(url, target, callback)
                 }
                 else if(typeof(data.msg)!='undefined')
                 {
-                    show_alert(data.msg);
+                    show_error(data.msg);
                 }
 				place_holder();
                 if(typeof(callback)=='function')
@@ -241,7 +241,7 @@ function load_page(url, target, callback)
                 $("html,body").animate({scrollTop:$("#"+target).offset().top-85},1000);
             },
             error:function(){
-                show_alert(msg.error);
+                show_error(msg.error);
             },
             beforeSend:function(){
                 //show_alert(msg.loading, 'loading');

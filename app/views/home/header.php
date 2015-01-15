@@ -19,7 +19,6 @@
     <!-- BEGIN THEME STYLES --> 
     <link href="<?php echo base_url();?>assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="<?php echo base_url();?>assets/css/home.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- END THEME STYLES -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -74,7 +73,7 @@
                 <form role="form" class="navbar-form navbar-right" id='search-form' action='<?php echo base_url()?>search' method='post'>
                     <div class='form-group m-r-15'>
                         <div class="input-group">
-                            <input type="text" class="form-control" id='search' name='keyword' placeholder="搜索商品">
+                            <input type="text" class="form-control" id='search' name='keyword' value="<?php echo isset($keyword)?urldecode($keyword):''?>" placeholder="搜索商品">
                             <button class="input-group-addon btn" type='submit' style='padding-top:9px;padding-bottom:9px;'><i class="glyphicon glyphicon-search"></i></button>
                         </div>
                     </div>
