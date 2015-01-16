@@ -17,7 +17,7 @@
                     <?foreach($product_cate as $key => $item):?>
                         <div class="list-group-item heading cate-parent hand" id='cate-<?php echo $item['id']?>'>
                             <i class="fa <?php echo $key>3 ? 'fa-plus' : 'fa-minus'?>"></i>
-                            <a class='p-l-10' href="<?php echo base_url()?>category/index/cate_id/<?php echo $item['id']?>">
+                            <a class='p-l-10' href="javascript:void(0)" onclick="load_page('<?php echo base_url()?>search/plist/keyword/<?php echo $keyword?>/cate_id/<?php echo $item['id']?>/brand_id/<?php echo $brand_id?>','c-plist')">
                                 <?php echo $item['name']?>
                             </a>
                         </div>
@@ -25,7 +25,7 @@
                             <?php if(isset($item['child']) && !empty($item['child'])): ?>
                                 <?foreach($item['child'] as $k => $i):?>
                                     <div class='m-b-5 p-l-20'>
-                                    <a href="<?php echo base_url()?>category/index/cate_id/<?php echo $i['id']?>">
+                                    <a href="javascript:void(0)" onclick="load_page('<?php echo base_url()?>search/plist/keyword/<?php echo $keyword?>/cate_id/<?php echo $i['id']?>/brand_id/<?php echo $brand_id?>','c-plist')">
                                         <?php echo $i['name'];?></a>
                                     </div>
                                 <?endforeach;?>
