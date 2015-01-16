@@ -29,6 +29,7 @@ class Item extends CI_Controller {
 		{
 			show_404();
 		}
+		$this->product->add_view($id);
 		$category = $this->product->get_category($id);
 		
 		if($category)
