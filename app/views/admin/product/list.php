@@ -96,6 +96,10 @@
 									<button id="down_jia" type="button" class="btn blue" style="margin-left:15px;">
 									 批量下架
 									</button>
+
+									<button id="export_product" type="button" onclick="export_product()" class="btn blue" style="margin-left:15px;">
+									 批量导出
+									</button>
 								</div>
 							</div>
 							<?php echo $list;?>
@@ -309,5 +313,15 @@
 		        }
 		    });
 		}
+
+	function export_product()
+	{
+		var keyword = $("#product_list_filter").find("input").val();
+		if(keyword)
+		{
+			keyword="/"+keyword;
+		}
+		window.open(msg.base_url+"admin/products/export_product"+keyword);
+	}
 	</script>
 <?$this->load->view('admin/footer');?>

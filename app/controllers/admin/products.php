@@ -414,6 +414,101 @@ class Products extends CI_Controller {
         echo json_encode($data);
     }
     //-------------------------------------------------------------------------
+
+    /**
+     * 用户学习查询导出
+     *
+     * @author varson
+     * @2013/4/18
+     */
+    public function export_product($keyword='')
+    {
+        require_once("./".APPPATH.'libraries/PHPExcel/PHPExcel.php');
+        require_once("./".APPPATH.'libraries/PHPExcel/PHPExcel/IOFactory.php');
+        require_once("./".APPPATH.'libraries/PHPExcel/PHPExcel/Writer/IWriter.php');
+        require_once("./".APPPATH.'libraries/PHPExcel/PHPExcel/Writer/Excel5.php');
+
+        $keyword = trim(urldecode($keyword));
+        $where = "status != 2";
+        if($keyword)
+        {
+            $where = $where." and (name like '%".$keyword."%'"." or code like '%".$keyword."%'"." or price like '%".$keyword."%'"." or best_price like '%".$keyword."%'";
+
+            if($keyword == "推荐")
+                $where = $where." or a.recommend = 1";
+            if($keyword == "特卖")
+                $where = $where." or a.specials = 1";
+            if($keyword == "允许评论")
+                $where = $where." or a.allow_comment = 1";
+            if($keyword == "首页显示")
+                $where = $where." or a.show_home = 1";
+            if($keyword == "精选商品")
+                $where = $where." or a.handpick = 1";
+            if($keyword == "热卖")
+                $where = $where." or a.hot = 1";
+
+            $where = $where.")";
+        }
+        $list = $this->product->all($where);
+        
+        $t1 = "编号";//标头  就是列名，最上面的那个
+        $t2 = "名称";
+        $t3 = "价格";
+        $t4 = "优惠价格";
+        $t5 = "特性";
+
+        //$a1=iconv("utf-8","gb2312",$a1);  //如果是乱码的话，则需要转换下
+        //$a2=iconv("utf-8","gb2312",$a2);
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->getActiveSheet()->setCellValue('a1', $t1);//设置列的值
+        $objPHPExcel->getActiveSheet()->setCellValue('b1', $t2);
+        $objPHPExcel->getActiveSheet()->setCellValue('c1', $t3);
+        $objPHPExcel->getActiveSheet()->setCellValue('d1', $t4);
+        $objPHPExcel->getActiveSheet()->setCellValue('e1', $t5);
+        if($list)
+        {
+            foreach($list as $key => $item)
+            {
+                $te_xing = array();
+                if($item->recommend==1)
+                    $te_xing[] = "推荐";
+                if($item->specials==1)
+                    $te_xing[] = "特卖";
+                if($item->allow_comment==1)
+                    $te_xing[] = "允许评论";
+                if($item->show_home==1)
+                    $te_xing[] = "首页显示";
+                if($item->handpick==1)
+                    $te_xing[] = "精选商品";
+                if($item->hot==1)
+                    $te_xing[] = "热卖";
+                $i = $key+2;
+                $objPHPExcel->getActiveSheet()->setCellValue('a'.$i, (string)$item->code!='' ? (string)$item->code : '--');
+                $objPHPExcel->getActiveSheet()->setCellValue('b'.$i, (string)$item->name);
+                $objPHPExcel->getActiveSheet()->setCellValue('c'.$i, (string)$item->price);
+                $objPHPExcel->getActiveSheet()->setCellValue('d'.$i, (string)$item->best_price);
+                $objPHPExcel->getActiveSheet()->setCellValue('e'.$i, empty($te_xing)?'--':implode(',', $te_xing));
+            }            
+        }
+
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);//设置宽度
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(35);
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');  //创建表格类型，目前支持老版的excel5,和excel2007,也支持生成html,pdf,csv格式
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control:must-revalidate, post-check=0, pre-check=0");
+        header("Content-Type:application/force-download");
+        header("Content-Type:application/vnd.ms-execl");
+        header("Content-Type:application/octet-stream");
+        header("Content-Type:application/download");
+        header('Content-Disposition:attachment;filename="product-records.xls"');
+        header("Content-Transfer-Encoding:binary");
+        $objWriter->save('php://output');
+    }
+    //-------------------------------------------------------------------------
 }
 /* End of file products.php */
 /* Location: ./lms_app/controllers/admin/products.php */
