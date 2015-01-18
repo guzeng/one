@@ -349,11 +349,11 @@ class Products extends CI_Controller {
             echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
             exit;
         }
-        if($this->product->delete($id))
+        if($this->product->update(array('status'=>2),$id))
         {
             $data = array('code'=>'1000','msg'=>'删除成功','data'=>array('id'=>$id));
-            @unlink(upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id).DIRECTORY_SEPARATOR.file_save_name($id).'.png');
-            @unlink(upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id).DIRECTORY_SEPARATOR.file_save_name($id).'_thumb.png');
+            // @unlink(upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id).DIRECTORY_SEPARATOR.file_save_name($id).'.png');
+            // @unlink(upload_folder('product').DIRECTORY_SEPARATOR.file_save_dir($id).DIRECTORY_SEPARATOR.file_save_name($id).'_thumb.png');
         }
         else
         {
@@ -389,6 +389,29 @@ class Products extends CI_Controller {
             ));            
         }
 
+    }
+    //-------------------------------------------------------------------------
+
+    public function reagin($id)
+    {
+        $this->auth->check_login_json();
+        if(!$id)
+        {
+            show_error('参数错误');
+        }
+        $data = array('code' => '1000', 'msg' => '还原成功');
+        $row = array(
+            'status' => 0
+        );
+        if(!$this->product->update($row,$id))
+        {
+            $data = array('code'=>'1001','msg'=>"还原失败");
+        }
+        else
+        {
+            $data['data'] = array('id'=>$id);
+        }
+        echo json_encode($data);
     }
     //-------------------------------------------------------------------------
 }
