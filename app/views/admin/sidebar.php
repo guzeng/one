@@ -134,7 +134,7 @@ $method_name=$RTR->fetch_method();
                             </a>
                         </li>
                          <li class="<?if($controller_name=='provider'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/provider" >
+                            <a href="<?php echo base_url()?>admin/providers" >
                             供货商
                             </a>
                         </li>

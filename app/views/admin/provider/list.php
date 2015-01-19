@@ -7,15 +7,19 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						所有文章
+						供货商
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="<?php echo base_url()?>">首页</a> 
+							<a href="<?php echo base_url()?>admin">首页</a> 
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li><a href="#">所有文章</a></li>
+						<li>
+							<a href="#">系统管理</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>供货商</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -29,23 +33,13 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue" id='list-box'>
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-list"></i>所有文章</div>
+							<div class="caption"><i class="fa fa-list"></i>供货商</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a href='<?php echo base_url();?>admin/news/edit' class="btn blue m-r-5">
-											<i class="fa fa-plus"></i> 新增文章
+									<a href='<?php echo base_url();?>admin/providers/edit' class="btn blue m-r-5">
+											<i class="fa fa-plus"></i> 新增供货商
 									</a>
-									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','news_list','admin/news/lists')"><i class='fa fa-refresh'></i></a>
-									<a class="btn blue" href="#" data-toggle="dropdown">
-									显示/隐藏
-									<i class="fa fa-angle-down"></i>
-									</a>
-									<div id="news_list_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-										<label><input type="checkbox" checked data-column="0">标题</label>
-										<label><input type="checkbox" checked data-column="1">状态</label>
-										<label><input type="checkbox" checked data-column="2">创建时间</label>
-										<label><input type="checkbox" checked data-column="3">发表时间</label>
-									</div>
+									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','provider_list','admin/providers/lists')"><i class='fa fa-refresh'></i></a>
 								</div>
 							</div>
 						</div>
@@ -63,10 +57,14 @@
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>assets/plugins/data-tables/DT_bootstrap.js"></script>
 	<!-- END PAGE LEVEL PLUGINS -->
-	<!-- BEGIN PAGE LEVEL SCRIPTS -->  
-	<script>
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script >
 		jQuery(document).ready(function() {
-		   initTable('news_list');
+		   initTable('provider_list');
 		});
-	</script>
+		function delete_callback()
+		{
+			reload_list('list-box','provider_list','admin/providers/lists');
+		}
+	</script>    
 <?$this->load->view('admin/footer');?>
