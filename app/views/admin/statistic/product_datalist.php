@@ -10,6 +10,7 @@
 			<th>库存</th>
 			<th>销量</th>
 			<th>浏览量</th>
+			<th>购买率</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -25,6 +26,7 @@
     		<td><?php echo $item->amount;?></td>
     		<td><?php echo $item->sale_num;?></td>
     		<td><?php echo $item->view_num;?></td>
+    		<td><?php echo round($item->sale_num*100/$item->view_num,2).'%';?></td>
     		<td>
     			<?php if($item->recommend==1):?><div>推荐</div><?php endif;?>
     			<?php if($item->specials==1):?><div>特卖</div><?php endif;?>

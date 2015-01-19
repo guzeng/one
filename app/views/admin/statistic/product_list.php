@@ -41,10 +41,15 @@
 							<i class="fa fa-angle-down"></i>
 							</a>
 							<div id="product_list_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
-								<label><input type="checkbox" checked data-column="1">编码</label>
-								<label><input type="checkbox" checked data-column="2">名称</label>
-								<label><input type="checkbox" checked data-column="3">价格</label>
-								<label><input type="checkbox" checked data-column="4">优惠价</label>
+								<label><input type="checkbox" checked data-column="1">图片</label>
+								<label><input type="checkbox" checked data-column="2">编码</label>
+								<label><input type="checkbox" checked data-column="3">名称</label>
+								<label><input type="checkbox" checked data-column="4">价格/优惠价</label>
+								<label><input type="checkbox" checked data-column="5">库存</label>
+								<label><input type="checkbox" checked data-column="6">销量</label>
+								<label><input type="checkbox" checked data-column="7">浏览量</label>
+								<label><input type="checkbox" checked data-column="8">购买率</label>
+								<label><input type="checkbox" checked data-column="9">特性</label>
 							</div>
 						</div>
 					</div>
@@ -73,7 +78,8 @@
 								<th>库存</th>
 								<th>销量</th>
 								<th>浏览量</th>
-								<th></th>
+								<th>购买率</th>
+								<th>特性</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -88,6 +94,7 @@
 					    		<td><?php echo $item->amount;?></td>
 					    		<td><?php echo $item->sale_num;?></td>
 					    		<td><?php echo $item->view_num;?></td>
+    							<td><?php echo ($item->view_num>0?round($item->sale_num*100/$item->view_num,2):'0').'%';?></td>
 					    		<td>
 					    			<?php if($item->recommend==1):?><div>推荐</div><?php endif;?>
 					    			<?php if($item->specials==1):?><div>特卖</div><?php endif;?>

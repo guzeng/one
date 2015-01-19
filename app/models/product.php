@@ -81,6 +81,23 @@ class Product extends CI_Model{
     }   
     //----------------------------------------------------------------
     /**
+    *   update
+    *   更新单个商品
+    *   @param array row 数组
+    *   @param int id
+    * 
+    */
+    public function add_view($id,$num=1)
+    {
+        if($num && $id){
+            $this->db->where('id',$id);
+            $this->db->set('view_num', 'view_num+1', FALSE);
+            return $this->db->update($this->table);
+        }
+        return false;
+    }   
+    //----------------------------------------------------------------
+    /**
     *   bath_update_status
     *   更新多个个商品状态
     *   @param array row 数组

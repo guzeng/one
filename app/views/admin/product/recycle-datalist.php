@@ -18,8 +18,10 @@
                                 		<td><?php echo $item->price?></td>
                                 		<td><?php echo $item->best_price?></td>
 										<td>
-											<a href="<?php echo base_url();?>admin/products/edit/<?php echo $item->id?>">
-												<span class='label label-warning'><i class='fa fa-edit'></i></span></a>
+											<!-- <a href="<?php echo base_url();?>admin/products/edit/<?php echo $item->id?>">
+												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> -->
+											<a href="javascript:void(0)" onclick="confirm_dialog('还原商品确认','确认还原改商品吗？',Delete,'admin/products/reagin/'+<?php echo $item->id?>)">
+												<span class='label label-success'><i class='fa fa-exchange'></i></span></a>
 										</td>
 									</tr>
                             		<?endforeach;?>
