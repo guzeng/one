@@ -133,6 +133,11 @@ $method_name=$RTR->fetch_method();
                             系统设置
                             </a>
                         </li>
+                         <li class="<?if($controller_name=='provider'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/provider" >
+                            供货商
+                            </a>
+                        </li>
                         <li class="<?if($controller_name=='ship_type'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/ship_type" >
                             配送方式
