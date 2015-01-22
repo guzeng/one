@@ -133,7 +133,12 @@ $method_name=$RTR->fetch_method();
                             系统设置
                             </a>
                         </li>
-                         <li class="<?if($controller_name=='provider'):?>active<?endif;?>">
+                        <li class="<?if($controller_name=='roles'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/roles" >
+                            角色设置
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='provider'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/providers" >
                             供货商
                             </a>

@@ -43,3 +43,5 @@ $lang['deny_request'] ="你请求的操作是不允许的。";
 $lang['no_product_exist'] = "商品不存在";
 $lang['submit_error'] = "提交出错，请查看提示";
 $lang['product_shortage'] = "产品数量不足";
+$lang['param_incorrect'] = "参数错误";
+$lang['permission_denied'] = "您没有权限";

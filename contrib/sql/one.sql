@@ -3332,6 +3332,7 @@ CREATE TABLE `one_member` (
   `alias` varchar(30) NOT NULL default '' COMMENT '昵称',
   `id_card_number` varchar(30) NOT NULL default '' COMMENT '身份证号码',
   `birthday` int(10) NOT NULL default '0' COMMENT '生日',
+  `role_id` tinyint(3) NOT NULL default '0' COMMENT '角色ID',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
@@ -3709,3 +3710,26 @@ CREATE TABLE `one_provider` (
   `descript` VARCHAR(50) NOT NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY  (`id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='供货商表';
+
+/*Table structure for table `one_role` */
+
+DROP TABLE IF EXISTS `one_role`;
+
+CREATE TABLE `one_role` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '角色名称',
+  PRIMARY KEY (`id`)
+) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='角色表';
+
+/*Table structure for table `lm_role_permission_map` */
+
+DROP TABLE IF EXISTS `one_role_permission_map`;
+
+CREATE TABLE `one_role_permission_map` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `role_id` INT(11) NOT NULL DEFAULT '0' COMMENT '角色ID',
+  `permission_id` INT(11) NOT NULL DEFAULT '0' COMMENT '权限ID',
+  PRIMARY KEY (`id`),
+  KEY `role_id` (`role_id`),
+  KEY `permission_id` (`permission_id`)
+) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='角色拥有的权限表';
