@@ -32,7 +32,7 @@
 							<div class="caption"><i class="fa fa-list"></i>回收商品</div>
 							<div class="actions">
 								<div class="btn-group">
-									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','product_recycle_list','admin/products/recycle_lists')"><i class='fa fa-refresh'></i></a>
+									<a class='btn blue' href="javascript:void(0);" onclick="reload_list('list-box','product_recycle_list','admin/recycle/recycle_lists')"><i class='fa fa-refresh'></i></a>
 									<a class="btn blue" href="#" data-toggle="dropdown">
 									显示/隐藏
 									<i class="fa fa-angle-down"></i>

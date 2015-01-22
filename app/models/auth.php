@@ -317,7 +317,7 @@ class Auth extends CI_Model{
             1 => array(
                     'id'        => 1,                   //索引
                     'dir'       =>'admin',              //类所在文件夹
-                    'controller'=> 'IndexController',   //控制器名称
+                    'controller'=> 'Index',          //控制器名称
                     'method'    => array('getIndex'),   //控制器下的方法
                     'cate'      => 'admin-index',       //类别
                     'code'      => 'admin-index',       //编码，用于显示
@@ -327,7 +327,7 @@ class Auth extends CI_Model{
             2 => array(
                     'id'        => 2,
                     'dir'       =>'admin',
-                    'controller'=> 'index',
+                    'controller'=> 'Products',//所有商品
                     'method'    => array('user_online'),
                     'cate'      => 'admin-index',
                     'code'      => 'admin-user-online',
@@ -337,7 +337,7 @@ class Auth extends CI_Model{
             3 => array(
                     'id'        => 3,
                     'dir'       =>'admin',
-                    'controller'=> 'CourseUserController',
+                    'controller'=> 'Product_cate',//商品分类
                     'method'    => array('getIndex','postSave'),
                     'cate'      => 'learning',
                     'code'      => 'admin-course-user',
@@ -347,7 +347,7 @@ class Auth extends CI_Model{
             4 => array(
                     'id'        => 4,
                     'dir'       =>'admin',
-                    'controller'=> 'QuestionController',
+                    'controller'=> 'Product_brands',//商品品牌
                     'method'    => array('postUpload','postUpdate','postDelete','postDeleteall'),
                     'cate'      => 'learning',
                     'code'      => 'admin-question',
@@ -357,7 +357,7 @@ class Auth extends CI_Model{
             5 => array(
                     'id'        => 5,
                     'dir'       =>'admin',
-                    'controller'=> 'CourseController',
+                    'controller'=> 'Product_comments',//用户评论
                     'method'    => array('getIndex','getDatalist','postUpdate','getEdit','getDelete','postChangeStatus','getPlay','getCoursewareEdit','postCoursewareDelete','postCoursewareUpdate','postUpload','getInfo','getGradeList'),
                     'cate'      => 'learning',
                     'code'      => 'admin-course',
@@ -367,7 +367,7 @@ class Auth extends CI_Model{
             6 => array(
                     'id'        => 6,
                     'dir'       =>'admin',
-                    'controller'=> 'CategoryController',
+                    'controller'=> 'Recycle',//回收站
                     'method'    => array('getIndex','postUpdate','getEdit','getDelete'),
                     'cate'      => 'learning',
                     'code'      => 'admin-category',

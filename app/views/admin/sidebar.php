@@ -51,7 +51,7 @@ $method_name=$RTR->fetch_method();
                             </a>
                         </li>
                         <li class="<?if($controller_name=='products' && $method_name=='recycle'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/products/recycle" >
+                            <a href="<?php echo base_url()?>admin/recycle" >
                             回收站
                             </a>
                         </li>
