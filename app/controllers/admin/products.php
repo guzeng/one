@@ -78,6 +78,21 @@ class Products extends CI_Controller {
     }
     //-------------------------------------------------------------------------
 
+    public function info($id)
+    {
+        $row = $this->product->get($id);
+        if(!$row)
+        {
+            show_404('',false);
+        }
+        $data['row'] = $row;
+        $data['brand'] = $this->product_brand->get($row->brand_id);
+        $data['type'] = $this->product_type->get($row->type_id);
+        $data['cate'] = $this->product_category->get($row->cate_id);
+        $data['cates'] = $this->product_category_map->all(array('where'=>array('product_id'=>$id),'join_category'=>true));
+        $this->load->view('admin/product/info',$data);
+    }
+
     public function update()
     {
         $this->auth->check_login_json();
@@ -93,7 +108,6 @@ class Products extends CI_Controller {
         $this->form_validation->set_rules('price', ' ', 'numeric|max_length[8]'); 
         $this->form_validation->set_rules('best_price', ' ', 'numeric|max_length[8]'); 
         $this->form_validation->set_rules('amount', ' ', 'integer|max_length[8]'); 
-        $this->form_validation->set_rules('sale_num', ' ', 'integer|max_length[8]'); 
         $this->form_validation->set_rules('unit', ' ', 'max_length[30]');  
         $this->form_validation->set_rules('weight', ' ', 'numeric|max_length[8]');  
         $this->form_validation->set_rules('min_num', ' ', 'integer|max_length[11]');  
@@ -116,7 +130,6 @@ class Products extends CI_Controller {
             $error['price'] = form_error('price');
             $error['best_price'] = form_error('best_price');
             $error['amount'] = form_error('amount');
-            $error['sale_num'] = form_error('sale_num');
             $error['unit'] = form_error('unit');
             $error['weight'] = form_error('weight');
             $error['min_num'] = form_error('min_num');
@@ -178,7 +191,6 @@ class Products extends CI_Controller {
             'price' => $post['price'] ? $post['price'] : 0,
             'best_price' => $post['best_price'] ? $post['best_price'] : 0,
             'amount' => $post['amount'] ? $post['amount'] : 0,
-            'sale_num' => $post['sale_num'] ? $post['sale_num'] : 0,
             'type_id' => $post['type_id'],
             'cate_id' => $post['cate'],
             'brand_id' => $post['brand_id'],

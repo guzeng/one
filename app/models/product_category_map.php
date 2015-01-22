@@ -3,6 +3,7 @@
 class Product_category_map  extends CI_Model{
 	private $table='product_category_map';
 	private $table_product='product';
+	private $table_category='product_category';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -125,14 +126,20 @@ class Product_category_map  extends CI_Model{
         }
         $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'id desc';
         if(!isset($_type)){
-            $_type = '*';
+            $_type = 'a.*';
         }
-		$this->db->select ( $_type );
         if(isset($_where)){
             $this->db->where($_where);
         }
         $this->db->order_by($_orderby);
-		$query = $this->db->get ( $this->table);
+        $this->db->from($this->table . ' as a');
+        if(isset($_join_category))
+        {
+        	$this->db->join($this->table_category.' as c','a.category_id=c.id','left');
+            $_type = 'a.*,c.name';
+        }
+		$this->db->select ( $_type );
+		$query = $this->db->get ();
         if($query->num_rows() > 0){
             return $query->result();
         }
