@@ -77,13 +77,6 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3">销量</label>
-								<div class="col-md-7">
-									<input type="text" id="sale_num" name='sale_num' maxLength='8' class="form-control" placeholder="请输入整数" value="<?php echo isset($row)?$row->sale_num:0?>">
-									<span class="help-block"></span>
-								</div>
-							</div>
-							<div class="form-group">
 								<label class="control-label col-md-3">大类</label>
 								<div class="col-md-7">
 									<select  class="form-control" id='cate' name='cate'>
@@ -229,7 +222,7 @@
 								</div>
 							</div>       
 
-							<h4 class="form-section">商品状态</h4>       
+							<h4 class="form-section">商品特性</h4>       
 							<div class="form-group">
 								<div class="col-md-12 checkbox-list">
 									<div class="">

@@ -17,9 +17,17 @@
                             		<?foreach($list as $key => $item):?>
 									<tr id='<?php echo $item->id;?>'>
 										<td><input type="checkbox" class="checkboxes" value="<?php echo $item->id;?>" /></td>
-                                		<td><img src="<?php echo $this->product->pic($item->id,1,'thumb')?>"></td>
+                                		<td>
+                                			<a href="<?php echo base_url().'admin/products/info/'.$item->id?>">
+                                				<img src="<?php echo $this->product->pic($item->id,1,'thumb')?>">
+                                			</a>
+                                		</td>
                                 		<td><?php echo $item->code?></td>
-                                		<td><?php echo $item->name?></td>
+                                		<td>
+                                			<a href="<?php echo base_url().'admin/products/info/'.$item->id?>">
+                                				<?php echo $item->name?>
+                                			</a>
+                                		</td>
                                 		<td><?php echo $item->price?></td>
                                 		<td class='hidden-xs'><?php echo $item->best_price?></td>
 							    		<td class='hidden-xs'>
