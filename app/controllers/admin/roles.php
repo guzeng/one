@@ -23,18 +23,6 @@ class Roles extends CI_Controller {
 
 	public function index()
     {
-        // $dir = '';
-        // $controller = '';
-        // $method = '';
-        // $RTR =& load_class('Router', 'core');
-        // $dir = $dir != '' ? $dir :  rtrim($RTR->fetch_directory(), '/');
-        // $controller = $controller != '' ? $controller : rtrim($RTR->fetch_class(), '/');
-        // $method = $method != '' ? $method : rtrim($RTR->fetch_method(), '/');
-
-        // echo $dir;echo "---";
-        // echo $controller;echo "---";
-        // echo $method;echo "---";
-        // exit;
         $this->list_type = 'return';
         $data['list'] = $this->lists();
         $this->load->view('admin/role/list',$data);
@@ -312,7 +300,7 @@ class Roles extends CI_Controller {
         $d['no_lists'] = $_no;
         $d['roleId'] = $roleId;
         $data['code'] = '1000';
-        $data['data'] = $this->load->view('admin/role-permission', $d, true);
+        $data['data'] = $this->load->view('admin/role/role-permission', $d, true);
         echo json_encode($data);
         exit;
     }
@@ -379,7 +367,7 @@ class Roles extends CI_Controller {
                                 $_p = $all_permission[$_id];
                                 if($_p['show'])
                                 {
-                                    $also_add[] = array('cate'=>$_p['cate'],'id'=>$_id,'title'=>$this->lang->line('role-title-'.$_p['cate']));
+                                    $also_add[] = array('cate'=>$_p['cate'],'id'=>$_id,'title'=>$_p['code']);
                                 }
                             }
                         }
@@ -394,9 +382,9 @@ class Roles extends CI_Controller {
                     exit;
                 }
                 $pre = $_permission['pre'];
-                $others = array();  //其它与$permissinId有相同的级连的权限
+                $others = array();
 
-                if(!empty($others))
+                if(!empty($pre))
                 {
                     foreach($pre as $id)
                     {
@@ -412,12 +400,40 @@ class Roles extends CI_Controller {
                         }
                     }
                 }
+
+                if(!empty($others))
+                {
+                    foreach ($others as $key => $items) 
+                    {
+                        $_c_d = true;
+                        if(empty($items))
+                        {
+                            $_c_d = true;
+                        }
+                        else
+                        {
+                            foreach ($items as $k => $v) //循环其它的权限，若已无共同无级连的权限，则将级连权限删除
+                            {
+                                $other_map = $this->role_permission->map($roleId, $v['id']);
+                                if($other_map)
+                                {
+                                    $_c_d = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if($_c_d)
+                        {
+                            $this->role_permission->delete_by_role_permission($roleId, $key);
+                        }
+                    }
+                }
                 $_res = $this->role_permission->delete($_map->id);
                 break;
         }
         if($_res)
         {
-            $data = array('code'=>'1000','cate'=>$_permission['cate'],'title'=>$this->lang->line('role-title-'.$_permission['cate']));
+            $data = array('code'=>'1000','cate'=>$_permission['cate'],'title'=>$_permission['code']);
             if(isset($also_add) && !empty($also_add))
             {
                 $data['also_add'] = $also_add;

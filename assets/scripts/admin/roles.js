@@ -371,7 +371,7 @@ function setPermission(roleId, permissionId, type)
                                             }
                                             else
                                             {
-                                                $('#'+roleId+'-has-permission').append("<div class='m-b-10'><b>"+item.title+" : </b></div><div id='has-permission-"+item.cate+"'></div><div class='clearfix m-b-10'></div>");
+                                                $('#'+roleId+'-has-permission').append("<div id='has-permission-"+item.cate+"'></div><div class='clearfix m-b-10'></div>");
                                                 a.appendTo($('#'+roleId+'-has-permission').find('#has-permission-'+item.cate));
                                             }
                                         }                                        
@@ -388,7 +388,7 @@ function setPermission(roleId, permissionId, type)
                             }
                             else
                             {
-                                $('#'+roleId+'-has-permission').append("<div class='m-b-10'><b>"+json.title+" : </b></div><div id='has-permission-"+json.cate+"'></div><div class='clearfix m-b-10'></div>");
+                                $('#'+roleId+'-has-permission').append("<div id='has-permission-"+json.cate+"'></div><div class='clearfix m-b-10'></div>");
                                 o.appendTo($('#'+roleId+'-has-permission').find('#has-permission-'+json.cate));
                             }
                         break;
@@ -403,7 +403,7 @@ function setPermission(roleId, permissionId, type)
                             }
                             else
                             {
-                                $('#'+roleId+'-no-permission').append("<div class='m-b-10'><b>"+json.title+" : </b></div><div id='no-permission-"+json.cate+"'></div><div class='clearfix m-b-10'></div>");
+                                $('#'+roleId+'-no-permission').append("<div id='no-permission-"+json.cate+"'></div><div class='clearfix m-b-10'></div>");
                                 o.appendTo($('#'+roleId+'-no-permission').find('#no-permission-'+json.cate));
                             }
                         break;

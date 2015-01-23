@@ -18,7 +18,7 @@ $method_name=$RTR->fetch_method();
                     <span class="selected"></span>
                     </a>
                 </li>
-                <li class="<?if(in_array($controller_name, array('products','product_cate','product_types','product_brands','product_comments'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('products','product_cate','product_types','product_brands','product_comments','coupons','recycle'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">商品</span>
@@ -43,6 +43,11 @@ $method_name=$RTR->fetch_method();
                         <li class="<?if($controller_name=='product_brands'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/product_brands" >
                             商品品牌
+                            </a>
+                        </li>
+                        <li class="<?if($controller_name=='coupons'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/coupons" >
+                            优惠券
                             </a>
                         </li>
                         <li class="<?if($controller_name=='product_comments'):?>active<?endif;?>">
@@ -88,7 +93,7 @@ $method_name=$RTR->fetch_method();
                     <span class="title">分仓管理</span>
                     </a>
                 </li>
-                <li class="<?if(in_array($controller_name, array('users'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('users','user_comments'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">会员管理</span>
@@ -100,28 +105,14 @@ $method_name=$RTR->fetch_method();
                             所有会员
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='user_comment'):?>active<?endif;?>">
+                        <li class="<?if($controller_name=='user_comments'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/user_comments" >
                             会员评论
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="<?if(in_array($controller_name, array('coupons'))):?>open active<?endif;?>">
-                    <a href="javascript:;">
-                    <i class="fa fa-cogs"></i> 
-                    <span class="title">优惠券管理</span>
-                    <span class="arrow "></span>
-                    </a>
-                    <ul class="sub-menu" <?if(in_array($controller_name, array('coupons/lists'))):?>style='display:block;'<?endif;?>>
-                        <li class="<?if($controller_name=='coupons'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/coupons" >
-                            所有优惠券
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="<?if(in_array($controller_name, array('settings','joins','links'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('settings','joins','links','ads','roles','providers','ship_type','pay_type'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">系统管理</span>
@@ -138,7 +129,7 @@ $method_name=$RTR->fetch_method();
                             角色设置
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='provider'):?>active<?endif;?>">
+                        <li class="<?if($controller_name=='providers'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/providers" >
                             供货商
                             </a>
@@ -163,13 +154,12 @@ $method_name=$RTR->fetch_method();
                             友情链接
                             </a>
                         </li>
+                        <li class="<?if($controller_name=='ads'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/ads" >
+                            广告设置
+                            </a>
+                        </li>
                     </ul>
-                </li>
-                <li class="<?if(in_array($controller_name, array('ads'))):?>open active<?endif;?>">
-                    <a href="<?php echo base_url()?>admin/ads">
-                    <i class="fa fa-cogs"></i> 
-                    <span class="title">广告设置</span>
-                    </a>
                 </li>
                 <li class="<?if(in_array($controller_name, array('news','news_cate','questionnaires'))):?>open active<?endif;?>">
                     <a href="javascript:;">
