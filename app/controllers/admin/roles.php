@@ -13,11 +13,6 @@ class Roles extends CI_Controller {
         parent::__construct();
         $this->load->model('role');
         $this->list_type = '';
-        // if ( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ) {
-        //     echo "ajax request";
-        // } else {
-        //     echo "not ajax request";
-        // }
     }
     //-------------------------------------------------------------------------
 

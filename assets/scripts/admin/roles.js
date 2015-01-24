@@ -96,7 +96,9 @@ function addRole()
                         " <span class='help-block'></span>"+
                     "</div>"+
                 "</td></tr>";
-
+    if($("#new_node").length>0){
+        return;
+    }
     $("#add_new").before(tr_html);
     $("input[id='add-name-edit']").focus();
     place_holder();
@@ -107,6 +109,9 @@ function editRole(roleId)
 {
     if(typeof(roleId)!='undefined' && roleId!='')
     {
+        if($("#new_node").length>0){
+            $("#new_node").remove();
+        }
         if($('#'+roleId+'-edit-btn').length > 0)
         {
             return false;
@@ -213,7 +218,7 @@ function saveRole(roleId)
                              + "<td>";
                     if(typeof(json.set_permission)!='undefined' && json.set_permission == true)
                     {
-                        html += "<a href='javascript:void(0)' onclick=\"showPermissions('"+json.id+"')\">"+msg.check_permission+"</a> &nbsp; ";
+                        html += "<a href='javascript:void(0)' title='设置权限' class='btn btn-xs yellow btn-editable' onclick=\"showPermissions('"+json.id+"')\">"+"<i class='fa fa-cogs'></i>"+"</a> &nbsp; ";
                     }
                     if(typeof(json.can_edit)!='undefined' && json.can_edit == true)
                     {

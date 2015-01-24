@@ -34,7 +34,13 @@ class Login extends CI_Controller {
 		}
 		$this->load->model('user');
 		$user = $this->user->get_by_username($username);
-		if(isset($user->is_admin) && $user->is_admin != 1)
+		// if(isset($user->is_admin) && $user->is_admin != 1)
+		// {
+		// 	$data['msg'] = "你不是管理员";
+		// 	echo $this->load->view('admin/login', $data, true);
+		// 	exit;
+		// }
+		if(isset($user->role_id) && $user->role_id)
 		{
 			$data['msg'] = "你不是管理员";
 			echo $this->load->view('admin/login', $data, true);

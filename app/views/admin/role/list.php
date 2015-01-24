@@ -36,9 +36,6 @@
                             <div class="caption"><i class="fa fa-list"></i>角色设置</div>
                             <div class="actions">
                                 <div class="btn-group">
-                                    <a href='<?php echo base_url();?>admin/roles/edit' class="btn blue m-r-5">
-                                            <i class="fa fa-plus"></i> 新增角色
-                                    </a>
                                 </div>
                             </div>
                         </div>

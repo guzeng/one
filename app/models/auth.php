@@ -209,7 +209,7 @@ class Auth extends CI_Model{
     }
     //--------------------------------------------------------------------
 
-    static public function checkPermission($type='')
+    public function check_permission($type='')
     {
         if(!$this->has_permission())
         {
@@ -311,7 +311,7 @@ class Auth extends CI_Model{
     //---------------------------------------------------------------------
 
     //所有权限
-    static public function allPermission()
+    public function allPermission()
     {
         return array (
             1 => array(
