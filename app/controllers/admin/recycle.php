@@ -14,6 +14,13 @@ class Recycle extends CI_Controller {
         $this->load->model('product_category');
         $this->load->model('product');
 		$this->list_type = '';
+        if ( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ) {
+            $this->auth->check_login_json();
+            $this->auth->check_permission('json');
+        } else {
+            $this->auth->check_login();
+            $this->auth->check_permission();
+        }
     }
 	public function index()
 	{

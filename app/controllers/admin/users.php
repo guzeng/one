@@ -13,10 +13,16 @@ class Users extends CI_Controller {
         parent::__construct();
         $this->load->model('user');
 		$this->list_type = '';
+        if ( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ) {
+            $this->auth->check_login_json();
+            $this->auth->check_permission('json');
+        } else {
+            $this->auth->check_login();
+            $this->auth->check_permission();
+        }
     }
 	public function index()
 	{
-        $this->auth->check_login();
         $this->list_type = 'return';
         $data['list'] = $this->lists();
         $this->load->view('admin/user/list',$data);
@@ -44,7 +50,6 @@ class Users extends CI_Controller {
 
     public function edit($id='')
     {
-        $this->auth->check_login();
         if($id)
         {
             $row = $this->user->get($id);
@@ -63,7 +68,6 @@ class Users extends CI_Controller {
 
     public function update()
     {
-        $this->auth->check_login_json();
         $post = $this->input->post();
         if(empty($post))
         {
@@ -198,7 +202,6 @@ class Users extends CI_Controller {
 
     public function delete($id)
     {
-        $this->auth->check_login_json();
         if(!$id)
         {
             echo json_encode(array('code'=>'1003','msg'=>'参数错误'));
@@ -218,7 +221,6 @@ class Users extends CI_Controller {
     public function resetPassword()
     {
 
-        $this->auth->check_login_json();
         $this->load->library('form_validation');
         $post = $this->input->post();
         if(empty($post) && $post['reset_user_id'])

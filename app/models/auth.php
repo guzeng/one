@@ -297,7 +297,7 @@ class Auth extends CI_Model{
         {
             foreach ($all_permission as $key => $value) {
                 // if(in_array($method, $value['method']))
-                if($controller==$value['controller'])
+                if(strtolower($controller)==strtolower($value['controller']))
                 {
                     $p_id = $key;
                     break;
@@ -331,7 +331,7 @@ class Auth extends CI_Model{
                     'controller'=> 'Products',//所有商品
                     'cate'      => 'admin-product',
                     'code'      => '商品管理',
-                    'pre'       => array(1,3,4,5,6,11),
+                    'pre'       => array(1,3,4,5,6,11,24),
                     'show'      => true
                 ),
             3 => array(
@@ -436,8 +436,8 @@ class Auth extends CI_Model{
             14 => array(
                     'id'        => 14,
                     'dir'       => 'admin',
-                    'controller'=> 'admin-settting',//供货商
-                    'cate'      => 'learning',
+                    'controller'=> 'Providers',//供货商
+                    'cate'      => 'admin-settting',
                     'code'      => '供货商',
                     'pre'       => array(),
                     'show'      => false
@@ -522,6 +522,15 @@ class Auth extends CI_Model{
                     'code'      => '统计管理',
                     'pre'       => array(1),
                     'show'      => true
+                ),
+            24 => array(
+                    'id'        => 24,
+                    'dir'       =>'admin',
+                    'controller'=> 'Product_types',//商品类型
+                    'cate'      => 'admin-product',
+                    'code'      => '商品类型',
+                    'pre'       => array(),
+                    'show'      => false
                 )
         );
 
