@@ -97,7 +97,7 @@
 		                "</td>"+
 		                "<td>"+
 		                    "<button class='btn green' type='button' onclick='resetPassword()' id='reset_edit_btn'>"+"确认"+"</button>&nbsp;"+
-		                    "<button class='btn default' type='button' onclick='removeNode()'>"+"取消"+"</button>"+
+		                    "<button class='btn default' type='button' onclick='remove_node()'>"+"取消"+"</button>"+
 		                    "<input type='hidden' id='reset_user_id' name='reset_user_id' value='"+id+"'>"+
 		                "</td>"+
 		            "</tr>"+
@@ -110,7 +110,7 @@
 		    }
 		    else
 		    {
-		        removeNode()
+		        remove_node()
 		        $('#'+id).after(html);
 		    }
 		    return false;
@@ -131,7 +131,7 @@
 		            if(json.code=='1000')
 		            {
 		                show_success();
-		                removeNode()
+		                remove_node()
 		            }
 		            else if(json.code=='1002')
 		            {
@@ -166,7 +166,7 @@
 		    $('#reset_pwd_form').submit();
 		}
 
-		function removeNode()
+		function remove_node()
 		{
 		    $('tr[id^=reset_]').remove();
 		}
@@ -186,9 +186,9 @@
 		            	{
 		            		$.each(json.list,function(i,n){
 		            			if(typeof(n.check) != "undefined")
-		            				var role = "<input type='radio' name='role_id' checked='true' value='"+n.id+"'/>"+n.name+"&nbsp;&nbsp;&nbsp;&nbsp;";
+		            				var role = "<input type='radio' name='role_id' checked='true' value='"+n.id+"'/>&nbsp;&nbsp;"+n.name+"&nbsp;&nbsp;&nbsp;&nbsp;";
 		            			else
-		            				var role = "<input type='radio' name='role_id' value='"+n.id+"'/>"+n.name+"&nbsp;&nbsp;&nbsp;&nbsp;";
+		            				var role = "<input type='radio' name='role_id' value='"+n.id+"'/>&nbsp;&nbsp;"+n.name+"&nbsp;&nbsp;&nbsp;&nbsp;";
 		            			role_html = role_html + role;
 		            		});
 		            		var html = "<tr id='reset_"+id+"'><td colspan='8'><form id='assign_role_form' method='post' action='"+msg.base_url+"admin/roles/assign_role'>"+
@@ -208,7 +208,7 @@
 								                "</td>"+
 								                "<td>"+
 								                    "<button class='btn green' type='button' onclick='assign_role_submit()' id='assign_role_btn'>"+"确认"+"</button>&nbsp;"+
-								                    "<button class='btn default' type='button' onclick='removeNode()'>"+"取消"+"</button>"+
+								                    "<button class='btn default' type='button' onclick='remove_node()'>"+"取消"+"</button>"+
 								                    "<input type='hidden' id='user_id' name='user_id' value='"+id+"'>"+
 								                "</td>"+
 								            "</tr>"+
@@ -220,7 +220,7 @@
 						    }
 						    else
 						    {
-						        removeNode()
+						        remove_node()
 						        $('#'+id).after(html);
 						    }
 						    return false;
@@ -249,7 +249,7 @@
 		            if(json.code=='1000')
 		            {
 		                show_success();
-		                removeNode()
+		                remove_node()
 		            }
 		            else if(json.code=='1002')
 		            {

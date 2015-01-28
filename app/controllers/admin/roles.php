@@ -17,17 +17,18 @@ class Roles extends CI_Controller {
             $this->auth->check_login_json();
             if(!$this->auth->is_super_admin())
             {
-                echo "你不是系统默认管理员";
+                echo json_encode(array(
+                    'code' => '1004',
+                    'msg' => "你不是系统默认管理员"
+                ));  
                 exit;
             }
         } else {
             $this->auth->check_login();
             if(!$this->auth->is_super_admin())
             {
-                echo json_encode(array(
-                    'code' => '1004',
-                    'msg' => "你不是系统默认管理员"
-                ));  
+                echo "你不是系统默认管理员";
+                exit;
             }
         }
     }
