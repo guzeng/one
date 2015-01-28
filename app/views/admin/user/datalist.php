@@ -22,11 +22,14 @@
 										<td class="hidden-xs">
 											<a href="<?php echo base_url();?>admin/users/edit/<?php echo $item->id?>">
 												<span class='label label-warning'><i class='fa fa-edit'></i></span></a> 
-											<a href="javascript:void(0)" onclick="doDelete('admin/users/delete/'+<?php echo $item->id?>)">
-												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
-											<a class="btn btn-xs blue btn-editable" onclick="showResetPassword('<?php echo $item->id;?>')" href="javascript:;" title="更换密码">
-				                                <i class="fa fa-key"></i>
+											<a class="" onclick="showResetPassword('<?php echo $item->id;?>')" href="javascript:;" title="更换密码">
+				                                <span class='label label-warning'><i class="fa fa-key"></i></a>
 				                            </a>
+				                            <a class="" onclick="showAssignRole('<?php echo $item->id;?>')" href="javascript:;" title="分配权限">
+				                                <span class='label label-success'><i class="fa fa-user"></i></a>
+				                            </a>
+				                            <a href="javascript:void(0)" onclick="doDelete('admin/users/delete/'+<?php echo $item->id?>)">
+												<span class='label label-danger'><i class='fa fa-times'></i></span></a>
 										</td>
 									</tr>
                             		<?endforeach;?>

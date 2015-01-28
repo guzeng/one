@@ -22,6 +22,16 @@ class User  extends CI_Model{
 	}
 	//--------------------------------------------------------
 
+	public function assign_role($user_id,$role_id){
+		if($user_id && $role_id){
+			$this->db->where('id',$user_id);
+			$row= array("role_id"=>$role_id);
+			return $this->db->update($this->table,$row);
+		}
+		return false;
+	}
+	//---------------------------------------------------------
+
 	public function delete($id){
 		if($id){
 			$this->db->where('id',$id);

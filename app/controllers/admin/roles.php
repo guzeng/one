@@ -13,6 +13,23 @@ class Roles extends CI_Controller {
         parent::__construct();
         $this->load->model('role');
         $this->list_type = '';
+        if ( isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest' ) {
+            $this->auth->check_login_json();
+            if(!$this->auth->is_super_admin())
+            {
+                echo "你不是系统默认管理员";
+                exit;
+            }
+        } else {
+            $this->auth->check_login();
+            if(!$this->auth->is_super_admin())
+            {
+                echo json_encode(array(
+                    'code' => '1004',
+                    'msg' => "你不是系统默认管理员"
+                ));  
+            }
+        }
     }
     //-------------------------------------------------------------------------
 
@@ -440,6 +457,69 @@ class Roles extends CI_Controller {
         }
         echo json_encode($data);
         exit;
+    }
+
+    //查询所有角色
+    public function all_role()
+    {
+        $data = array('code' => '1000', 'msg' => '');
+        $list = $this->role->all(array('orderby' =>'id asc'));
+        $post = $this->input->post();
+        if(!empty($post))
+        {
+            $this->load->model('user');
+            $user = $this->user->get($post['id']);
+            if($user &&$user->role_id && $list)
+            {
+                foreach ($list as $key => $item) {
+                    if($item->id == $user->role_id)
+                    {
+                        $list[$key]->check = true;
+                    }
+                }
+            }
+        }
+        
+        if(!$list)
+        {
+            $data['code'] = "1004";
+            $data['msg'] = '需要添加角色,才能分配角色';
+        }
+        else
+        {
+            $data['list'] = $list;
+        }
+        echo json_encode($data);
+    }
+    //分配角色给用户
+    public function assign_role()
+    {
+        $data = array('code' => '1000', 'msg' => '分配成功');
+        $post = $this->input->post();
+        if(empty($post))
+        {
+            show_error('参数错误');
+        }
+        
+        if(!isset($post['role_id']) || !$post['role_id'])
+        {
+            echo json_encode(array('code'=>'1010','msg'=>"请选择角色选项"));
+            exit;
+        }
+
+        if(!isset($post['user_id']) || !$post['user_id'])
+        {
+            echo json_encode(array('code'=>'1010','msg'=>"用户不存在"));
+            exit;
+        }
+        
+        $this->load->model('user');       
+        if(!$this->user->assign_role($post['user_id'],$post['role_id']))
+        {
+            $data = array('code'=>'1001','msg'=>"分配失败");
+        }
+        
+        echo json_encode($data);
     }
 }
 /* End of file roles.php */

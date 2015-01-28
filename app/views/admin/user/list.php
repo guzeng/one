@@ -170,5 +170,105 @@
 		{
 		    $('tr[id^=reset_]').remove();
 		}
+
+		function showAssignRole(id)
+		{
+			var role_html = "";
+			$.ajax({
+		        url:msg.base_url+"admin/roles/all_role",
+		        data:{"id":id},
+		        type:'post',
+		        dataType:'json',
+		        success:function(json){
+		            if(json.code=='1000')
+		            {
+		            	if(typeof(json.list) != "undefined")
+		            	{
+		            		$.each(json.list,function(i,n){
+		            			if(typeof(n.check) != "undefined")
+		            				var role = "<input type='radio' name='role_id' checked='true' value='"+n.id+"'/>"+n.name+"&nbsp;&nbsp;&nbsp;&nbsp;";
+		            			else
+		            				var role = "<input type='radio' name='role_id' value='"+n.id+"'/>"+n.name+"&nbsp;&nbsp;&nbsp;&nbsp;";
+		            			role_html = role_html + role;
+		            		});
+		            		var html = "<tr id='reset_"+id+"'><td colspan='8'><form id='assign_role_form' method='post' action='"+msg.base_url+"admin/roles/assign_role'>"+
+								        "<table width='100%'><tbody>"+
+								            "<tr id='tr_new_pwd'>"+
+								                "<td style='text-align:right' width='38%'>"+
+								                    "<label style='margin-right:20px;margin-top:10px'>"+"角色"+"</label>"+
+								                "</td>"+
+								                "<td width='50%'>"+
+								                    role_html+
+								                "</td>"+
+								                "<td></td>"+
+								            "</tr>"+
+								            "<tr>"+
+								                "<td>"+
+								                    "<label style='margin-right:10px;'></label>"+
+								                "</td>"+
+								                "<td>"+
+								                    "<button class='btn green' type='button' onclick='assign_role_submit()' id='assign_role_btn'>"+"确认"+"</button>&nbsp;"+
+								                    "<button class='btn default' type='button' onclick='removeNode()'>"+"取消"+"</button>"+
+								                    "<input type='hidden' id='user_id' name='user_id' value='"+id+"'>"+
+								                "</td>"+
+								            "</tr>"+
+								        "</tbody></table>"+
+								        "</form></td></tr>";
+							if($('#reset_'+id).length>0)
+						    {
+						        $('#reset_'+id).remove();
+						    }
+						    else
+						    {
+						        removeNode()
+						        $('#'+id).after(html);
+						    }
+						    return false;
+		            	}
+		            }
+		            else
+		            {
+		                show_error(json.msg);
+		            }
+		        }
+		    });
+		}
+
+		function assign_role_submit()
+		{
+			$('#assign_role_form').ajaxForm({
+		        dataType:'json',
+		        beforeSend:function(){
+		            $('#assign_role_btn').attr('disabled',true);
+		            $('.pwd_alert').remove();
+		            loading();
+		        },
+		        success:function(json){
+		            close_alert();
+		            $('#assign_role_btn').attr('disabled', false);
+		            if(json.code=='1000')
+		            {
+		                show_success();
+		                removeNode()
+		            }
+		            else if(json.code=='1002')
+		            {
+		                show_login(json);
+		            }
+		            else
+		            {
+		                if(typeof(json.msg)!='undefined')
+		                {
+		                    show_error(json.msg);
+		                }
+		            }
+		        },
+		        error:function(err){
+		            $('#assign_role_btn').attr('disabled',true);
+		            show_error();
+		        }
+		    })
+		    $('#assign_role_form').submit();
+		}
 	</script>
 <?$this->load->view('admin/footer');?>
