@@ -18,6 +18,7 @@ $method_name=$RTR->fetch_method();
                     <span class="selected"></span>
                     </a>
                 </li>
+                <?if($this->auth->has_permission('admin', 'Products', '')):?>
                 <li class="<?if(in_array($controller_name, array('products','product_cate','product_types','product_brands','product_comments','coupons','recycle'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
@@ -62,6 +63,8 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
+                <?endif;?>
+                <?if($this->auth->has_permission('admin', 'Orders', '')):?>
                 <li class="<?if(in_array($controller_name, array('orders'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
@@ -87,12 +90,16 @@ $method_name=$RTR->fetch_method();
                         <?endif;?>
                     </ul>
                 </li>
+                <?endif;?>
+                <?if($this->auth->has_permission('admin', 'Storages', '')):?>
                 <li class="<?if(in_array($controller_name, array('storages'))):?>open active<?endif;?>">
                     <a href="<?php echo base_url()?>admin/storages">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">分仓管理</span>
                     </a>
                 </li>
+                <?endif;?>
+                <?if($this->auth->has_permission('admin', 'Users', '')):?>
                 <li class="<?if(in_array($controller_name, array('users','user_comments'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
@@ -112,6 +119,8 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
+                <?endif;?>
+                <?if($this->auth->has_permission('admin', 'Settings', '')):?>
                 <li class="<?if(in_array($controller_name, array('settings','joins','links','ads','roles','providers','ship_type','pay_type'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
@@ -161,6 +170,8 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
+                <?endif;?>
+                <?if($this->auth->has_permission('admin', 'News', '')):?>
                 <li class="<?if(in_array($controller_name, array('news','news_cate','questionnaires'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
@@ -185,6 +196,8 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
+                <?endif;?>
+                <?if($this->auth->has_permission('admin', 'Statistic', '')):?>
                 <li class="<?if(in_array($controller_name, array('statistic'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
@@ -209,6 +222,7 @@ $method_name=$RTR->fetch_method();
                         </li>
                     </ul>
                 </li>
+                <?endif;?>
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

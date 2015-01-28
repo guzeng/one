@@ -49,12 +49,12 @@ class Auth extends CI_Model{
     {
         if(isset($_SESSION['user_id']) && $_SESSION['user_id']!='')
         {
-            $RTR =& load_class('Router', 'core');
-            $dir_name=$RTR->fetch_directory();
-            if($dir_name == 'admin' && !$_SESSION['is_admin'])
-            {
-                return false;
-            }
+            // $RTR =& load_class('Router', 'core');
+            // $dir_name=$RTR->fetch_directory();
+            // if($dir_name == 'admin')
+            // {
+            //     return false;
+            // }
             return true;
         }
         return false;
@@ -171,12 +171,14 @@ class Auth extends CI_Model{
             $_SESSION['email'] = $row->email;
             $_SESSION['name'] = $row->name;
             $_SESSION['is_admin'] = $row->is_admin;
+            $_SESSION['role'] = $row->role_id;
+
             $this->load->model('cart');
             $res = $this->cart->save_db();
         }
     }
     //--------------------------------------------------------------------
-    
+
     /**
      *  destroy
      *           
@@ -295,7 +297,7 @@ class Auth extends CI_Model{
         {
             foreach ($all_permission as $key => $value) {
                 // if(in_array($method, $value['method']))
-                if(in_array($controller, $value['controller']))
+                if($controller==$value['controller'])
                 {
                     $p_id = $key;
                     break;
