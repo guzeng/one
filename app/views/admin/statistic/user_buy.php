@@ -7,7 +7,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						用户浏览统计
+						用户购买统计
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -19,7 +19,7 @@
 							<a href="#">统计管理</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li>用户浏览统计</li>
+						<li>用户购买统计</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -33,17 +33,17 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue" id='list-box'>
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-list"></i>用户浏览统计</div>
+							<div class="caption"><i class="fa fa-list"></i>用户购买统计</div>
 						</div>
 						<div class="portlet-body">
 							<div class="table-toolbar">
 							</div>
-							<table class="table table-striped table-bordered table-hover" id="user_history_list">
+							<table class="table table-striped table-bordered table-hover" id="user_buy_list">
 								<thead>
 									<tr>
 										<th width='20%'>用户名</th>
-										<th width='10%'>总浏览次数</th>
-										<th width='*'>最常浏览的商品</th>
+										<th width='10%'>总购买次数</th>
+										<th width='*'>最常购买的商品</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -71,11 +71,11 @@
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script >
 		jQuery(document).ready(function() {
-		   initTable('user_history_list');
+		   initTable('user_buy_list');
 		});
 		function delete_callback()
 		{
-			reload_list('list-box','user_history_list','admin/statistic/user_history');
+			reload_list('list-box','user_buy_list','admin/statistic/user_buy');
 		}
 	</script>    
 <?$this->load->view('admin/footer');?>
