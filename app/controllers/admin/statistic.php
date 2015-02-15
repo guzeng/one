@@ -133,6 +133,30 @@ class Statistic extends CI_Controller {
         
     }
 
+    public function user_history()
+    {
+        $this->db->select ("t1.*,p.name as `product_name`");
+        $this->db->from("(SELECT username,COUNT(*) as `total`,MAX(product_id) AS `product_id` FROM one_member LEFT JOIN one_user_browse_history AS h ON one_member.id = h.user_id) AS t1 ");
+        $this->db->join('one_product AS p','p.id = t1.product_id','left');
+
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            $list = $query->result();
+        }
+        else
+        {
+            $list = false;
+        } 
+
+        $data['list'] = $list;
+        $this->load->view('admin/statistic/user_history',$data);
+    }
+
+    public function user_buy()
+    {
+                
+    }
+
 
 }
 
