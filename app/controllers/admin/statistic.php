@@ -170,6 +170,93 @@ class Statistic extends CI_Controller {
         $this->load->view('admin/statistic/user_buy',$data);      
     }
 
+    public function browser()
+    {
+        $this->load->view('admin/statistic/browser_history');
+
+    }
+
+    public function browser_datalist()
+    {
+        $this->load->model('user_browse_history');
+        $iDisplayLength = intval($_GET['iDisplayLength']);
+        $iDisplayStart = intval($_GET['iDisplayStart']);
+        $sEcho = intval($_GET['sEcho']);
+
+        $records = array();
+        $records["aaData"] = array(); 
+
+        $iTotalRecords = $this->user_browse_history->count();
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $end = $iDisplayStart + $iDisplayLength;
+        
+        $list = $this->user_browse_history->lists(array(
+            'join_user' => true,
+            'num' => $iDisplayLength,
+            'start' => $iDisplayStart
+        ));
+        if(!empty($list))
+        {
+            foreach ($list as $key => $item) 
+            {
+                $records["aaData"][] = array(
+                    $item->username,
+                    $item->name,
+                    date('Y-m-d H:i:s',gmt_to_local($item->create_time))
+                );
+            }
+        }
+        $records["sEcho"] = $sEcho;
+        $records["iTotalRecords"] = $iTotalRecords;
+        $records["iTotalDisplayRecords"] = $iTotalRecords;
+
+        echo json_encode($records);
+        exit;
+    }
+
+    public function buy()
+    {
+        $this->load->view('admin/statistic/browser_history');
+
+    }
+
+    public function buy_datalist()
+    {
+        $this->load->model('user_browse_history');
+        $iDisplayLength = intval($_GET['iDisplayLength']);
+        $iDisplayStart = intval($_GET['iDisplayStart']);
+        $sEcho = intval($_GET['sEcho']);
+
+        $records = array();
+        $records["aaData"] = array(); 
+
+        $iTotalRecords = $this->user_browse_history->count();
+        $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
+        $end = $iDisplayStart + $iDisplayLength;
+        
+        $list = $this->user_browse_history->lists(array(
+            'join_user' => true,
+            'num' => $iDisplayLength,
+            'start' => $iDisplayStart
+        ));
+        if(!empty($list))
+        {
+            foreach ($list as $key => $item) 
+            {
+                $records["aaData"][] = array(
+                    $item->username,
+                    $item->name,
+                    date('Y-m-d H:i:s',gmt_to_local($item->create_time))
+                );
+            }
+        }
+        $records["sEcho"] = $sEcho;
+        $records["iTotalRecords"] = $iTotalRecords;
+        $records["iTotalDisplayRecords"] = $iTotalRecords;
+
+        echo json_encode($records);
+        exit;
+    }
 
 }
 

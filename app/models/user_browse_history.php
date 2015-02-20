@@ -3,6 +3,7 @@
 class User_browse_history  extends CI_Model{
 	private $table='user_browse_history';
 	private $table_product = 'product';
+	private $table_user = 'member';
 	
 	public function insert($row){
 		if(is_array($row) && !empty($row)){
@@ -61,14 +62,18 @@ class User_browse_history  extends CI_Model{
         }
         $_num = isset($_num) && intval($_num)>0 ? intval($_num) : 10;
         $_start = isset($_start) && intval($_start)>0 ? intval($_start) : 0;
-        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'id desc';
+        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'a.id desc';
         if(!isset($_type)){
             $_type = 'a.*,p.id,p.name,p.price,p.best_price,p.sale_num';
         }
-		$this->db->select ( $_type );
         $this->db->from( $this->table.' as a');
-        $this->db->join($this->table_product.' as p','p.id=a.product_id','inner');
-
+        $this->db->join($this->table_product.' as p','p.id=a.product_id','left');
+        if(isset($_join_user))
+        {
+        	$this->db->join($this->table_user.' as u','u.id=a.user_id','left');
+        	$_type .= ',u.username';
+        }
+		$this->db->select ( $_type );
         if(isset($_where)){
             $this->db->where($_where);
         }

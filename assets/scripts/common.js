@@ -1,4 +1,17 @@
 var clearTime = '';
+msg.lang = 'zh';
+msg.dataTableLang = {
+                    "sLengthMenu": msg.lang=='zh' ? "每页显示 _MENU_ " : "Show _MENU_ entries",  
+                    "sZeroRecords": msg.lang=='zh' ? "未查询到任何相关数据" : "No matching records found",  
+                    "sInfo": msg.lang=='zh' ? "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录" : "Showing _START_ to _END_ of _TOTAL_ entries",  
+                    "sInfoFiltered": msg.lang=='zh' ? "（从 _MAX_ 条记录中搜索）" : " ( filtered from _MAX_ total entries )",  
+                    "sProcessing": "<i class='fa fa-coffee'></i>&nbsp; " + (msg.lang=='zh' ? "加载中..." : "Loading..."),  
+                    "sSearch": msg.lang=='zh' ? "搜索 : " : "Search:",
+                    "sInfoEmpty": msg.lang=='zh' ? "当前显示 0 至 0， 共 0 项" : "Showing 0 to 0 of 0 entries",
+                    "oPaginate":  msg.lang=='zh' ? {"sFirst":"第一页","sPrevious":"上一页 ","sNext":"下一页 ","sLast":"末页 "} : {"sFirst": "First","sPrevious": "Previous","sNext": "Next","sLast": "Last"}
+                };
+msg.all = msg.lang=='zh' ? "全部" : 'All';
+
 function show_success(msg)
 {
     close_alert();
@@ -477,6 +490,28 @@ function initTable(tableID)
         });
     }
 }
+
+function initDataTableAction(tableID,table)
+{
+    jQuery('#'+tableID+'_wrapper .dataTables_filter input').addClass("form-control input-medium"); // modify table search input
+    jQuery('#'+tableID+'_wrapper .dataTables_length select').addClass("form-control input-small"); // modify table per page dropdown
+    jQuery('#'+tableID+'_wrapper .dataTables_length select').select2(); // initialize select2 dropdown
+    $('#'+tableID+'_column_toggler input[type="checkbox"]').off().on('change',function(){
+        /* Get the DataTables object again - this is not a recreation, just a get of the object */
+        var iCol = parseInt($(this).attr("data-column"));
+        if($(this).parent().hasClass('checked')){
+            bVis = false;
+            $(this).parent().removeClass('checked');
+        }
+        else
+        {
+            bVis = true;
+            $(this).parent().addClass('checked');
+        }
+        table.fnSetColumnVis(iCol, bVis);
+    });
+}
+
 /**
  * 删除列表中一条记录
  */

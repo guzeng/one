@@ -7,6 +7,5 @@ CREATE TABLE `one_coupon` (
   `expirse_from` int(10) NOT NULL DEFAULT '0' COMMENT '有效期开始时间',
   `expirse_to` int(10) NOT NULL DEFAULT '0' COMMENT '有效期结束时间',
   `create_time` int(10) NOT NULL DEFAULT '0' COMMENT '创建时间',
-  PRIMARY KEY (`id`),
-  KEY `user` (`user_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -220,6 +220,11 @@ $method_name=$RTR->fetch_method();
                             订单统计
                             </a>
                         </li>
+                        <li class="<?if($method_name=='browser'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/statistic/browser" >
+                            浏览统计
+                            </a>
+                        </li>
                         <li class="<?if($method_name=='user_history'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/statistic/user_history" >
                             用户浏览统计
