@@ -216,13 +216,13 @@ class Statistic extends CI_Controller {
 
     public function buy()
     {
-        $this->load->view('admin/statistic/browser_history');
+        $this->load->view('admin/statistic/buy_history');
 
     }
 
     public function buy_datalist()
     {
-        $this->load->model('user_browse_history');
+        $this->load->model('order_detail');
         $iDisplayLength = intval($_GET['iDisplayLength']);
         $iDisplayStart = intval($_GET['iDisplayStart']);
         $sEcho = intval($_GET['sEcho']);
@@ -230,15 +230,16 @@ class Statistic extends CI_Controller {
         $records = array();
         $records["aaData"] = array(); 
 
-        $iTotalRecords = $this->user_browse_history->count();
+        $iTotalRecords = $this->order_detail->count();
         $iDisplayLength = $iDisplayLength < 0 ? $iTotalRecords : $iDisplayLength;
         $end = $iDisplayStart + $iDisplayLength;
         
-        $list = $this->user_browse_history->lists(array(
+        $list = $this->order_detail->lists(array(
             'join_user' => true,
             'num' => $iDisplayLength,
             'start' => $iDisplayStart
         ));
+        //print_r($list);
         if(!empty($list))
         {
             foreach ($list as $key => $item) 
@@ -246,6 +247,7 @@ class Statistic extends CI_Controller {
                 $records["aaData"][] = array(
                     $item->username,
                     $item->name,
+                    $item->number,
                     date('Y-m-d H:i:s',gmt_to_local($item->create_time))
                 );
             }

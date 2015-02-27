@@ -9,6 +9,7 @@ class Order_detail extends CI_Model{
 	private $table = 'order_detail';
     private $product_table = 'product';
     private $order_table = 'order';
+    private $user_table = 'member';
     private $page = 1;
     private $per_page = 15;
     private $param = array();
@@ -128,16 +129,47 @@ class Order_detail extends CI_Model{
      * @author zeng.gu
      * 2014/3/31
      */    
-    public function lists($where = array(), $num=15,$orderby='')
+    public function lists($items = array())
     {
-        $_where = $this->condition($where);
-        $_num = intval($num)>0 ? intval($num) : 15;
-        $_start = (intval($this->page)-1)*$_num;
-        $_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
+        if(count($items) >0 ){
+            foreach($items as $key => $val){
+                $c = '_'.$key;
+                $$c = $val;
+            }
+        }
+        $_num = isset($_num) && intval($_num)>0 ? intval($_num) : 10;
         $this->per_page = $_num;
-        $_type = 'a.*,p.name,p.name';
-        
+        $_start = isset($_start) && intval($_start)>0 ? intval($_start) : 0;
+        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'a.id desc';
+        if(!isset($_type)){
+            $_type = 'a.*,p.name,p.price,p.best_price,p.sale_num';
+        }
+        $this->db->from( $this->table.' as a');
+        $this->db->join($this->product_table.' as p','p.id=a.product_id','left');
+        if(isset($_join_user))
+        {
+            $this->db->join($this->user_table.' as u','u.id=a.user_id','left');
+            $_type .= ',u.username';
+        }
         $this->db->select ( $_type );
+        if(isset($_where)){
+            $this->db->where($_where);
+        }
+        $this->db->order_by($_orderby);
+        $this->db->limit($_num,$_start);
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;
+        /*
+        //$_where = $this->condition($where);
+        //$_num = intval($num)>0 ? intval($num) : 15;
+        //$_start = (intval($this->page)-1)*$_num;
+        //$_orderby = isset($orderby) && $orderby!='' ? $orderby : 'a.id desc';
+        $this->per_page = $_num;
+        $_type = 'a.*,p.name';
+        
         if(isset($_where) && $_where){
             $this->db->where($_where);
         }
@@ -145,13 +177,21 @@ class Order_detail extends CI_Model{
         $this->db->from($this->table.' as a');
         $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
         // $this->db->join($this->order_table.' as o','a.order_id=o.id','left');
+        if(isset($_join_user))
+        {
+            $this->db->join($this->user_table.' as u','a.user_id=u.id','left');
+            $_type .= ',u.username';
+        }
+        $this->db->select ( $_type );
 
         $this->db->order_by($_orderby);
         $query = $this->db->get();
+        echo $this->db->last_query();
         if($query->num_rows() > 0){
             return $query->result();
         }
         return false;   
+        */
     }
     //----------------------------------------------------------------
     /**
@@ -201,7 +241,7 @@ class Order_detail extends CI_Model{
             $this->db->where($_where);
         }
         $this->db->from($this->table.' as a');
-        $this->db->join($this->product_table.' as p','a.product_id=p.id','left');
+        //$this->db->join($this->product_table.' as p','a.product_id=p.id','left');
         // $this->db->join($this->order_table.' as o','a.order_id=o.id','left');
         $query = $this->db->get();
         if($query->num_rows() > 0){

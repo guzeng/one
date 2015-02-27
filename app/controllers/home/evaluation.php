@@ -16,11 +16,12 @@ class Evaluation extends CI_Controller {
         $user_id = $this->auth->user_id();
         $this->load->model('product');
         $this->load->model('order_detail');
-        $base_url = base_url().'/home/evaluation/index/';
+        $base_url = '';//base_url().'/home/evaluation/index/';
         $param = $this->uri->uri_to_assoc(4);
-        
-        $condition = array("a.user_id = '".$user_id."'");
-        $list = $this->order_detail->lists($condition,15,'a.id desc');
+        $page = isset($param['page']) ? trim($param['page']) : 1;
+        $_num = 5;
+        $condition = array('where'=>"a.user_id = '".$user_id."'",'start'=>(intval($page)-1)*$_num,'num'=>$_num);
+        $list = $this->order_detail->lists($condition);
 
         if(!empty($list)){
             foreach ($list as $key => $value) {
@@ -42,7 +43,7 @@ class Evaluation extends CI_Controller {
             }
         }
         $data['list'] = $list;
-        $data['pagination'] = $this->order_detail->pages($base_url,$condition);
+        $data['pagination'] = $this->order_detail->pages($base_url,array("a.user_id = '".$user_id."'"));
 
 		$this->load->view('home/evaluation',$data);
 	}

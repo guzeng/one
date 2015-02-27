@@ -121,7 +121,7 @@ $method_name=$RTR->fetch_method();
                 </li>
                 <?endif;?>
                 <?if($this->auth->has_permission('admin', 'Settings', '')):?>
-                <li class="<?if(in_array($controller_name, array('settings','joins','links','ads','roles','providers','ship_type','pay_type'))):?>open active<?endif;?>">
+                <li class="<?if(in_array($controller_name, array('settings','joins','links','roles','providers','ship_type','pay_type'))):?>open active<?endif;?>">
                     <a href="javascript:;">
                     <i class="fa fa-cogs"></i> 
                     <span class="title">系统管理</span>
@@ -163,12 +163,16 @@ $method_name=$RTR->fetch_method();
                             友情链接
                             </a>
                         </li>
-                        <li class="<?if($controller_name=='ads'):?>active<?endif;?>">
-                            <a href="<?php echo base_url()?>admin/ads" >
-                            广告设置
-                            </a>
-                        </li>
                     </ul>
+                </li>
+                <?endif;?>
+                <?if($this->auth->has_permission('admin', 'Ads', '')):?>
+                <li class="<?if(in_array($controller_name, array('ads'))):?>open active<?endif;?>">
+                    <a href="<?php echo base_url()?>admin/ads">
+                    <i class="fa fa-cogs"></i> 
+                    <span class="title">广告设置</span>
+                    <span class="arrow "></span>
+                    </a>
                 </li>
                 <?endif;?>
                 <?if($this->auth->has_permission('admin', 'News', '')):?>
@@ -223,6 +227,11 @@ $method_name=$RTR->fetch_method();
                         <li class="<?if($method_name=='browser'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/statistic/browser" >
                             浏览统计
+                            </a>
+                        </li>
+                        <li class="<?if($method_name=='buy'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/statistic/buy" >
+                            购买统计
                             </a>
                         </li>
                         <li class="<?if($method_name=='user_history'):?>active<?endif;?>">
