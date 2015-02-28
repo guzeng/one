@@ -20,18 +20,32 @@
                     <?php foreach ($item as $key => $value):?>
                     <div class='col-md-3 p-thumb'>
                         <div class='text-center m-b-10'>
-                            <img src='<?php echo $this->product->pic($value->product_id)?>' title='<?php echo $value->name;?>' class='img-responsive'></div>
-
+                            <a href="<?php echo base_url().'item/id/'.$value->product_id?>" target='_blank'>
+                                <img src='<?php echo $this->product->pic($value->product_id)?>' title='<?php echo $value->name;?>' class='img-responsive'></div>
+                            </a>
                         <div class='price'>
                              ￥ <?php echo $value->price;?>
-                            <span class="label label-sm label-warning pull-right">限时特价</span>
+                            <?php if($value->specials==1):?>
+                                <span class="label label-sm label-warning pull-right">特卖</span>
+                            <?php endif;?>
+                            <?php if($value->recommend==1):?>
+                                <span class="label label-sm label-success pull-right m-r-5">推荐</span>
+                            <?php endif;?>
                         </div>
                         <div class=' m-b-5'>
                             <a>已销售量<?php echo $value->sale_num;?>件</a>
-                            <span class="label label-sm  label-default  pull-right">同类推荐</span>
+                            <?php if($value->handpick==1):?>
+                                <span class="label label-sm label-default pull-right">精选</span>
+                            <?php endif;?>
+                            <?php if($value->hot==1):?>
+                                <span class="label label-sm label-info pull-right m-r-5">热卖</span>
+                            <?php endif;?>
                         </div>
-
                     </div>
+                    <?php if($key>0 && $key%3==0):?>
+                        </div>
+                        <div class='row m-b-20'>
+                    <?php endif;?>
                     <?endforeach;?>
                 </div>
             </div>

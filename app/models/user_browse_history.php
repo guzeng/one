@@ -64,7 +64,7 @@ class User_browse_history  extends CI_Model{
         $_start = isset($_start) && intval($_start)>0 ? intval($_start) : 0;
         $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'a.id desc';
         if(!isset($_type)){
-            $_type = 'a.*,p.id,p.name,p.price,p.best_price,p.sale_num';
+            $_type = 'a.*,p.id,p.name,p.price,p.best_price,p.sale_num,p.recommend,p.specials,p.handpick,p.hot';
         }
         $this->db->from( $this->table.' as a');
         $this->db->join($this->table_product.' as p','p.id=a.product_id','left');

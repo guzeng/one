@@ -228,12 +228,16 @@
                                                 </div>
                                                 <p class='help-block'>接受图片格式：.jpg .png .gif , 图片大小小于2M </p>
                                             </div>
+                                            <!--
                                             <div id="review_pic" class="m-t-10 bg-c-f5 relative" style="text-align:center;height:240px;">
                                                 <?if(isset($user)&&$user->id>0):?>
-                                                    <img src="<?php echo $this->user->pic($user->id,'normal')?>" id='user_pic' class="relative" style='width:100px;height:100px;margin-bottom:10px;top:70px;'> 
+                                                    <img src="<?php //echo $this->user->pic($user->id,'normal')?>" id='user_pic' class="relative" style='width:100px;height:100px;margin-bottom:10px;top:70px;'> 
                                                 <?endif;?>
                                             </div>
-                                            <button id="edit_btn" onclick="do_submit('user_pic_form')" class="btn btn-default btn-lg green m-t-20">确定</button>
+                                            -->
+                                            <div class='text-left'>
+                                                <button id="edit_btn" onclick="do_submit('user_pic_form')" class="btn btn-default btn-lg green m-t-20">确定</button>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                              <h4>效果预览</h4>
