@@ -59,6 +59,140 @@
             $('.grade').find('a').removeClass('hover');
         })
     }  
+
+    function show_pingjia2(user_comment_id,detail_id,product_id,obj)
+    {
+        if($(obj).parent().parent().next(".tr_pingjia").html()){
+            $(".tr_pingjia").remove();   
+            return;
+        }
+
+        $.ajax({
+            url:msg.base_url+"home/evaluation/edit",
+            type:'post',
+            data:{'id':user_comment_id},
+            dataType:'json',
+            success:function(json){
+                if(json.code=='1000')
+                {
+                    if($(obj).parent().parent().next(".tr_pingjia").html()){
+                        $(".tr_pingjia").remove();   
+                    }
+                    var html = "<tr class='tr_pingjia'>"+
+                                        "<td colspan='3' class='tdorder text-left'>"+
+                                            "<div class='message'>"+
+                                                "<span class='arrow'></span>"+
+                                                "<form class='form-horizontal' role='form'>"+
+                                                    "<div class='form-body'>"+
+                                                        "<div class='form-group'>"+
+                                                            "<label class='col-md-1 control-label'>评分</label>"+
+                                                            "<div class='col-md-7'>"+
+                                                                "<input type='hidden' value='"+json.row['point']+"' name='point' id='point'>"+
+                                                                "<input type='hidden' value='"+json.row['id']+"' name='id' id='id'>"+
+                                                                "<p style='margin-top:2px;*margin-top:5px' class='grade con'>"+
+                                                                    "<a href='javascript:void(0);' onclick='rate_review(1);' class='selected'></a> "+
+                                                                    "<a href='javascript:void(0);' onclick='rate_review(2);' class='selected'></a> "+
+                                                                    "<a href='javascript:void(0);' onclick='rate_review(3);' class='selected'></a> "+
+                                                                    "<a href='javascript:void(0);' onclick='rate_review(4);' class='selected'></a> "+
+                                                                    "<a href='javascript:void(0);' onclick='rate_review(5);' class='selected'></a> "+
+                                                                "</p>"+
+                                                            "</div>"+
+                                                        "</div>"+
+                                                        "<div class='form-group'>"+
+                                                            "<label class='col-md-1 control-label'>评语</label>"+
+                                                            "<div class='col-md-7'>"+
+                                                                "<textarea id='content' name='content' class='form-control' rows='3'>"+json.row['content']+"</textarea>"+
+                                                            "</div>"+
+                                                        "</div>"+
+                                                        "<div class='form-group'>"+
+                                                            "<div class='col-md-offset-1 col-md-7'>"+
+                                                                "<button type='button' onclick='commit("+detail_id+","+product_id+")' class='btn green'>确认</button>"+
+                                                            "</div>"+
+                                                        "</div>"+
+                                                    "</form>"+
+                                                "</div>"+
+                                            "</td>"+
+                                        "</tr>";
+                    $(".tr_pingjia").remove();                   
+                    $(obj).parent().parent().after(html);
+                    if($(".tr_pingjia").length>0){
+                       $(".tr_pingjia").show();
+                    }
+                    $('.grade').find('a').mouseover(function(){
+                        var index = $(this).index();
+                        $.each($('.grade').find('a'),function(key,item){
+                            if(key < index){
+                                $(item).addClass('hover');
+                            }
+                        })
+                    }).mouseout(function(){
+                        $('.grade').find('a').removeClass('hover');
+                    })
+                    //选分（星星）
+                    rate_review(json.row['point']);
+                }
+                else if(json.code=='1002')
+                {
+                    show_login();
+                }
+                else
+                {
+                    show_error(json.msg);
+                }
+            }
+        });  
+
+        var html = "<tr class='tr_pingjia'>"+
+                            "<td colspan='3' class='tdorder text-left'>"+
+                                "<div class='message'>"+
+                                    "<span class='arrow'></span>"+
+                                    "<form class='form-horizontal' role='form'>"+
+                                        "<div class='form-body'>"+
+                                            "<div class='form-group'>"+
+                                                "<label class='col-md-1 control-label'>评分</label>"+
+                                                "<div class='col-md-7'>"+
+                                                    "<input type='hidden' value='5' name='point' id='point'>"+
+                                                    "<p style='margin-top:2px;*margin-top:5px' class='grade con'>"+
+                                                        "<a href='javascript:void(0);' onclick='rate_review(1);' class='selected'></a> "+
+                                                        "<a href='javascript:void(0);' onclick='rate_review(2);' class='selected'></a> "+
+                                                        "<a href='javascript:void(0);' onclick='rate_review(3);' class='selected'></a> "+
+                                                        "<a href='javascript:void(0);' onclick='rate_review(4);' class='selected'></a> "+
+                                                        "<a href='javascript:void(0);' onclick='rate_review(5);' class='selected'></a> "+
+                                                    "</p>"+
+                                                "</div>"+
+                                            "</div>"+
+                                            "<div class='form-group'>"+
+                                                "<label class='col-md-1 control-label'>评语</label>"+
+                                                "<div class='col-md-7'>"+
+                                                    "<textarea id='content' name='content' class='form-control' rows='3'></textarea>"+
+                                                "</div>"+
+                                            "</div>"+
+                                            "<div class='form-group'>"+
+                                                "<div class='col-md-offset-1 col-md-7'>"+
+                                                    "<button type='button' onclick='commit("+detail_id+","+product_id+")' class='btn green'>确认</button>"+
+                                                "</div>"+
+                                            "</div>"+
+                                        "</form>"+
+                                    "</div>"+
+                                "</td>"+
+                            "</tr>";
+        $(".tr_pingjia").remove();                   
+        $(obj).parent().parent().after(html);
+        if($(".tr_pingjia").length>0){
+           $(".tr_pingjia").show();
+        }
+        $('.grade').find('a').mouseover(function(){
+            var index = $(this).index();
+            $.each($('.grade').find('a'),function(key,item){
+                if(key < index){
+                    $(item).addClass('hover');
+                }
+            })
+        }).mouseout(function(){
+            $('.grade').find('a').removeClass('hover');
+        })
+    }  
+
     /**
      * rate_review
      * 评价，评分
@@ -82,10 +216,15 @@
     {
         var point = $("#point").val();
         var content = $("#content").val();
+        var id = $("#id").val();
+        if(typeof(id) == 'undefined')
+        {
+            id = "";
+        }
         $.ajax({
             url:msg.base_url+"home/evaluation/update",
             type:'post',
-            data:{'order_detail_id':order_detail_id,'product_id':product_id,'point':point,'content':content},
+            data:{'order_detail_id':order_detail_id,'product_id':product_id,'point':point,'content':content,'id':id},
             dataType:'json',
             success:function(json){
                 if(json.code=='1000')
@@ -156,10 +295,10 @@
                             </td>
                             <td><?php echo date('Y-m-d',$value->create_time);?></td>
                             <td>
-                                <?php if(isset($value->commented) && $value->commented):?>
-                                <a herf="javascript:void(0)" onclick="show_pingjia(<?php echo $value->id;?>,<?php echo $value->product_id;?>,this)">发表评价</a>
+                                <?php if(isset($value->commented) && $value->commented && isset($value->comment_id) && $value->comment_id):?>
+                                <a herf="javascript:void(0)" onclick="show_pingjia2(<?php echo $value->comment_id;?>,<?php echo $value->id;?>,<?php echo $value->product_id;?>,this)" >已评价</a>
                                 <?else:?>
-                                <a herf="javascript:void(0)" >已评价</a>
+                                <a herf="javascript:void(0)" onclick="show_pingjia(<?php echo $value->id;?>,<?php echo $value->product_id;?>,this)">发表评价</a>
                                 <?endif;?>
                             </td>
                         </tr>

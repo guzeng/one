@@ -27,18 +27,21 @@ class Evaluation extends CI_Controller {
             foreach ($list as $key => $value) {
             	if(isset($value->id))
             	{
-            		if($this->user_comment->get_by_orderdetail($value->id))
+                    $user_comment = $this->user_comment->get_by_orderdetail($value->id);
+            		if($user_comment)
             		{
-            			$list[$key]->commented = false;
+            			$list[$key]->commented = true;
+                        $list[$key]->comment_id = $user_comment->id;
             		}
             		else
             		{
-            			$list[$key]->commented = true;
+            			$list[$key]->commented = false;
+                        
             		}
             	}
             	else
             	{
-            		$list[$key]->commented = true;
+            		$list[$key]->commented = false;
             	}
             }
         }
@@ -48,7 +51,7 @@ class Evaluation extends CI_Controller {
 		$this->load->view('home/evaluation',$data);
 	}
 
-	 public function update()
+	public function update()
     {
         $this->auth->check_login_json();
         $this->load->model('user_comment');
@@ -58,22 +61,6 @@ class Evaluation extends CI_Controller {
             show_error('参数错误');
         }
         $data = array('code' => '1000', 'msg' => '评论成功');
-        // $this->load->library('form_validation');
-        // $this->form_validation->set_rules('title', ' ', 'required|max_length[50]'); 
-        // $this->form_validation->set_rules('content', ' ', 'required'); 
-        
-        // if($this->form_validation->run() == FALSE)
-        // {
-        //     $this->form_validation->set_error_delimiters('', '');
-        //     $data['code'] = '1010';
-        //     $error['title'] = form_error('title');
-        //     $error['content'] = form_error('content');
-        //     $data['msg'] = $this->lang->line('error_msg');
-        //     $data['error'] = $error;
-        //     echo json_encode($data);                                    
-        //     exit;
-        // }
-
         $user_id = $this->auth->user_id();
         if(!isset($post['point']) || !$post['point'])
         {
@@ -98,18 +85,60 @@ class Evaluation extends CI_Controller {
             'order_detail_id' => $post['order_detail_id'],
             'product_id' => $post['product_id']
         );
-
-        if(!$this->user_comment->insert($row))
+        if(!$post['id'])
         {
-            //order status
-            $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
+            if(!$this->user_comment->insert($row))
+            {
+                //order status
+                $data = array('code'=>'1001','msg'=>$this->lang->line('add_fail'));
+            }
         }
+        else
+        {
+            $row['id'] = $post['id'];
+            if(!$this->user_comment->update($row,$post['id']))
+            {
+                //order status
+                $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
+            }
+        }
+
+        
         if($data['code'] == '1000')
         {
             $data['goto'] = 'home/evaluation';
         }
         echo json_encode($data);
     }
+
+    /**
+     * 编辑用户评价信息
+     * 
+     */
+    public function edit()
+    {
+        $this->load->model('user_comment');
+        $post = $this->input->post();
+        $id = $post['id'];
+        $data = array('code' => '1000');
+
+        if($id)
+        {
+            $row = $this->user_comment->get($id);
+            if(!$row)
+            {
+                show_404('',false);
+            }
+
+            $data['row'] = $row;
+        }
+        else
+        {
+            $data['code'] = '1001';
+        }
+        echo json_encode($data);
+    }
+    //-------------------------------------------------------------------------
 }
 
 /* End of file welcome.php */
