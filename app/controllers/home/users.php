@@ -117,16 +117,35 @@ class Users extends CI_Controller {
         
         $this->load->library('form_validation');
 
-        if($post['email'])
+        if($post['email'] && trim($post['email'])!='')
         {
             $this->form_validation->set_rules('email', ' ', 'valid_email');
         }
-        if($post['email'] && $this->form_validation->run() == FALSE)
+        if($post['phone'] && trim($post['phone'])!='')
+        {
+            $this->form_validation->set_rules('phone', ' ', 'valid_mobile');
+        }
+        if($post['id_card_number'] && trim($post['id_card_number'])!='')
+        {
+            $this->form_validation->set_rules('id_card_number', ' ', 'valid_idcard');
+        }
+        if($this->form_validation->run() == FALSE)
         {
             $this->form_validation->set_error_delimiters('', '');
             $data['code'] = '1010';
-            $error['email'] = form_error('email');
-            $data['msg'] = "出错";
+            if($post['email'] && trim($post['email'])!='')
+            {
+               $error['email'] = form_error('email'); 
+            }
+            if($post['phone'] && trim($post['phone'])!='')
+            {
+               $error['phone'] = form_error('phone'); 
+            }
+            if($post['id_card_number'] && trim($post['id_card_number'])!='')
+            {
+               $error['id_card_number'] = form_error('id_card_number'); 
+            }
+            $data['msg'] = "验证出错";
             $data['error'] = $error;
             echo json_encode($data);                                    
             exit;
