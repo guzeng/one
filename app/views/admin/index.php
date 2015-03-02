@@ -96,6 +96,38 @@
 					</div>
 				</div>
 			</div>
+			<div class='row'>
+				<div class='col-md-12'>
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption"><i class="fa fa-reorder"></i>最近15天浏览数</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div id="chart_15days_browser_history_legendPlaceholder"></div>
+							<div id="chart_15days_browser_history" class="chart"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col-md-12'>
+					<div class="portlet box yellow">
+						<div class="portlet-title">
+							<div class="caption"><i class="fa fa-reorder"></i>最近15天购买数</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div id="chart_15days_buy_history_legendPlaceholder"></div>
+							<div id="chart_15days_buy_history" class="chart"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 <script type="text/javascript">
 		var orders = [];
 		var x_date = [];
@@ -143,32 +175,86 @@
 			++i;
 		<?endforeach;?>
         $.plot($("#order_pie_chart"), data, {
-                series: {
-                    pie: {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    tilt: 1,
+                    label: {
                         show: true,
                         radius: 1,
-                        tilt: 1,
-                        label: {
-                            show: true,
-                            radius: 1,
-                            formatter: function (label, series) {
-                                return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
-                            },
-                            background: {
-                                opacity: 0.8
-                            }
+                        formatter: function (label, series) {
+                            return '<div style="font-size:8pt;text-align:center;padding:2px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
                         },
-                        combine: {
-                            color: '#999',
-                            threshold: 0
+                        background: {
+                            opacity: 0.8
                         }
+                    },
+                    combine: {
+                        color: '#999',
+                        threshold: 0
                     }
-                },
-                legend: {
-                    show: false
                 }
-            });
-
+            },
+            legend: {
+                show: false
+            }
+        });
+        //最近15天浏览记录
+        var data1 = [];
+        var i = 1;
+        <?php foreach($browser as $key => $value):?>
+        data1.push([i,<?php echo $value?>]);
+        i++;
+        <?php endforeach;?>
+        var options = {
+            series:{
+                bars:{show: true}
+            },
+            bars:{
+                  barWidth:0.8
+            },            
+            grid:{
+                backgroundColor: { colors: ["#fafafa", "#35aa47"] }
+            }
+        };
+        $.plot($("#chart_15days_browser_history"), [data1], options);
+        //最近15天浏览记录
+        /*
+        var data1 = GenerateSeries(0);
+        function GenerateSeries(added){
+            var data = [];
+            var start = 100 + added;
+            var end = 200 + added;
+     
+            for(i=1;i<=20;i++){        
+                var d = Math.floor(Math.random() * (end - start + 1) + start);        
+                data.push([i, d]);
+                start++;
+                end++;
+            }
+     
+            return data;
+        }
+        */
+        var data1 = [];
+        var i = 1;
+        <?php foreach($buy as $key => $value):?>
+        data1.push([i,<?php echo $value?>]);
+        i++;
+        <?php endforeach;?>
+        var options = {
+                series:{
+                    bars:{show: true}
+                },
+                bars:{
+                      barWidth:0.8
+                },            
+                grid:{
+                    backgroundColor: { colors: ["#fafafa", "#35aa47"] }
+                }
+        };
+        $.plot($("#chart_15days_buy_history"), [data1], options);
     });
 </script>
 <?$this->load->view('admin/footer');?>
