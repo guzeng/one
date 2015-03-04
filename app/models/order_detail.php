@@ -146,6 +146,10 @@ class Order_detail extends CI_Model{
         }
         $this->db->from( $this->table.' as a');
         $this->db->join($this->product_table.' as p','p.id=a.product_id','left');
+        if(isset($_join_order))
+        {
+            $this->db->join($this->order_table.' as o','o.id=a.user_id','left');
+        }
         if(isset($_join_user))
         {
             $this->db->join($this->user_table.' as u','u.id=a.user_id','left');

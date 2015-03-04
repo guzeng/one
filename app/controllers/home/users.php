@@ -100,6 +100,106 @@ class Users extends CI_Controller {
         $data['money_log'] = $this->user_money_log->all(array('where'=>array('user_id'=>$user_id)));
         $this->load->view('home/user-money',$data);
     }
+	
+    /**
+     * 展示用户近三个月消费记录
+     * 
+     */
+    public function consume()
+    {
+        $this->auth->check_login();
+        $user_id = $this->auth->user_id();
+
+		if(!$user_id)
+		{
+			show_404('',false);
+		}
+        $this->load->model('order_detail');
+
+		$base_url = '';
+		$param = $this->uri->uri_to_assoc(4);
+		$page = isset($param['page']) ? trim($param['page']) : 1;
+		$_num = 12;
+		$join_order = true;
+        $type = "o.code,a.price,a.create_time";
+		$condition = array('where'=>array('a.user_id'=>$user_id),'start'=>(intval($page)-1)*$_num,'num'=>$_num,'join_order'=>$join_order,'type'=>$type);
+		$order_detail = $this->order_detail->lists($condition);
+        $all = $this->order_detail->all(array('where'=>array('user_id'=>$user_id)));
+		$total_consume_money = 0;
+        $list = array();
+		if(!empty($all))
+		{
+			foreach($all as $item)
+			{
+				$total_consume_money+=$item->price;
+			}
+		}
+        if(!empty($order_detail))
+        {
+            foreach($order_detail as $key=>$value)
+            {
+                if(strtotime("-3 month",local_to_gmt()) < $value->create_time)
+                {
+                    $list[] = $value;
+                }
+            }
+        }
+
+		$data['list'] = $list;
+        $data['total_consume_money'] = $total_consume_money;
+		$data['pagination'] = $this->order_detail->pages($base_url,array("a.user_id = '".$user_id."'"));
+        $this->load->view('home/user-consume',$data);
+    }
+
+    /**
+     * 展示用户三个月前消费记录
+     * 
+     */
+    public function previously_consume()
+    {
+        $this->auth->check_login();
+        $user_id = $this->auth->user_id();
+
+        if(!$user_id)
+        {
+            show_404('',false);
+        }
+        $this->load->model('order_detail');
+
+        $base_url = '';
+        $param = $this->uri->uri_to_assoc(4);
+        $page = isset($param['page']) ? trim($param['page']) : 1;
+        $_num = 12;
+        $join_order = true;
+        $type = "o.code,a.price,a.create_time";
+        $condition = array('where'=>array('a.user_id'=>$user_id),'start'=>(intval($page)-1)*$_num,'num'=>$_num,'join_order'=>$join_order,'type'=>$type);
+        $order_detail = $this->order_detail->lists($condition);
+        $all = $this->order_detail->all(array('where'=>array('user_id'=>$user_id)));
+        $total_consume_money = 0;
+        $list = array();
+        if(!empty($all))
+        {
+            foreach($all as $item)
+            {
+                $total_consume_money+=$item->price;
+            }
+        }
+        if(!empty($order_detail))
+        {
+            foreach($order_detail as $key=>$value)
+            {
+                if(strtotime("-3 month",local_to_gmt()) > $value->create_time)
+                {
+                    $list[] = $value;
+                }
+            }
+        }
+
+        $data['list'] = $list;
+        $data['total_consume_money'] = $total_consume_money;
+        $data['pagination'] = $this->order_detail->pages($base_url,array("a.user_id = '".$user_id."'"));
+        $this->load->view('home/user-previously-consume',$data);
+    }
 
     /**
      * 更新用户基本信息
