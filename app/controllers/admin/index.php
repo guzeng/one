@@ -26,6 +26,8 @@ class Index extends CI_Controller {
 		$this->load->model('order');
 		$this->load->model('user');
 		$this->load->model('newss');
+		$this->load->model('user_browse_history');
+		$this->load->model('order_detail');
 		$data['product_count'] = $this->product->count();
 		$data['order_count'] = $this->order->count();
 		$data['member_count'] = $this->user->count();
@@ -63,6 +65,47 @@ class Index extends CI_Controller {
         }
         $data['order_pie_count'] = $count;
         $data['order_pie_total'] = $total>0?$total:1;
+        /*
+         * 15天浏览数
+        */
+        $browsers = $this->user_browse_history->all(array('where'=>array('create_time >'=>local_to_gmt(strtotime('-15 days')))));
+        $browser = array();
+        for ($i=14; $i>=0; $i--) {
+		    $d = date('d/m', strtotime('-'.$i.' days'));
+		    $browser[$d] = 0;
+		}
+        if(!empty($browsers))
+        {
+        	foreach ($browsers as $key => $value) {
+        		$d = date('d/m',gmt_to_local($value->create_time));
+        		if(isset($browser[$d]))
+        		{
+        			$browser[$d] ++;
+        		}
+        	}
+        }
+        $data['browser'] = $browser;
+        /*
+         * 15天购买数
+        */
+        $buys = $this->order_detail->all(array('where'=>array('create_time >'=>local_to_gmt(strtotime('-15 days')))));
+        $buy = array();
+        for ($i=14; $i>=0; $i--) {
+		    $d = date('d/m', strtotime('-'.$i.' days'));
+		    $buy[$d] = 0;
+		}
+        if(!empty($buys))
+        {
+        	foreach ($buys as $key => $value) {
+        		$d = date('d/m',gmt_to_local($value->create_time));
+        		if(isset($buy[$d]))
+        		{
+        			$buy[$d] ++;
+        		}
+        	}
+        }
+        $data['buy'] = $buy;
+
 		$this->load->view('admin/index', $data);
 	}
 	/**

@@ -31,6 +31,8 @@ $lang['error_msg']			= "设置出错，具体请参考提示";
 $lang['update_fail'] 		= "更新失败";
 $lang['add_fail']			= "增加失败";
 $lang['delete_fail']		= "删除失败";
+$lang['valid_mobile']		= "错误的手机号码";
+$lang['valid_idcard']		= "错误的身份证号码";
 
 /* End of file form_validation_lang.php */
 /* Location: ./system/language/english/form_validation_lang.php */

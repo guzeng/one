@@ -105,14 +105,16 @@ class User_browse_history  extends CI_Model{
         }
         $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'id desc';
         if(!isset($_type)){
-            $_type = '*';
+            $_type = 'a.*';
         }
 		$this->db->select ( $_type );
         if(isset($_where)){
             $this->db->where($_where);
         }
         $this->db->order_by($_orderby);
-		$query = $this->db->get ( $this->table);
+        $this->db->from($this->table.' as a');
+
+		$query = $this->db->get ();
         if($query->num_rows() > 0){
             return $query->result();
         }

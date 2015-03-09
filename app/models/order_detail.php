@@ -146,6 +146,10 @@ class Order_detail extends CI_Model{
         }
         $this->db->from( $this->table.' as a');
         $this->db->join($this->product_table.' as p','p.id=a.product_id','left');
+        if(isset($_join_order))
+        {
+            $this->db->join($this->order_table.' as o','o.id=a.user_id','left');
+        }
         if(isset($_join_user))
         {
             $this->db->join($this->user_table.' as u','u.id=a.user_id','left');
@@ -204,6 +208,7 @@ class Order_detail extends CI_Model{
      * @author zeng.gu
      * 2014/4/11
      */    
+    /*
     public function all($where = array(), $orderby='')
     {
         $_where = $this->condition($where);
@@ -222,6 +227,32 @@ class Order_detail extends CI_Model{
             return $query->result();
         }
         return false;   
+    }
+    */
+    public function all($items=array())
+    {
+        if(count($items) >0 ){
+            foreach($items as $key => $val){
+                $c = '_'.$key;
+                $$c = $val;
+            }
+        }
+        $_orderby = isset($_orderby) && $_orderby!='' ? $_orderby : 'id desc';
+        if(!isset($_type)){
+            $_type = 'a.*';
+        }
+        $this->db->select ( $_type );
+        if(isset($_where) && !empty($_where)){
+            $this->db->where($_where);
+        }
+        $this->db->order_by($_orderby);
+        $this->db->from($this->table.' as a');
+
+        $query = $this->db->get ();
+        if($query->num_rows() > 0){
+            return $query->result();
+        }
+        return false;
     }
     //----------------------------------------------------------------
         /**
