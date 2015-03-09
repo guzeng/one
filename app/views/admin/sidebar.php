@@ -224,14 +224,24 @@ $method_name=$RTR->fetch_method();
                             订单统计
                             </a>
                         </li>
+                        <li class="<?if($method_name=='browser_chart'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/statistic/browser_chart" >
+                            浏览统计
+                            </a>
+                        </li>
                         <li class="<?if($method_name=='browser'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/statistic/browser" >
-                            浏览统计
+                            浏览记录
+                            </a>
+                        </li>
+                        <li class="<?if($method_name=='buy_chart'):?>active<?endif;?>">
+                            <a href="<?php echo base_url()?>admin/statistic/buy_chart" >
+                            购买统计
                             </a>
                         </li>
                         <li class="<?if($method_name=='buy'):?>active<?endif;?>">
                             <a href="<?php echo base_url()?>admin/statistic/buy" >
-                            购买统计
+                            购买记录
                             </a>
                         </li>
                         <li class="<?if($method_name=='user_history'):?>active<?endif;?>">

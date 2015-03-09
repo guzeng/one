@@ -214,6 +214,72 @@ class Statistic extends CI_Controller {
         exit;
     }
 
+    public function browser_chart()
+    {
+        $this->load->model('user_browse_history');
+
+        $from = isset($_GET['from'])?$_GET['from']:date('Y-m-d',strtotime('-30 days'));
+        $to = isset($_GET['to'])?$_GET['to']:date('Y-m-d');
+
+        $data = array('from'=>$from,'to'=>$to);
+        $_from = strtotime($from);
+        $_to = strtotime('+1 days',strtotime($to));
+
+        $browsers = $this->user_browse_history->all(array('where'=>array('create_time >'=>local_to_gmt($_from),'create_time <'=>local_to_gmt($_to))));
+        $browser = array();
+
+        $days = ceil(abs($_to - $_from)/86400); 
+
+        for ($i=$days; $i>=0; $i--) {
+            $d = date('d/m', strtotime('-'.$i.' days'));
+            $browser[$d] = 0;
+        }
+        if(!empty($browsers))
+        {
+            foreach ($browsers as $key => $value) {
+                $d = date('d/m',gmt_to_local($value->create_time));
+                if(isset($browser[$d]))
+                {
+                    $browser[$d] ++;
+                }
+            }
+        }
+        $data['browser'] = $browser;
+        $this->load->view('admin/statistic/browser_chart',$data);
+    }
+
+    public function buy_chart()
+    {
+        $this->load->model('order');
+
+        $from = isset($_GET['from'])?$_GET['from']:date('Y-m-d',strtotime('-30 days'));
+        $to = isset($_GET['to'])?$_GET['to']:date('Y-m-d');
+        $data = array('from'=>$from,'to'=>$to);
+        $_from = strtotime($from);
+        $_to = strtotime('+1 days',strtotime($to));
+
+        $orders = $this->order->all(array('create_time >'=>$_from,'create_time <'=>$_to));
+        $o = array();
+        $days = ceil(abs($_to - $_from)/86400); 
+
+        for ($i=$days; $i>=0; $i--) {
+            $d = date('d/m', strtotime('-'.$i.' days'));
+            $o[$d] = 0;
+        }
+        if(!empty($orders))
+        {
+            foreach ($orders as $key => $value) {
+                $d = date('d/m',gmt_to_local($value->create_time));
+                if(isset($o[$d]))
+                {
+                    $o[$d] ++;
+                }
+            }
+        }
+        $data['browser'] = $o;
+        $this->load->view('admin/statistic/buy_chart',$data);
+    }
+
     public function buy()
     {
         $this->load->view('admin/statistic/buy_history');
