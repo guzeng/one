@@ -556,7 +556,7 @@
                 <?php $ad_1F = $this->ad->get_by_position(2);//1L广告?>
                 <?php if(isset($ad_1F)&& !empty($ad_1F)):?>
                         <li>
-                            <a href="<?php echo $ad_1F->url;?>" title="<?php echo $value->title;?>" target="_blank">
+                            <a href="<?php echo $ad_1F->url;?>" title="<?php echo $ad_1F->title;?>" target="_blank">
                             <img style="height:360px;width:100%;" alt="" src="<?php echo $this->ad->pic($ad_1F->id);?>">
                             </a>
                         </li>
@@ -725,7 +725,7 @@
                 <?php if(isset($ad_2F)&& !empty($ad_2F)):?>
                 <?php foreach ($ad_2F as $key => $value):?>
                     <li style="margin-bottom:5px;">
-                        <a target="_blank" href="<?php echo $value->url;?>" title="<?php $value->title;?>" >
+                        <a target="_blank" href="<?php echo $value->url;?>" title="<?php echo $value->title;?>" >
                             <img style="height:50px;width:100%;" alt="" src="<?php echo $this->ad->pic($value->id);?>">
                         </a>
                     </li>
@@ -893,7 +893,7 @@
                 <?php if(isset($ad_2F)&& !empty($ad_2F)):?>
                 <?php foreach ($ad_2F as $key => $value):?>
                     <li style="margin-bottom:5px;">
-                        <a target="_blank" href="<?php echo $value->url;?>" title="<?php $value->title;?>" >
+                        <a target="_blank" href="<?php echo $value->url;?>" title="<?php echo $value->title;?>" >
                             <img style="height:50px;width:100%;" alt="" src="<?php echo $this->ad->pic($value->id);?>">
                         </a>
                     </li>
