@@ -550,17 +550,26 @@
                     <?endif;?>
                 </div>
             </div>
-            <div class='col-md-2 col-no-padding' id='right'>
-                
+            <div class='col-md-2 col-no-padding' style="border-left:1px solid rgb(221,221,221);height:360px;" id='right'>
+                <div style="margin:5px;">
+                    <ul class="list-unstyled">
                 <?php $ad_1F = $this->ad->get_by_position(2);//1L广告?>
                 <?php if(isset($ad_1F)&& !empty($ad_1F)):?>
-                <a target="_blank" href="<?php echo $ad_1F->url;?>">
+                        <li>
+                            <a href="<?php echo $ad_1F->url;?>" title="<?php echo $value->title;?>" target="_blank">
+                            <img style="height:360px;width:100%;" alt="" src="<?php echo $this->ad->pic($ad_1F->id);?>">
+                            </a>
+                        </li>
+                <!-- <a target="_blank" href="<?php echo $ad_1F->url;?>">
                     <img style="height:100%;width:100%;" src="<?php echo $this->ad->pic($ad_1F->id);?>"/>
-                </a>
+                </a> -->
                 <?else:?>
-                暂无广告显示，可以在广告设置添加
+                        <li>
+                        暂无广告显示，可以在广告设置添加
+                        </li>
                 <?endif;?>
-                
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -709,18 +718,25 @@
                     <?endif;?>
                 </div>
             </div>
-            <div class='col-md-2 col-no-padding' id='right'>
-                
+            <div class='col-md-2 col-no-padding' style="border-left:1px solid rgb(221,221,221);height:360px;" id='right'>
+                <div style="margin:5px;">
+                    <ul class="list-unstyled">
                 <?php $ad_2F = $this->ad->lists(array("where"=>"position_id = 3"));//2L广告?>
                 <?php if(isset($ad_2F)&& !empty($ad_2F)):?>
                 <?php foreach ($ad_2F as $key => $value):?>
-                    <a target="_blank" href="<?php echo $value->url;?>">
-                        <img  src="<?php echo $this->ad->pic($value->id);?>"/>
-                    </a>
+                    <li style="margin-bottom:5px;">
+                        <a target="_blank" href="<?php echo $value->url;?>" title="<?php $value->title;?>" >
+                            <img style="height:50px;width:100%;" alt="" src="<?php echo $this->ad->pic($value->id);?>">
+                        </a>
+                    </li>
                 <?php endforeach;?>
                 <?else:?>
-                暂无广告显示，可以在广告设置添加
+                        <li>
+                        暂无广告显示，可以在广告设置添加
+                        </li>
                 <?endif;?>
+                    </ul>
+                </div>
                 
             </div>
         </div>
@@ -870,18 +886,25 @@
                     <?endif;?>
                 </div>
             </div>
-            <div class='col-md-2 col-no-padding' id='right'>
-                
+            <div class='col-md-2 col-no-padding' style="border-left:1px solid rgb(221,221,221);height:360px;" id='right'>
+                <div style="margin:5px;">
+                    <ul class="list-unstyled">
                 <?php $ad_2F = $this->ad->lists(array("where"=>"position_id = 4"));//3L广告?>
                 <?php if(isset($ad_2F)&& !empty($ad_2F)):?>
                 <?php foreach ($ad_2F as $key => $value):?>
-                    <a target="_blank" href="<?php echo $value->url;?>">
-                        <img  src="<?php echo $this->ad->pic($value->id);?>"/>
-                    </a>
+                    <li style="margin-bottom:5px;">
+                        <a target="_blank" href="<?php echo $value->url;?>" title="<?php $value->title;?>" >
+                            <img style="height:50px;width:100%;" alt="" src="<?php echo $this->ad->pic($value->id);?>">
+                        </a>
+                    </li>
                 <?php endforeach;?>
                 <?else:?>
-                暂无广告显示，可以在广告设置添加
+                        <li>
+                        暂无广告显示，可以在广告设置添加
+                        </li>
                 <?endif;?>
+                    </ul>
+                </div>
                 
             </div>
         </div>
