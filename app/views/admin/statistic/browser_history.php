@@ -7,7 +7,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						浏览统计
+						浏览记录
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -19,7 +19,7 @@
 							<a href="#">统计管理</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
-						<li>浏览统计</li>
+						<li>浏览记录</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -33,7 +33,7 @@
 					<!-- BEGIN EXAMPLE TABLE PORTLET-->
 					<div class="portlet box blue" id='list-box'>
 						<div class="portlet-title">
-							<div class="caption"><i class="fa fa-list"></i>浏览统计</div>
+							<div class="caption"><i class="fa fa-list"></i>浏览记录</div>
 						</div>
 						<div class="portlet-body">
 							<div class="table-toolbar">

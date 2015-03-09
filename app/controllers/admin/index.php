@@ -18,6 +18,7 @@ class Index extends CI_Controller {
             $this->auth->check_permission();
         }
     }
+
 	public function index()
 	{
         $this->auth->check_login();
@@ -108,6 +109,7 @@ class Index extends CI_Controller {
 
 		$this->load->view('admin/index', $data);
 	}
+	
 	/**
 	 * 首页面板内容
 	 */
