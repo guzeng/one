@@ -285,6 +285,7 @@
 	<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-image.js" type="text/javascript"></script>
 	<!-- The File Upload user interface plugin -->
 	<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js" type="text/javascript"></script>
+	<script src="<?php echo base_url();?>assets/plugins/jquery-file-upload/js/jquery.iframe-transport.js" type="text/javascript"></script>
 	<!-- The main application script -->
 	<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 	<!--[if (gte IE 8)&(lt IE 10)]>
