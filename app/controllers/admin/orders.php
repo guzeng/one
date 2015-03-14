@@ -133,6 +133,31 @@ class Orders extends CI_Controller {
         echo json_encode($data);
     }
 
+    public function change_price()
+    {
+        $post = $this->input->post();
+        if(empty($post))
+        {
+            show_error('参数错误');
+        }
+        $data = array('code' => '1000', 'msg' => '修改成功');
+        
+        if($post['id'] && $post['price'])
+        {
+            $row = array("price"=>$post['price']);
+            if(!$this->order->update($row,$post['id']))
+            {
+                $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
+            }
+        }
+        else
+        {
+            $data['code'] = "1004";
+            $data['msg'] = "参数错误";
+        }
+        echo json_encode($data);
+    }
+
     public function delete($id)
     {
         if(!$id)
