@@ -149,6 +149,19 @@ class Orders extends CI_Controller {
             {
                 $data = array('code'=>'1001','msg'=>$this->lang->line('update_fail'));
             }
+            else
+            {
+                //记录订单日志
+                $this->load->model('order_log');
+                $this->load->model('order');
+
+                $order = $this->order->get($post['id']);
+                $user_id = $this->auth->user_id();
+                $order_id = $post['id'];
+                $info = "[".$this->auth->username()."]用户修改了总价为".$post['price'];
+                $log = array("user_id"=>$user_id,"order_id"=>$order_id,"info"=>$info);
+                $this->order_log->insert($log);
+            }
         }
         else
         {
