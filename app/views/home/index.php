@@ -446,7 +446,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -468,7 +468,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -490,7 +490,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -512,7 +512,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -534,7 +534,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -614,7 +614,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -636,7 +636,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -658,7 +658,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -680,7 +680,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -702,7 +702,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -782,7 +782,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -804,7 +804,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -826,7 +826,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -848,7 +848,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
@@ -870,7 +870,7 @@
                     <div class='item pull-left'>
                         <div class='img'>
                             <a href="<?php echo base_url()."item/id/".$i->id;?>" target='_blank'>
-                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1)?>">
+                                <img style="" class='img-responsive' src="<?php echo $CI->product->pic($i->id,1,'thumb')?>">
                             </a>
                         </div>
                         <div class='name'>
