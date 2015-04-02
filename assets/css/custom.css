@@ -168,11 +168,11 @@ td {vertical-align:middle!important;;}
 }
 #f1 #list .item .img,
 #f2 #list .item .img,
-#f3 #list .item .img{margin-bottom: 5px;height: 90px;max-height: 90px;overflow: hidden;}
+#f3 #list .item .img{margin-bottom: 5px;height: 120px;max-height: 120px;overflow: hidden;}
 #f1 #list .item .name,
 #f2 #list .item .name,
 #f3 #list .item .name{
-    text-align:left;height: 3em;  word-break:break-all; word-wrap:break-word; overflow: hidden;
+    text-align:left;height: 25px;  word-break:break-all; word-wrap:break-word; overflow: hidden;
 }
 #f1 #list .item .price,
 #f2 #list .item .price,
